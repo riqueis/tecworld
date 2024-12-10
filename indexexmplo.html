@@ -10,16 +10,18 @@
     body { display: flex; justify-content: center; align-items: center; background-color: #0d0f12; overflow: hidden; }
 
     /* Vídeo de fundo */
-    .background-video { 
-        position: fixed; 
-        top: 0; 
-        left: 0; 
-        width: 100%; 
-        height: 100%; 
-        object-fit: cover; 
-        z-index: -1; 
-        filter: brightness(0.3);
-    }
+    
+        .background-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Mantém a proporção do vídeo */
+    z-index: -1;
+    filter: brightness(0.3);
+}
+
 
     /* Camada translúcida sobre o vídeo */
     .overlay {
@@ -47,48 +49,47 @@
         border-radius: 5px;
     }
 
-    .title { 
-        position: absolute; 
-        top: 150px; 
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: 2; 
-        color: #E0FFFF; 
-        font-size: 36px; 
-        font-weight: bold; 
-        font-family: 'Arial', sans-serif;
-        text-align: center;
-    }
+  .title {
+    position: absolute; 
+    top: 15vh; /* Usando unidade relativa */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    color: #E0FFFF;
+    font-size: 5vw; /* Usando unidade relativa */
+    font-weight: bold;
+    text-align: center;
+}
 
-    .description { 
-        position: absolute; 
-        top: 250px;
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: 2; 
-        color: #E0FFFF; 
-        font-size: 20px; 
-        font-family: 'Arial', sans-serif; 
-        line-height: 1.6; 
-        text-align: center;
-    }
+.description {
+    position: absolute;
+    top: 25vh; /* Ajustando posição relativa */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    color: #E0FFFF;
+    font-size: 4vw; /* Usando unidade relativa */
+    line-height: 1.6;
+    text-align: center;
+}
 
-    .start-button {
-        position: absolute;
-        top: 395px; 
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: 2;
-        padding: 12px 24px;
-        background: linear-gradient(90deg, #6cc6df, #152e4d);
-        color: white;
-        font-size: 16px;
-        font-weight: bold;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-        transition: 0.3s;
-    }
+.start-button {
+    position: absolute;
+    top: 40vh; /* Ajustando posição relativa */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    padding: 12px 24px;
+    background: linear-gradient(90deg, #6cc6df, #152e4d);
+    color: white;
+    font-size: 5vw; /* Usando unidade relativa */
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
 
     .start-button:hover {
         background: linear-gradient(90deg, #6cc6df, #152e4d);
