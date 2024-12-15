@@ -5,118 +5,149 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TecWorld</title>
     <style>
-    * * { margin: 0; padding: 0; box-sizing: border-box; }
-body, html { 
-    height: 100%; 
-    font-family: 'Arial', sans-serif; 
-    display: flex; 
-    justify-content: center; 
-    align-items: center;
-    overflow: hidden; 
-    flex-direction: column; /* Usando flexbox para empilhar os elementos */
-    text-align: center;
-    background-color: #0d0f12;
-}
-
- .background-video { 
-        position: fixed; 
-        top: 0; 
-        left: 0; 
-        width: 100%; 
-        height: 100%; 
-        object-fit: cover; 
-        z-index: -1; 
-        filter: brightness(0.3);
-    }
-
-    /* Camada translúcida sobre o vídeo */
-    .overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.4); 
-        z-index: 1;
+        * * { margin: 0; padding: 0; box-sizing: border-box; }
+        body, html { 
+            height: 100%; 
+            font-family: 'Arial', sans-serif; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            background-color: #0d0f12; 
+            overflow: hidden; 
+            flex-direction: column; /* Usando flexbox para empilhar os elementos */
+            text-align: center;
         }
-.language-buttons { 
-    position: absolute; 
-    top: 10px; 
-    right: 10px; 
-    z-index: 2; 
-}
 
-.language-buttons select { 
-    padding: 5px 10px; 
-    cursor: pointer; 
-    background-color: #333; 
-    color: #fff;
-    border-radius: 5px;
-}
+        .background-video { 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            z-index: -1; 
+            filter: brightness(0.3);
+        }
 
-.title { 
-    color: #E0FFFF; 
-    font-size: 6vw; /* Usando vw para ajustar o tamanho */
-    font-weight: bold; 
-    margin-top: 15vh; /* Usando vh para ajustar o espaçamento */
-    z-index: 2;
-}
+        .language-buttons { 
+            position: absolute; 
+            top: 10px; 
+            right: 10px; 
+            z-index: 2; 
+        }
 
-.description { 
-    color: #E0FFFF; 
-    font-size: 4vw; /* Usando vw para ajustar o tamanho */
-    line-height: 1.6; 
-    margin-top: 2vh; /* Adicionando margem para separar do título */
-    z-index: 2;
-}
+        .language-buttons select { 
+            padding: 5px 10px; 
+            cursor: pointer; 
+            background-color: #333; 
+            color: #fff;
+            border-radius: 5px;
+        }
 
-.start-button {
-    padding: 12px 24px;
-    background: linear-gradient(90deg, #6cc6df, #152e4d);
-    color: white;
-    font-size: 5vw; /* Usando vw para ajustar o tamanho */
-    font-weight: bold;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: 0.3s;
-    margin-top: 3vh; /* Adicionando margem para separar da descrição */
-    z-index: 2;
-}
+        .title { 
+            color: #E0FFFF; 
+            font-size: 6vw; 
+            font-weight: bold; 
+            margin-top: 15vh; 
+            z-index: 2;
+        }
 
-.start-button:hover {
-    background: linear-gradient(90deg, #6cc6df, #152e4d);
-    transform: scale(1.05);
-}
+        .description { 
+            color: #E0FFFF; 
+            font-size: 4vw; 
+            line-height: 1.6; 
+            margin-top: 2vh; 
+            z-index: 2;
+        }
 
+        .start-button {
+            padding: 12px 24px;
+            background: linear-gradient(90deg, #6cc6df, #152e4d);
+            color: white;
+            font-size: 5vw;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 3vh;
+            z-index: 2;
+        }
+
+        .start-button:hover {
+            background: linear-gradient(90deg, #6cc6df, #152e4d);
+            transform: scale(1.05);
+        }
     </style>
 </head>
 <body>
 
     <!-- Título no centro -->
-    <div class="title">TecWorld - <br>Conectando o Mundo</div>
+    <div id="title" class="title">TecWorld - <br>Conectando o Mundo</div>
 
     <!-- Descrição abaixo do título -->
-    <div class="description">
+    <div id="description" class="description">
         Conecte-se com pessoas ao redor do mundo. Explore bate-papos,<br> faça novas amizades, aprenda idiomas e descubra novas culturas.<br> Personalize suas tags e encontre pessoas com interesses em comum.<br> O mundo está a um clique de distância!
     </div>
 
     <!-- Botão "Iniciar" -->
-    <button class="start-button" onclick="startChat()">Iniciar</button>
+    <button id="startButton" class="start-button" onclick="startChat()">Iniciar</button>
 
     <!-- Botão de seleção de idioma -->
     <div class="language-buttons">
-        <select onchange="changeLanguage(this.value)">
+        <select id="languageSelect" onchange="changeLanguage(this.value)">
             <option value="pt">🇧🇷 Português</option>
             <option value="en">🇺🇸 English</option>
             <option value="es">🇪🇸 Español</option>
         </select>
     </div>
 
-   <video autoplay muted loop class="background-video" onerror="console.log('Erro ao carregar o vídeo');">
-    <source src="rei.mp4" type="video/mp4">
-    Seu navegador não suporta a tag de vídeo.
-</video>
+    <video autoplay muted loop class="background-video">
+        <source src="rei.mp4" type="video/mp4">
+        <source src="rei.webm" type="video/webm">
+        <source src="rei.ogv" type="video/ogg">
+        Seu navegador não suporta a tag de vídeo.
+    </video>
 
+    <script>
+        // Traduções
+        const translations = {
+            pt: {
+                title: "TecWorld - <br>Conectando o Mundo",
+                description: `Conecte-se com pessoas ao redor do mundo. Explore bate-papos,<br>
+                              faça novas amizades, aprenda idiomas e descubra novas culturas.<br>
+                              Personalize suas tags e encontre pessoas com interesses em comum.<br>
+                              O mundo está a um clique de distância!`,
+                startButton: "Iniciar"
+            },
+            en: {
+                title: "TecWorld - <br>Connecting the World",
+                description: `Connect with people around the world. Explore chats,<br>
+                              make new friends, learn languages, and discover new cultures.<br>
+                              Personalize your tags and find people with common interests.<br>
+                              The world is just a click away!`,
+                startButton: "Start"
+            },
+            es: {
+                title: "TecWorld - <br>Conectando el Mundo",
+                description: `Conéctate con personas de todo el mundo. Explora chats,<br>
+                              haz nuevos amigos, aprende idiomas y descubre nuevas culturas.<br>
+                              Personaliza tus etiquetas y encuentra personas con intereses en común.<br>
+                              ¡El mundo está a un clic de distancia!`,
+                startButton: "Comenzar"
+            }
+        };
+
+        // Função para mudar o idioma
+        function changeLanguage(language) {
+            const title = document.getElementById("title");
+            const description = document.getElementById("description");
+            const startButton = document.getElementById("startButton");
+
+            title.innerHTML = translations[language].title;
+            description.innerHTML = translations[language].description;
+            startButton.textContent = translations[language].startButton;
+        }
+    </script>
 </body>
 </html>
