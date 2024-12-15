@@ -8,8 +8,14 @@
     height: 100%; 
     font-family: Arial, sans-serif; 
     margin: 0;}
-body, html { height: 100%; font-family: Arial, sans-serif; }
-    body { display: flex; justify-content: center; align-items: center; background-color: #0d0f12; overflow: hidden; }
+body { 
+    display: flex; 
+    flex-direction: column; /* Mantém os elementos empilhados */
+    justify-content: center; /* Centraliza verticalmente */
+    align-items: center; /* Centraliza horizontalmente */
+    background-color: #0d0f12; /* Cor de fundo escura */
+    overflow: hidden; /* Impede que o conteúdo ultrapasse os limites */
+}
 
 .background-video { 
     position: fixed; 
