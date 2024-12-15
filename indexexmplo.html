@@ -6,15 +6,15 @@
     <title>TecWorld</title>
     <style>
         * * { margin: 0; padding: 0; box-sizing: border-box; }
-      body, html { 
+  body, html { 
     height: 100%; 
     font-family: 'Arial', sans-serif; 
     display: flex; 
-    justify-content: center; 
-    align-items: center; 
+    flex-direction: column; /* Mantém elementos empilhados */
+    justify-content: center; /* Centraliza verticalmente */
+    align-items: center; /* Centraliza horizontalmente */
     background-color: #0d0f12; 
     overflow: hidden; 
-    flex-direction: column; 
     text-align: center;
     margin: 0;
 }
@@ -32,7 +32,7 @@
 
 .language-buttons { 
     position: absolute; 
-    top: 5px; 
+    top: 10px; 
     right: 10px; 
     z-index: 2; 
 }
@@ -46,13 +46,10 @@
 }
 
 .title { 
-    position: absolute; 
-    top: 15%; 
-    left: 50%; 
-    transform: translateX(-50%); 
     color: #E0FFFF; 
     font-size: 6vw; 
     font-weight: bold; 
+    margin-bottom: 2vh; /* Espaçamento entre título e descrição */
     z-index: 2;
 }
 
@@ -60,8 +57,7 @@
     color: #E0FFFF; 
     font-size: 4vw; 
     line-height: 1.6; 
-    margin-top: 3vh; 
-    padding: 0 5%; /* Margem interna para evitar textos muito colados nas bordas */
+    margin: 0 5%; /* Margem interna para evitar textos muito colados */
     z-index: 2;
 }
 
@@ -88,12 +84,10 @@
 @media (max-width: 768px) {
     .title { 
         font-size: 8vw; 
-        top: 10%; 
     }
 
     .description {
         font-size: 5vw; 
-        margin-top: 2vh;
     }
 
     .start-button {
@@ -106,7 +100,6 @@
 @media (max-width: 480px) {
     .title { 
         font-size: 10vw; 
-        top: 8%; 
     }
 
     .description {
@@ -117,6 +110,7 @@
         font-size: 7vw;
     }
 }
+
 
     </style>
 </head>
