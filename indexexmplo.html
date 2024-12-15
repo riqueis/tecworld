@@ -134,12 +134,18 @@
         </select>
     </div>
 
-    <video autoplay muted loop class="background-video">
-        <source src="rei.mp4" type="video/mp4">
-        <source src="rei.webm" type="video/webm">
-        <source src="rei.ogv" type="video/ogg">
+   <video autoplay muted loop class="background-video">
+        <source src="videos/rei.mp4" type="video/mp4">
         Seu navegador não suporta a tag de vídeo.
     </video>
+     <!-- Camada translúcida sobre o vídeo -->
+     <div class="overlay"></div>
+
+
+    <div class="login-container">
+        <form id="login-form" class="invisible" onsubmit="return validateForm(event)">
+            <!-- Conteúdo será gerado dinamicamente pelo JavaScript -->
+        </form>
 
     <script>
         // Traduções
