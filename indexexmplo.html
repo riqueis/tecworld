@@ -4,8 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TecWorld</title>
     <style>
-    * {
-    { margin: 0; padding: 0; box-sizing: border-box; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body, html { height: 100%; font-family: Arial, sans-serif; }
     body { display: flex;  flex-direction: column;justify-content: center;align-items: center; background-color: #0d0f12; overflow: hidden; 
 text-align: center;
@@ -119,8 +118,6 @@ text-align: center;
     </div>
 
     <!-- Botão "Iniciar" -->
-    <button id="startButton" class="start-button" onclick="startChat()">Iniciar</button>
-
     <!-- Botão de seleção de idioma -->
     <div class="language-buttons">
         <select id="languageSelect" onchange="changeLanguage(this.value)">
@@ -142,32 +139,33 @@ text-align: center;
         <form id="login-form" class="invisible" onsubmit="return validateForm(event)">
             <!-- Conteúdo será gerado dinamicamente pelo JavaScript -->
         </form>
+          <button id="startButton" class="start-button" onclick="startChat()">Iniciar</button>
 
     <script>
         // Traduções
         const translations = {
             pt: {
                 title: "TecWorld - <br>Conectando o Mundo",
-                description: Conecte-se com pessoas ao redor do mundo. Explore bate-papos,<br>
+                description: "Conecte-se com pessoas ao redor do mundo. Explore bate-papos,<br>
                               faça novas amizades, aprenda idiomas e descubra novas culturas.<br>
                               Personalize suas tags e encontre pessoas com interesses em comum.<br>
-                              O mundo está a um clique de distância!,
+                              O mundo está a um clique de distância!",
                 startButton: "Iniciar"
             },
             en: {
                 title: "TecWorld - <br>Connecting the World",
-                description: Connect with people around the world. Explore chats,<br>
+                description: "Connect with people around the world. Explore chats,<br>
                               make new friends, learn languages, and discover new cultures.<br>
                               Personalize your tags and find people with common interests.<br>
-                              The world is just a click away!,
+                              The world is just a click away!",
                 startButton: "Start"
             },
             es: {
                 title: "TecWorld - <br>Conectando el Mundo",
-                description: Conéctate con personas de todo el mundo. Explora chats,<br>
+                description:" Conéctate con personas de todo el mundo. Explora chats,<br>
                               haz nuevos amigos, aprende idiomas y descubre nuevas culturas.<br>
                               Personaliza tus etiquetas y encuentra personas con intereses en común.<br>
-                              ¡El mundo está a un clic de distancia!,
+                              ¡El mundo está a un clic de distancia!",
                 startButton: "Comenzar"
             }
         };
@@ -182,6 +180,10 @@ text-align: center;
             description.innerHTML = translations[language].description;
             startButton.textContent = translations[language].startButton;
         }
+           // Função JavaScript vinculada ao clique do botão
+        function startChat() {
+            window.location.href = "outra-pagina.html";
+            }
     </script>
 </body>
 </html>
