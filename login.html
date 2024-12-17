@@ -8,7 +8,7 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body, html { height: 100%; font-family: Arial, sans-serif; }
     body { display: flex; justify-content: center; align-items: center; background-color: #0d0f12; overflow: hidden; }
-
+    
     /* Vídeo de fundo */
     .background-video { 
         position: fixed; 
@@ -18,167 +18,91 @@
         height: 100%; 
         object-fit: cover; 
         z-index: -1; /* Coloca o vídeo atrás da camada translúcida */
-        filter: brightness(0.3);
+        filter: brightness(0,3)
     }
 
-    /* Camada translúcida sobre o vídeo */
+    /* Camada translúcida sobre o vídeo (alteração aqui) */
     .overlay {
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background: rgba(0, 0, 0, 0.4);
-        z-index: 1;
+        background: rgba(0, 0, 0, 0.4); /* Alterado para 0.6 para ficar mais escuro */
+        z-index: 1; /* Garante que o overlay fique acima do vídeo */
     }
 
     .language-buttons {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        z-index: 2;
-    }
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 2;
+}
 
-    .language-buttons select {
-        padding: 8px 12px;
-        cursor: pointer;
-        background-color: #444;
-        color: #fff;
-        border-radius: 5px;
-        border: 1px solid #ccc;
-        font-size: 12px;
-        transition: background-color 0.3s, transform 0.3s;
-    }
+.language-buttons select {
+    padding: 8px 12px;
+    cursor: pointer;
+    background-color: #444;
+    color: #fff;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 12px;
+    transition: background-color 0.3s, transform 0.3s;
+}
 
-    .language-buttons select:hover {
-        background-color: #555;
-        transform: scale(1.05);
-    }
+.language-buttons select:hover {
+    background-color: #555;
+    transform: scale(1.05);
+}
 
-    .language-buttons option {
-        background-color: #333;
-        color: white;
-    }
+.language-buttons option {
+    background-color: #333;
+    color: white;
+}
 
-    /* Container do formulário de login */
-    .login-container { 
-        display: flex; 
-        justify-content: center; 
-        align-items: center; 
-        height: 100%; 
-        z-index: 2; 
+    .login-container { display: flex; justify-content: center; align-items: center; height: 100%; z-index: 2; }
+    form.invisible { background-color: transparent; padding: 30px; box-shadow: none; border-radius: 0; width: 350px; text-align: center; }
+    h1 { font-size: 32px; margin-bottom: 25px; color: #E0FFFF; }
+    input[type="text"], input[type="password"] { width: 100%; padding: 14px; margin: 10px 0; border: 1px solid #b3dae4; border-radius: 8px; background-color: #8ed2e4; color: #ffffff; font-size: 18px; }
+    input[type="text"]::placeholder, input[type="password"]::placeholder { color: #000; }
+    .login-btn { width: 100%; padding: 14px; background: linear-gradient(90deg, #a6e9df 0%, #00aaff 100%); border: none; border-radius: 8px; color: #000; font-size: 18px; cursor: pointer; margin-top: 20px; transition: 0.3s; }
+    .login-btn:hover { background: linear-gradient(90deg, #ffffff 0%, #f3f3f3 100%); transform: scale(1.05); }
+    .forgot-password, .create-account, .back-to-login { display: block; margin-top: 20px; font-size: 14px; color: #00ffd9; text-decoration: none; }
+    .forgot-password:hover, .create-account:hover, .back-to-login:hover { text-decoration: underline; color: #00aaff; }
+    .error-message {
+        color: #ff6347; /* Cor vermelha para erros */
+        font-size: 16px; /* Ajuste o tamanho da fonte, se necessário */
+        margin-bottom: 10px;
+        text-align: left;
+        font-family: Verdana, sans-serif;
+        display: block; /* Garante que o erro será exibido como um bloco */
     }
-
-    form.invisible {
-        background-color: transparent;
-        padding: 30px;
-        box-shadow: none;
-        border-radius: 0;
-        width: 350px;
-        text-align: center;
-        margin: 10px;
-    }
-
-    h1 {
-        font-size: 32px;
-        margin-bottom: 25px;
-        color: #E0FFFF;
-    }
-
+    .error-input { border: 1px solid #ff6347; }
+    .checkbox-container { display: flex; flex-direction: row; align-items: center; font-size: 14px; color: #E0FFFF; margin-top: 10px; }
+    .checkbox-container label { margin-right: 10px; }
+    .checkbox-container input { margin-right: 5px; }
     input[type="text"], input[type="password"], input[type="email"] {
-        width: 100%;
-        padding: 14px;
-        margin: 10px 0;
-        border: 1px solid #b3dae4;
-        border-radius: 8px;
-        background-color: #8ed2e4;
-        color: #ffffff;
-        font-size: 18px;
+        width: 100%; 
+        padding: 14px; 
+        margin: 10px 0; 
+        border: 1px solid #b3dae4; 
+        border-radius: 8px; 
+        background-color: #8ed2e4; 
+        color: #ffffff; 
+        font-size: 18px; 
     }
 
     input[type="text"]::placeholder, input[type="password"]::placeholder, input[type="email"]::placeholder {
         color: #000;
     }
 
-    .login-btn {
-        width: 100%;
-        padding: 14px;
-        background: linear-gradient(90deg, #a6e9df 0%, #00aaff 100%);
-        border: none;
-        border-radius: 8px;
-        color: #000;
-        font-size: 18px;
-        cursor: pointer;
-        margin-top: 20px;
-        transition: 0.3s;
-    }
 
-    .login-btn:hover {
-        background: linear-gradient(90deg, #ffffff 0%, #f3f3f3 100%);
-        transform: scale(1.05);
-    }
-
-    .forgot-password, .create-account, .back-to-login {
-        display: block;
-        margin-top: 20px;
-        font-size: 14px;
-        color: #00ffd9;
-        text-decoration: none;
-    }
-
-    .forgot-password:hover, .create-account:hover, .back-to-login:hover {
-        text-decoration: underline;
-        color: #00aaff;
-    }
-
-    .error-message {
-        color: #ff6347;
-        font-size: 16px;
-        margin-bottom: 10px;
-        text-align: left;
-        font-family: Verdana, sans-serif;
-        display: block;
-    }
-
-    .error-input { border: 1px solid #ff6347; }
-
-    .checkbox-container { 
-        display: flex; 
-        flex-direction: row; 
-        align-items: center; 
-        font-size: 14px; 
-        color: #E0FFFF; 
-        margin-top: 10px; 
-    }
-
-    .checkbox-container label { margin-right: 10px; }
-    .checkbox-container input { margin-right: 5px; }
-
-    /* Media Query para dispositivos móveis */
-    @media screen and (max-width: 768px) {
-        .login-container { 
-            flex-direction: column; 
-            padding: 20px; 
-        }
-        h1 { 
-            font-size: 26px; 
-        }
-        input[type="text"], input[type="password"], input[type="email"] {
-            font-size: 16px;
-        }
-        .login-btn { 
-            font-size: 16px; 
-        }
-        .language-buttons select {
-            font-size: 14px;
-        }
-    }
     </style>
 </head>
 <body>
 
     <div class="language-buttons">
-        <select id="languageSelect" onchange="changeLanguage(this.value)">
+        <select onchange="changeLanguage(this.value)">
             <option value="pt">🇧🇷 Português</option>
             <option value="en">🇺🇸 English</option>
             <option value="es">🇪🇸 Español</option>
@@ -189,8 +113,9 @@
         <source src="videos/rei.mp4" type="video/mp4">
         Seu navegador não suporta a tag de vídeo.
     </video>
+     <!-- Camada translúcida sobre o vídeo -->
+     <div class="overlay"></div>
 
-    <div class="overlay"></div>
 
     <div class="login-container">
         <form id="login-form" class="invisible" onsubmit="return validateForm(event)">
@@ -266,9 +191,6 @@
                 invalidPassword: "La contraseña debe tener más de 5 caracteres.",
                 termsError: "Debes aceptar los Términos de Uso y la Política de Privacidad."
             }
-            function changeLanguage(lang) {
-        alert('Idioma selecionado: ' + lang);
-    }
         };
 
         let currentLanguage = 'pt';
@@ -306,44 +228,87 @@
             document.getElementById('login-form').innerHTML = `
                 <h1>${t.createHeading}</h1>
                 <input type="text" placeholder="${t.createUsernamePlaceholder}" id="username">
-                <input type="email" placeholder="${t.createEmailPlaceholder}" id="email">
+                <input type="text" placeholder="${t.createEmailPlaceholder}" id="email">
                 <input type="password" placeholder="${t.createPasswordPlaceholder}" id="password">
                 <div class="checkbox-container">
                     <input type="checkbox" id="terms">
                     <label for="terms">${t.createTerms}</label>
+                </div>
+                <div class="checkbox-container">
                     <input type="checkbox" id="privacy">
                     <label for="privacy">${t.createPrivacy}</label>
                 </div>
-                <button type="submit" class="login-btn">${t.createRegister}</button>
+                <div id="general-error" class="error-message"></div>
+                <button class="login-btn">${t.createRegister}</button>
                 <a href="#" class="back-to-login" onclick="showLogin()">${t.backToLogin}</a>
             `;
         }
 
         function validateForm(event) {
-            event.preventDefault();
-            const t = translations[currentLanguage];
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            const generalError = document.getElementById('general-error');
-            const errorMsg = [];
-            if (!email || !password) {
-                errorMsg.push(t.generalError);
-            }
-            if (!email.match(/^[^@]+@[^@]+\.[^@]+$/)) {
-                errorMsg.push(t.invalidEmail);
-            }
-            if (password.length <= 5) {
-                errorMsg.push(t.invalidPassword);
-            }
-            if (errorMsg.length > 0) {
-                generalError.innerHTML = errorMsg.join('<br>');
-            } else {
-                alert('Formulário enviado!');
-            }
+    event.preventDefault();  // Impede o envio do formulário
+    const email = document.getElementById('email').value;  // Obtém o valor do campo email
+    const password = document.getElementById('password').value;  // Obtém o valor do campo senha
+    const terms = document.getElementById('terms')?.checked;  // Verifica se a checkbox de termos foi marcada
+    const privacy = document.getElementById('privacy')?.checked;  // Verifica se a checkbox de privacidade foi marcada
+    const generalError = document.getElementById('general-error');  // Div onde os erros serão mostrados
+    let isValid = true;  // Flag de validade do formulário
+    let errorMessage = '';  // Mensagem de erro a ser exibida
+
+    // Resetando erros
+    generalError.innerHTML = '';  // Limpa mensagens de erro anteriores
+    generalError.style.display = 'none';  // Garante que o erro não estará visível até ser necessário
+    document.getElementById('email').classList.remove('error-input');
+    document.getElementById('password').classList.remove('error-input');
+
+    // Valida o preenchimento dos campos de texto (email e senha)
+    if (!email || !password) {
+        errorMessage = translations[currentLanguage].generalError;  // Exibe erro se campos estiverem vazios
+        isValid = false;
+    }
+
+    // Verifica o e-mail
+    if (isValid && !validateEmail(email)) {
+        errorMessage = translations[currentLanguage].invalidEmail;  // Exibe erro se o email for inválido
+        document.getElementById('email').classList.add('error-input');
+        isValid = false;
+    }
+
+    // Verifica a senha
+    if (isValid && (!password || password.length <= 5)) {
+        errorMessage = translations[currentLanguage].invalidPassword;  // Exibe erro se a senha for muito curta
+        document.getElementById('password').classList.add('error-input');
+        isValid = false;
+    }
+
+    // Verifica se as caixas de seleção (termos e privacidade) estão marcadas
+    if (isValid && (terms === false || privacy === false)) {
+        errorMessage = translations[currentLanguage].termsError;  // Exibe erro se os termos ou privacidade não forem aceitos
+        isValid = false;
+    }
+
+    // Se algum erro for encontrado, exibe a mensagem
+    if (!isValid) {
+        generalError.innerHTML = errorMessage;
+        generalError.style.display = 'block';  // Torna a mensagem de erro visível
+        return false;  // Impede o envio do formulário se houver erro
+    }
+    if (isValid) {
+        window.location.href = "file:///C:/Users/henrique/GenickWorld/index2.html";  // Altere para a URL para a qual deseja redirecionar
+    }
+
+    return true;  // Permite o envio do formulário se não houver erro
+}
+
+
+        function validateEmail(email) {
+            const regex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
+            return regex.test(email);
         }
 
+        // Inicializar a tela de login
         showLogin();
     </script>
 
 </body>
 </html>
+ml>
