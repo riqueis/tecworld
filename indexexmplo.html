@@ -186,10 +186,10 @@
     }
 
     // Ao carregar a página, define o idioma salvo
-    document.addEventListener('DOMContentLoaded', () => {
-        const savedLanguage = localStorage.getItem('selectedLanguage') || 'pt';
-        updateText(savedLanguage); // Atualiza com o idioma salvo
-        document.getElementById("languageSelect").value = savedLanguage
+     document.addEventListener('DOMContentLoaded', () => {
+            const savedLanguage = localStorage.getItem('selectedLanguage') || 'pt';
+            updateText(savedLanguage); // Atualiza com o idioma salvo
+            document.getElementById("languageSelect").value = savedLanguage;
         });
     </script>
 
