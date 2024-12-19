@@ -180,9 +180,9 @@
 
     // Função para atualizar os textos da página
     function updateText(language) {
-        document.getElementById("title").innerText = translations[language].title;
-        document.getElementById("description").innerText = translations[language].description;
-        document.getElementById("startButton").innerText = translations[language].startButton;
+        document.getElementById("title").innerHTML = translations[language].title;
+        document.getElementById("description").innerHTML = translations[language].description;
+        document.getElementById("startButton").innerHTML = translations[language].startButton;
     }
 
     // Ao carregar a página, define o idioma salvo
