@@ -193,12 +193,18 @@
             }
         };
 
-        let currentLanguage = 'pt';
-
         function changeLanguage(lang) {
-            currentLanguage = lang;
-            showLogin();
-        }
+    localStorage.setItem('selectedLanguage', lang); // Salva o idioma
+    currentLanguage = lang;
+    showLogin(); // Atualiza os textos
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const savedLanguage = localStorage.getItem('selectedLanguage') || 'pt'; // Recupera ou usa o idioma padrão
+    currentLanguage = savedLanguage;
+    showLogin(); // Atualiza a página com o idioma salvo
+});
+
 
         function showLogin() {
             const t = translations[currentLanguage];
