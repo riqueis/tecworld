@@ -173,23 +173,24 @@
         };
 
         // Função para mudar o idioma
-        function changeLanguage(language) {
-            const title = document.getElementById("title");
-            const description = document.getElementById("description");
-            const startButton = document.getElementById("startButton");
+         function changeLanguage(language) {
+        localStorage.setItem('selectedLanguage', language); // Salva o idioma
+        updateText(language); // Atualiza os textos da página
+    }
 
-            title.innerHTML = translations[language].title;
-            description.innerHTML = translations[language].description;
-            startButton.textContent = translations[language].startButton;
-        }
+    // Função para atualizar os textos da página
+    function updateText(language) {
+        document.getElementById("title").innerText = translations[language].title;
+        document.getElementById("description").innerText = translations[language].description;
+        document.getElementById("startButton").innerText = translations[language].startButton;
+    }
 
-        // Função JavaScript vinculada ao clique do botão
-        function startChat() {
-            window.location.href = "login.html";
-        }
+    // Ao carregar a página, define o idioma salvo
+    document.addEventListener('DOMContentLoaded', () => {
+        const savedLanguage = localStorage.getItem('selectedLanguage') || 'pt';
+        updateText(savedLanguage); // Atualiza com o idioma salvo
+        document.getElementById("languageSelect").value = savedLanguage
     </script>
 
 </body>
 </html>
-
- 
