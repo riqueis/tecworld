@@ -124,35 +124,34 @@
     </div>
 
     <script>
-        function changeLanguage(lang) {
+    // Função para alterar o idioma
+function changeLanguage(lang) {
     localStorage.setItem('selectedLanguage', lang); // Salva o idioma
     currentLanguage = lang;
-    showLogin(); // Atualiza os textos
+    showLogin(); // Atualiza os textos na página de login
 }
 
+// Evento DOMContentLoaded para carregar o idioma salvo e exibir a página de login
 document.addEventListener('DOMContentLoaded', () => {
     const savedLanguage = localStorage.getItem('selectedLanguage') || 'pt'; // Recupera ou usa o idioma padrão
     currentLanguage = savedLanguage;
-    updatePageLanguage(); // Atualiza a página com o idioma salvo
+    updateLanguageButton(savedLanguage); // Atualiza o botão de idioma
+    showLogin(); // Exibe o conteúdo de login imediatamente
 });
 
-function updatePageLanguage() {
-    const t = translations[currentLanguage];
+// Função para exibir e traduzir a página de login
+function showLogin() {
+    const t = translations[currentLanguage]; // Obtém as traduções para o idioma selecionado
     // Aplique a tradução nas partes necessárias da página
     document.getElementById('login-heading').innerHTML = t.heading;
     // Aqui você pode traduzir outras partes da página, como os botões, títulos, etc.
 }
-        document.addEventListener('DOMContentLoaded', () => {
-    const savedLanguage = localStorage.getItem('selectedLanguage') || 'pt'; // Recupera o idioma
-    currentLanguage = savedLanguage;
-    updateLanguageButton(savedLanguage); // Atualiza o botão de idioma
-});
 
+// Função para atualizar o botão de seleção de idioma
 function updateLanguageButton(lang) {
     const select = document.querySelector('select');
     select.value = lang;  // Atualiza o valor do botão de idioma conforme a escolha salva
 }
-
 
 
         const translations = {
