@@ -133,8 +133,27 @@
 document.addEventListener('DOMContentLoaded', () => {
     const savedLanguage = localStorage.getItem('selectedLanguage') || 'pt'; // Recupera ou usa o idioma padrão
     currentLanguage = savedLanguage;
-    showLogin(); // Atualiza a página com o idioma salvo
+    updatePageLanguage(); // Atualiza a página com o idioma salvo
 });
+
+function updatePageLanguage() {
+    const t = translations[currentLanguage];
+    // Aplique a tradução nas partes necessárias da página
+    document.getElementById('login-heading').innerHTML = t.heading;
+    // Aqui você pode traduzir outras partes da página, como os botões, títulos, etc.
+}
+        document.addEventListener('DOMContentLoaded', () => {
+    const savedLanguage = localStorage.getItem('selectedLanguage') || 'pt'; // Recupera o idioma
+    currentLanguage = savedLanguage;
+    updateLanguageButton(savedLanguage); // Atualiza o botão de idioma
+});
+
+function updateLanguageButton(lang) {
+    const select = document.querySelector('select');
+    select.value = lang;  // Atualiza o valor do botão de idioma conforme a escolha salva
+}
+
+
 
         const translations = {
             pt: {
