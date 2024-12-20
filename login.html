@@ -124,6 +124,18 @@
     </div>
 
     <script>
+        function changeLanguage(lang) {
+    localStorage.setItem('selectedLanguage', lang); // Salva o idioma
+    currentLanguage = lang;
+    showLogin(); // Atualiza os textos
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const savedLanguage = localStorage.getItem('selectedLanguage') || 'pt'; // Recupera ou usa o idioma padrão
+    currentLanguage = savedLanguage;
+    showLogin(); // Atualiza a página com o idioma salvo
+});
+
         const translations = {
             pt: {
                 heading: "TecWorld - <br>Conectando o Mundo",
@@ -193,17 +205,7 @@
             }
         };
 
-        function changeLanguage(lang) {
-    localStorage.setItem('selectedLanguage', lang); // Salva o idioma
-    currentLanguage = lang;
-    showLogin(); // Atualiza os textos
-}
 
-document.addEventListener('DOMContentLoaded', () => {
-    const savedLanguage = localStorage.getItem('selectedLanguage') || 'pt'; // Recupera ou usa o idioma padrão
-    currentLanguage = savedLanguage;
-    showLogin(); // Atualiza a página com o idioma salvo
-});
 
 
         function showLogin() {
@@ -249,7 +251,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 <a href="#" class="back-to-login" onclick="showLogin()">${t.backToLogin}</a>
             `;
         }
-
         function validateForm(event) {
     event.preventDefault();  // Impede o envio do formulário
     const email = document.getElementById('email').value;  // Obtém o valor do campo email
@@ -304,7 +305,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     return true;  // Permite o envio do formulário se não houver erro
 }
-
 
         function validateEmail(email) {
             const regex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
