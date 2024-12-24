@@ -22,16 +22,20 @@
         width: 100%;  /* Garantir que o body não ultrapasse a tela */
     }
 
-    .header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 10px 20px;
-        background-color: #0d0f12;
-        position: relative;
-        z-index: 1;
-        width: 100%;  /* Garantir que o header não ultrapasse a largura da tela */
-    }
+   .header {
+    position: fixed; /* Torna o cabeçalho fixo no topo da página */
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 1000; /* Garantir que o cabeçalho esteja acima de outros elementos */
+    background-color: #0d0f12; /* Manter o fundo */
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 
     .header .profile {
         display: flex;
