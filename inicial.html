@@ -5,29 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TecWorld</title>
     <style>
-        body, html {
-            height: 100%; /* Garante que a altura ocupe 100% da janela */
-            display: flex;
-            flex-direction: column;
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #0d0f12;
-            overflow-x: hidden; /* Evita rolagem horizontal */
-        }
+     body, html {
+    height: 100%; /* Garante que a altura ocupe toda a janela */
+    margin: 0; /* Remove as margens */
+    font-family: Arial, sans-serif;
+    background-color: #0d0f12;
+    overflow-x: hidden; /* Evita rolagem horizontal */
+}
 
-        .header {
-            position: fixed; /* Torna o cabeçalho fixo no topo da página */
-            top: 0;
-            left: 0;
-            width: 100%; /* Garante que o cabeçalho ocupe toda a largura */
-            height: 60px; /* Defina uma altura fixa */
-            z-index: 1000; /* Coloque o cabeçalho acima do conteúdo */
-            background-color: #0d0f12; /* Manter o fundo */
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 10px 20px;
-        }
+.header {
+    position: fixed; /* Torna o cabeçalho fixo no topo da página */
+    top: 0;
+    left: 0;
+    width: 100%; /* Garante que o cabeçalho ocupe toda a largura */
+    height: 60px; /* Defina uma altura fixa */
+    z-index: 1000; /* Coloca o cabeçalho acima do conteúdo */
+    background-color: #0d0f12; /* Manter o fundo */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+}
 
         .header .profile {
             display: flex;
@@ -114,19 +112,13 @@
         }
 
         .content {
-            flex: 1; /* Faz o conteúdo ocupar o espaço disponível */
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: center;
-            padding: 20px;
-            color: #e0e0e0;
-            text-align: center;
-            margin-top: 80px; /* Espaço para o cabeçalho */
-            overflow-y: auto;
-            width: 100%;
-        }
-
+    margin-top: 60px; /* Espaço suficiente para o conteúdo não ficar oculto atrás do cabeçalho fixo */
+    padding: 20px;
+    color: #e0e0e0;
+    text-align: center;
+    overflow-y: auto; /* Permite rolagem vertical */
+    height: calc(100vh - 60px); /* Ajusta a altura do conteúdo para o restante da tela */
+}
         .welcome {
             font-size: 32px;
             color: #00ffd9;
