@@ -203,16 +203,18 @@
         
     }
 
-    .footer {
-        background-color: #0d0f12;
-        color: #666;
-        font-size: 12px;
-        text-align: center;
-        padding: 10px;
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-    }
+   .footer {
+    background-color: #0d0f12; /* Mesma cor do cabeçalho */
+    color: #666; /* Cor do texto */
+    font-size: 12px; /* Tamanho da fonte */
+    text-align: center; /* Centraliza o texto */
+    padding: 10px; /* Espaçamento interno */
+    position: fixed; /* Fixa o footer na parte inferior */
+    bottom: 0; /* Posiciona na parte inferior */
+    width: 100%; /* Ocupa toda a largura */
+    z-index: 1000; /* Garante que esteja acima de outros elementos */
+}
+
 
     .buttons {
         margin-top: 1px;
@@ -342,8 +344,8 @@
     </div>
 
     <!-- Rodapé -->
-    <div class="footer">
-        © 2024 TecEvoluctio. Todos os direitos reservados.
+     <div class="footer">
+        &copy; 2024 TecWorld. Todos os direitos reservados.
     </div>
 
     <script>
