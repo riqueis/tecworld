@@ -4,209 +4,215 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TecWorld</title>
-   <style>
-       * {
-    box-sizing: border-box; /* Garantir que todos os elementos respeitem a largura da tela */
-    margin: 0;  /* Remover margens indesejadas */
-    padding: 0; /* Remover preenchimentos indesejados */
-}
+  <style>
+    * {
+        box-sizing: border-box; /* Garantir que todos os elementos respeitem a largura da tela */
+        margin: 0;  /* Remover margens indesejadas */
+        padding: 0; /* Remover preenchimentos indesejados */
+    }
 
-body, html {
-    height: 100%;
-    font-family: Arial, sans-serif;
-    background-color: #0d0f12;
-    display: flex;
-    flex-direction: column;
-    overflow-x: hidden; /* Impede a rolagem horizontal */
-    overflow-y: auto; /* Permite a rolagem vertical */
-}
+    body, html {
+        height: 100%;
+        font-family: Arial, sans-serif;
+        background-color: #0d0f12;
+        display: flex;
+        flex-direction: column;
+        overflow-x: hidden; /* Impede a rolagem horizontal */
+        overflow-y: auto; /* Permite a rolagem vertical */
+        width: 100%;  /* Garantir que o body não ultrapasse a tela */
+    }
 
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    background-color: #0d0f12;
-    position: relative;
-    z-index: 1;
-}
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px;
+        background-color: #0d0f12;
+        position: relative;
+        z-index: 1;
+        width: 100%;  /* Garantir que o header não ultrapasse a largura da tela */
+    }
 
-.header .profile {
-    display: flex;
-    align-items: center;
-}
+    .header .profile {
+        display: flex;
+        align-items: center;
+    }
 
-.header .profile img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    margin-right: 10px;
-}
+    .header .profile img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin-right: 10px;
+    }
 
-.header .profile .username {
-    font-size: 18px;
-    color: #e0e0e0;
-}
+    .header .profile .username {
+        font-size: 18px;
+        color: #e0e0e0;
+    }
 
-.unlimited-jumps-btn {
-    background-color: #9925ec;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    box-shadow: 0 0 10px rgba(106, 13, 173, 0.7);
-    transition: box-shadow 0.3s ease;
-}
+    .unlimited-jumps-btn {
+        background-color: #9925ec;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        box-shadow: 0 0 10px rgba(106, 13, 173, 0.7);
+        transition: box-shadow 0.3s ease;
+    }
 
-.unlimited-jumps-btn:hover {
-    box-shadow: 0 0 15px rgba(106, 13, 173, 1);
-}
+    .unlimited-jumps-btn:hover {
+        box-shadow: 0 0 15px rgba(106, 13, 173, 1);
+    }
 
-/* Estilo do Modal */
-.modal-overlay {
-    display: none; /* Oculto inicialmente */
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.8); /* Fundo escuro semi-transparente */
-    justify-content: center;
-    align-items: center;
-    z-index: 10;
-}
+    /* Estilo do Modal */
+    .modal-overlay {
+        display: none; /* Oculto inicialmente */
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.8); /* Fundo escuro semi-transparente */
+        justify-content: center;
+        align-items: center;
+        z-index: 10;
+    }
 
-.modal-content {
-    background-color: #1a1a1d;
-    padding: 20px;
-    border-radius: 10px;
-    width: 300px;
-    text-align: center;
-    color: white;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
-}
+    .modal-content {
+        background-color: #1a1a1d;
+        padding: 20px;
+        border-radius: 10px;
+        width: 300px;
+        text-align: center;
+        color: white;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+    }
 
-.qr-code {
-    width: 150px;
-    height: 150px;
-    background-color: #333;
-    margin: 10px auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #bbb;
-    font-size: 14px;
-    border-radius: 10px;
-}
+    .qr-code {
+        width: 150px;
+        height: 150px;
+        background-color: #333;
+        margin: 10px auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #bbb;
+        font-size: 14px;
+        border-radius: 10px;
+    }
 
-.close-btn {
-    background-color: #9925ec;
-    color: white;
-    padding: 5px 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 10px;
-}
+    .close-btn {
+        background-color: #9925ec;
+        color: white;
+        padding: 5px 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 10px;
+    }
 
-.close-btn:hover {
-    background-color: #6c15b3;
-}
+    .close-btn:hover {
+        background-color: #6c15b3;
+    }
 
-.content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 20px;
-    color: #e0e0e0;
-    text-align: center;
-    margin-top: 40px;
-    overflow-y: auto; /* Permite rolagem apenas vertical */
-}
+    .content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 20px;
+        color: #e0e0e0;
+        text-align: center;
+        margin-top: 40px;
+        overflow-y: auto; /* Permite rolagem apenas vertical */
+        width: 100%;  /* Garante que o conteúdo se ajuste à tela */
+    }
 
-.welcome {
-    font-size: 32px;
-    color: #00ffd9;
-    text-shadow: 0 0 5px rgba(0, 255, 255, 0.8);
-    margin-bottom: 20px;
-}
+    .welcome {
+        font-size: 32px;
+        color: #00ffd9;
+        text-shadow: 0 0 5px rgba(0, 255, 255, 0.8);
+        margin-bottom: 20px;
+    }
 
-.tagline {
-    font-size: 18px;
-    color: #cccccc;
-    margin-top: 10px;
-    max-width: 100%; /* Garantir que não ultrapasse a largura da tela */
-    line-height: 1.4;
-}
+    .tagline {
+        font-size: 18px;
+        color: #cccccc;
+        margin-top: 10px;
+        max-width: 100%; /* Garantir que não ultrapasse a largura da tela */
+        line-height: 1.4;
+    }
 
-.footer {
-    background-color: #0d0f12;
-    color: #666;
-    font-size: 12px;
-    text-align: center;
-    padding: 10px;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-}
+    .footer {
+        background-color: #0d0f12;
+        color: #666;
+        font-size: 12px;
+        text-align: center;
+        padding: 10px;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+    }
 
-.buttons {
-    margin-top: 1px;
-}
+    .buttons {
+        margin-top: 1px;
+    }
 
-.buttons button {
-    background-color: #00aaff;
-    color: white;
-    border: none;
-    border-radius: 7px;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    margin: 1px;
-}
+    .buttons button {
+        background-color: #00aaff;
+        color: white;
+        border: none;
+        border-radius: 7px;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        margin: 1px;
+    }
 
-.buttons button:hover {
-    background-color: #007acc;
-}
+    .buttons button:hover {
+        background-color: #007acc;
+    }
 
-/* Ajuste para o input de tags */
-#tag-input {
-    margin: 10px 0;
-    padding: 8px;
-    width: 93%;
-    border-radius: 5px;
-    margin-right: 100px;
-}
+    /* Ajuste para o input de tags */
+    #tag-input {
+        margin: 10px 0;
+        padding: 8px;
+        width: 93%;
+        border-radius: 5px;
+        margin-right: 100px;
+        box-sizing: border-box; /* Garantir que padding e borda não aumentem a largura */
+    }
 
-.language-select {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    background-color: #e0e0e0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    cursor: pointer;
-    text-align: center;
-}
+    .language-select {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        background-color: #e0e0e0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        cursor: pointer;
+        text-align: center;
+        box-sizing: border-box; /* Garantir que padding e borda não aumentem a largura */
+    }
 
-.language-select option {
-    display: block;
-    width: 50%;
-}
+    .language-select option {
+        display: block;
+        width: 100%;  /* Garantir que as opções ocupem a largura correta */
+    }
 
-.language-select {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"%3E%3Cpath fill="none" stroke="black" stroke-width="2" d="M5 7l5 5 5-5" /%3E%3C/svg%3E');
-    background-repeat: no-repeat;
-    background-position: right 10px center;
-}
-   </style>
+    .language-select {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"%3E%3Cpath fill="none" stroke="black" stroke-width="2" d="M5 7l5 5 5-5" /%3E%3C/svg%3E');
+        background-repeat: no-repeat;
+        background-position: right 10px center;
+    }
+</style>
+
 </head>
 <body>
 
@@ -226,7 +232,7 @@ body, html {
             TecEvoluctio é uma plataforma inovadora que conecta pessoas de todo o mundo<br> para conversas em tempo real. Faça novos amigos, compartilhe experiências e descubra um mundo de novas conexões!<br>Com uma interface moderna e intuitiva, nossa missão é proporcionar uma experiência única, onde a tecnologia e as interações sociais se encontram<br> em perfeita harmonia. Aqui, você pode explorar comunidades, participar de discussões em grupo ou simplesmente conversar com seus amigos. Estamos comprometidos em tornar cada interação significativa e segura. Junte-se a nós e faça parte do futuro da comunicação digital!
         </div>
         <div class="select-container">
-            <label for="language-select">>Escolha o idioma de preferência e digite uma tag caso procure algo em especifico para conversa:</label></label>
+            <label for="language-select">Escolha o idioma de preferência e digite uma tag caso procure algo em especifico para conversa:</label></label>
             <select id="language-select">
                 <option value="zh">Chinês</option>
                 <option value="es">Espanhol</option>
