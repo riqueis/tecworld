@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TecWorld</title>
     <style>
-      body, html {
+body, html {
     height: 100%; /* Garante que a altura ocupe 100% da janela */
     margin: 0;
     font-family: Arial, sans-serif;
@@ -26,6 +26,7 @@
     justify-content: space-between;
     padding: 10px 20px;
 }
+
         .header .profile {
             display: flex;
             align-items: center;
@@ -111,15 +112,15 @@
         }
 
 
-  .content {
-            padding: 20px;
-            color: #e0e0e0;
-            text-align: center;
-            margin-top: 60px; /* Deixa o conteúdo abaixo do cabeçalho fixo */
-            overflow-y: auto; /* Permite rolagem vertical */
-            flex: 1; /* Permite que o conteúdo ocupe o espaço restante */
-            height: calc(100vh - 60px); /* Ajusta a altura do conteúdo com base na altura do cabeçalho */
-        }
+  content {
+    padding: 20px;
+    color: #e0e0e0;
+    text-align: center;
+    margin-top: 60px; /* Adiciona um espaço para que o conteúdo não fique atrás do cabeçalho */
+    overflow-y: auto; /* Permite rolagem vertical */
+    flex: 1; /* Permite que o conteúdo ocupe o espaço restante */
+    height: calc(100vh - 60px); /* Ajusta a altura do conteúdo com base na altura do cabeçalho */
+}
 
       
 .welcome {
