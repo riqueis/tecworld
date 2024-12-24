@@ -111,15 +111,13 @@
         }
 
    content {
-    padding: 20px;
+   .content {
+    margin-top: 60px; /* Espaço suficiente para o conteúdo não ficar oculto atrás do cabeçalho fixo */    padding: 20px;
     color: #e0e0e0;
     text-align: center;
     overflow-y: auto; /* Permite rolagem vertical */
-    margin-top: 60px; /* Garante que o conteúdo comece abaixo do cabeçalho */
-    padding-top: 20px; /* Ajusta o espaço superior para o conteúdo não ficar colado no topo */
-    height: calc(100vh - 60px); /* O conteúdo ocupa o espaço restante na tela */
-}
-
+    height: calc(100vh - 60px); /* Ajusta a altura do conteúdo para o restante da tela */
+    
   .welcome {
     font-size: 32px;
     color: #00ffd9;
