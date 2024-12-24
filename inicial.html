@@ -111,16 +111,19 @@ body, html {
             background-color: #6c15b3;
         }
 
-
-  content {
-    padding: 20px;
-    color: #e0e0e0;
-    text-align: center;
-    margin-top: 60px; /* Adiciona um espaço para que o conteúdo não fique atrás do cabeçalho */
-    overflow-y: auto; /* Permite rolagem vertical */
-    flex: 1; /* Permite que o conteúdo ocupe o espaço restante */
-    height: calc(100vh - 60px); /* Ajusta a altura do conteúdo com base na altura do cabeçalho */
-}
+ .content {
+            flex: 1; /* Faz o conteúdo ocupar o espaço disponível */
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 20px;
+            color: #e0e0e0;
+            text-align: center;
+            margin-top: 60px; /* Espaço para o cabeçalho */
+            overflow-y: auto;
+            width: 100%;
+        }
 
       
 .welcome {
