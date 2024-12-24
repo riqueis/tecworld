@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TecWorld</title>
     <style>
+        * {
+            box-sizing: border-box; /* Garantir que todos os elementos respeitem a largura da tela */
+        }
+
         body, html {
             height: 100%;
             margin: 0;
@@ -133,7 +137,7 @@
             font-size: 18px;
             color: #cccccc;
             margin-top: 10px;
-            max-width: 100%;
+            max-width: 100%; /* Garantir que não ultrapasse a largura da tela */
             line-height: 1.4;
         }
 
@@ -166,38 +170,40 @@
         .buttons button:hover {
             background-color: #007acc;
         }
-    #tag-input {
-        margin: 10px 0; /* Margem superior e inferior */
-        padding: 8px;  /* Espaçamento interno */
-        width: 93%;  /* Largura ajustável */
-        border-radius: 5px; /* Bordas arredondadas */
-        margin-right: 100px; 
-    }
-    .language-select {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    background-color: #e0e0e0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    cursor: pointer;
-    text-align: center;
-}
 
-.language-select option {
-    display: block; /* Faz cada opção ser exibida como um bloco */
-    width: 50%; /* Cada opção ocupa metade da largura */
-}
+        /* Ajuste para o input de tags */
+        #tag-input {
+            margin: 10px 0;
+            padding: 8px;
+            width: 93%;
+            border-radius: 5px;
+            margin-right: 100px;
+        }
 
-.language-select {
-    -webkit-appearance: none; /* Remove a aparência padrão do select no Safari e Chrome */
-    -moz-appearance: none; /* Remove a aparência padrão do select no Firefox */
-    appearance: none; /* Remove a aparência padrão */
-    background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"%3E%3Cpath fill="none" stroke="black" stroke-width="2" d="M5 7l5 5 5-5" /%3E%3C/svg%3E'); /* Adiciona um ícone para indicar o dropdown */
-    background-repeat: no-repeat;
-    background-position: right 10px center;
-}
+        .language-select {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            background-color: #e0e0e0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+        }
 
+        .language-select option {
+            display: block;
+            width: 50%;
+        }
+
+        .language-select {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"%3E%3Cpath fill="none" stroke="black" stroke-width="2" d="M5 7l5 5 5-5" /%3E%3C/svg%3E');
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+        }
 
     </style>
 </head>
