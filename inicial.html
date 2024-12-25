@@ -130,19 +130,46 @@ body, html {
         }
 
       
-.welcome {
+  .welcome {
     font-size: 32px;
-    color: #ffffff; /* Cor branca */
+    color: #ffff /* Azul brilhante */
+    position: relative; /* Para usar pseudo-elementos */
     text-shadow: 
-        0 0 3px #ffffff, /* Menor brilho */
-        0 0 6px #ffffff, /* Brilho suave */
-        0 0 9px rgba(255, 255, 255, 0.7); /* Brilho mais sutil */
+        0 0 3px #00bfff, /* Brilho sutil */
+        0 0 6px #00bfff, 
+        0 0 8px #1e90ff, /* Efeito de raio azul */
+        0 0 10px #1e90ff; /* Maior brilho */
     margin-bottom: 20px;
-    background: none; /* Sem fundo */
-    padding: 5px;
-    border-radius: 5px;
+    animation: lightning-strike 1.5s infinite; /* Animação de raio */
 }
 
+/* Animação de relâmpago */
+@keyframes lightning-strike {
+    0% {
+        text-shadow: 
+            0 0 3px #00bfff, 
+            0 0 6px #00bfff, 
+            0 0 8px #1e90ff, 
+            0 0 10px #1e90ff;
+        opacity: 1;
+    }
+    50% {
+        text-shadow: 
+            0 0 8px #00bfff, 
+            0 0 12px #00bfff, 
+            0 0 18px #1e90ff, 
+            0 0 24px #1e90ff;
+        opacity: 0.9;
+    }
+    100% {
+        text-shadow: 
+            0 0 3px #00bfff, 
+            0 0 6px #00bfff, 
+            0 0 8px #1e90ff, 
+            0 0 10px #1e90ff;
+        opacity: 1;
+    }
+}
 .tagline {
     font-size: 18px;
     color: #cccccc;
