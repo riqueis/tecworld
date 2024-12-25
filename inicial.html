@@ -12,7 +12,6 @@ body, html {
     background-color: #0d0f12;
     overflow-x: hidden; /* Evita rolagem horizontal */
 }
-
 .header {
     top: 0;
     left: 0;
@@ -22,42 +21,43 @@ body, html {
     background-color: #0d0f12; /* Mantém a cor do fundo */
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-between; /* Espaça elementos nos lados opostos */
     padding: 10px 20px;
 }
 
-        .header .profile {
-            display: flex;
-            align-items: center;
-        }
+.header .profile {
+    display: flex;
+    align-items: center; /* Garante alinhamento vertical */
+}
 
-        .header .profile img {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            margin-right: 10px;
-        }
+.header .profile img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px; /* Espaçamento entre a imagem e o nome */
+}
 
-        .header .profile .username {
-            font-size: 18px;
-            color: #e0e0e0;
-        }
+.header .profile .username {
+    font-size: 18px;
+    color: #e0e0e0;
+    white-space: nowrap; /* Evita quebra de linha */
+}
 
-        .unlimited-jumps-btn {
+.unlimited-jumps-btn {
     background: linear-gradient(90deg, #ffd700, #daa520); /* Gradiente dourado */
     color: white;
-    padding: 10px 20px;
+    padding: 7px 15px;
     border: none;
     border-radius: 10px;
     cursor: pointer;
-    margin-top: 10px;
-    font-weight: 18px;
+    font-size: 16px; /* Ajusta o tamanho da fonte */
+    font-weight: bold;
     box-shadow: 0 0 10px rgba(255, 215, 0, 0.5); /* Efeito de brilho ao redor */
     transition: all 0.3s ease; /* Suaviza as transições */
-    margin-right:23px
+    margin-right:23px; /* Garante que o botão vá para o lado direito */
 }
 
-.unlimited-jumps-btn:hover  {
+.unlimited-jumps-btn:hover {
     background: linear-gradient(90deg, #ffdf00, #ffc107); /* Gradiente mais brilhante */
     box-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 0 0 30px rgba(218, 165, 32, 0.6); /* Efeito de brilho mais intenso */
     transform: scale(1.1); /* Leve aumento no tamanho */
@@ -101,7 +101,7 @@ body, html {
             font-size: 14px;
             border-radius: 10px;
         }
-
+        .close-btn:hover{
           background-color: #9925ec;
             color: white;
             padding: 5px 10px;
