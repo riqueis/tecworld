@@ -96,19 +96,25 @@ body, html {
             border-radius: 10px;
         }
 
-        .close-btn {
-            background-color: #9925ec;
-            color: white;
-            padding: 5px 10px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 10px;
-        }
+      .close-btn {
+    background: linear-gradient(90deg, #ffd700, #daa520); /* Gradiente dourado */
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    font-weight: bold;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.5); /* Efeito de brilho ao redor */
+    transition: all 0.3s ease; /* Suaviza as transições */
+}
 
-        .close-btn:hover {
-            background-color: #6c15b3;
-        }
+.close-btn:hover {
+    background: linear-gradient(90deg, #ffdf00, #ffc107); /* Gradiente mais brilhante */
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 0 0 30px rgba(218, 165, 32, 0.6); /* Efeito de brilho mais intenso */
+    transform: scale(1.1); /* Leve aumento no tamanho */
+    color: black; /* Contraste adicional */
+}
 
  .content {
             flex: 1; /* Faz o conteúdo ocupar o espaço disponível */
