@@ -130,16 +130,19 @@ body, html {
         }
 
       
-  .welcome {
+   .welcome {
     font-size: 32px;
-    color: #ffff /* Azul brilhante */
+    color: #ffffff; /* Cor branca */
     position: relative; /* Para usar pseudo-elementos */
     text-shadow: 
-        0 0 3px #00bfff, /* Brilho sutil */
-        0 0 6px #00bfff, 
-        0 0 8px #1e90ff, /* Efeito de raio azul */
-        0 0 10px #1e90ff; /* Maior brilho */
+        0 0 5px #00bfff,  /* Brilho suave */
+        0 0 10px #00bfff,  /* Brilho mais forte */
+        0 0 20px #1e90ff,  /* Brilho intenso */
+        0 0 35px #1e90ff;  /* Maior brilho controlado */
     margin-bottom: 20px;
+    padding: 0 5px; /* Espaço interno para evitar que o brilho vaze muito */
+    background: transparent; /* Fundo transparente */
+    border-radius: 5px; /* Bordas arredondadas */
     animation: lightning-strike 1.5s infinite; /* Animação de raio */
 }
 
@@ -147,29 +150,28 @@ body, html {
 @keyframes lightning-strike {
     0% {
         text-shadow: 
-            0 0 3px #00bfff, 
-            0 0 6px #00bfff, 
-            0 0 8px #1e90ff, 
-            0 0 10px #1e90ff;
+            0 0 5px #00bfff, 
+            0 0 10px #00bfff, 
+            0 0 20px #1e90ff, 
+            0 0 35px #1e90ff;
         opacity: 1;
     }
     50% {
         text-shadow: 
-            0 0 8px #00bfff, 
-            0 0 12px #00bfff, 
-            0 0 18px #1e90ff, 
-            0 0 24px #1e90ff;
+            0 0 10px #00bfff, 
+            0 0 15px #00bfff, 
+            0 0 25px #1e90ff, 
+            0 0 35px #1e90ff;
         opacity: 0.9;
     }
     100% {
         text-shadow: 
-            0 0 3px #00bfff, 
-            0 0 6px #00bfff, 
-            0 0 8px #1e90ff, 
-            0 0 10px #1e90ff;
+            0 0 5px #00bfff, 
+            0 0 10px #00bfff, 
+            0 0 20px #1e90ff, 
+            0 0 35px #1e90ff;
         opacity: 1;
     }
-}
 .tagline {
     font-size: 18px;
     color: #cccccc;
