@@ -131,45 +131,12 @@ body, html {
 .welcome {
     font-size: 32px;
     color: #ffffff; /* Cor branca do texto */
-    position: relative;
     text-shadow: 
-        0 0 5px #00bfff,  /* Brilho suave */
-        0 0 10px #00bfff,  /* Brilho mais forte */
-        0 0 20px #1e90ff,  /* Brilho intenso */
-        0 0 30px #1e90ff;  /* Brilho máximo controlado até 30px */
-    margin-bottom: 20px;
-    animation: lightning-strike 1.5s infinite; /* Animação de raio */
+        0 0 10px #00bfff,  /* Brilho suave */
+        0 0 20px #00bfff,  /* Brilho mais forte */
+        0 0 30px #1e90ff,  /* Brilho intenso */
+        0 0 35px #1e90ff;  /* Brilho máximo controlado até 40px */
 }
-
-/* Animação de relâmpago */
-@keyframes lightning-strike {
-    0% {
-        text-shadow: 
-            0 0 5px #00bfff, 
-            0 0 10px #00bfff, 
-            0 0 20px #1e90ff, 
-            0 0 31px #1e90ff;
-        opacity: 1;
-    }
-    50% {
-        text-shadow: 
-            0 0 10px #00bfff, 
-            0 0 15px #00bfff, 
-            0 0 25px #1e90ff, 
-            0 0 31px #1e90ff;
-        opacity: 0.9;
-    }
-    100% {
-        text-shadow: 
-            0 0 5px #00bfff, 
-            0 0 10px #00bfff, 
-            0 0 20px #1e90ff, 
-            0 0 31px #1e90ff;
-        opacity: 1;
-    }
-}
-
-
 .tagline {
     font-size: 18px;
     color: #cccccc;
