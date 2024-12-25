@@ -9,8 +9,12 @@ body, html {
     height: 100%; /* Garante que a altura ocupe 100% da janela */
     margin: 0;
     font-family: Arial, sans-serif;
-    background-color: #0d0f12;
-    overflow-x: hidden; /* Evita rolagem horizontal */
+    background-image: url('./blue.avif');
+    background-size: cover; /* Faz com que a imagem cubra toda a tela */
+    background-position: center; /* Centraliza a imagem */
+    background-repeat: no-repeat; /* Evita repetição da imagem */
+    background-attachment: fixed; /* Faz a imagem permanecer fixa ao rolar a página */
+    overflow-x: hidden;
 }
 .header {
     top: 0;
@@ -18,7 +22,7 @@ body, html {
     width: 100%; /* Garante que o cabeçalho ocupe toda a largura */
     height: 65px; /* Define uma altura fixa */
     z-index: 1000; /* Coloca o cabeçalho acima do conteúdo */
-    background-color: #0d0f12; /* Mantém a cor do fundo */
+    background-color: rgba(0, 0, 0, 0);
     display: flex;
     align-items: center;
     justify-content: space-between; /* Espaça elementos nos lados opostos */
@@ -146,7 +150,7 @@ body, html {
 }
 
 .footer {
-    background-color: #0d0f12;
+    background-color: rgba(0, 0, 0, 0); /* Fundo 100% transparente */
     color: #666;
     font-size: 12px;
     text-align: center;
