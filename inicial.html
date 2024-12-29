@@ -5,69 +5,69 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TecWorld</title>
     <style>
-body, html {
-    height: 100%; /* Garante que a altura ocupe 100% da janela */
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background-image: url('./blue.avif');
-    background-size: cover; /* Faz com que a imagem cubra toda a tela */
-    background-position: center; /* Centraliza a imagem */
-    background-repeat: no-repeat; /* Evita repetição da imagem */
-    background-attachment: fixed; /* Faz a imagem permanecer fixa ao rolar a página */
-    overflow-x: hidden;
-}
-.header {
-    top: 0;
-    left: 0;
-    width: 100%; /* Garante que o cabeçalho ocupe toda a largura */
-    height: 65px; /* Define uma altura fixa */
-    z-index: 1000; /* Coloca o cabeçalho acima do conteúdo */
-    background-color: rgba(0, 0, 0, 0);
-    display: flex;
-    align-items: center;
-    justify-content: space-between; /* Espaça elementos nos lados opostos */
-    padding: 10px 20px;
-}
+        body, html {
+            height: 100%; /* Garante que a altura ocupe 100% da janela */
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-image: url('./blue.avif');
+            background-size: cover; /* Faz com que a imagem cubra toda a tela */
+            background-position: center; /* Centraliza a imagem */
+            background-repeat: no-repeat; /* Evita repetição da imagem */
+            background-attachment: fixed; /* Faz a imagem permanecer fixa ao rolar a página */
+            overflow-x: hidden;
+        }
 
-.header .profile {
-    display: flex;
-    align-items: center; /* Garante alinhamento vertical */
-}
+        .header {
+            top: 0;
+            left: 0;
+            width: 100%; /* Garante que o cabeçalho ocupe toda a largura */
+            height: 65px; /* Define uma altura fixa */
+            z-index: 1000; /* Coloca o cabeçalho acima do conteúdo */
+            background-color: rgba(0, 0, 0, 0);
+            display: flex;
+            align-items: center;
+            justify-content: space-between; /* Espaça elementos nos lados opostos */
+            padding: 10px 20px;
+        }
 
-.header .profile img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    margin-right: 10px; /* Espaçamento entre a imagem e o nome */
-}
+        .header .profile {
+            display: flex;
+            align-items: center; /* Garante alinhamento vertical */
+        }
 
-.header .profile .username {
-    font-size: 18px;
-    color: #e0e0e0;
-    white-space: nowrap; /* Evita quebra de linha */
-}
+        .header .profile img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px; /* Espaçamento entre a imagem e o nome */
+        }
 
-.unlimited-jumps-btn {
-    background: linear-gradient(90deg, #ffd700, #daa520); /* Gradiente dourado */
-    color: white;
-    padding: 7px 15px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 16px; /* Ajusta o tamanho da fonte */
-    font-weight: bold;
-    box-shadow: 0 0 10px rgba(255, 215, 0, 0.5); /* Efeito de brilho ao redor */
-    transition: all 0.3s ease; /* Suaviza as transições */
-    margin-right:23px; /* Garante que o botão vá para o lado direito */
-}
+        .header .profile .username {
+            font-size: 18px;
+            color: #e0e0e0;
+            white-space: nowrap; /* Evita quebra de linha */
+        }
 
-.unlimited-jumps-btn:hover {
-    background: linear-gradient(90deg, #ffdf00, #ffc107); /* Gradiente mais brilhante */
-    box-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 0 0 30px rgba(218, 165, 32, 0.6); /* Efeito de brilho mais intenso */
-    transform: scale(1.1); /* Leve aumento no tamanho */
-    color: black; /* Contraste adicional */
-}
+        .unlimited-jumps-btn {
+            background: linear-gradient(90deg, #ffd700, #daa520); /* Gradiente dourado */
+            color: white;
+            padding: 7px 15px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px; /* Ajusta o tamanho da fonte */
+            font-weight: bold;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5); /* Efeito de brilho ao redor */
+            transition: all 0.3s ease; /* Suaviza as transições */
+            margin-right: 23px; /* Garante que o botão vá para o lado direito */
+        }
 
+        .unlimited-jumps-btn:hover {
+            background: linear-gradient(90deg, #ffdf00, #ffc107); /* Gradiente mais brilhante */
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 0 0 30px rgba(218, 165, 32, 0.6); /* Efeito de brilho mais intenso */
+            transform: scale(1.1); /* Leve aumento no tamanho */
+            color: black; /* Contraste adicional */
+        }
 
         /* Estilo do Modal */
         .modal-overlay {
@@ -105,8 +105,9 @@ body, html {
             font-size: 14px;
             border-radius: 10px;
         }
+
         .close-btn {
-          background-color: #9925ec;
+            background-color: #9925ec;
             color: white;
             padding: 5px 10px;
             border: none;
@@ -119,7 +120,7 @@ body, html {
             background-color: #6c15b3;
         }
 
- .content {
+        .content {
             flex: 1; /* Faz o conteúdo ocupar o espaço disponível */
             display: flex;
             flex-direction: column;
@@ -132,34 +133,36 @@ body, html {
             overflow-y: auto;
             width: 100%;
         }
-.welcome {
-    font-size: 32px;
-    color: #ffffff; /* Cor branca do texto */
-    text-shadow: 
-        0 0 10px #00bfff,  /* Brilho suave */
-        0 0 20px #00bfff,  /* Brilho mais forte */
-        0 0 30px #1e90ff,  /* Brilho intenso */
-        0 0 35px #1e90ff;  /* Brilho máximo controlado até 40px */
-}
-.tagline {
-    font-size: 18px;
-    color: #cccccc;
-    margin-top: 15px;
-    max-width: 90%; /* Garante que não ultrapasse a largura da tela */
-    line-height: 1.4;
-}
 
-.footer {
-    background-color: rgba(0, 0, 0, 0); /* Fundo 100% transparente */
-    color: #666;
-    font-size: 12px;
-    text-align: center;
-    padding: 10px;
-    width: 100%;
-    z-index: 1000;
-    position: relative;
-    margin-top: auto;
-}
+        .welcome {
+            font-size: 32px;
+            color: #ffffff; /* Cor branca do texto */
+            text-shadow: 
+                0 0 10px #00bfff,  /* Brilho suave */
+                0 0 20px #00bfff,  /* Brilho mais forte */
+                0 0 30px #1e90ff,  /* Brilho intenso */
+                0 0 35px #1e90ff;  /* Brilho máximo controlado até 40px */
+        }
+
+        .tagline {
+            font-size: 18px;
+            color: #cccccc;
+            margin-top: 15px;
+            max-width: 90%; /* Garante que não ultrapasse a largura da tela */
+            line-height: 1.4;
+        }
+
+        .footer {
+            background-color: rgba(0, 0, 0, 0); /* Fundo 100% transparente */
+            color: #666;
+            font-size: 12px;
+            text-align: center;
+            padding: 10px;
+            width: 100%;
+            z-index: 1000;
+            position: relative;
+            margin-top: auto;
+        }
 
         .buttons {
             margin-top: 1px;
@@ -190,6 +193,24 @@ body, html {
             margin-left: 20px; /* Remover margem direita excessiva */
         }
 
+        .select-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            margin-top: 30px; /* Espaçamento adicional */
+        }
+
+        .select-container select, .select-container #tag-input {
+            margin: 10px 0;
+            padding: 10px;
+            width: 80%; /* Tamanho adequado */
+            max-width: 400px; /* Limita a largura */
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
         .language-select {
             width: 100%;
             padding: 10px;
@@ -215,9 +236,7 @@ body, html {
             background-repeat: no-repeat;
             background-position: right 10px center;
         }
-</style>
-
-
+    </style>
 </head>
 <body>
 
@@ -234,75 +253,56 @@ body, html {
     <div class="content">
         <div class="welcome">Bem-vindo,<br>henrique</div>
         <div class="tagline">
-TecWorld é uma plataforma inovadora que conecta pessoas de todo o mundo<br> para conversas em tempo real. Faça novos amigos, compartilhe experiências e descubra um mundo de novas conexões!<br> Com uma interface moderna e intuitiva, nossa missão é proporcionar uma experiência única, onde a tecnologia e as interações sociais se encontram<br> em perfeita harmonia. Aqui, você pode escolher um idioma e praticá-lo, participar de conversas com a tag de sua escolha. Estamos comprometidos em tornar cada interação significativa e segura. Junte-se a nós e faça parte do futuro da comunicação digital!
+            TecWorld é uma plataforma inovadora que conecta pessoas de todo o mundo<br> 
+            para conversas em tempo real. Faça novos amigos, compartilhe experiências e descubra um mundo de novas conexões!<br> 
+            Com uma interface moderna e intuitiva, nossa missão é proporcionar uma experiência única, onde a tecnologia e as interações sociais se encontram
+            em perfeita harmonia. Aqui, você pode escolher um idioma e praticá-lo, participar de conversas com a tag de sua escolha. Estamos comprometidos em tornar cada interação significativa e segura. Junte-se a nós e faça parte do futuro da comunicação digital!
         </div>
+
+        <!-- Seletor de idioma e input de tag -->
         <div class="select-container">
-            
-            <select id="language-select">
+            <select class="language-select" id="language-select">
                 <option value="zh">Chinês</option>
                 <option value="es">Espanhol</option>
-                <option value="es">Espanhol</option>
-        <option value="en">Inglês</option>
-        <option value="hi">Hindi</option>
-        <option value="ar">Árabe</option>
-        <option value="bn">Bengali</option>
-        <option value="pt">Português</option>
-        <option value="ru">Russo</option>
-        <option value="ja">Japonês</option>
-        <option value="de">Alemão</option>
-        <option value="ko">Coreano</option>
-        <option value="fr">Francês</option>
-        <option value="tr">Turco</option>
-        <option value="it">Italiano</option>
-        <option value="vi">Vietnamita</option>
-        <option value="ta">Tâmil</option>
-        <option value="ur">Urdu</option>
-        <option value="mr">Marata</option>
-        <option value="te">Télugo</option>
-        <option value="kn">Canará</option>
-        <option value="ml">Malaiala</option>
-        <option value="pa">Punjabi</option>
-        <option value="gu">Guzerate</option>
-        <option value="pl">Polonês</option>
-        <option value="uk">Ucraniano</option>
+                <option value="en">Inglês</option>
+                <option value="hi">Hindi</option>
+                <option value="ar">Árabe</option>
+                <option value="bn">Bengali</option>
+                <option value="pt">Português</option>
+                <option value="ru">Russo</option>
+                <option value="ja">Japonês</option>
+                <option value="de">Alemão</option>
+                <option value="ko">Coreano</option>
+                <option value="fr">Francês</option>
+                <option value="tr">Turco</option>
+                <option value="it">Italiano</option>
+                <option value="vi">Vietnamita</option>
+                <option value="ta">Tâmil</option>
+                <option value="ur">Urdu</option>
+                <option value="mr">Marata</option>
+                <option value="te">Télugo</option>
+                <option value="kn">Canará</option>
+                <option value="ml">Malaiala</option>
+                <option value="pa">Punjabi</option>
+                <option value="gu">Guzerate</option>
+                <option value="pl">Polonês</option>
+                <option value="uk">Ucraniano</option>
             </select>
             <br>
-            <input id="tag-input" type="text" placeholder="escreva sua tag Ex: Anime, Jogos, Filmes" />
+            <input id="tag-input" type="text" placeholder="Escreva sua tag Ex: Anime, Jogos, Filmes" />
         </div>
+
+        <!-- Botões para navegar para chats -->
         <div class="buttons">
             <button onclick="window.location.href='file:///C:/Users/henrique/GenickWorld/index3.html'">Chat de Texto</button>
             <button onclick="window.location.href='file:///C:/Users/henrique/GenickWorld/index4.html'">Chat de Vídeo</button>
         </div>
     </div>
 
-    <!-- Modal de pagamento -->
-    <div class="modal-overlay" id="paymentModal">
-        <div class="modal-content">
-            <h2>Pague R$10 para obter Pulos Ilimitados</h2>
-            <div class="qr-code">
-                QR Code<br> (Imagem aqui)
-            </div>
-            <p>Use o código QR acima para fazer o pagamento</p>
-            <button class="close-btn" onclick="closeModal()">Fechar</button>
-        </div>
-    </div>
-
     <!-- Rodapé -->
-     <div class="footer">
-        &copy; 2024 TecWorld. Todos os direitos reservados.
+    <div class="footer">
+        <p>&copy; 2024 TecWorld. Todos os direitos reservados.</p>
     </div>
-
-    <script>
-        // Função para abrir o modal de pagamento
-        function openModal() {
-            document.getElementById("paymentModal").style.display = "flex";
-        }
-
-        // Função para fechar o modal de pagamento
-        function closeModal() {
-            document.getElementById("paymentModal").style.display = "none";
-        }
-    </script>
 
 </body>
 </html>
