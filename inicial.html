@@ -18,47 +18,68 @@
         }
 
         .header {
-            top: 0;
-            left: 0;
-            width: 100%; /* Garante que o cabeçalho ocupe toda a largura */
-            height: 65px; /* Define uma altura fixa */
-            z-index: 1000; /* Coloca o cabeçalho acima do conteúdo */
-            background-color: rgba(0, 0, 0, 0);
-            display: flex;
-            align-items: center;
-            justify-content: space-between; /* Espaça elementos nos lados opostos */
-            padding: 10px 20px;
-        }
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 65px;
+    z-index: 1000;
+    background-color: rgba(0, 0, 0, 0);
+    display: flex;
+    align-items: center; /* Alinha verticalmente todos os elementos */
+    justify-content: space-between; /* Coloca o botão "Assinar" à direita */
+    padding: 10px 20px;
+}
 
-        .header .profile {
-            display: flex;
-            align-items: center; /* Garante alinhamento vertical */
-        }
+/* Estilo para o perfil */
+.header .profile {
+    display: flex;
+    align-items: center; /* Alinha os itens do perfil (avatar, nome e coroa) na linha */
+}
 
-        .header .profile img {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            margin-right: 10px; /* Espaçamento entre a imagem e o nome */
-        }
+/* Estilo para a imagem do avatar */
+.header .profile img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px; /* Espaçamento entre a imagem e o nome */
+}
 
-        .header .profile .username {
-            font-size: 18px;
-            color: #e0e0e0;
-            white-space: nowrap; /* Evita quebra de linha */
-        }
+/* Estilo para o nome de usuário */
+.header .profile .username {
+    font-size: 18px;
+    color: #e0e0e0;
+    white-space: nowrap;
+}
 
-        .unlimited-jumps-btn {
-            background: linear-gradient(90deg, #ffd700, #daa520); /* Gradiente dourado */
-            color: white;
-            padding: 7px 15px;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 16px; /* Ajusta o tamanho da fonte */
-            font-weight: bold;
-            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5); /* Efeito de brilho ao redor */
-            transition: all 0.3s ease; /* Suaviza as transições */
+/* Estilo para o ícone da coroa */
+#crown-icon {
+    width: 40px;
+    height: 40px;
+    margin-left: 10px; /* Espaçamento entre a coroa e o nome */
+}
+
+/* Cor de fundo e efeito de transição para a coroa */
+#crown-icon path {
+    fill: black;
+    stroke: none;
+    transition: fill 0.3s ease;
+}
+
+#crown-icon.signed path {
+    fill: gold;
+}
+
+/* Estilo para o botão "Assinar" */
+.unlimited-jumps-btn {
+    background: linear-gradient(90deg, #ffd700, #daa520); /* Gradiente dourado */
+    color: white;
+    padding: 7px 15px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.5); /* Efeito de brilho */
             margin-right: 23px; /* Garante que o botão vá para o lado direito */
         }
 
@@ -71,54 +92,54 @@
 
         /* Estilo do Modal */
         .modal-overlay {
-            display: none; /* Oculto inicialmente */
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8); /* Fundo escuro semi-transparente */
-            justify-content: center;
-            align-items: center;
-            z-index: 10;
-        }
+    display: none; /* Oculto inicialmente */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Fundo escuro semi-transparente */
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
 
-        .modal-content {
-            background-color: #1a1a1d;
-            padding: 20px;
-            border-radius: 10px;
-            width: 300px;
-            text-align: center;
-            color: white;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
-        }
+.modal-content {
+    background-color: #1a1a1d;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    text-align: center;
+    color: white;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+}
 
-        .qr-code {
-            width: 150px;
-            height: 150px;
-            background-color: #333;
-            margin: 10px auto;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #bbb;
-            font-size: 14px;
-            border-radius: 10px;
-        }
+.qr-code {
+    width: 150px;
+    height: 150px;
+    background-color: #333;
+    margin: 10px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #bbb;
+    font-size: 14px;
+    border-radius: 10px;
+}
+.close-btn {
+    background-color: #9925ec;
+    color: white;
+    padding: 7px 15px; /* Mesmo tamanho de padding que o botão "Assinar" */
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 12px;
+    width: 50%; /* Garante que o botão "Fechar" também ocupe a mesma largura */
+}
 
-        .close-btn {
-            background-color: #9925ec;
-            color: white;
-            padding: 5px 10px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-
-        .close-btn:hover {
-            background-color: #6c15b3;
-        }
+.close-btn:hover {
+    background-color: #6c15b3;
+}
 
         .content {
             flex: 1; /* Faz o conteúdo ocupar o espaço disponível */
@@ -236,6 +257,8 @@
             background-repeat: no-repeat;
             background-position: right 10px center;
         }
+        /* Estilos para o ícone de coroa */
+
     </style>
 </head>
 <body>
@@ -243,11 +266,35 @@
     <!-- Cabeçalho -->
     <div class="header">
         <div class="profile">
+            
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPlwkUTsaWA_zSj0oFI7sbKYXqs-ih3b0_Bg&s" alt="Avatar">
             <span class="username">Nome de Usuário</span>
+            <svg id="crown-icon" class="icon" version="1.0" xmlns="http://www.w3.org/2000/svg" width="225.000000pt" height="225.000000pt" viewBox="0 0 225.000000 225.000000" preserveAspectRatio="xMidYMid meet">
+                <g transform="translate(0.000000,225.000000) scale(0.100000,-0.100000)" fill="none" stroke="none">
+                  <path d="M1085 1618 c-11 -6 -25 -19 -32 -27 -17 -22 -16 -82 1 -107 13 -18 6 -37 -79 -212 -52 -106 -96 -192 -98 -192 -2 0 -64 68 -138 152 -125 143 -133 154 -130 190 1 31 -4 44 -28 68 -50 50 -120 38 -147 -26 -12 -30 -12 -39 1 -70 9 -23 25 -40 43 -46 29 -11 30 -15 83 -257 40 -183 55 -274 59 -356 l5 -110 500 0 500 0 6 120 c5 91 19 175 58 350 28 126 51 232 51 235 0 3 14 11 30 17 60 23 70 115 17 155 -58 46 -153 -5 -145 -78 4 -33 -4 -45 -131 -190 -74 -85 -137 -154 -140 -154 -3 1 -46 85 -95 187 -90 186 -90 186 -73 215 26 45 22 85 -12 119 -31 31 -70 37 -106 17z m150 -388 c107 -222 111 -230 130 -230 7 0 82 79 166 176 85 96 155 172 156 167 1 -4 -22 -116 -51 -248 l-52 -240 -459 0 -460 0 -52 240 c-29 132 -51 243 -50 248 1 4 71 -72 156 -168 92 -105 160 -175 169 -173 19 4 14 -5 133 242 55 114 104 204 108 200 5 -5 52 -101 106 -214z m345 -495 l0 -65 -455 0 -455 0 0 65 0 65 455 0 455 0 0 -65z"/>
+                </g>
+              </svg>
         </div>
         <button class="unlimited-jumps-btn" onclick="openModal()">Vip</button>
     </div>
+    <body>
+        <div class="modal-overlay" id="paymentModal">
+            <div class="modal-content">
+                <h2>Pague R$10 para obter Pulos Ilimitados</h2>
+                <div class="qr-code">
+                    QR Code<br> (Imagem aqui)
+                </div>
+                <p>Use o código QR acima para fazer o pagamento</p>
+                
+                <!-- Botão Assinar dentro do Modal, acima do botão Fechar -->
+                <button class="unlimited-jumps-btn" onclick="sign()">Assinar</button>
+                
+                <button class="close-btn" onclick="closeModal()">Fechar</button>
+            </div>
+        </div>
+      
+        <!-- Ícone SVG da coroa -->
+       
 
     <!-- Conteúdo principal -->
     <div class="content">
@@ -294,8 +341,8 @@
 
         <!-- Botões para navegar para chats -->
         <div class="buttons">
-            <button onclick="window.location.href='file:///C:/Users/henrique/GenickWorld/index3.html'">Chat de Texto</button>
-            <button onclick="window.location.href='file:///C:/Users/henrique/GenickWorld/index4.html'">Chat de Vídeo</button>
+            <button onclick="window.location.href='index3.html'">Chat de Texto</button>
+            <button onclick="window.location.href='index4.html'">Chat de Vídeo</button>
         </div>
     </div>
 
@@ -303,6 +350,21 @@
     <div class="footer">
         <p>&copy; 2024 TecWorld. Todos os direitos reservados.</p>
     </div>
+    <script>
+        // Função que ativa a "assinatura" e muda a cor da coroa
+        function sign() {
+          document.getElementById('crown-icon').classList.add('signed');
+        }
+         // Função para abrir o modal
+         function openModal() {
+            document.getElementById('paymentModal').style.display = 'flex'; // Torna o modal visível
+        }
+    
+        // Função para fechar o modal
+        function closeModal() {
+            document.getElementById('paymentModal').style.display = 'none'; // Esconde o modal
+        }
+    </script>
 
 </body>
 </html>
