@@ -17,7 +17,7 @@
             overflow-x: hidden;
         }
 
-        .header {
+  .header {
     top: 0;
     left: 0;
     width: 100%;
@@ -26,10 +26,9 @@
     background-color: rgba(0, 0, 0, 0);
     display: flex;
     align-items: center; /* Alinha verticalmente todos os elementos */
-    justify-content: space-between; /* Coloca o botão "Assinar" à direita */
+    justify-content: space-between; /* Distribui os elementos ao longo da linha */
     padding: 10px 20px;
 }
-
 /* Estilo para o perfil */
 .header .profile {
     display: flex;
@@ -73,14 +72,12 @@
     width: 50px;
     height: 50px;
     fill: #272727;
-    margin-right: auto;
-   margin-left:89% ; /* Ajuste conforme necessário */
+    margin-right: 10px; /* Espaçamento entre o botão "Assinar" e o ícone */
     z-index: 1001; /* Garante que o ícone fique acima de outros elementos */
 }
 
-/* Estilo para o botão "Assinar" */
 .unlimited-jumps-btn {
-    background: linear-gradient(90deg, #ffd700, #daa520); /* Gradiente dourado */
+    background: linear-gradient(90deg, #ffd700, #daa520);
     color: white;
     padding: 7px 15px;
     border: none;
@@ -88,9 +85,10 @@
     cursor: pointer;
     font-size: 16px;
     font-weight: bold;
-    box-shadow: 0 0 10px rgba(255, 215, 0, 0.5); /* Efeito de brilho */
-            margin-right: 64px; /* Garante que o botão vá para o lado direito */
-        }
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    margin-right: 10px; /* Espaçamento entre o botão e outros elementos */
+}
+
 
         .unlimited-jumps-btn:hover {
             background: linear-gradient(90deg, #ffdf00, #ffc107); /* Gradiente mais brilhante */
