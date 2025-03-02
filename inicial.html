@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -104,7 +102,7 @@
 
 .profile-options {
     position: absolute;
-    top: 100%;
+    top: 12%;
     left: 0;
     background: #fff;
     border: 1px solid #ddd;
@@ -473,10 +471,11 @@
     <script>
         // Função que ativa a "assinatura" e muda a cor da coroa
         function sign() {
-          document.getElementById('crown-icon').classList.add('signed');
+            document.getElementById('crown-icon').classList.add('signed');
         }
-         // Função para abrir o modal
-         function openModal() {
+    
+        // Função para abrir o modal
+        function openModal() {
             document.getElementById('paymentModal').style.display = 'flex'; // Torna o modal visível
         }
     
@@ -484,94 +483,134 @@
         function closeModal() {
             document.getElementById('paymentModal').style.display = 'none'; // Esconde o modal
         }
-    </script>
-
-<!-- Code injected by live-server -->
-<script>
-	// <![CDATA[  <-- For SVG support
-	if ('WebSocket' in window) {
-		(function () {
-			function refreshCSS() {
-				var sheets = [].slice.call(document.getElementsByTagName("link"));
-				var head = document.getElementsByTagName("head")[0];
-				for (var i = 0; i < sheets.length; ++i) {
-					var elem = sheets[i];
-					var parent = elem.parentElement || head;
-					parent.removeChild(elem);
-					var rel = elem.rel;
-					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
-						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
-						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
-					}
-					parent.appendChild(elem);
-				}
-			}
-			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
-			var address = protocol + window.location.host + window.location.pathname + '/ws';
-			var socket = new WebSocket(address);
-			socket.onmessage = function (msg) {
-				if (msg.data == 'reload') window.location.reload();
-				else if (msg.data == 'refreshcss') refreshCSS();
-			};
-			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
-				console.log('Live reload enabled.');
-				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
-			}
-		})();
-	} 
-	else {
-		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
-	}
-    document.addEventListener('DOMContentLoaded', function () {
-    const settingsIcon = document.getElementById('settings-icon');
-    const settingsModal = document.querySelector('.settings-modal-overlay');
-
-    // Oculta o modal inicialmente
-    settingsModal.style.display = 'none';
-
-    // Mostra o modal ao clicar no ícone
-    settingsIcon.addEventListener('click', function () {
-        settingsModal.style.display = 'flex';
-    });
-
-    // Fecha o modal ao clicar fora do conteúdo
-    settingsModal.addEventListener('click', function (event) {
-        if (event.target === settingsModal) {
-            settingsModal.style.display = 'none';
+    
+        // Função para alterar o nome de usuário
+        function changeUsername() {
+            let newUsername = prompt("Digite seu novo nome de usuário:");
+            if (newUsername && newUsername.trim() !== "") {
+                // Atualiza o nome de usuário exibido
+                document.querySelector(".username").textContent = newUsername;
+                document.getElementById("dynamicUsername").textContent = newUsername;
+    
+                // Salva o novo nome de usuário no localStorage
+                localStorage.setItem("username", newUsername);
+            }
         }
-    });
-});
-document.addEventListener("DOMContentLoaded", function () {
-    const profile = document.querySelector(".profile");
-    const profileOptions = document.getElementById("profileOptions");
-
-    profile.addEventListener("click", function (event) {
-      profileOptions.classList.toggle("hidden");
-      event.stopPropagation(); // Impede que o clique feche imediatamente
-    });
-
-    document.addEventListener("click", function () {
-      profileOptions.classList.add("hidden"); // Esconde se clicar fora
-    });
-
-    profileOptions.addEventListener("click", function (event) {
-      event.stopPropagation(); // Evita fechar ao clicar dentro do menu
-    });
-  });
-
-  function changeUsername() {
-    let newUsername = prompt("Digite seu novo nome de usuário:");
-    if (newUsername && newUsername.trim() !== "") {
-        document.getElementById("dynamicUsername").textContent = newUsername;
-        document.querySelector(".username").textContent = newUsername;
-    }
-}
- function changeProfileImage() {
-    let newImageUrl = prompt("Cole o URL da nova imagem de perfil:");
-    if (newImageUrl) {
-      document.querySelector(".profile img").src = newImageUrl;
-    }
-  }
-</script>
+    
+        // Função para alterar a imagem de perfil
+        function changeProfileImage() {
+            let newImageUrl = prompt("Cole o URL da nova imagem de perfil:");
+            if (newImageUrl) {
+                document.querySelector(".profile img").src = newImageUrl;
+            }
+        }
+    
+        // Função para buscar o nome de usuário salvo e exibi-lo
+        document.addEventListener('DOMContentLoaded', function () {
+            const savedUsername = localStorage.getItem("username");
+            if (savedUsername) {
+                // Substitui o nome de usuário nas áreas desejadas
+                document.querySelector(".username").textContent = savedUsername;
+                document.getElementById("dynamicUsername").textContent = savedUsername;
+            }
+        });
+    
+        // Código de live-reload
+        if ('WebSocket' in window) {
+            (function () {
+                function refreshCSS() {
+                    var sheets = [].slice.call(document.getElementsByTagName("link"));
+                    var head = document.getElementsByTagName("head")[0];
+                    for (var i = 0; i < sheets.length; ++i) {
+                        var elem = sheets[i];
+                        var parent = elem.parentElement || head;
+                        parent.removeChild(elem);
+                        var rel = elem.rel;
+                        if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+                            var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+                            elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+                        }
+                        parent.appendChild(elem);
+                    }
+                }
+                var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+                var address = protocol + window.location.host + window.location.pathname + '/ws';
+                var socket = new WebSocket(address);
+                socket.onmessage = function (msg) {
+                    if (msg.data == 'reload') window.location.reload();
+                    else if (msg.data == 'refreshcss') refreshCSS();
+                };
+                if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+                    console.log('Live reload enabled.');
+                    sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+                }
+            })();
+        } else {
+            console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+        }
+    
+        // Função para login
+        function login() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+    
+            // Recupera os dados do usuário usando o e-mail
+            const userData = localStorage.getItem("user_" + email);
+    
+            if (userData) {
+                const parsedData = JSON.parse(userData);
+    
+                // Verifica se a senha corresponde
+                if (parsedData.password === password) {
+                    // Sucesso no login, redireciona
+                    window.location.href = "inicial.html";  // Redireciona para a página inicial
+                } else {
+                    document.getElementById('general-error').innerHTML = 'E-mail ou senha inválidos.';
+                    document.getElementById('general-error').style.display = 'block';
+                }
+            } else {
+                // E-mail não encontrado
+                document.getElementById('general-error').innerHTML = 'E-mail não registrado.';
+                document.getElementById('general-error').style.display = 'block';
+            }
+        }
+    
+        // Função para buscar o nome de usuário salvo e exibi-lo após login
+        document.addEventListener('DOMContentLoaded', function () {
+            const email = localStorage.getItem("email");  // Recupera o e-mail logado
+            const userData = localStorage.getItem("user_" + email); // Recupera os dados do usuário com base no e-mail
+    
+            if (userData) {
+                const parsedData = JSON.parse(userData);
+                const savedUsername = parsedData.username;
+    
+                if (savedUsername) {
+                    // Substitui o nome de usuário nas áreas desejadas
+                    document.querySelector(".username").textContent = savedUsername;
+                    document.getElementById("dynamicUsername").textContent = savedUsername;
+                }
+            }
+        });
+    
+        // Função para abrir o menu de opções de perfil
+        document.addEventListener("DOMContentLoaded", function () {
+            const profile = document.querySelector(".profile");
+            const profileOptions = document.getElementById("profileOptions");
+    
+            profile.addEventListener("click", function (event) {
+                profileOptions.classList.toggle("hidden");
+                event.stopPropagation(); // Impede que o clique feche imediatamente
+            });
+    
+            document.addEventListener("click", function () {
+                profileOptions.classList.add("hidden"); // Esconde se clicar fora
+            });
+    
+            profileOptions.addEventListener("click", function (event) {
+                event.stopPropagation(); // Evita fechar ao clicar dentro do menu
+            });
+        });
+    </script>    
 </body>
 </html>
+
