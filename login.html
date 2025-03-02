@@ -222,116 +222,142 @@ function updateLanguageButton(lang) {
                 termsError: "Debes aceptar los Términos de Uso y la Política de Privacidad."
             }
         };
+        
+        // Função de login
+function login() {
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value.trim();
+    const errorMessage = document.getElementById('general-error');
 
-
-
-
-        function showLogin() {
-            const t = translations[currentLanguage];
-            document.getElementById('login-form').innerHTML = `
-                <h1>${t.heading}</h1>
-                <input type="text" id="email" placeholder="${t.emailPlaceholder}">
-                <input type="password" id="password" placeholder="${t.passwordPlaceholder}">
-                <div id="general-error" class="error-message"></div>
-                <button type="submit" class="login-btn">${t.loginButton}</button>
-                <a href="#" class="forgot-password" onclick="showForgotPassword()">${t.forgotPassword}</a>
-                <a href="#" class="create-account" onclick="showCreateAccount()">${t.createAccount}</a>
-            `;
-        }
-
-        function showForgotPassword() {
-            const t = translations[currentLanguage];
-            document.getElementById('login-form').innerHTML = `
-                <h1>${t.recoverHeading}</h1>
-                <input type="email" placeholder="${t.emailPlaceholder}" id="email">
-                <button type="submit" class="login-btn">${t.recoverButton}</button>
-                <a href="#" class="back-to-login" onclick="showLogin()">${t.backToLogin}</a>
-            `;
-        }
-
-        function showCreateAccount() {
-            const t = translations[currentLanguage];
-            document.getElementById('login-form').innerHTML = `
-                <h1>${t.createHeading}</h1>
-                <input type="text" placeholder="${t.createUsernamePlaceholder}" id="username">
-                <input type="text" placeholder="${t.createEmailPlaceholder}" id="email">
-                <input type="password" placeholder="${t.createPasswordPlaceholder}" id="password">
-                <div class="checkbox-container">
-                    <input type="checkbox" id="terms">
-                    <label for="terms">${t.createTerms}</label>
-                </div>
-                <div class="checkbox-container">
-                    <input type="checkbox" id="privacy">
-                    <label for="privacy">${t.createPrivacy}</label>
-                </div>
-                <div id="general-error" class="error-message"></div>
-                <button class="login-btn">${t.createRegister}</button>
-                <a href="#" class="back-to-login" onclick="showLogin()">${t.backToLogin}</a>
-            `;
-        }
-        function validateForm(event) {
-    event.preventDefault();  // Impede o envio do formulário
-    const email = document.getElementById('email').value;  // Obtém o valor do campo email
-    const password = document.getElementById('password').value;  // Obtém o valor do campo senha
-    const terms = document.getElementById('terms')?.checked;  // Verifica se a checkbox de termos foi marcada
-    const privacy = document.getElementById('privacy')?.checked;  // Verifica se a checkbox de privacidade foi marcada
-    const generalError = document.getElementById('general-error');  // Div onde os erros serão mostrados
-    let isValid = true;  // Flag de validade do formulário
-    let errorMessage = '';  // Mensagem de erro a ser exibida
-
-    // Resetando erros
-    generalError.innerHTML = '';  // Limpa mensagens de erro anteriores
-    generalError.style.display = 'none';  // Garante que o erro não estará visível até ser necessário
-    document.getElementById('email').classList.remove('error-input');
-    document.getElementById('password').classList.remove('error-input');
-
-    // Valida o preenchimento dos campos de texto (email e senha)
+    // Verifica se os campos foram preenchidos
     if (!email || !password) {
-        errorMessage = translations[currentLanguage].generalError;  // Exibe erro se campos estiverem vazios
-        isValid = false;
+        errorMessage.innerHTML = 'Preencha todos os campos antes de continuar.';
+        errorMessage.style.display = 'block';
+        return;
     }
 
-    // Verifica o e-mail
-    if (isValid && !validateEmail(email)) {
-        errorMessage = translations[currentLanguage].invalidEmail;  // Exibe erro se o email for inválido
-        document.getElementById('email').classList.add('error-input');
-        isValid = false;
-    }
+    // Recupera os dados do usuário usando o e-mail
+    const userData = localStorage.getItem("user_" + email);
 
-    // Verifica a senha
-    if (isValid && (!password || password.length <= 5)) {
-        errorMessage = translations[currentLanguage].invalidPassword;  // Exibe erro se a senha for muito curta
-        document.getElementById('password').classList.add('error-input');
-        isValid = false;
-    }
+    if (userData) {
+        const parsedData = JSON.parse(userData);
 
-    // Verifica se as caixas de seleção (termos e privacidade) estão marcadas
-    if (isValid && (terms === false || privacy === false)) {
-        errorMessage = translations[currentLanguage].termsError;  // Exibe erro se os termos ou privacidade não forem aceitos
-        isValid = false;
+        // Verifica se a senha corresponde
+        if (parsedData.password === password) {
+            // Sucesso no login, redireciona
+            localStorage.setItem("email", email); // Salva o e-mail logado
+            window.location.href = "inicial.html";  // Redireciona para a página inicial
+        } else {
+            errorMessage.innerHTML = 'E-mail ou senha inválidos.';
+            errorMessage.style.display = 'block';
+        }
+    } else {
+        // E-mail não encontrado
+        errorMessage.innerHTML = 'E-mail não registrado.';
+        errorMessage.style.display = 'block';
     }
-
-    // Se algum erro for encontrado, exibe a mensagem
-    if (!isValid) {
-        generalError.innerHTML = errorMessage;
-        generalError.style.display = 'block';  // Torna a mensagem de erro visível
-        return false;  // Impede o envio do formulário se houver erro
-    }
-    if (isValid) {
-        window.location.href ="inicial.html";  // Altere para a URL para a qual deseja redirecionar
-    }
-
-    return true;  // Permite o envio do formulário se não houver erro
 }
 
-        function validateEmail(email) {
-            const regex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
-            return regex.test(email);
-        }
+// Função para salvar os dados do usuário ao se cadastrar
+function saveAccount() {
+    const username = document.getElementById('username').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value.trim();
+    const terms = document.getElementById('terms').checked;
+    const privacy = document.getElementById('privacy').checked;
+    const errorMessage = document.getElementById('general-error');
 
-        // Inicializar a tela de login
-        showLogin();
+    // Verifica se todos os campos foram preenchidos
+    if (!username || !email || !password || !terms || !privacy) {
+        errorMessage.innerHTML = 'Preencha todos os campos e aceite os termos.';
+        errorMessage.style.display = 'block';
+        return;
+    }
+
+    // Verifica se o e-mail já foi cadastrado
+    const existingUser = localStorage.getItem("user_" + email);
+    if (existingUser) {
+        errorMessage.innerHTML = 'Este e-mail já está cadastrado.';
+        errorMessage.style.display = 'block';
+        return;
+    }
+
+    // Cria um objeto de dados do usuário
+    const userData = {
+        username: username,
+        password: password
+    };
+
+    // Salva os dados do usuário no localStorage
+    localStorage.setItem("user_" + email, JSON.stringify(userData));
+
+    // Salva o e-mail do usuário para login posterior
+    localStorage.setItem("email", email);
+
+    // Redireciona para a página inicial após o cadastro
+    window.location.href = "inicial.html"; 
+}
+
+// Função para exibir o formulário de login
+function showLogin() {
+    const t = translations[currentLanguage];
+    document.getElementById('login-form').innerHTML = `
+        <h1>${t.heading}</h1>
+        <input type="text" id="email" placeholder="${t.emailPlaceholder}">
+        <input type="password" id="password" placeholder="${t.passwordPlaceholder}">
+        <div id="general-error" class="error-message"></div>
+        <button type="button" class="login-btn" onclick="login()">${t.loginButton}</button>
+        <a href="#" class="forgot-password" onclick="showForgotPassword()">${t.forgotPassword}</a>
+        <a href="#" class="create-account" onclick="showCreateAccount()">${t.createAccount}</a>
+    `;
+}
+
+// Função para exibir o formulário de recuperação de senha
+function showForgotPassword() {
+    const t = translations[currentLanguage];
+    document.getElementById('login-form').innerHTML = `
+        <h1>${t.recoverHeading}</h1>
+        <input type="email" placeholder="${t.emailPlaceholder}" id="email">
+        <button type="button" class="login-btn" onclick="recoverPassword()">${t.recoverButton}</button>
+        <a href="#" class="back-to-login" onclick="showLogin()">${t.backToLogin}</a>
+    `;
+}
+
+// Função para exibir o formulário de criação de conta
+function showCreateAccount() {
+    const t = translations[currentLanguage];
+    document.getElementById('login-form').innerHTML = `
+        <h1>${t.createHeading}</h1>
+        <input type="text" placeholder="${t.createUsernamePlaceholder}" id="username">
+        <input type="text" placeholder="${t.createEmailPlaceholder}" id="email">
+        <input type="password" placeholder="${t.createPasswordPlaceholder}" id="password">
+        <div class="checkbox-container">
+            <input type="checkbox" id="terms">
+            <label for="terms">${t.createTerms}</label>
+        </div>
+        <div class="checkbox-container">
+            <input type="checkbox" id="privacy">
+            <label for="privacy">${t.createPrivacy}</label>
+        </div>
+        <div id="general-error" class="error-message"></div>
+        <button type="button" class="login-btn" onclick="saveAccount()">${t.createRegister}</button>
+        <a href="#" class="back-to-login" onclick="showLogin()">${t.backToLogin}</a>
+    `;
+}
+
+// Função de recuperação de senha (apenas como exemplo)
+function recoverPassword() {
+    const email = document.getElementById('email').value.trim();
+    if (!email) {
+        alert('Por favor, insira um e-mail válido.');
+        return;
+    }
+    alert('Recuperação de senha em breve!');
+}
+
+// Inicializa a tela de login
+showLogin();
+
     </script>
-
-</body>
+ </body>
 </html>
