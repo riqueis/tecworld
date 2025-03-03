@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat de Texto - TecEvolution</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            background-color: #000; /* Fundo escuro fixo */
+            color: #e0e0e0; /* Texto claro fixo */
+        }
+
+        /* Estilo da área de chat */
+        .chat-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            padding-top: 60px; /* Espaço extra para o botão Denunciar */
+            overflow-y: auto;
+            background-color: #000; /* Fundo da área de chat */
+            margin: 0;
+            border: none;
+            border-radius: 0;
+        }
+
+        /* Estilo das mensagens */
+        .message {
+            margin-bottom: 15px;
+            padding: 10px;
+            border-radius: 5px;
+            max-width: 70%;
+        }
+
+        .message.user {
+            background-color: #00aaff; /* Cor das mensagens do usuário */
+            align-self: flex-end;
+        }
+
+        .message.partner {
+            background-color: #28a745; /* Cor das mensagens do parceiro */
+            align-self: flex-start;
+        }
+
+        /* Estilo da área de entrada */
+        .input-area {
+            display: flex;
+            padding: 10px;
+            border-top: 1px solid #444;
+        }
+
+        .input-area input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #444;
+            border-radius: 5px;
+            margin: 0;
+        }
+
+        .input-area button {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        .input-area .send-button {
+            background-color: #00aaff;
+        }
+
+        .input-area .send-button:hover {
+            background-color: #007acc;
+        }
+
+        .input-area .skip-button {
+            background-color: #00ff0d; /* Cor do botão Pular */
+        }
+
+        .input-area .skip-button:hover {
+            background-color: #d9534f;
+        }
+
+        /* Estilo do botão Denunciar (diminuindo a palavra "Denunciar") */
+        .report-button {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 18px; /* Tamanho ajustado da palavra "Denunciar" */
+            color: #e0e0e0; /* Cor inicial da letra */
+            cursor: pointer;
+        }
+
+        .report-button:hover {
+            color: #ff0000; /* Cor vermelha quando o mouse passa por cima */
+        }
+
+        /* Estilos para a janela de denúncia */
+        .report-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .report-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            width: 400px;
+            max-width: 80%;
+            position: relative;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .report-content h2 {
+            margin-top: 0;
+            padding-top: 10px;
+            color: #333;
+        }
+
+        .report-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .report-options label {
+            padding: 5px;
+            background-color: transparent;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .report-options label:hover {
+            background-color: #ddd;
+        }
+
+        .report-content button {
+            padding: 10px;
+            background-color: #007acc;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .report-content button:hover {
+            background-color: #005f8b;
+        }
+
+        .report-close-letter {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .report-close-letter:hover {
+            color: #ff0000;
+        }
+
+        .report-description {
+            width: 100%;
+            height: 100px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            resize: vertical;
+        }
+
+        .error-message {
+            color: red;
+            margin-top: 10px;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .thank-you-message {
+            display: none;
+            padding: 10px;
+            background-color: #000000bd;
+            color: white;
+            text-align: center;
+            font-size: 14px;
+            border-radius: 5px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            max-width: 400px;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Botão Denunciar -->
+    <span class="report-button" onclick="reportChat()">Denunciar</span>
+
+    <!-- Área de chat -->
+    <div class="chat-area" id="chatArea"></div>
+
+    <!-- Área de entrada -->
+    <div class="input-area">
+        <input type="text" id="messageInput" placeholder="Digite sua mensagem...">
+        <button class="send-button" onclick="sendMessage()">Enviar</button>
+        <button class="skip-button" onclick="skipChat()">Próximo</button>
+    </div>
+
+    <!-- Janela Modal de Denúncia -->
+    <div class="report-modal" id="reportModal">
+        <div class="report-content">
+            <div class="report-close-letter" onclick="closeReportModal()">X</div>
+            <h2>Denunciar Chat</h2>
+            <div class="report-options">
+                <label><input type="radio" name="reportReason" value="Ofensa"> Ofensa</label>
+                <label><input type="radio" name="reportReason" value="Discurso de ódio"> Discurso de ódio</label>
+                <label><input type="radio" name="reportReason" value="Abuso sexual"> Abuso sexual</label>
+                <label><input type="radio" name="reportReason" value="Comportamento inadequado"> Comportamento inadequado</label>
+                <label><input type="radio" name="reportReason" value="Assédio"> Assédio</label>
+                <label><input type="radio" name="reportReason" value="Conteúdo impróprio"> Conteúdo impróprio</label>
+                <label><input type="radio" name="reportReason" value="Ameaças"> Ameaças</label>
+                <label><input type="radio" name="reportReason" value="Spam"> Spam</label>
+                <label><input type="radio" name="reportReason" value="Outro"> Outro</label>
+            </div>
+
+            <textarea class="report-description" id="reportDescription" placeholder="Descreva a denúncia (opcional)"></textarea>
+
+            <div id="errorMessage" class="error-message" style="display: none;">Você deve marcar uma das opções antes de enviar.</div>
+
+            <button onclick="submitReport()">Enviar Denúncia</button>
+        </div>
+    </div>
+
+    <div id="thankYouMessage" class="thank-you-message">
+        Obrigado por nos ajudar a manter a comunidade segura!
+    </div>
+
+    <script>
+        document.getElementById('messageInput').addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                sendMessage();
+            }
+        });
+
+        function sendMessage() {
+            const input = document.getElementById('messageInput');
+            const message = document.createElement('div');
+            message.classList.add('message', 'user');
+            message.textContent = input.value.trim();
+            const chatArea = document.getElementById('chatArea');
+            chatArea.appendChild(message);
+
+            input.value = '';
+            chatArea.scrollTop = chatArea.scrollHeight;
+        }
+
+        function skipChat() {
+            const chatArea = document.getElementById('chatArea');
+            const message = document.createElement('div');
+            message.classList.add('message', 'partner');
+            message.textContent = "Você foi para o próximo chat!";
+            chatArea.appendChild(message);
+            chatArea.scrollTop = chatArea.scrollHeight;
+        }
+
+        function reportChat() {
+            document.getElementById('reportModal').style.display = 'flex';
+            // Exibe a mensagem de agradecimento assim que o botão "Denunciar" for clicado
+            document.getElementById('thankYouMessage').style.display = 'block';
+            setTimeout(function() {
+                document.getElementById('thankYouMessage').style.display = 'none';
+            }, 3000); // A mensagem desaparece após 3 segundos
+        }
+
+        function closeReportModal() {
+            document.getElementById('reportModal').style.display = 'none';
+        }
+
+        function submitReport() {
+            const selectedReason = document.querySelector('input[name="reportReason"]:checked');
+            const description = document.getElementById('reportDescription').value.trim();
+
+            if (!selectedReason) {
+                document.getElementById('errorMessage').style.display = 'block';
+                return;
+            }
+
+            document.getElementById('errorMessage').style.display = 'none';
+
+            // Exibe uma mensagem de agradecimento após o envio da denúncia
+            document.getElementById('reportModal').style.display = 'none';
+            document.getElementById('thankYouMessage').style.display = 'block';
+            setTimeout(function() {
+                document.getElementById('thankYouMessage').style.display = 'none';
+            }, 3000); // A mensagem desaparece após 3 segundos
+        }
+    </script>
+</body>
+</html>
