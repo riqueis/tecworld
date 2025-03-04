@@ -5,19 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TecWorld</title>
     <style>
-        body, html {
-            height: 100%; /* Garante que a altura ocupe 100% da janela */
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-image: url('./blue.avif');
-            background-size: cover; /* Faz com que a imagem cubra toda a tela */
-            background-position: center; /* Centraliza a imagem */
-            background-repeat: no-repeat; /* Evita repetição da imagem */
-            background-attachment: fixed; /* Faz a imagem permanecer fixa ao rolar a página */
-            overflow-x: hidden;
-        }
+ body, html {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-image: url('./blue.avif');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    overflow-x: hidden;
+}
 
-        .header {
+.header {
     top: 0;
     left: 0;
     width: 100%;
@@ -25,15 +25,15 @@
     z-index: 1000;
     background-color: rgba(0, 0, 0, 0);
     display: flex;
-    align-items: center; /* Alinha verticalmente todos os elementos */
-    justify-content: space-between; /* Coloca o botão "Assinar" à direita */
+    align-items: center;
+    justify-content: space-between;
     padding: 10px 20px;
 }
 
 /* Estilo para o perfil */
 .header .profile {
     display: flex;
-    align-items: center; /* Alinha os itens do perfil (avatar, nome e coroa) na linha */
+    align-items: center;  /* Alinha o avatar e a área de texto na linha */
 }
 
 /* Estilo para a imagem do avatar */
@@ -41,7 +41,15 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    margin-right: 10px; /* Espaçamento entre a imagem e o nome */
+    margin-right: 10px;
+}
+
+/* Estilo para a área de informações do usuário (nome + id) */
+.header .profile .user-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;  /* Alinha o nome e o id à esquerda */
+    margin-top: 15px;
 }
 
 /* Estilo para o nome de usuário */
@@ -49,6 +57,18 @@
     font-size: 18px;
     color: #e0e0e0;
     white-space: nowrap;
+}
+
+/* Estilo para o ID (baixo do nome de usuário) */
+#user-id {
+    font-size: 8px;
+    color: #808080;
+    font-weight: normal;
+    background-color: #f1f1f1;
+    padding: 3px 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-top: 1px; /* Espaço entre o nome e o ID */
 }
 
 /* Estilo para o ícone da coroa */
@@ -66,7 +86,7 @@
 }
 
 #crown-icon.signed path {
-    fill: gold;
+    fill: gold; /* Cor de destaque para a coroa quando "assinada" */
 }
 .profile-container {
     position: relative;
@@ -364,15 +384,18 @@
     <!-- Cabeçalho -->
     <div class="header">
         <div class="profile">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPlwkUTsaWA_zSj0oFI7sbKYXqs-ih3b0_Bg&s" alt="Avatar">
-          <span class="username">Nome de Usuário</span>
-          <svg id="crown-icon" class="icon" version="1.0" xmlns="http://www.w3.org/2000/svg" width="225.000000pt" height="225.000000pt" viewBox="0 0 225.000000 225.000000" preserveAspectRatio="xMidYMid meet">
-            <g transform="translate(0.000000,225.000000) scale(0.100000,-0.100000)" fill="none" stroke="none">
-              <path d="M1085 1618 c-11 -6 -25 -19 -32 -27 -17 -22 -16 -82 1 -107 13 -18 6 -37 -79 -212 -52 -106 -96 -192 -98 -192 -2 0 -64 68 -138 152 -125 143 -133 154 -130 190 1 31 -4 44 -28 68 -50 50 -120 38 -147 -26 -12 -30 -12 -39 1 -70 9 -23 25 -40 43 -46 29 -11 30 -15 83 -257 40 -183 55 -274 59 -356 l5 -110 500 0 500 0 6 120 c5 91 19 175 58 350 28 126 51 232 51 235 0 3 14 11 30 17 60 23 70 115 17 155 -58 46 -153 -5 -145 -78 4 -33 -4 -45 -131 -190 -74 -85 -137 -154 -140 -154 -3 1 -46 85 -95 187 -90 186 -90 186 -73 215 26 45 22 85 -12 119 -31 31 -70 37 -106 17z m150 -388 c107 -222 111 -230 130 -230 7 0 82 79 166 176 85 96 155 172 156 167 1 -4 -22 -116 -51 -248 l-52 -240 -459 0 -460 0 -52 240 c-29 132 -51 243 -50 248 1 4 71 -72 156 -168 92 -105 160 -175 169 -173 19 4 14 -5 133 242 55 114 104 204 108 200 5 -5 52 -101 106 -214z m345 -495 l0 -65 -455 0 -455 0 0 65 0 65 455 0 455 0 0 -65z"/>
-            </g>
-          </svg>
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPlwkUTsaWA_zSj0oFI7sbKYXqs-ih3b0_Bg&s" alt="Avatar">
+            <div class="user-info">
+                <span class="username">Nome de Usuário</span>
+                <span id="user-id">#123456</span>
+            </div>
+            <svg id="crown-icon" class="icon" version="1.0" xmlns="http://www.w3.org/2000/svg" width="225.000000pt" height="225.000000pt" viewBox="0 0 225.000000 225.000000" preserveAspectRatio="xMidYMid meet">
+                <g transform="translate(0.000000,225.000000) scale(0.100000,-0.100000)" fill="none" stroke="none">
+                    <path d="M1085 1618 c-11 -6 -25 -19 -32 -27 -17 -22 -16 -82 1 -107 13 -18 6 -37 -79 -212 -52 -106 -96 -192 -98 -192 -2 0 -64 68 -138 152 -125 143 -133 154 -130 190 1 31 -4 44 -28 68 -50 50 -120 38 -147 -26 -12 -30 -12 -39 1 -70 9 -23 25 -40 43 -46 29 -11 30 -15 83 -257 40 -183 55 -274 59 -356 l5 -110 500 0 500 0 6 120 c5 91 19 175 58 350 28 126 51 232 51 235 0 3 14 11 30 17 60 23 70 115 17 155 -58 46 -153 -5 -145 -78 4 -33 -4 -45 -131 -190 -74 -85 -137 -154 -140 -154 -3 1 -46 85 -95 187 -90 186 -90 186 -73 215 26 45 22 85 -12 119 -31 31 -70 37 -106 17z m150 -388 c107 -222 111 -230 130 -230 7 0 82 79 166 176 85 96 155 172 156 167 1 -4 -22 -116 -51 -248 l-52 -240 -459 0 -460 0 -52 240 c-29 132 -51 243 -50 248 1 4 71 -72 156 -168 92 -105 160 -175 169 -173 19 4 14 -5 133 242 55 114 104 204 108 200 5 -5 52 -101 106 -214z m345 -495 l0 -65 -455 0 -455 0 0 65 0 65 455 0 455 0 0 -65z"/>
+                </g>
+            </svg>
         </div>
-        <button class="unlimited-jumps-btn" onclick="openModal()">premium</button>
+            <button class="unlimited-jumps-btn" onclick="openModal()">premium</button>
         <svg id="settings-icon" class="settings-icon" version="1.0" xmlns="http://www.w3.org/2000/svg" width="512.000000pt" height="512.000000pt" viewBox="0 0 512.000000 512.000000" preserveAspectRatio="xMidYMid meet">
           <metadata>Created by potrace 1.16, written by Peter Selinger 2001-2019</metadata>
           <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" fill="#524f4f" stroke="none">
@@ -459,8 +482,8 @@
 
         <!-- Botões para navegar para chats -->
         <div class="buttons">
-            <button onclick="window.location.href='chatTexto.html'">Chat de Texto</button>
-            <button onclick="window.location.href='ChatVideo.html'">Chat de Vídeo</button>
+            <button onclick="window.location.href='index3.html'">Chat de Texto</button>
+            <button onclick="window.location.href='index4.html'">Chat de Vídeo</button>
         </div>
     </div>
 
@@ -613,4 +636,3 @@
     </script>    
 </body>
 </html>
-
