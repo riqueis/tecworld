@@ -10,6 +10,7 @@
             margin: 0;
             font-family: Arial, sans-serif;
             display: flex;
+            flex-direction: column;
             transition: background-color 0.3s, color 0.3s;
             overflow: hidden;
         }
@@ -20,73 +21,70 @@
             color: #e0e0e0; /* Texto claro */
         }
 
-        /* Container geral que agrupa vídeo e chat */
+        /* Container principal que ocupa a tela inteira */
         .container {
             display: flex;
-            width: 100%;
+            flex-direction: column;
             height: 100%;
-            margin: 0;
-            padding: 0; /* Remove o padding geral */
-        }
-
-        /* Estilo da área de vídeo */
-        .video-container {
-            display: flex;
-            flex-direction: column; /* Empilha os vídeos verticalmente */
-            width: 100%; /* Ocupa 50% da largura da tela */
-            height: 654px; /* Ocupa 100% da altura da tela */
-            margin: 0; /* Remove a margem para alinhar à esquerda */
-            padding: 0;
+            width: 100%;
             position: relative;
         }
 
-        .video {
-            height: 50%; /* Cada vídeo ocupa 50% da altura do contêiner */
-            width: 101%; /* Cada vídeo ocupa 100% da largura do contêiner */
-            background-color: black; /* Cor de fundo para as telas de vídeo */
-            border: 1px solid #00aaff; /* Borda azul */
-            margin-bottom: -1px; /* Exibe a borda inferior */
-            padding: 0; /* Remove padding interno */
-            object-fit: cover; /* Faz o vídeo preencher completamente o espaço */
-        }
-
-        /* Estilo da área de chat */
-        .chat-container {
-            width: 52%; /* Ocupa 50% da largura da tela */
-            background-color: #1a1c20; /* Fundo do chat */
-            color: white;
+        /* Estilo da área de vídeo que ocupa a tela inteira */
+        .video-container {
             display: flex;
             flex-direction: column;
-            padding: 0; /* Remove o padding para encostar a área de mensagens na borda */
-            position: fixed;
-            right: 0; /* Encosta no canto direito */
-            height: 100%; /* Ocupa a altura total da tela */
-            margin: 0; /* Remove qualquer margem superior */
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1; /* Coloca as telas de vídeo como plano de fundo */
+        }
+
+        .video {
+            width: 100%; /* Cada vídeo ocupa 100% da largura */
+            height: 49%; /* Cada vídeo ocupa metade da altura */
+            background-color: black;
+            object-fit: cover; /* Faz o vídeo preencher completamente o espaço */
+            border: 1px solid #00aaff; /* Borda azul */
+        }
+
+        /* Estilo da área de chat e controles que ficam por cima das telas de vídeo */
+        .chat-container {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            z-index: 2; /* Coloca o chat por cima da área de vídeo */
+            background-color: rgba(0, 0, 0, 0); /* Fundo semitransparente */
+            color: white;
+            padding: 10px;
         }
 
         .messages {
-            flex: 1;
+            height: 200px; /* Altura da área de mensagens */
             overflow-y: auto;
-            border: 1px solid #00aaff;
-            padding: 0; /* Remove padding para garantir encostado no topo */
-            background-color: #0d0f12;
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.5); /* Fundo transparente para a área de mensagens */
             color: #e0e0e0;
-            margin: 0; /* Remove qualquer margem superior */
         }
 
         .input-area {
             display: flex;
-            padding: 0; /* Remove o padding da área de entrada */
-            background-color: #1a1c20;
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.5); /* Fundo transparente para a área de entrada */
+            justify-content: space-between;
+            align-items: center;
         }
 
         .input-area input {
             flex: 1;
             padding: 10px;
             border: 1px solid #00aaff;
-            background-color: #1a1c20;
+            background-color: rgba(0, 0, 0, 0.5); /* Fundo transparente para o campo de input */
             color: white;
-            width: 100%; /* O input ocupa 100% da largura da área de entrada */
+            width: 80%; /* O input ocupa 80% da largura da área de entrada */
         }
 
         .input-area button {
@@ -94,26 +92,13 @@
             border: none;
             color: white;
             cursor: pointer;
-            width: auto; /* O botão ocupa o espaço que sobrar */
-            margin-right: 0px; /* Espaço entre os botões */
-            border: px;
+            background-color: #00aaff;
+            width: 15%; /* O botão ocupa 15% da largura da área de entrada */
             transition: background-color 0.3s ease;
         }
 
-        .input-area .send-button {
-            background-color: #00aaff;
-        }
-
-        .input-area .send-button:hover {
+        .input-area button:hover {
             background-color: #007acc;
-        }
-
-        .input-area .skip-button {
-            background-color: #00ff0d; /* Cor do botão Pular */
-        }
-
-        .input-area .skip-button:hover {
-            background-color: #00cc00;
         }
 
         /* Estilo do botão Denunciar */
@@ -154,46 +139,6 @@
             overflow: hidden;
         }
 
-        .report-content h2 {
-            margin-top: 0;
-            padding-top: 10px;
-            color: #333;
-        }
-
-        .report-options {
-            display: grid;
-            grid-template-columns: 1fr 1fr; /* Duas colunas */
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        .report-options label {
-            padding: 5px;
-            background-color: transparent;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            color: #333;
-            font-weight: bold;
-        }
-
-        .report-options label:hover {
-            background-color: #ddd;
-        }
-
-        .report-content button {
-            padding: 10px;
-            background-color: #007acc;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            width: 100%;
-        }
-
-        .report-content button:hover {
-            background-color: #005f8b;
-        }
-
         .report-close-letter {
             position: absolute;
             top: 10px;
@@ -219,14 +164,6 @@
             resize: vertical;
         }
 
-        .error-message {
-            color: red;
-            margin-top: 10px;
-            font-size: 14px;
-            text-align: center;
-        }
-
-        /* Estilo da mensagem de agradecimento */
         .thank-you-message {
             display: none;
             padding: 10px;
