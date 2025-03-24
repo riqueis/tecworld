@@ -6,17 +6,31 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body, html { height: 100%; font-family: Arial, sans-serif; }
-        body { 
-            display: flex;  
-            flex-direction: column;
-            justify-content: center;
-            align-items: center; 
-            background-color: #0d0f12; 
-            overflow: hidden; 
-            text-align: center;
-            margin: 0;
-            background-image: url('./mundotec.webp');
-        }
+      body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #0d0f12;
+    overflow: hidden;
+    text-align: center;
+    margin: 0;
+    position: relative;
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('./mundotec.webp');
+    background-size: cover;
+    background-position: center;
+    filter: brightness(50%); /* Escurece a imagem */
+    z-index: -1;
+}
         .language-buttons { 
             position: absolute; 
             top: 10px; 
