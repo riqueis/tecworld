@@ -15,24 +15,12 @@
             overflow: hidden; 
             text-align: center;
             margin: 0;
+            background-image: url('./mundotec.webp');
         }
-
-        .background-video { 
-            position: fixed; 
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 100%; 
-            object-fit: cover; 
-            z-index: -1; 
-            filter: brightness(0.3);
-        }
-
         .language-buttons { 
             position: absolute; 
             top: 10px; 
             right: 10px; 
-            z-index: 2; 
         }
 
         .language-buttons select { 
@@ -48,7 +36,6 @@
             font-size: 6vw; 
             font-weight: bold; 
             margin-bottom: 2vh; /* Espaçamento entre título e descrição */
-            z-index: 2;
         }
 
         .description { 
@@ -56,7 +43,6 @@
             font-size: 4vw; 
             line-height: 1.2; 
             margin: 1.0%; /* Margem interna para evitar textos muito colados */
-            z-index: 2;
         }
 
         .start-button {
@@ -70,7 +56,6 @@
             cursor: pointer;
             transition: 0.3s;
             margin-top: 4vh;
-            z-index: 2;
         }
 
         .start-button:hover {
@@ -116,7 +101,6 @@
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.4); /* Ajuste a opacidade conforme necessário */
-            z-index: 1; /* Garante que a camada translúcida não bloqueie o texto */
         }
 
     </style>
@@ -143,14 +127,7 @@
         </select>
     </div>
 
-    <!-- Vídeo de fundo -->
-    <video autoplay muted loop class="background-video">
-        <source src="rei.mp4" type="video/mp4">
-        Seu navegador não suporta a tag de vídeo.
-    </video>
-
-    <!-- Camada translúcida sobre o vídeo -->
-    <div class="overlay"></div>
+    
 
     <script>
         // Traduções
