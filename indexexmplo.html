@@ -6,7 +6,7 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body, html { height: 100%; font-family: Arial, sans-serif; }
-    body {
+   body {
     display: flex;  
     flex-direction: column;
     justify-content: center;
@@ -16,21 +16,15 @@
     text-align: center;
     margin: 0;
     background-image: url('./mundotec.webp');
-    background-size: cover; /* Faz a imagem cobrir o fundo */
-    background-position: top; /* Mantém a posição inicial da imagem */
 }
-
 body::after {
     content: ''; 
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5); /* Cor preta com opacidade de 50% */
-    z-index: -1; /* Coloca o overlay atrás do conteúdo */
+    position: fixed; /* Deixa o overlay fixo */
+    width: 100vw; /* Largura total da tela */
+    height: 100vh; /* Altura total da tela */
+    background: rgba(0, 0, 0, 0.5); /* Cor preta com 50% de opacidade para escurecer */
+    z-index: -1; /* Fica atrás do conteúdo */
 }
-
         .language-buttons { 
             position: absolute; 
             top: 10px; 
