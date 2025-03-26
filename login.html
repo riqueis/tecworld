@@ -8,18 +8,9 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body, html { height: 100%; font-family: Arial, sans-serif; }
     body { display: flex; justify-content: center; align-items: center; background-color: #0d0f12; overflow: hidden; }
+    background-image: url('./mundotec.webp');
     
-    /* Vídeo de fundo */
-    .background-video { 
-        position: fixed; 
-        top: 0; 
-        left: 0; 
-        width: 100%; 
-        height: 100%; 
-        object-fit: cover; 
-        z-index: -1; /* Coloca o vídeo atrás da camada translúcida */
-        filter: brightness(0,3)
-    }
+  
 
     /* Camada translúcida sobre o vídeo (alteração aqui) */
     .overlay {
@@ -109,11 +100,7 @@
         </select>
     </div>
 
-    <video autoplay muted loop class="background-video">
-        <source src="rei.mp4" type="video/mp4">
-        Seu navegador não suporta a tag de vídeo.
-    </video>
-     <!-- Camada translúcida sobre o vídeo -->
+    
      <div class="overlay"></div>
 
 
