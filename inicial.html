@@ -1,194 +1,296 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TecWorld</title>
-    <style>
- body, html {
-    height: 100%;
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background-image: url('./ChatGPT Image 30 de mar. de 2025, 23_49_26.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    overflow-x: hidden;
-}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TecWorld</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-.header {
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 65px;
-    z-index: 1000;
-    background-color: rgba(0, 0, 0, 0);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 20px;
-}
+    html, body {
+      height: 100%;
+      font-family: Arial, sans-serif;
+      background-image: url('./ChatGPT Image 30 de mar. de 2025, 23_49_26.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      overflow-x: hidden;
+    }
 
-/* Estilo para o perfil */
-.header .profile {
-    display: flex;
-    align-items: center;  /* Alinha o avatar e a área de texto na linha */
-}
+    .header {
+      width: 100%;
+      height: 65px;
+      z-index: 1000;
+      background-color: rgba(0, 0, 0, 0);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 20px;
+    }
 
-/* Estilo para a imagem do avatar */
-.header .profile img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    margin-right: 10px;
-}
+    .header .profile {
+      display: flex;
+      align-items: center;
+    }
 
-/* Estilo para a área de informações do usuário (nome + id) */
-.header .profile .user-info {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;  /* Alinha o nome e o id à esquerda */
-    margin-top: 15px;
-}
+    .header .profile img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
 
-/* Estilo para o nome de usuário */
-.header .profile .username {
-    font-size: 18px;
-    color: #e0e0e0;
-    white-space: nowrap;
-}
+    .header .profile .user-info {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      margin-top: 15px;
+    }
 
-/* Estilo para o ID (baixo do nome de usuário) */
-#user-id {
-    font-size: 8px;
-    color: #808080;
-    font-weight: normal;
-    background-color: #f1f1f1;
-    padding: 3px 8px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    margin-top: 1px; /* Espaço entre o nome e o ID */
-}
+    .header .profile .username {
+      font-size: 18px;
+      color: #e0e0e0;
+      white-space: nowrap;
+    }
 
-/* Estilo para o ícone da coroa */
-#crown-icon {
-    width: 40px;
-    height: 40px;
-    margin-left: 10px; /* Espaçamento entre a coroa e o nome */
-}
+    #user-id {
+      font-size: 8px;
+      color: #808080;
+      background-color: #f1f1f1;
+      padding: 3px 8px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      margin-top: 1px;
+    }
 
-/* Cor de fundo e efeito de transição para a coroa */
-#crown-icon path {
-    fill: black;
-    stroke: none;
-    transition: fill 0.3s ease;
-}
+    #crown-icon {
+      width: 40px;
+      height: 40px;
+      margin-left: 10px;
+    }
 
-#crown-icon.signed path {
-    fill: gold; /* Cor de destaque para a coroa quando "assinada" */
-}
-.profile-container {
-    position: relative;
-    display: inline-block;
-    cursor: pointer;
-}
+    #crown-icon path {
+      fill: black;
+      transition: fill 0.3s ease;
+    }
 
-.profile-area {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    transition: background-color 0.2s ease;
-}
+    #crown-icon.signed path {
+      fill: gold;
+    }
 
-.profile-area:hover {
-    background-color: #f0f0f0;
-}
+    .profile-container {
+      position: relative;
+      display: inline-block;
+      cursor: pointer;
+    }
 
-.profile-image {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    object-fit: cover;
-}
+    .profile-area {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      transition: background-color 0.2s ease;
+    }
 
-.username {
-    font-size: 16px;
-    font-weight: bold;
-}
+    .profile-area:hover {
+      background-color: #f0f0f0;
+    }
 
-.profile-options {
-    position: absolute;
-    top: 12%;
-    left: 0;
-    background: #fff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    z-index: 10;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
+    .profile-image {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
 
-.profile-options.hidden {
-    display: none;
-}
+    .username {
+      font-size: 16px;
+      font-weight: bold;
+    }
 
-.option-button {
-    background: #007bff;
-    color: #fff;
-    border: none;
-    padding: 10px;
-    border-radius: 4px;
-    font-size: 14px;
-    cursor: pointer;
-}
+    .profile-options {
+      position: absolute;
+      top: 12%;
+      left: 0;
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
 
-.option-button:hover {
-    background: #0056b3;
-}
+    .profile-options.hidden {
+      display: none;
+    }
 
-/* Media Query para dispositivos móveis */
-@media (max-width: 768px) {
-    .settings-icon {
+    .option-button {
+      background: #007bff;
+      color: #fff;
+      border: none;
+      padding: 10px;
+      border-radius: 4px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .option-button:hover {
+      background: #0056b3;
+    }
+
+    .content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      padding: 20px;
+      color: #e0e0e0;
+      text-align: center;
+      margin-top: 40px;
+      width: 100%;
+      overflow-y: auto;
+    }
+
+    .welcome {
+      font-size: 32px;
+      color: #ffffff;
+      text-shadow:
+        0 0 10px #00bfff,
+        0 0 20px #00bfff,
+        0 0 30px #1e90ff,
+        0 0 35px #1e90ff;
+      margin-bottom: 10px;
+    }
+
+    .tagline {
+      font-size: 18px;
+      color: #cccccc;
+      max-width: 90%;
+      line-height: 1.4;
+      margin-bottom: 20px;
+    }
+
+    .footer {
+      background-color: rgba(0, 0, 0, 0);
+      color: #666;
+      font-size: 12px;
+      text-align: center;
+      padding: 10px;
+      width: 100%;
+      margin-top: auto;
+    }
+
+    .buttons {
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+    }
+
+    .buttons button {
+      background-color: #00aaff;
+      color: white;
+      border: none;
+      border-radius: 7px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .buttons button:hover {
+      background-color: #007acc;
+    }
+
+    #tag-input {
+      margin: 10px 0;
+      padding: 8px;
+      width: 90%;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+
+    .select-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      margin-top: 30px;
+    }
+
+    .select-container select,
+    .select-container #tag-input {
+      margin: 10px 0;
+      padding: 10px;
+      width: 80%;
+      max-width: 400px;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+
+    .language-select {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      background-color: #e0e0e0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      cursor: pointer;
+      text-align: center;
+      box-sizing: border-box;
+      appearance: none;
+      background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"%3E%3Cpath fill="none" stroke="black" stroke-width="2" d="M5 7l5 5 5-5" /%3E%3C/svg%3E');
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+    }
+
+    @media (max-width: 768px) {
+      .settings-icon {
         width: 50px;
         height: 50px;
         fill: #111111;
-        margin-left: auto; /* Empurra o ícone para a direita */
-        margin-right: 15px; /* Espaçamento da borda direita */
+        margin-left: auto;
+        margin-right: 15px;
         cursor: pointer;
-        z-index: 1001; /* Garante que fique acima de outros elementos dentro da header */
-    }
-    .settings-modal-overlay {
-    display: none; /* Inicialmente oculto */
-    position: fixed; /* Fixa o elemento na tela */
-    top: 0;
-    left: 0;
-    width: 100vw; /* Ocupa 100% da largura da viewport */
-    height: 100vh; /* Ocupa 100% da altura da viewport */
-    background-color: #888787; /* Fundo semitransparente */
-    justify-content: center; /* Centraliza o conteúdo no eixo horizontal */
-    align-items: center; /* Centraliza o conteúdo no eixo vertical */
-    z-index: 1000; /* Garante que fique acima de outros elementos */
-}
+        z-index: 1001;
+      }
 
+      .settings-modal-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: #888787;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+      }
 
-.settings-modal-content {
-    background: #888787; /* Fundo branco do modal */
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Sombra para destaque */
-    z-index: 1001; /* Modal acima do overlay */
-}
-    /* Estilo para o botão "Assinar" */
-    .unlimited-jumps-btn {
-        background: linear-gradient(90deg, #ffd700, #daa520); /* Gradiente dourado */
+      .settings-modal-content {
+        background: #888787;
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        z-index: 1001;
+      }
+
+      .unlimited-jumps-btn {
+        background: linear-gradient(90deg, #ffd700, #daa520);
         color: white;
         padding: 7px 15px;
         border: none;
@@ -196,198 +298,70 @@
         cursor: pointer;
         font-size: 16px;
         font-weight: bold;
-        box-shadow: 0 0 10px rgba(255, 215, 0, 0.5); /* Efeito de brilho */
-        margin-left: auto; /* Flex para alinhar ao lado direito */
-        margin-right: 15px; /* Espaçamento da borda direita */
+        box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        margin-left: auto;
+        margin-right: 15px;
+      }
     }
-}
-        .unlimited-jumps-btn:hover {
-            background: linear-gradient(90deg, #ffdf00, #ffc107); /* Gradiente mais brilhante */
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 0 0 30px rgba(218, 165, 32, 0.6); /* Efeito de brilho mais intenso */
-            transform: scale(1.1); /* Leve aumento no tamanho */
-            color: black; /* Contraste adicional */
-        }
 
-        /* Estilo do Modal */
-        .modal-overlay {
-    display: none; /* Oculto inicialmente */
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.8); /* Fundo escuro semi-transparente */
-    justify-content: center;
-    align-items: center;
-    z-index: 10;
-}
+    .unlimited-jumps-btn:hover {
+      background: linear-gradient(90deg, #ffdf00, #ffc107);
+      box-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 0 0 30px rgba(218, 165, 32, 0.6);
+      transform: scale(1.1);
+      color: black;
+    }
 
-.modal-content {
-    background-color: #1a1a1d;
-    padding: 20px;
-    border-radius: 10px;
-    width: 300px;
-    text-align: center;
-    color: white;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
-}
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      justify-content: center;
+      align-items: center;
+      z-index: 10;
+    }
 
-.qr-code {
-    width: 150px;
-    height: 150px;
-    background-color: #333;
-    margin: 10px auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #bbb;
-    font-size: 14px;
-    border-radius: 10px;
-}
-.close-btn {
-    background-color: #888787;
-    color: white;
-    padding: 7px 15px; /* Mesmo tamanho de padding que o botão "Assinar" */
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    margin-top: 12px;
-    width: 50%; /* Garante que o botão "Fechar" também ocupe a mesma largura */
-}
+    .modal-content {
+      background-color: #1a1a1d;
+      padding: 20px;
+      border-radius: 10px;
+      width: 300px;
+      text-align: center;
+      color: white;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+    }
 
-.close-btn:hover {
-    background-color: #888787;
-}
+    .qr-code {
+      width: 150px;
+      height: 150px;
+      background-color: #333;
+      margin: 10px auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #bbb;
+      font-size: 14px;
+      border-radius: 10px;
+    }
 
-        .content {
-            flex: 1; /* Faz o conteúdo ocupar o espaço disponível */
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: center;
-            padding: 20px;
-            color: #e0e0e0;
-            text-align: center;
-            margin-top: 40px; /* Espaço para o cabeçalho */
-            overflow-y: auto;
-            width: 100%;
-        }
+    .close-btn {
+      background-color: #888787;
+      color: white;
+      padding: 7px 15px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 12px;
+      width: 50%;
+    }
 
-        .welcome {
-            font-size: 32px;
-            color: #ffffff; /* Cor branca do texto */
-            text-shadow: 
-                0 0 10px #00bfff,  /* Brilho suave */
-                0 0 20px #00bfff,  /* Brilho mais forte */
-                0 0 30px #1e90ff,  /* Brilho intenso */
-                0 0 35px #1e90ff;  /* Brilho máximo controlado até 40px */
-            margin-right: 10px;
-        }
-
-        .tagline {
-            font-size: 18px;
-            color: #cccccc;
-            margin-top: 15px;
-            max-width: 90%; /* Garante que não ultrapasse a largura da tela */
-            line-height: 1.4;
-            margin-right: 10px;
-        }
-
-        .footer {
-            background-color: rgba(0, 0, 0, 0); /* Fundo 100% transparente */
-            color: #666;
-            font-size: 12px;
-            text-align: center;
-            padding: 10px;
-            width: 100%;
-            z-index: 1000;
-            position: relative;
-            margin-top: auto;
-            margin-right: 10px;
-        }
-
-        .buttons {
-            margin-top: 1px;
-            margin-right: 10px;
-        }
-
-        .buttons button {
-            background-color: #00aaff;
-            color: white;
-            border: none;
-            border-radius: 7px;
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            margin: 1px;
-            margin-right: 10px;
-        }
-
-        .buttons button:hover {
-            background-color: #007acc;
-            margin-right: 10px;
-        }
-
-        /* Ajuste para o input de tags */
-        #tag-input {
-            margin: 10px 0;
-            padding: 8px;
-            width: 93%; /* Já garante boa largura em dispositivos móveis */
-            border-radius: 5px;
-            box-sizing: border-box; /* Garantir que padding e borda não aumentem a largura */
-            margin-left: 20px; /* Remover margem direita excessiva */
-            margin-right: 10px;
-        }
-
-        .select-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            margin-top: 30px; /* Espaçamento adicional */
-            margin-right: 10px;
-        }
-
-        .select-container select, .select-container #tag-input {
-            margin: 10px 0;
-            padding: 10px;
-            width: 80%; /* Tamanho adequado */
-            max-width: 400px; /* Limita a largura */
-            border-radius: 5px;
-            box-sizing: border-box;
-            margin-right: 10px;
-        }
-
-        .language-select {
-            width: 100%;
-            padding: 10px;
-            font-size: 16px;
-            background-color: #e0e0e0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            cursor: pointer;
-            text-align: center;
-            box-sizing: border-box; /* Garantir que padding e borda não aumentem a largura */
-            margin-right: 10px;
-        }
-
-        .language-select option {
-            display: block;
-            width: 100%;  /* Garantir que as opções ocupem a largura correta */
-        }
-
-        .language-select {
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-            background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"%3E%3Cpath fill="none" stroke="black" stroke-width="2" d="M5 7l5 5 5-5" /%3E%3C/svg%3E');
-            background-repeat: no-repeat;
-            background-position: right 10px center;
-        }
-        /* Estilos para o ícone de coroa */
-
-    </style>
+    .close-btn:hover {
+      background-color: #888787;
+    }
+   </style>
 </head>
 <body>
 
