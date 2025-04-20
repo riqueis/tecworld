@@ -18,6 +18,17 @@ html, body {
   position: relative;
   z-index: 1;
 }
+    body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5); /* Ajuste a opacidade conforme quiser */
+  z-index: -1.5; /* entre o fundo e o conteúdo */
+}
+
 
 /* ::before para aplicar o fundo fixo */
 body::before {
