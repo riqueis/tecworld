@@ -95,25 +95,25 @@ body, html {
 
 .chat-container {
     position: absolute;
-    top: 30%; /* <-- muda isso aqui para levantar o bloco */
+    bottom: 0;
     left: 0;
     width: 100%;
     z-index: 2;
     background-color: rgba(0, 0, 0, 0);
     color: white;
-    padding: 20px 10px;
+    padding: 10px;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start; /* coloca as mensagens no topo da área */
+    justify-content: flex-end;
     height: 200px;
     transition: padding 0.3s ease, height 0.3s ease;
     overflow-y: auto;
 }
+
 .chat-container.shrink {
-    padding: 10px 10px 5px; /* Ajuste de padding para telas menores */
+    padding: 5px;
     height: 100px;
 }
-
 
 .message {
     background-color: rgba(0, 0, 0, 0);
@@ -140,6 +140,8 @@ body, html {
     background-color: rgba(0, 0, 0, 0.5);
     justify-content: space-between;
     align-items: center;
+    box-sizing: border-box;  /* Garante que o padding não ultrapasse os limites */
+    z-index: 3; /* Garante que fique acima de outros elementos */
 }
 
 .input-area input {
@@ -150,6 +152,7 @@ body, html {
     color: white;
     margin-right: 5px;
     border-radius: 5px;
+    box-sizing: border-box;  /* Garante que o padding não ultrapasse a largura total */
 }
 
 .input-area button {
@@ -260,31 +263,38 @@ body, html {
 #crown-icon path {
     fill: gold;
 }
+
+/* Ajustes para dispositivos móveis */
 @media (max-width: 768px) {
+    .video {
+        height: 40%; /* Ajuste da altura para telas menores */
+    }
+
+    .chat-container {
+        height: 150px; /* Ajuste da altura para dispositivos móveis */
+    }
+
     .input-area {
         padding: 5px;
         bottom: 0;
         left: 0;
-        width: 100%;  /* Garantir que ocupe toda a largura da tela */
+        width: 100%;  /* Garante que ocupe a largura total da tela */
         display: flex;
         justify-content: space-between;
         align-items: center;
-        box-sizing: border-box;  /* Garantir que o padding não ultrapasse os limites */
-         background-color: rgba(0, 0, 0, 0.5);
+        box-sizing: border-box;
     }
 
     .input-area input {
-        width: 70%;  /* Ajuste da largura do campo de texto */
+        width: 70%; /* Ajuste da largura do campo de texto */
+        padding: 8px; /* Menos padding para não ultrapassar os limites */
     }
 
     .input-area button {
-        width: 20%;  /* Ajuste da largura do botão */
-        padding: 10px;
+        width: 25%; /* Ajuste da largura do botão */
+        padding: 8px; /* Menos padding para se ajustar melhor */
     }
 }
-
-
-
 
     </style>
 </head>
