@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chat de Vídeo - TecEvolution</title>
     <style>
- body, html {
+body, html {
     height: 100%;
     margin: 0;
     font-family: Arial, sans-serif;
@@ -46,13 +46,12 @@
     width:100%;
     height: 50%;
     background-color: black;
-    object-fit: contain; /* Ajuste para não ultrapassar as bordas */
+    object-fit: contain;
     border: 1px solid #00aaff;
     box-sizing: border-box;
     z-index: 1;
 }
 
-/* Alinhamento dos usuários à esquerda */
 .user {
     display: flex;
     align-items: center;
@@ -71,16 +70,16 @@
 }
 
 .user-left.user-bottom {
-    top: 50%; /* Coloca o Usuário 2 abaixo do Usuário 1 */
-    margin-top: 10px; /* Ajusta o espaço entre os usuários */
+    top: 50%;
+    margin-top: 10px;
 }
 
 .profile-image {
     width: 50px;
     height: 50px;
-    border-radius: 50%; /* Torna a imagem redonda */
+    border-radius: 50%;
     object-fit: cover;
-    background-color: #E0E0E0; /* Fundo cinza claro */
+    background-color: #E0E0E0;
 }
 
 .username {
@@ -88,9 +87,10 @@
     font-weight: bold;
     color: #e0e0e0;
     display: flex;
-    align-items: center; /* Alinha verticalmente */
-    gap: 1px; /* Adiciona um pequeno espaço entre o texto e a coroa */
+    align-items: center;
+    gap: 1px;
 }
+
 .chat-container {
     position: absolute;
     bottom: 0;
@@ -104,31 +104,32 @@
     flex-direction: column;
     justify-content: flex-end;
     height: 250px;
-    transition: padding 0.3s ease, height 0.3s ease; /* Adicionando transições suaves */
+    transition: padding 0.3s ease, height 0.3s ease;
 }
 
-/* Estilo para a mudança no estado do container */
 .chat-container.shrink {
-    padding: 10px; /* Exemplo de alteração do padding */
-    height: 100px; /* Exemplo de alteração na altura */
+    padding: 10px;
+    height: 100px;
 }
+
 .message {
-    background-color:  rgba(0, 0, 0, 0);
+    background-color: rgba(0, 0, 0, 0);
     color: white;
     padding: 10px;
     margin-bottom: 10px;
     border-radius: 8px;
     opacity: 1;
     transition: opacity 0.5s ease;
-    margin-top: 50px; /* Ajuste a margem superior para a altura desejada */
+    margin-top: 50px;
 }
 
 .message.hidden {
-    opacity: 0; /* A classe 'hidden' faz a mensagem desaparecer */
+    opacity: 0;
 }
+
 .input-area {
-    position: fixed;  /* Fixa a área na parte inferior da tela */
-    bottom: 0;        /* Alinha ao fundo da tela */
+    position: fixed;
+    bottom: 0;
     left: 0;
     width: 100%;
     display: flex;
@@ -136,7 +137,7 @@
     background-color: rgba(0, 0, 0, 0);
     justify-content: space-between;
     align-items: center;
-    box-sizing: border-box;  /* Garante que o padding não afete o tamanho */
+    box-sizing: border-box;
 }
 
 .messages {
@@ -198,7 +199,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    text-align: center; /* Centraliza o texto */
+    text-align: center;
 }
 
 .report-close-letter {
@@ -218,7 +219,7 @@
 
 .report-options {
     width: 100%;
-    text-align: left; /* Mantém as opções alinhadas à esquerda */
+    text-align: left;
     margin-bottom: 10px;
 }
 
@@ -231,15 +232,17 @@
     margin-bottom: 20px;
     resize: vertical;
 }
+
 .report-button {
     position: absolute;
     top: 10px;
     right: 10px;
-    font-size: 18px; /* Tamanho da letra */
-    color: #e0e0e0; /* Cor inicial da letra */
+    font-size: 18px;
+    color: #e0e0e0;
     cursor: pointer;
-    z-index: 3; /* Garante que fique acima do vídeo e do chat */
+    z-index: 3;
 }
+
 .report-button:hover {
     color: #ff0000;
 }
@@ -260,15 +263,78 @@
     max-width: 400px;
     white-space: nowrap;
 }
+
 #crown-icon {
     width: 30px;
     height: 30px;
-    margin-left: 01px;
+    margin-left: 1px;
     margin-bottom: 4px;
 }
 
 #crown-icon path {
-    fill: gold; /* Cor dourada para o ícone da coroa */
+    fill: gold;
+}
+
+/* RESPONSIVIDADE PARA CELULARES */
+@media screen and (max-width: 600px) {
+    .input-area {
+        flex-direction: row;
+        padding: 5px;
+    }
+
+    .input-area input {
+        width: 70%;
+        font-size: 14px;
+    }
+
+    .input-area button {
+        width: 28%;
+        font-size: 14px;
+    }
+
+    .profile-image {
+        width: 40px;
+        height: 40px;
+    }
+
+    .username {
+        font-size: 14px;
+    }
+
+    .chat-container {
+        padding: 20px;
+        height: 200px;
+    }
+
+    .chat-container.shrink {
+        padding: 8px;
+        height: 90px;
+    }
+
+    .message {
+        font-size: 14px;
+        margin-top: 20px;
+    }
+
+    .report-button {
+        font-size: 16px;
+        top: 5px;
+        right: 5px;
+    }
+
+    .report-content {
+        width: 90%;
+        padding: 15px;
+    }
+
+    .report-close-letter {
+        font-size: 20px;
+    }
+
+    #crown-icon {
+        width: 20px;
+        height: 20px;
+    }
 }
 
 
