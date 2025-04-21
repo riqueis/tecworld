@@ -95,20 +95,21 @@ body, html {
 
 .chat-container {
     position: absolute;
-    bottom: 0;
-    left: 0;
+    top: 30%; /* <-- muda isso aqui para levantar o bloco */
+    left: 30%;
     width: 100%;
     z-index: 2;
     background-color: rgba(0, 0, 0, 0);
     color: white;
-    padding: 20px 10px; /* Ajuste de padding para mais espaço em cima e embaixo */
+    padding: 20px 10px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* Distribui o conteúdo com espaçamento entre as mensagens */
-    height: 200px; /* Ajuste a altura conforme necessário */
+    justify-content: flex-start; /* coloca as mensagens no topo da área */
+    height: 200px;
     transition: padding 0.3s ease, height 0.3s ease;
     overflow-y: auto;
 }
+
 
 .chat-container.shrink {
     padding: 10px 10px 5px; /* Ajuste de padding para telas menores */
