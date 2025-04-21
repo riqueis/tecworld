@@ -140,6 +140,8 @@ body, html {
     background-color: rgba(0, 0, 0, 0.5);
     justify-content: space-between;
     align-items: center;
+    box-sizing: border-box;  /* Garante que o padding não ultrapasse os limites */
+    z-index: 3; /* Garante que fique acima de outros elementos */
 }
 
 .input-area input {
@@ -150,6 +152,7 @@ body, html {
     color: white;
     margin-right: 5px;
     border-radius: 5px;
+    box-sizing: border-box;  /* Garante que o padding não ultrapasse a largura total */
 }
 
 .input-area button {
@@ -259,6 +262,38 @@ body, html {
 
 #crown-icon path {
     fill: gold;
+}
+
+/* Ajustes para dispositivos móveis */
+@media (max-width: 768px) {
+    .video {
+        height: 40%; /* Ajuste da altura para telas menores */
+    }
+
+    .chat-container {
+        height: 150px; /* Ajuste da altura para dispositivos móveis */
+    }
+
+    .input-area {
+        padding: 5px;
+        bottom: 0;
+        left: 0;
+        width: 100%;  /* Garante que ocupe a largura total da tela */
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-sizing: border-box;
+    }
+
+    .input-area input {
+        width: 70%; /* Ajuste da largura do campo de texto */
+        padding: 8px; /* Menos padding para não ultrapassar os limites */
+    }
+
+    .input-area button {
+        width: 25%; /* Ajuste da largura do botão */
+        padding: 8px; /* Menos padding para se ajustar melhor */
+    }
 }
 
 
