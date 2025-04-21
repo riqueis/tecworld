@@ -101,19 +101,20 @@ body, html {
     z-index: 2;
     background-color: rgba(0, 0, 0, 0);
     color: white;
-    padding: 10px;
+    padding: 20px 10px; /* Ajuste de padding para mais espaço em cima e embaixo */
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
-    height: 200px;
+    justify-content: center; /* Centraliza as mensagens verticalmente */
+    height: 200px; /* Ajuste a altura conforme necessário */
     transition: padding 0.3s ease, height 0.3s ease;
     overflow-y: auto;
 }
 
 .chat-container.shrink {
-    padding: 5px;
+    padding: 10px 10px 5px; /* Ajuste de padding para telas menores */
     height: 100px;
 }
+
 
 .message {
     background-color: rgba(0, 0, 0, 0);
