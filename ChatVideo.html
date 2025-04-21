@@ -260,18 +260,25 @@ body, html {
 #crown-icon path {
     fill: gold;
 }
-        @media (max-width: 768px) {
-    .video {
-        height: 40%; /* Ajuste de altura para telas menores */
-    }
-
-    .chat-container {
-        height: 150px; /* Ajuste de altura para dispositivos móveis */
-    }
-
+@media (max-width: 768px) {
     .input-area {
         padding: 5px;
-        bottom: 10px; /* Ajuste do posicionamento */
+        bottom: 0;
+        left: 0;
+        width: 100%;  /* Garantir que ocupe toda a largura da tela */
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-sizing: border-box;  /* Garantir que o padding não ultrapasse os limites */
+    }
+
+    .input-area input {
+        width: 70%;  /* Ajuste da largura do campo de texto */
+    }
+
+    .input-area button {
+        width: 20%;  /* Ajuste da largura do botão */
+        padding: 10px;
     }
 }
 
