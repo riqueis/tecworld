@@ -95,13 +95,12 @@ body, html {
 
 .chat-container {
     position: absolute;
-   top: 30%;
-   left: 50%;
-   transform: translateX(-50%);
-   width: 90%; /* ou ajuste conforme quiser */
-   z-index: 2;
-   background-color: rgba(0, 0, 0, 0);
-   color: white;
+    top: 30%; /* <-- muda isso aqui para levantar o bloco */
+    left: 0;
+    width: 100%;
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0);
+    color: white;
     padding: 20px 10px;
     display: flex;
     flex-direction: column;
@@ -110,8 +109,6 @@ body, html {
     transition: padding 0.3s ease, height 0.3s ease;
     overflow-y: auto;
 }
-
-
 .chat-container.shrink {
     padding: 10px 10px 5px; /* Ajuste de padding para telas menores */
     height: 100px;
