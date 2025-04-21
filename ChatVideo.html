@@ -1,1 +1,472 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat de Vídeo - TecEvolution</title>
+    <style>
+body, html {
+     height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    transition: background-color 0.3s, color 0.3s;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.dark-mode {
+    background-color: #0d0f12;
+    color: #e0e0e0;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+.video-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    padding: 0;
+    margin: 0;
+}
+
+.video {
+    width: 100%;
+    height: 50%;
+    background-color: black;
+    object-fit: contain;
+    border: 1px solid #00aaff;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: absolute;
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 5px;
+    border-radius: 8px;
+}
+
+.user-left {
+    left: 10px;
+    top: 10px;
+    flex-direction: row;
+}
+
+.user-left.user-bottom {
+    top: 50%;
+    margin-top: 10px;
+}
+
+.profile-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    background-color: #E0E0E0;
+}
+
+.username {
+    font-size: 16px;
+    font-weight: bold;
+    color: #e0e0e0;
+    display: flex;
+    align-items: center;
+    gap: 1px;
+}
+
+.chat-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0);
+    color: white;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 200px;
+    transition: padding 0.3s ease, height 0.3s ease;
+    overflow-y: auto;
+}
+
+.chat-container.shrink {
+    padding: 5px;
+    height: 100px;
+}
+
+.message {
+    background-color: rgba(0, 0, 0, 0);
+    color: white;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+    margin-top: 10px;
+}
+
+.message.hidden {
+    opacity: 0;
+}
+
+.input-area {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    padding: 5px;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: space-between;
+    align-items: center;
+}
+
+.input-area input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #00aaff;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    margin-right: 5px;
+    border-radius: 5px;
+}
+
+.input-area button {
+    padding: 10px;
+    border: none;
+    color: white;
+    cursor: pointer;
+    background-color: #00aaff;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.input-area button:hover {
+    background-color: #007acc;
+}
+
+.report-modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 400px;
+    padding: 20px;
+    z-index: 10;
+    border-radius: 8px;
+}
+
+.report-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.report-close-letter {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+}
+
+.report-close-letter:hover {
+    color: #ff0000;
+}
+
+.report-options {
+    width: 100%;
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+.report-description {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    resize: vertical;
+}
+
+.report-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 18px;
+    color: #e0e0e0;
+    cursor: pointer;
+    z-index: 3;
+}
+
+.report-button:hover {
+    color: #ff0000;
+}
+
+.thank-you-message {
+    display: none;
+    padding: 10px;
+    background-color: #000000bd;
+    color: white;
+    text-align: center;
+    font-size: 14px;
+    border-radius: 5px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 400px;
+    white-space: nowrap;
+}
+
+#crown-icon {
+    width: 30px;
+    height: 30px;
+    margin-left: 1px;
+    margin-bottom: 4px;
+}
+
+#crown-icon path {
+    fill: gold;
+}
+        @media (max-width: 768px) {
+    .input-area {
+        padding: 5px;
+        bottom: 0;
+        left: 0;
+        width: 100%;  /* Garantir que ocupe toda a largura da tela */
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-sizing: border-box;  /* Garantir que o padding não ultrapasse os limites */
+    }
+
+    .input-area input {
+        width: 70%;  /* Ajuste da largura do campo de texto */
+    }
+
+    .input-area button {
+        width: 20%;  /* Ajuste da largura do botão */
+        padding: 10px;
+    }
+}
+
+
+/* Ajustes para dispositivos móveis */
+
+    </style>
+</head>
+<div class="container">
+    <!-- Container do vídeo -->
+    <div class="video-container">
+        <!-- Usuário 1 (Perfil e vídeo) -->
+        <div class="user user-left">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPlwkUTsaWA_zSj0oFI7sbKYXqs-ih3b0_Bg&s" alt="Usuário 1" class="profile-image">
+            <span class="username">Usuário 1 
+                <svg id="crown-icon" class="icon" version="1.0" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 225.000000 225.000000" preserveAspectRatio="xMidYMid meet">
+                    <g transform="translate(0.000000,225.000000) scale(0.100000,-0.100000)" fill="none" stroke="none">
+                        <path d="M1085 1618 c-11 -6 -25 -19 -32 -27 -17 -22 -16 -82 1 -107 13 -18 6 -37 -79 -212 -52 -106 -96 -192 -98 -192 -2 0 -64 68 -138 152 -125 143 -133 154 -130 190 1 31 -4 44 -28 68 -50 50 -120 38 -147 -26 -12 -30 -12 -39 1 -70 9 -23 25 -40 43 -46 29 -11 30 -15 83 -257 40 -183 55 -274 59 -356 l5 -110 500 0 500 0 6 120 c5 91 19 175 58 350 28 126 51 232 51 235 0 3 14 11 30 17 60 23 70 115 17 155 -58 46 -153 -5 -145 -78 4 -33 -4 -45 -131 -190 -74 -85 -137 -154 -140 -154 -3 1 -46 85 -95 187 -90 186 -90 186 -73 215 26 45 22 85 -12 119 -31 31 -70 37 -106 17z m150 -388 c107 -222 111 -230 130 -230 7 0 82 79 166 176 85 96 155 172 156 167 1 -4 -22 -116 -51 -248 l-52 -240 -459 0 -460 0 -52 240 c-29 132 -51 243 -50 248 1 4 71 -72 156 -168 92 -105 160 -175 169 -173 19 4 14 -5 133 242 55 114 104 204 108 200 5 -5 52 -101 106 -214z m345 -495 l0 -65 -455 0 -455 0 0 65 0 65 455 0 455 0 0 -65z"/>
+                    </g>
+                </svg>
+            </span>
+        </div>
+        
+        <!-- Vídeo local (Usuário 1) -->
+        <video class="video" id="user1-video" autoplay muted></video>
+
+        <!-- Usuário 2 (Perfil) -->
+        <div class="user user-left user-bottom">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPlwkUTsaWA_zSj0oFI7sbKYXqs-ih3b0_Bg&s" alt="Usuário 2" class="profile-image">
+            <span class="username">Usuário 2 
+                <svg id="crown-icon" class="icon" version="1.0" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 225.000000 225.000000" preserveAspectRatio="xMidYMid meet">
+                    <g transform="translate(0.000000,225.000000) scale(0.100000,-0.100000)" fill="none" stroke="none">
+                        <path d="M1085 1618 c-11 -6 -25 -19 -32 -27 -17 -22 -16 -82 1 -107 13 -18 6 -37 -79 -212 -52 -106 -96 -192 -98 -192 -2 0 -64 68 -138 152 -125 143 -133 154 -130 190 1 31 -4 44 -28 68 -50 50 -120 38 -147 -26 -12 -30 -12 -39 1 -70 9 -23 25 -40 43 -46 29 -11 30 -15 83 -257 40 -183 55 -274 59 -356 l5 -110 500 0 500 0 6 120 c5 91 19 175 58 350 28 126 51 232 51 235 0 3 14 11 30 17 60 23 70 115 17 155 -58 46 -153 -5 -145 -78 4 -33 -4 -45 -131 -190 -74 -85 -137 -154 -140 -154 -3 1 -46 85 -95 187 -90 186 -90 186 -73 215 26 45 22 85 -12 119 -31 31 -70 37 -106 17z m150 -388 c107 -222 111 -230 130 -230 7 0 82 79 166 176 85 96 155 172 156 167 1 -4 -22 -116 -51 -248 l-52 -240 -459 0 -460 0 -52 240 c-29 132 -51 243 -50 248 1 4 71 -72 156 -168 92 -105 160 -175 169 -173 19 4 14 -5 133 242 55 114 104 204 108 200 5 -5 52 -101 106 -214z m345 -495 l0 -65 -455 0 -455 0 0 65 0 65 455 0 455 0 0 -65z"/>
+                    </g>
+                </svg>
+            </span>
+        </div>
+        
+        <!-- Vídeo remoto (Usuário 2) -->
+        <video class="video" id="user2-video" autoplay></video>
+    </div>
+</div>
+
+        <!-- Botão de denúncia separado -->
+        <div class="report-container">
+            <span class="report-button" onclick="reportChat()">Denúncia</span>
+        </div>
+    
+        <!-- Área de chat -->
+        <div class="chat-container">
+            <div class="messages" id="messageDisplay"></div>
+            <div class="input-area">
+                <input type="text" id="messageInput" placeholder="Digite sua mensagem...">
+                <button class="send-button" onclick="sendMessage()">Enviar</button>
+                <button class="skip-button" onclick="nextAction()">Próximo</button> <!-- Novo botão Próximo -->
+            </div>
+        </div>
+    </div>
+    <!-- Janela Modal de Denúncia -->
+    <div class="report-modal" id="reportModal">
+        <div class="report-content">
+            <div class="report-close-letter" onclick="closeReportModal()">X</div>
+            <h2>Denunciar Chat</h2>
+            <div class="report-options">
+                <label><input type="radio" name="reportReason" value="Conteúdo sexual e nudez"> Conteúdo sexual e nudez</label>
+                <label><input type="radio" name="reportReason" value="Discurso de ódio"> Discurso de ódio</label>
+                <label><input type="radio" name="reportReason" value="Assédio e bullying"> Assédio e bullying</label>
+                <label><input type="radio" name="reportReason" value="Exploração infantil"> Exploração infantil</label>
+                <label><input type="radio" name="reportReason" value="Violência e ameaças"> Violência e ameaças</label>
+                <label><input type="radio" name="reportReason" value="Spam e promoções enganosas"> Spam e promoções enganosas</label>
+                <label><input type="radio" name="reportReason" value="Conteúdo sensacionalista ou enganoso"> Conteúdo sensacionalista ou enganoso</label>
+                <label><input type="radio" name="reportReason" value="Violação de propriedade intelectual"> Violação de propriedade intelectual</label>
+                <label><input type="radio" name="reportReason" value="outros...">outros...</label>
+            </div>
+            <textarea class="report-description" placeholder="Descreva o problema (opcional)"></textarea>
+            <button onclick="submitReport()">Enviar Denúncia</button>
+        </div>
+    </div>
+
+    <div class="thank-you-message" id="thankYouMessage">
+        <p>Obrigado pela sua denúncia! Estamos analisando.</p>
+    </div>
+
+        <script>
+        function sendMessage() {
+            const messageInput = document.getElementById('messageInput');
+            const messageDisplay = document.getElementById('messageDisplay');
+            const messageText = messageInput.value.trim();
+
+            if (messageText) {
+                const messageElement = document.createElement('div');
+                messageElement.textContent = messageText;
+                messageDisplay.appendChild(messageElement);
+                messageInput.value = ''; // Limpa o campo de entrada
+                messageDisplay.scrollTop = messageDisplay.scrollHeight; // Rola até a última mensagem
+            }
+        }
+
+        function nextAction() {
+            alert('Você clicou no botão "Próximo"!'); // Exemplo de ação
+        }
+        window.onload = function() {
+    document.getElementById("reportModal").style.display = "none";
+    };
+         function reportChat() {
+            document.getElementById('reportModal').style.display = 'flex';
+        }
+
+        function closeReportModal() {
+            document.getElementById('reportModal').style.display = 'none';
+        }
+
+        function submitReport() {
+            const selectedReason = document.querySelector('input[name="reportReason"]:checked');
+            const description = document.querySelector('.report-description').value.trim();
+            
+            if (selectedReason) {
+                document.getElementById('reportModal').style.display = 'none';
+                document.getElementById('thankYouMessage').style.display = 'block';
+                setTimeout(() => {
+                    document.getElementById('thankYouMessage').style.display = 'none';
+                }, 3000); // Oculta a mensagem após 3 segundos
+            } else {
+                alert('Por favor, selecione um motivo para a denúncia.');
+            }
+        }
+        // Função para enviar a mensagem
+function sendMessage() {
+    const messageInput = document.getElementById('messageInput');
+    const content = messageInput.value.trim();
+    
+    if (content === "") {
+        return; // Não faz nada se a mensagem estiver vazia
+    }
+
+    const chatContainer = document.querySelector('.chat-container');
+    
+    // Criação de uma nova mensagem
+    const message = document.createElement('div');
+    message.classList.add('message');
+    message.textContent = content;
+    
+    // Adiciona a mensagem ao chat
+    chatContainer.appendChild(message);
+
+    // Limpa o campo de entrada
+    messageInput.value = '';
+
+    // Faz a mensagem desaparecer depois de 5 segundos
+    setTimeout(() => {
+        message.classList.add('hidden'); // Adiciona a classe para fazer desaparecer
+    }, 5000); // 5000 milissegundos = 5 segundos
+
+    // Opcional: Remover a mensagem completamente após a transição
+    setTimeout(() => {
+        message.remove();
+    }, 5500); // 5500 milissegundos para garantir que a transição termine antes de remover
+}
+ // Acessando o vídeo do usuário 1
+ const user1Video = document.getElementById('user1-video');
+
+// Acessando o vídeo do usuário 2
+const user2Video = document.getElementById('user2-video');
+
+// Função para acessar a câmera e exibir o vídeo no elemento correto
+function startVideo(userVideoElement) {
+    navigator.mediaDevices.getUserMedia({ video: true })
+        .then(stream => {
+            // Atribui o stream da câmera ao elemento de vídeo
+            userVideoElement.srcObject = stream;
+        })
+        .catch(error => {
+            console.error('Erro ao acessar a câmera:', error);
+        });
+}
+
+// Inicia o vídeo para o Usuário 1
+startVideo(user1Video);
+
+// Inicia o vídeo para o Usuário 2 (se necessário)
+startVideo(user2Video);
+    </script>
+
+</body>
+</html>
+
+    </script>
+
+</body>
+</html>
 
