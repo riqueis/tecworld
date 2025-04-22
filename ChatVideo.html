@@ -95,17 +95,17 @@ body, html {
 
 .chat-container {
     position: absolute;
-    top:30%
-    bottom: 0;
-    left:0;
+    top: 30%; /* Isso move o container mais pro centro da tela */
+    left: 0;
     width: 100%;
     z-index: 2;
     background-color: rgba(0, 0, 0, 0);
     color: white;
-    padding: 10px;
+    padding: 20px 10px;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
+    justify-content: flex-start; /* Mensagens começam do topo do container */
+    align-items: center; /* Alinha mensagens ao centro horizontalmente */
     height: 200px;
     transition: padding 0.3s ease, height 0.3s ease;
     overflow-y: auto;
