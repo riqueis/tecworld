@@ -117,18 +117,43 @@ body, html {
 }
 
 .message {
-    background-color: rgba(0, 0, 0, 0);
-    color: white;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 8px;
-    opacity: 1;
-    transition: opacity 0.5s ease;
-    margin-top: 10px;
+  display: flex; /* Usando flex para alinhar o nome e a mensagem na mesma linha */
+  flex-direction: row;
+  align-items: center;  /* Alinha o nome e a mensagem no centro verticalmente */
+  margin: 8px;
+  max-width: 60%;
+  padding: 10px;
+  border-radius: 10px;
+  word-wrap: break-word;
+  white-space: nowrap; /* Evita a quebra de linha */
 }
 
 .message.hidden {
     opacity: 0;
+}
+.user1-message {
+  align-self: flex-start;
+  color:blue;
+  text-align: left;
+}
+
+/* Mensagem do Usuário 2 (direita) */
+.user2-message {
+  align-self: flex-end;
+color:green;
+  text-align: right;
+}
+
+.username {
+  font-weight: bold;
+  margin-right: 10px;  /* Espaçamento entre o nome e a mensagem */
+  font-size: 14px;
+  white-space: nowrap; /* Impede quebra de linha no nome */
+}
+
+.message-text {
+  font-size: 15px;
+  margin: 0;
 }
 
 .input-area {
@@ -327,17 +352,19 @@ body, html {
         <div class="report-container">
             <span class="report-button" onclick="reportChat()">Denúncia</span>
         </div>
-    
-        <!-- Área de chat -->
-        <div class="chat-container">
-            <div class="messages" id="messageDisplay"></div>
-            <div class="input-area">
-                <input type="text" id="messageInput" placeholder="Digite sua mensagem...">
-                <button class="send-button" onclick="sendMessage()">Enviar</button>
-                <button class="skip-button" onclick="nextAction()">Próximo</button> <!-- Novo botão Próximo -->
-            </div>
-        </div>
-    </div>
+    <!-- Área de chat -->
+<div class="chat-container">
+  <!-- Container para exibição das mensagens -->
+  <div class="messages" id="messageDisplay">
+    <!-- As mensagens serão exibidas dinamicamente aqui -->
+  </div>
+  <div class="input-area">
+    <input type="text" id="messageInput" placeholder="Digite sua mensagem...">
+    <button class="send-button" onclick="sendMessage()">Enviar</button>
+    <button class="skip-button" onclick="nextAction()">Próximo</button>
+  </div>
+</div>
+
     <!-- Janela Modal de Denúncia -->
     <div class="report-modal" id="reportModal">
         <div class="report-content">
@@ -363,57 +390,54 @@ body, html {
         <p>Obrigado pela sua denúncia! Estamos analisando.</p>
     </div>
 
-        <script>
-        function sendMessage() {
-            const messageInput = document.getElementById('messageInput');
-            const messageDisplay = document.getElementById('messageDisplay');
-            const messageText = messageInput.value.trim();
-
-            if (messageText) {
-                const messageElement = document.createElement('div');
-                messageElement.textContent = messageText;
-                messageDisplay.appendChild(messageElement);
-                messageInput.value = ''; // Limpa o campo de entrada
-                messageDisplay.scrollTop = messageDisplay.scrollHeight; // Rola até a última mensagem
-            }
-        }
-
-        function nextAction() {
-            alert('Você clicou no botão "Próximo"!'); // Exemplo de ação
-        }
-        window.onload = function() {
-    document.getElementById("reportModal").style.display = "none";
-    };
-         function reportChat() {
-            document.getElementById('reportModal').style.display = 'flex';
-        }
-
-        function closeReportModal() {
-            document.getElementById('reportModal').style.display = 'none';
-        }
-
-        function submitReport() {
-            const selectedReason = document.querySelector('input[name="reportReason"]:checked');
-            const description = document.querySelector('.report-description').value.trim();
-            
-            if (selectedReason) {
-                document.getElementById('reportModal').style.display = 'none';
-                document.getElementById('thankYouMessage').style.display = 'block';
-                setTimeout(() => {
-                    document.getElementById('thankYouMessage').style.display = 'none';
-                }, 3000); // Oculta a mensagem após 3 segundos
-            } else {
-                alert('Por favor, selecione um motivo para a denúncia.');
-            }
-        }
-        // Função para enviar a mensagem
-function sendMessage() {
-    const messageInput = document.getElementById('messageInput');
-    const content = messageInput.value.trim();
-    
-    if (content === "") {
-        return; // Não faz nada se a mensagem estiver vazia
-    }
+    <script>
+      function sendMessage() {
+          const messageInput = document.getElementById("messageInput");
+          const messageText = messageInput.value.trim();
+      
+          if (messageText !== "") {
+              // Mensagem do Usuário 1 (quem está digitando)
+              createMessage("Usuário 1", messageText, "user1-message");
+      
+              // Limpa o campo
+              messageInput.value = "";
+      
+              // Simula resposta do Usuário 2 após 1.5 segundos
+              setTimeout(() => {
+                  createMessage("Usuário 2", "Mensagem recebida!", "user2-message");
+              }, 1500);
+          }
+      }
+      
+      function createMessage(userLabel, text, cssClass) {
+          const messageDiv = document.createElement("div");
+          const username = document.createElement("span");
+          const messageContent = document.createElement("p");
+      
+          messageDiv.classList.add("message", cssClass);
+          username.innerText = userLabel + ":";
+          messageContent.innerText = text;
+      
+          messageDiv.appendChild(username);
+          messageDiv.appendChild(messageContent);
+      
+          const messageDisplay = document.getElementById("messageDisplay");
+          messageDisplay.appendChild(messageDiv);
+          messageDisplay.scrollTop = messageDisplay.scrollHeight;
+      
+          // Remove a mensagem após 3 segundos
+          setTimeout(() => {
+              messageDiv.remove();
+          }, 3000);
+      }
+      
+      function nextAction() {
+          alert('Você clicou no botão "Próximo"!');
+      }
+    // Oculta o modal de denúncia ao carregar a página
+window.onload = function() {
+    document.getElementById('reportModal').style.display = 'none';
+};
 
     const chatContainer = document.querySelector('.chat-container');
     
@@ -437,7 +461,7 @@ function sendMessage() {
     setTimeout(() => {
         message.remove();
     }, 5500); // 5500 milissegundos para garantir que a transição termine antes de remover
-}
+
  // Acessando o vídeo do usuário 1
  const user1Video = document.getElementById('user1-video');
 
@@ -470,4 +494,3 @@ startVideo(user2Video);
 
 </body>
 </html>
-
