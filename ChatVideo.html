@@ -391,88 +391,94 @@ color:green;
     </div>
 
     <script>
-      function sendMessage() {
-          const messageInput = document.getElementById("messageInput");
-          const messageText = messageInput.value.trim();
-      
-          if (messageText !== "") {
-              // Mensagem do Usuário 1 (quem está digitando)
-              createMessage("Usuário 1", messageText, "user1-message");
-      
-              // Limpa o campo
-              messageInput.value = "";
-      
-              // Simula resposta do Usuário 2 após 1.5 segundos
-              setTimeout(() => {
-                  createMessage("Usuário 2", "Mensagem recebida!", "user2-message");
-              }, 1500);
-          }
-      }
-      
-      function createMessage(userLabel, text, cssClass) {
-          const messageDiv = document.createElement("div");
-          const username = document.createElement("span");
-          const messageContent = document.createElement("p");
-      
-          messageDiv.classList.add("message", cssClass);
-          username.innerText = userLabel + ":";
-          messageContent.innerText = text;
-      
-          messageDiv.appendChild(username);
-          messageDiv.appendChild(messageContent);
-      
-          const messageDisplay = document.getElementById("messageDisplay");
-          messageDisplay.appendChild(messageDiv);
-          messageDisplay.scrollTop = messageDisplay.scrollHeight;
-      
-          // Remove a mensagem após 3 segundos
-          setTimeout(() => {
-              messageDiv.remove();
-          }, 3000);
-      }
-      
-      function nextAction() {
-          alert('Você clicou no botão "Próximo"!');
-      }
-    // Oculta o modal de denúncia ao carregar a página
-window.onload = function() {
-    document.getElementById('reportModal').style.display = 'none';
-};
-
-    const chatContainer = document.querySelector('.chat-container');
+       // Função para enviar uma mensagem
+    function sendMessage() {
+        const messageInput = document.getElementById("messageInput");
+        const messageText = messageInput.value.trim();
     
-    // Criação de uma nova mensagem
-    const message = document.createElement('div');
-    message.classList.add('message');
-    message.textContent = content;
+        if (messageText !== "") {
+            // Cria e exibe a mensagem do Usuário 1
+            createMessage("Usuário 1", messageText, "user1-message");
     
-    // Adiciona a mensagem ao chat
-    chatContainer.appendChild(message);
+            // Limpa o campo de entrada de texto
+            messageInput.value = "";
+    
+            // Simula uma resposta do Usuário 2 após 1.5 segundos
+            setTimeout(() => {
+                createMessage("Usuário 2", "Mensagem recebida!", "user2-message");
+            }, 1500);
+        }
+    }
+    
+    // Função para criar uma nova mensagem no chat
+    function createMessage(userLabel, text, cssClass) {
+        const messageDiv = document.createElement("div");
+        const username = document.createElement("span");
+        const messageContent = document.createElement("p");
+    
+        // Configura a estrutura da mensagem
+        messageDiv.classList.add("message", cssClass);
+        username.innerText = `${userLabel}:`;
+        messageContent.innerText = text;
+    
+        messageDiv.appendChild(username);
+        messageDiv.appendChild(messageContent);
+    
+        // Exibe a mensagem no chat
+        const messageDisplay = document.getElementById("messageDisplay");
+        messageDisplay.appendChild(messageDiv);
+        messageDisplay.scrollTop = messageDisplay.scrollHeight;
+    
+        // Remove a mensagem após 3 segundos
+        setTimeout(() => {
+            messageDiv.remove();
+        }, 3000);
+    }
+    
+    // Função para ação do botão "Próximo"
+    function nextAction() {
+        alert('Você clicou no botão "Próximo"!');
+    }
+    
+    // Oculta o modal de denúncia quando a página for carregada
+    window.onload = function() {
+        document.getElementById('reportModal').style.display = 'none';
+    };
 
-    // Limpa o campo de entrada
-    messageInput.value = '';
-
-    // Faz a mensagem desaparecer depois de 5 segundos
-    setTimeout(() => {
-        message.classList.add('hidden'); // Adiciona a classe para fazer desaparecer
-    }, 5000); // 5000 milissegundos = 5 segundos
-
-    // Opcional: Remover a mensagem completamente após a transição
-    setTimeout(() => {
-        message.remove();
-    }, 5500); // 5500 milissegundos para garantir que a transição termine antes de remover
-
- // Acessando o vídeo do usuário 1
- const user1Video = document.getElementById('user1-video');
-
-// Acessando o vídeo do usuário 2
+    // Função para adicionar uma nova mensagem no container de chat
+    function addMessageToChat(content) {
+        const chatContainer = document.querySelector('.chat-container');
+    
+        // Criação da nova mensagem
+        const message = document.createElement('div');
+        message.classList.add('message');
+        message.textContent = content;
+    
+        // Adiciona a mensagem ao container de chat
+        chatContainer.appendChild(message);
+    
+        // Limpa o campo de entrada
+        document.getElementById('messageInput').value = '';
+    
+        // Faz a mensagem desaparecer após 5 segundos
+        setTimeout(() => {
+            message.classList.add('hidden'); // Adiciona a classe para ocultar
+        }, 5000); // 5000 milissegundos = 5 segundos
+    
+        // Opcional: Remove a mensagem após a transição
+        setTimeout(() => {
+            message.remove();
+        }, 5500); // 5500 milissegundos para garantir que a transição termine antes de remover
+    }
+    
+ // Acessa os vídeos dos dois usuários
+const user1Video = document.getElementById('user1-video');
 const user2Video = document.getElementById('user2-video');
 
-// Função para acessar a câmera e exibir o vídeo no elemento correto
+// Função genérica para iniciar vídeo em um elemento
 function startVideo(userVideoElement) {
     navigator.mediaDevices.getUserMedia({ video: true })
         .then(stream => {
-            // Atribui o stream da câmera ao elemento de vídeo
             userVideoElement.srcObject = stream;
         })
         .catch(error => {
@@ -480,17 +486,18 @@ function startVideo(userVideoElement) {
         });
 }
 
-// Inicia o vídeo para o Usuário 1
-startVideo(user1Video);
+// Quando a página carregar, inicia o vídeo dos dois usuários
+window.onload = () => {
+    startVideo(user1Video);
 
-// Inicia o vídeo para o Usuário 2 (se necessário)
-startVideo(user2Video);
+    // Se estiver apenas testando localmente, pode usar o mesmo stream:
+    // startVideo(user2Video); // Isso causaria conflito de câmera no mesmo navegador
+    user2Video.srcObject = user1Video.srcObject; // apenas para visualizar os dois vídeos
+};
+
+
     </script>
 
 </body>
 </html>
 
-    </script>
-
-</body>
-</html>
