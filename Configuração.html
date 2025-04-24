@@ -2,240 +2,110 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TecWorld Chat</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Configurações - TecWorld</title>
   <style>
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
-    }
-
-    body {
-      font-family: sans-serif;
-      background-color: #111;
-      color: white;
-      overflow-x: hidden;
-    }
-
-    .video-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 10px;
-    }
-
-    video {
-      width: 100%;
-      max-width: 500px;
-      border-radius: 10px;
-      margin: 10px 0;
-    }
-
-    .user {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin: 5px 0;
-    }
-
-    .profile-image {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-    }
-
-    .username {
-      font-weight: bold;
-    }
-
-    .chat-box {
-      width: 100%;
-      max-width: 500px;
-      background-color: #222;
-      padding: 10px;
-      border-radius: 8px;
-      margin: 10px 0;
-    }
-
-    .chat-messages {
-      height: 150px;
-      overflow-y: auto;
-      background-color: #000;
-      padding: 10px;
-      border-radius: 5px;
-      margin-bottom: 10px;
-    }
-
-    .chat-input {
-      display: flex;
-      gap: 10px;
-    }
-
-    .chat-input input {
-      flex: 1;
-      padding: 8px;
-      border-radius: 5px;
-      border: none;
-    }
-
-    .chat-input button {
-      padding: 8px 12px;
-      background-color: #444;
-      color: white;
-      border: none;
-      border-radius: 5px;
-    }
-
-    .config-btn {
-      margin: 20px;
-      padding: 10px;
-      background-color: #333;
-      border: none;
-      border-radius: 5px;
-      color: white;
-    }
-
-    /* CONFIGURAÇÕES - Tela cheia */
-    .configuracoes-tela {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background-color: #111;
-      color: white;
-      z-index: 1000;
-      display: none;
-      flex-direction: column;
-      padding: 20px;
       box-sizing: border-box;
-      overflow-y: auto;
+      font-family: Arial, sans-serif;
     }
 
-    .configuracoes-conteudo {
+    body, html {
+      height: 100%;
+      background: #111;
+      color: #fff;
+    }
+
+    .config-page {
       width: 100%;
-      max-width: 600px;
-      margin: auto;
+      height: 100vh;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      background: linear-gradient(to bottom right, #1e1e1e, #2c2c2c);
     }
 
-    .lista-config {
-      list-style: none;
-      padding: 0;
-      margin-top: 20px;
+    h1 {
+      text-align: center;
+      margin-bottom: 10px;
+      color: #00d8ff;
     }
 
-    .lista-config li {
-      margin-bottom: 15px;
+    .config-section {
+      background: #222;
+      border: 1px solid #333;
+      padding: 15px;
+      border-radius: 8px;
+    }
+
+    .config-section h2 {
+      margin-bottom: 10px;
       font-size: 18px;
+      color: #00d8ff;
     }
 
-    .lista-config button, .lista-config select {
-      margin-left: 10px;
-      padding: 6px 10px;
-      background-color: #222;
-      color: white;
+    select, button, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      background: #333;
+      color: #fff;
       border: none;
       border-radius: 5px;
     }
 
-    .lista-config button:hover {
-      background-color: #444;
+    button:hover {
+      background-color: #00d8ff;
+      color: #000;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
+  <div class="config-page">
+    <h1>Configurações</h1>
 
-  <button class="config-btn" onclick="abrirConfiguracoes()">Abrir Configurações</button>
-
-  <div class="video-container">
-    <!-- Usuário 1 -->
-    <div class="user">
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPlwkUTsaWA_zSj0oFI7sbKYXqs-ih3b0_Bg&s" class="profile-image">
-      <span class="username">Usuário 1</span>
+    <div class="config-section">
+      <h2>Idioma</h2>
+      <select>
+        <option value="pt">Português</option>
+        <option value="en">English</option>
+        <option value="es">Español</option>
+        <!-- Mais idiomas aqui -->
+      </select>
     </div>
-    <video id="user1-video" autoplay muted></video>
 
-    <!-- Usuário 2 -->
-    <div class="user">
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPlwkUTsaWA_zSj0oFI7sbKYXqs-ih3b0_Bg&s" class="profile-image">
-      <span class="username">Usuário 2</span>
+    <div class="config-section">
+      <h2>Contas Bloqueadas</h2>
+      <p>Você ainda não bloqueou ninguém.</p>
     </div>
-    <video id="user2-video" autoplay></video>
 
-    <!-- Caixa de Chat -->
-    <div class="chat-box">
-      <div class="chat-messages" id="chat-messages">
-        <p><strong>Usuário 1:</strong> Olá!</p>
-        <p><strong>Usuário 2:</strong> Oi, tudo bem?</p>
-      </div>
-      <div class="chat-input">
-        <input type="text" id="mensagem" placeholder="Digite sua mensagem...">
-        <button onclick="enviarMensagem()">Enviar</button>
-      </div>
+    <div class="config-section">
+      <h2>Histórico de Denúncias</h2>
+      <p>Sem denúncias registradas.</p>
     </div>
-  </div>
 
-  <!-- Configurações em tela cheia -->
-  <div id="configuracoesTela" class="configuracoes-tela">
-    <div class="configuracoes-conteudo">
-      <h2>Configurações</h2>
+    <div class="config-section">
+      <h2>Suporte</h2>
+      <textarea placeholder="Descreva seu problema ou dúvida aqui..."></textarea>
+      <button>Enviar para o suporte</button>
+    </div>
 
-      <ul class="lista-config">
-        <li><strong>Idioma:</strong> 
-          <select>
-            <option>Português</option>
-            <option>Inglês</option>
-            <option>Espanhol</option>
-          </select>
-        </li>
-        <li><strong>Usuários Bloqueados:</strong> <button>Ver lista</button></li>
-        <li><strong>Histórico de Denúncias:</strong> <button>Ver histórico</button></li>
-        <li><strong>Suporte:</strong> <button>Entrar em contato</button></li>
-        <li><strong>Sair da conta:</strong> <button onclick="deslogar()">Deslogar</button></li>
-      </ul>
-
-      <button onclick="fecharConfiguracoes()" style="margin-top: 20px;">Fechar</button>
+    <div class="config-section">
+      <h2>Desconectar</h2>
+      <button onclick="logout()">Sair da conta</button>
     </div>
   </div>
 
   <script>
-    function abrirConfiguracoes() {
-      document.getElementById('configuracoesTela').style.display = 'flex';
+    function logout() {
+      alert("Você foi desconectado!");
+      // Aqui você pode redirecionar ou limpar tokens
+      // window.location.href = "/login";
     }
-
-    function fecharConfiguracoes() {
-      document.getElementById('configuracoesTela').style.display = 'none';
-    }
-
-    function deslogar() {
-      alert('Você foi desconectado!');
-    }
-
-    function enviarMensagem() {
-      const input = document.getElementById('mensagem');
-      const chat = document.getElementById('chat-messages');
-      if (input.value.trim() !== '') {
-        chat.innerHTML += `<p><strong>Você:</strong> ${input.value}</p>`;
-        input.value = '';
-        chat.scrollTop = chat.scrollHeight;
-      }
-    }
-
-    // Inicializar câmera do usuário 1
-    async function startVideo() {
-      try {
-        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-        document.getElementById('user1-video').srcObject = stream;
-      } catch (err) {
-        console.error('Erro ao acessar a câmera: ', err);
-      }
-    }
-
-    window.onload = () => {
-      startVideo();
-    };
   </script>
-
 </body>
 </html>
