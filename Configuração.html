@@ -7,6 +7,7 @@
     body {
       font-family: Arial, sans-serif;
       background: #f0f0f0;
+      margin: 0;
     }
 
     .settings-button {
@@ -23,21 +24,32 @@
       display: none;
       position: fixed;
       z-index: 1000;
-      left: 0;
       top: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0,0,0,0.6);
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.8);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal.show {
+      display: flex;
     }
 
     .modal-content {
       background-color: #fff;
-      margin: 10% auto;
       padding: 25px;
       width: 90%;
       max-width: 400px;
       border-radius: 10px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
     }
 
     .close {
@@ -45,10 +57,6 @@
       font-size: 28px;
       font-weight: bold;
       cursor: pointer;
-    }
-
-    .modal h2 {
-      margin-top: 0;
     }
 
     .config-item {
@@ -60,7 +68,8 @@
       margin-bottom: 5px;
     }
 
-    .config-item select, .config-item button {
+    .config-item select,
+    .config-item button {
       width: 100%;
       padding: 8px;
       border-radius: 6px;
@@ -79,10 +88,10 @@
 </head>
 <body>
 
-  <!-- Botão para abrir as configurações -->
+  <!-- Botão de configurações -->
   <button onclick="abrirConfiguracoes()" class="settings-button">Configurações</button>
 
-  <!-- Modal -->
+  <!-- Modal de configurações -->
   <div id="configModal" class="modal">
     <div class="modal-content">
       <span class="close" onclick="fecharConfiguracoes()">&times;</span>
@@ -115,14 +124,13 @@
     </div>
   </div>
 
-  <!-- Scripts -->
   <script>
     function abrirConfiguracoes() {
-      document.getElementById('configModal').style.display = 'block';
+      document.getElementById('configModal').classList.add('show');
     }
 
     function fecharConfiguracoes() {
-      document.getElementById('configModal').style.display = 'none';
+      document.getElementById('configModal').classList.remove('show');
     }
 
     function abrirContasBloqueadas() {
@@ -135,22 +143,22 @@
 
     function abrirSuporte() {
       alert("Você será redirecionado para o suporte.");
-      // window.location.href = "/suporte"; // descomente e edite se tiver um link
+      // window.location.href = "/suporte";
     }
 
     function deslogar() {
       alert("Você foi desconectado.");
-      // Aqui você pode apagar token, redirecionar para login, etc.
-      // Exemplo: window.location.href = "/login";
+      // window.location.href = "/login";
     }
 
-    // Fechar modal ao clicar fora dele
+    // Fechar ao clicar fora do conteúdo
     window.onclick = function(event) {
       const modal = document.getElementById('configModal');
       if (event.target === modal) {
-        modal.style.display = "none";
+        fecharConfiguracoes();
       }
     }
   </script>
+
 </body>
 </html>
