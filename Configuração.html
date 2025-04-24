@@ -1,1 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title>Configurações - TecWorld</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f0f0;
+    }
 
+    .settings-button {
+      padding: 10px 20px;
+      background-color: #0066cc;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin: 20px;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.6);
+    }
+
+    .modal-content {
+      background-color: #fff;
+      margin: 10% auto;
+      padding: 25px;
+      width: 90%;
+      max-width: 400px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    }
+
+    .close {
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .modal h2 {
+      margin-top: 0;
+    }
+
+    .config-item {
+      margin: 15px 0;
+    }
+
+    .config-item label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .config-item select, .config-item button {
+      width: 100%;
+      padding: 8px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    .config-item button {
+      background-color: #eee;
+      cursor: pointer;
+    }
+
+    .config-item button:hover {
+      background-color: #ddd;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Botão para abrir as configurações -->
+  <button onclick="abrirConfiguracoes()" class="settings-button">Configurações</button>
+
+  <!-- Modal -->
+  <div id="configModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="fecharConfiguracoes()">&times;</span>
+      <h2>Configurações</h2>
+
+      <div class="config-item">
+        <label for="idioma">Idioma:</label>
+        <select id="idioma">
+          <option value="pt">Português</option>
+          <option value="en">English</option>
+          <option value="es">Español</option>
+        </select>
+      </div>
+
+      <div class="config-item">
+        <button onclick="abrirContasBloqueadas()">Contas bloqueadas</button>
+      </div>
+
+      <div class="config-item">
+        <button onclick="abrirHistoricoDenuncias()">Histórico de denúncias</button>
+      </div>
+
+      <div class="config-item">
+        <button onclick="abrirSuporte()">Suporte técnico</button>
+      </div>
+
+      <div class="config-item">
+        <button onclick="deslogar()">Desconectar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    function abrirConfiguracoes() {
+      document.getElementById('configModal').style.display = 'block';
+    }
+
+    function fecharConfiguracoes() {
+      document.getElementById('configModal').style.display = 'none';
+    }
+
+    function abrirContasBloqueadas() {
+      alert("Em breve: lista de contas bloqueadas.");
+    }
+
+    function abrirHistoricoDenuncias() {
+      alert("Em breve: histórico de denúncias feitas.");
+    }
+
+    function abrirSuporte() {
+      alert("Você será redirecionado para o suporte.");
+      // window.location.href = "/suporte"; // descomente e edite se tiver um link
+    }
+
+    function deslogar() {
+      alert("Você foi desconectado.");
+      // Aqui você pode apagar token, redirecionar para login, etc.
+      // Exemplo: window.location.href = "/login";
+    }
+
+    // Fechar modal ao clicar fora dele
+    window.onclick = function(event) {
+      const modal = document.getElementById('configModal');
+      if (event.target === modal) {
+        modal.style.display = "none";
+      }
+    }
+  </script>
+</body>
+</html>
