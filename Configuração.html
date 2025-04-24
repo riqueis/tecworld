@@ -1,163 +1,240 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Configurações - TecWorld</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TecWorld Chat</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f0f0f0;
+    * {
+      box-sizing: border-box;
       margin: 0;
+      padding: 0;
     }
 
-    .settings-button {
-      padding: 10px 20px;
-      background-color: #0066cc;
+    body {
+      font-family: sans-serif;
+      background-color: #111;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    .video-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 10px;
+    }
+
+    video {
+      width: 100%;
+      max-width: 500px;
+      border-radius: 10px;
+      margin: 10px 0;
+    }
+
+    .user {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 5px 0;
+    }
+
+    .profile-image {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+    }
+
+    .username {
+      font-weight: bold;
+    }
+
+    .chat-box {
+      width: 100%;
+      max-width: 500px;
+      background-color: #222;
+      padding: 10px;
+      border-radius: 8px;
+      margin: 10px 0;
+    }
+
+    .chat-messages {
+      height: 150px;
+      overflow-y: auto;
+      background-color: #000;
+      padding: 10px;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+
+    .chat-input {
+      display: flex;
+      gap: 10px;
+    }
+
+    .chat-input input {
+      flex: 1;
+      padding: 8px;
+      border-radius: 5px;
+      border: none;
+    }
+
+    .chat-input button {
+      padding: 8px 12px;
+      background-color: #444;
       color: white;
       border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      margin: 20px;
+      border-radius: 5px;
     }
 
-    .modal {
-      display: none;
+    .config-btn {
+      margin: 20px;
+      padding: 10px;
+      background-color: #333;
+      border: none;
+      border-radius: 5px;
+      color: white;
+    }
+
+    /* CONFIGURAÇÕES - Tela cheia */
+    .configuracoes-tela {
       position: fixed;
-      z-index: 1000;
       top: 0;
       left: 0;
       width: 100vw;
       height: 100vh;
-      background-color: rgba(0, 0, 0, 0.8);
-      justify-content: center;
-      align-items: center;
+      background-color: #111;
+      color: white;
+      z-index: 1000;
+      display: none;
+      flex-direction: column;
+      padding: 20px;
+      box-sizing: border-box;
+      overflow-y: auto;
     }
 
-    .modal.show {
-      display: flex;
-    }
-
-    .modal-content {
-      background-color: #fff;
-      padding: 25px;
-      width: 90%;
-      max-width: 400px;
-      border-radius: 10px;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-      animation: fadeIn 0.3s ease-in-out;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.95); }
-      to { opacity: 1; transform: scale(1); }
-    }
-
-    .close {
-      float: right;
-      font-size: 28px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .config-item {
-      margin: 15px 0;
-    }
-
-    .config-item label {
-      display: block;
-      margin-bottom: 5px;
-    }
-
-    .config-item select,
-    .config-item button {
+    .configuracoes-conteudo {
       width: 100%;
-      padding: 8px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
+      max-width: 600px;
+      margin: auto;
     }
 
-    .config-item button {
-      background-color: #eee;
-      cursor: pointer;
+    .lista-config {
+      list-style: none;
+      padding: 0;
+      margin-top: 20px;
     }
 
-    .config-item button:hover {
-      background-color: #ddd;
+    .lista-config li {
+      margin-bottom: 15px;
+      font-size: 18px;
+    }
+
+    .lista-config button, .lista-config select {
+      margin-left: 10px;
+      padding: 6px 10px;
+      background-color: #222;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+
+    .lista-config button:hover {
+      background-color: #444;
     }
   </style>
 </head>
 <body>
 
-  <!-- Botão de configurações -->
-  <button onclick="abrirConfiguracoes()" class="settings-button">Configurações</button>
+  <button class="config-btn" onclick="abrirConfiguracoes()">Abrir Configurações</button>
 
-  <!-- Modal de configurações -->
-  <div id="configModal" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="fecharConfiguracoes()">&times;</span>
+  <div class="video-container">
+    <!-- Usuário 1 -->
+    <div class="user">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPlwkUTsaWA_zSj0oFI7sbKYXqs-ih3b0_Bg&s" class="profile-image">
+      <span class="username">Usuário 1</span>
+    </div>
+    <video id="user1-video" autoplay muted></video>
+
+    <!-- Usuário 2 -->
+    <div class="user">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPlwkUTsaWA_zSj0oFI7sbKYXqs-ih3b0_Bg&s" class="profile-image">
+      <span class="username">Usuário 2</span>
+    </div>
+    <video id="user2-video" autoplay></video>
+
+    <!-- Caixa de Chat -->
+    <div class="chat-box">
+      <div class="chat-messages" id="chat-messages">
+        <p><strong>Usuário 1:</strong> Olá!</p>
+        <p><strong>Usuário 2:</strong> Oi, tudo bem?</p>
+      </div>
+      <div class="chat-input">
+        <input type="text" id="mensagem" placeholder="Digite sua mensagem...">
+        <button onclick="enviarMensagem()">Enviar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Configurações em tela cheia -->
+  <div id="configuracoesTela" class="configuracoes-tela">
+    <div class="configuracoes-conteudo">
       <h2>Configurações</h2>
 
-      <div class="config-item">
-        <label for="idioma">Idioma:</label>
-        <select id="idioma">
-          <option value="pt">Português</option>
-          <option value="en">English</option>
-          <option value="es">Español</option>
-        </select>
-      </div>
+      <ul class="lista-config">
+        <li><strong>Idioma:</strong> 
+          <select>
+            <option>Português</option>
+            <option>Inglês</option>
+            <option>Espanhol</option>
+          </select>
+        </li>
+        <li><strong>Usuários Bloqueados:</strong> <button>Ver lista</button></li>
+        <li><strong>Histórico de Denúncias:</strong> <button>Ver histórico</button></li>
+        <li><strong>Suporte:</strong> <button>Entrar em contato</button></li>
+        <li><strong>Sair da conta:</strong> <button onclick="deslogar()">Deslogar</button></li>
+      </ul>
 
-      <div class="config-item">
-        <button onclick="abrirContasBloqueadas()">Contas bloqueadas</button>
-      </div>
-
-      <div class="config-item">
-        <button onclick="abrirHistoricoDenuncias()">Histórico de denúncias</button>
-      </div>
-
-      <div class="config-item">
-        <button onclick="abrirSuporte()">Suporte técnico</button>
-      </div>
-
-      <div class="config-item">
-        <button onclick="deslogar()">Desconectar</button>
-      </div>
+      <button onclick="fecharConfiguracoes()" style="margin-top: 20px;">Fechar</button>
     </div>
   </div>
 
   <script>
     function abrirConfiguracoes() {
-      document.getElementById('configModal').classList.add('show');
+      document.getElementById('configuracoesTela').style.display = 'flex';
     }
 
     function fecharConfiguracoes() {
-      document.getElementById('configModal').classList.remove('show');
-    }
-
-    function abrirContasBloqueadas() {
-      alert("Em breve: lista de contas bloqueadas.");
-    }
-
-    function abrirHistoricoDenuncias() {
-      alert("Em breve: histórico de denúncias feitas.");
-    }
-
-    function abrirSuporte() {
-      alert("Você será redirecionado para o suporte.");
-      // window.location.href = "/suporte";
+      document.getElementById('configuracoesTela').style.display = 'none';
     }
 
     function deslogar() {
-      alert("Você foi desconectado.");
-      // window.location.href = "/login";
+      alert('Você foi desconectado!');
     }
 
-    // Fechar ao clicar fora do conteúdo
-    window.onclick = function(event) {
-      const modal = document.getElementById('configModal');
-      if (event.target === modal) {
-        fecharConfiguracoes();
+    function enviarMensagem() {
+      const input = document.getElementById('mensagem');
+      const chat = document.getElementById('chat-messages');
+      if (input.value.trim() !== '') {
+        chat.innerHTML += `<p><strong>Você:</strong> ${input.value}</p>`;
+        input.value = '';
+        chat.scrollTop = chat.scrollHeight;
       }
     }
+
+    // Inicializar câmera do usuário 1
+    async function startVideo() {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        document.getElementById('user1-video').srcObject = stream;
+      } catch (err) {
+        console.error('Erro ao acessar a câmera: ', err);
+      }
+    }
+
+    window.onload = () => {
+      startVideo();
+    };
   </script>
 
 </body>
