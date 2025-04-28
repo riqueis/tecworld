@@ -108,242 +108,258 @@
             <!-- Conteúdo será gerado dinamicamente pelo JavaScript -->
         </form>
     </div>
+     <script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-analytics.js";
 
-    <script>
-    // Função para alterar o idioma
-function changeLanguage(lang) {
-    localStorage.setItem('selectedLanguage', lang); // Salva o idioma
-    currentLanguage = lang;
-    showLogin(); // Atualiza os textos na página de login
-}
+  // Sua configuração do Firebase
+  const firebaseConfig = {
+    apiKey: "AIzaSyA-xYnpBxH7ut_aZoBJKWwkGBY9QVB5bY0",
+    authDomain: "nexworld-1-235bf.firebaseapp.com",
+    projectId: "nexworld-1-235bf",
+    storageBucket: "nexworld-1-235bf.firebasestorage.app",
+    messagingSenderId: "829828361946",
+    appId: "1:829828361946:web:6c13a0884d4b0d2829bfe3",
+    measurementId: "G-6M6M7MNR2E"
+  };
 
-// Evento DOMContentLoaded para carregar o idioma salvo e exibir a página de login
-document.addEventListener('DOMContentLoaded', () => {
-    const savedLanguage = localStorage.getItem('selectedLanguage') || 'pt'; // Recupera ou usa o idioma padrão
-    currentLanguage = savedLanguage;
-    updateLanguageButton(savedLanguage); // Atualiza o botão de idioma
-    showLogin(); // Exibe o conteúdo de login imediatamente
-});
+  // Inicializa o Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
 
-// Função para exibir e traduzir a página de login
-function showLogin() {
-    const t = translations[currentLanguage]; // Obtém as traduções para o idioma selecionado
-    // Aplique a tradução nas partes necessárias da página
-    document.getElementById('login-heading').innerHTML = t.heading;
-    // Aqui você pode traduzir outras partes da página, como os botões, títulos, etc.
-}
+  // Função para alterar o idioma
+  function changeLanguage(lang) {
+      localStorage.setItem('selectedLanguage', lang); // Salva o idioma
+      currentLanguage = lang;
+      showLogin(); // Atualiza os textos na página de login
+  }
 
-// Função para atualizar o botão de seleção de idioma
-function updateLanguageButton(lang) {
-    const select = document.querySelector('select');
-    select.value = lang;  // Atualiza o valor do botão de idioma conforme a escolha salva
-}
+  // Evento DOMContentLoaded para carregar o idioma salvo e exibir a página de login
+  document.addEventListener('DOMContentLoaded', () => {
+      const savedLanguage = localStorage.getItem('selectedLanguage') || 'pt'; // Recupera ou usa o idioma padrão
+      currentLanguage = savedLanguage;
+      updateLanguageButton(savedLanguage); // Atualiza o botão de idioma
+      showLogin(); // Exibe o conteúdo de login imediatamente
+  });
 
+  // Função para exibir e traduzir a página de login
+  function showLogin() {
+      const t = translations[currentLanguage]; // Obtém as traduções para o idioma selecionado
+      // Aplique a tradução nas partes necessárias da página
+      document.getElementById('login-heading').innerHTML = t.heading;
+      // Aqui você pode traduzir outras partes da página, como os botões, títulos, etc.
+  }
 
-        const translations = {
-            pt: {
-                heading: "TecWorld - <br>Conectando o Mundo",
-                emailPlaceholder: "Email ou nome de usuario",
-                passwordPlaceholder: "Senha",
-                loginButton: "Entrar",
-                forgotPassword: "Esqueceu a senha?",
-                createAccount: "Criar Conta",
-                recoverHeading: "Recuperar Senha",
-                recoverButton: "Recuperar",
-                createHeading: "Criar Conta - TecWorld",
-                createUsernamePlaceholder: "Nome de usuário",
-                createEmailPlaceholder: "Email",
-                createPasswordPlaceholder: "Senha",
-                createTerms: "Aceito os <a href='termos.html' target='_blank'>Termos de Uso</a>",
-                createPrivacy: "Aceito a <a href='privacidade.html' target='_blank'>Política de Privacidade</a>",
-                createRegister: "Cadastrar",
-                backToLogin: "Já tem conta? Entrar",
-                generalError: "Por favor, preencha todos os campos solicitados.",
-                invalidEmail: "Por favor, insira um email válido (Gmail, Outlook, Yahoo Mail, Apple Mail, ProtonMail, Zoho Mail).",
-                invalidPassword: "A senha deve ter mais de 5 caracteres.",
-                termsError: "Você precisa aceitar os Termos de Uso e a Política de Privacidade."
-            },
-            en: {
-                heading: "TecWorld - <br>Connecting the World",
-                emailPlaceholder: "Email or username",
-                passwordPlaceholder: "Password",
-                loginButton: "Login",
-                forgotPassword: "Forgot password?",
-                createAccount: "Create Account",
-                recoverHeading: "Recover Password",
-                recoverButton: "Recover",
-                createHeading: "Create Account - TecWorld",
-                createUsernamePlaceholder: "Username",
-                createEmailPlaceholder: "Email",
-                createPasswordPlaceholder: "Password",
-                createTerms: "I accept the <a href='terms.html' target='_blank'>Terms of Use</a>",
-                createPrivacy: "I accept the <a href='privacy.html' target='_blank'>Privacy Policy</a>",
-                createRegister: "Register",
-                backToLogin: "Already have an account? Login",
-                generalError: "Please fill in all required fields.",
-                invalidEmail: "Please enter a valid email (Gmail, Outlook, Yahoo Mail, Apple Mail, ProtonMail, Zoho Mail).",
-                invalidPassword: "Password must be more than 5 characters.",
-                termsError: "You must accept the Terms of Use and Privacy Policy."
-            },
-            es: {
-                heading: "TecWorld - <br>Conectando el Mundo",
-                emailPlaceholder: "Correo electrónico o nombre de usuario",
-                passwordPlaceholder: "Contraseña",
-                loginButton: "Iniciar sesión",
-                forgotPassword: "¿Olvidaste tu contraseña?",
-                createAccount: "Crear Cuenta",
-                recoverHeading: "Recuperar Contraseña",
-                recoverButton: "Recuperar",
-                createHeading: "Crear Cuenta - TecWorld",
-                createUsernamePlaceholder: "Nombre de usuario",
-                createEmailPlaceholder: "Correo electrónico",
-                createPasswordPlaceholder: "Contraseña",
-                createTerms: "Acepto los <a href='terminos.html' target='_blank'>Términos de Uso</a>",
-                createPrivacy: "Acepto la <a href='privacidad.html' target='_blank'>Política de Privacidad</a>",
-                createRegister: "Registrar",
-                backToLogin: "¿Ya tienes cuenta? Iniciar sesión",
-                generalError: "Por favor, complete todos los campos requeridos.",
-                invalidEmail: "Por favor, ingresa un correo electrónico válido (Gmail, Outlook, Yahoo Mail, Apple Mail, ProtonMail, Zoho Mail).",
-                invalidPassword: "La contraseña debe tener más de 5 caracteres.",
-                termsError: "Debes aceptar los Términos de Uso y la Política de Privacidad."
-            }
-        };
+  // Função para atualizar o botão de seleção de idioma
+  function updateLanguageButton(lang) {
+      const select = document.querySelector('select');
+      select.value = lang;  // Atualiza o valor do botão de idioma conforme a escolha salva
+  }
+
+  const translations = {
+      pt: {
+          heading: "TecWorld - <br>Conectando o Mundo",
+          emailPlaceholder: "Email ou nome de usuario",
+          passwordPlaceholder: "Senha",
+          loginButton: "Entrar",
+          forgotPassword: "Esqueceu a senha?",
+          createAccount: "Criar Conta",
+          recoverHeading: "Recuperar Senha",
+          recoverButton: "Recuperar",
+          createHeading: "Criar Conta - TecWorld",
+          createUsernamePlaceholder: "Nome de usuário",
+          createEmailPlaceholder: "Email",
+          createPasswordPlaceholder: "Senha",
+          createTerms: "Aceito os <a href='termos.html' target='_blank'>Termos de Uso</a>",
+          createPrivacy: "Aceito a <a href='privacidade.html' target='_blank'>Política de Privacidade</a>",
+          createRegister: "Cadastrar",
+          backToLogin: "Já tem conta? Entrar",
+          generalError: "Por favor, preencha todos os campos solicitados.",
+          invalidEmail: "Por favor, insira um email válido (Gmail, Outlook, Yahoo Mail, Apple Mail, ProtonMail, Zoho Mail).",
+          invalidPassword: "A senha deve ter mais de 5 caracteres.",
+          termsError: "Você precisa aceitar os Termos de Uso e a Política de Privacidade."
+      },
+      en: {
+          heading: "TecWorld - <br>Connecting the World",
+          emailPlaceholder: "Email or username",
+          passwordPlaceholder: "Password",
+          loginButton: "Login",
+          forgotPassword: "Forgot password?",
+          createAccount: "Create Account",
+          recoverHeading: "Recover Password",
+          recoverButton: "Recover",
+          createHeading: "Create Account - TecWorld",
+          createUsernamePlaceholder: "Username",
+          createEmailPlaceholder: "Email",
+          createPasswordPlaceholder: "Password",
+          createTerms: "I accept the <a href='terms.html' target='_blank'>Terms of Use</a>",
+          createPrivacy: "I accept the <a href='privacy.html' target='_blank'>Privacy Policy</a>",
+          createRegister: "Register",
+          backToLogin: "Already have an account? Login",
+          generalError: "Please fill in all required fields.",
+          invalidEmail: "Please enter a valid email (Gmail, Outlook, Yahoo Mail, Apple Mail, ProtonMail, Zoho Mail).",
+          invalidPassword: "Password must be more than 5 characters.",
+          termsError: "You must accept the Terms of Use and Privacy Policy."
+      },
+      es: {
+          heading: "TecWorld - <br>Conectando el Mundo",
+          emailPlaceholder: "Correo electrónico o nombre de usuario",
+          passwordPlaceholder: "Contraseña",
+          loginButton: "Iniciar sesión",
+          forgotPassword: "¿Olvidaste tu contraseña?",
+          createAccount: "Crear Cuenta",
+          recoverHeading: "Recuperar Contraseña",
+          recoverButton: "Recuperar",
+          createHeading: "Crear Cuenta - TecWorld",
+          createUsernamePlaceholder: "Nombre de usuario",
+          createEmailPlaceholder: "Correo electrónico",
+          createPasswordPlaceholder: "Contraseña",
+          createTerms: "Acepto los <a href='terminos.html' target='_blank'>Términos de Uso</a>",
+          createPrivacy: "Acepto la <a href='privacidad.html' target='_blank'>Política de Privacidad</a>",
+          createRegister: "Registrar",
+          backToLogin: "¿Ya tienes cuenta? Iniciar sesión",
+          generalError: "Por favor, complete todos los campos requeridos.",
+          invalidEmail: "Por favor, ingresa un correo electrónico válido (Gmail, Outlook, Yahoo Mail, Apple Mail, ProtonMail, Zoho Mail).",
+          invalidPassword: "La contraseña debe tener más de 5 caracteres.",
+          termsError: "Debes aceptar los Términos de Uso y la Política de Privacidad."
+      }
+  };
         
-        // Função de login
-function login() {
-    const email = document.getElementById('email').value.trim();
-    const password = document.getElementById('password').value.trim();
-    const errorMessage = document.getElementById('general-error');
+  // Função de login
+  function login() {
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value.trim();
+      const errorMessage = document.getElementById('general-error');
 
-    // Verifica se os campos foram preenchidos
-    if (!email || !password) {
-        errorMessage.innerHTML = 'Preencha todos os campos antes de continuar.';
-        errorMessage.style.display = 'block';
-        return;
-    }
+      // Verifica se os campos foram preenchidos
+      if (!email || !password) {
+          errorMessage.innerHTML = 'Preencha todos os campos antes de continuar.';
+          errorMessage.style.display = 'block';
+          return;
+      }
 
-    // Recupera os dados do usuário usando o e-mail
-    const userData = localStorage.getItem("user_" + email);
+      // Recupera os dados do usuário usando o e-mail
+      const userData = localStorage.getItem("user_" + email);
 
-    if (userData) {
-        const parsedData = JSON.parse(userData);
+      if (userData) {
+          const parsedData = JSON.parse(userData);
 
-        // Verifica se a senha corresponde
-        if (parsedData.password === password) {
-            // Sucesso no login, redireciona
-            localStorage.setItem("email", email); // Salva o e-mail logado
-            window.location.href = "inicial.html";  // Redireciona para a página inicial
-        } else {
-            errorMessage.innerHTML = 'E-mail ou senha inválidos.';
-            errorMessage.style.display = 'block';
-        }
-    } else {
-        // E-mail não encontrado
-        errorMessage.innerHTML = 'E-mail não registrado.';
-        errorMessage.style.display = 'block';
-    }
-}
+          // Verifica se a senha corresponde
+          if (parsedData.password === password) {
+              // Sucesso no login, redireciona
+              localStorage.setItem("email", email); // Salva o e-mail logado
+              window.location.href = "inicial.html";  // Redireciona para a página inicial
+          } else {
+              errorMessage.innerHTML = 'E-mail ou senha inválidos.';
+              errorMessage.style.display = 'block';
+          }
+      } else {
+          // E-mail não encontrado
+          errorMessage.innerHTML = 'E-mail não registrado.';
+          errorMessage.style.display = 'block';
+      }
+  }
 
-// Função para salvar os dados do usuário ao se cadastrar
-function saveAccount() {
-    const username = document.getElementById('username').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const password = document.getElementById('password').value.trim();
-    const terms = document.getElementById('terms').checked;
-    const privacy = document.getElementById('privacy').checked;
-    const errorMessage = document.getElementById('general-error');
+  // Função para salvar os dados do usuário ao se cadastrar
+  function saveAccount() {
+      const username = document.getElementById('username').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value.trim();
+      const terms = document.getElementById('terms').checked;
+      const privacy = document.getElementById('privacy').checked;
+      const errorMessage = document.getElementById('general-error');
 
-    // Verifica se todos os campos foram preenchidos
-    if (!username || !email || !password || !terms || !privacy) {
-        errorMessage.innerHTML = 'Preencha todos os campos e aceite os termos.';
-        errorMessage.style.display = 'block';
-        return;
-    }
+      // Verifica se todos os campos foram preenchidos
+      if (!username || !email || !password || !terms || !privacy) {
+          errorMessage.innerHTML = 'Preencha todos os campos e aceite os termos.';
+          errorMessage.style.display = 'block';
+          return;
+      }
 
-    // Verifica se o e-mail já foi cadastrado
-    const existingUser = localStorage.getItem("user_" + email);
-    if (existingUser) {
-        errorMessage.innerHTML = 'Este e-mail já está cadastrado.';
-        errorMessage.style.display = 'block';
-        return;
-    }
+      // Verifica se o e-mail já foi cadastrado
+      const existingUser = localStorage.getItem("user_" + email);
+      if (existingUser) {
+          errorMessage.innerHTML = 'Este e-mail já está cadastrado.';
+          errorMessage.style.display = 'block';
+          return;
+      }
 
-    // Cria um objeto de dados do usuário
-    const userData = {
-        username: username,
-        password: password
-    };
+      // Cria um objeto de dados do usuário
+      const userData = {
+          username: username,
+          password: password
+      };
 
-    // Salva os dados do usuário no localStorage
-    localStorage.setItem("user_" + email, JSON.stringify(userData));
+      // Salva os dados do usuário no localStorage
+      localStorage.setItem("user_" + email, JSON.stringify(userData));
 
-    // Salva o e-mail do usuário para login posterior
-    localStorage.setItem("email", email);
+      // Salva o e-mail do usuário para login posterior
+      localStorage.setItem("email", email);
 
-    // Redireciona para a página inicial após o cadastro
-    window.location.href = "inicial.html"; 
-}
+      // Redireciona para a página inicial após o cadastro
+      window.location.href = "inicial.html"; 
+  }
 
-// Função para exibir o formulário de login
-function showLogin() {
-    const t = translations[currentLanguage];
-    document.getElementById('login-form').innerHTML = `
-        <h1>${t.heading}</h1>
-        <input type="text" id="email" placeholder="${t.emailPlaceholder}">
-        <input type="password" id="password" placeholder="${t.passwordPlaceholder}">
-        <div id="general-error" class="error-message"></div>
-        <button type="button" class="login-btn" onclick="login()">${t.loginButton}</button>
-        <a href="#" class="forgot-password" onclick="showForgotPassword()">${t.forgotPassword}</a>
-        <a href="#" class="create-account" onclick="showCreateAccount()">${t.createAccount}</a>
-    `;
-}
+  // Função para exibir o formulário de login
+  function showLogin() {
+      const t = translations[currentLanguage];
+      document.getElementById('login-form').innerHTML = `
+          <h1>${t.heading}</h1>
+          <input type="text" id="email" placeholder="${t.emailPlaceholder}">
+          <input type="password" id="password" placeholder="${t.passwordPlaceholder}">
+          <div id="general-error" class="error-message"></div>
+          <button type="button" class="login-btn" onclick="login()">${t.loginButton}</button>
+          <a href="#" class="forgot-password" onclick="showForgotPassword()">${t.forgotPassword}</a>
+          <a href="#" class="create-account" onclick="showCreateAccount()">${t.createAccount}</a>
+      `;
+  }
 
-// Função para exibir o formulário de recuperação de senha
-function showForgotPassword() {
-    const t = translations[currentLanguage];
-    document.getElementById('login-form').innerHTML = `
-        <h1>${t.recoverHeading}</h1>
-        <input type="email" placeholder="${t.emailPlaceholder}" id="email">
-        <button type="button" class="login-btn" onclick="recoverPassword()">${t.recoverButton}</button>
-        <a href="#" class="back-to-login" onclick="showLogin()">${t.backToLogin}</a>
-    `;
-}
+  // Função para exibir o formulário de recuperação de senha
+  function showForgotPassword() {
+      const t = translations[currentLanguage];
+      document.getElementById('login-form').innerHTML = `
+          <h1>${t.recoverHeading}</h1>
+          <input type="email" placeholder="${t.emailPlaceholder}" id="email">
+          <button type="button" class="login-btn" onclick="recoverPassword()">${t.recoverButton}</button>
+          <a href="#" class="back-to-login" onclick="showLogin()">${t.backToLogin}</a>
+      `;
+  }
 
-// Função para exibir o formulário de criação de conta
-function showCreateAccount() {
-    const t = translations[currentLanguage];
-    document.getElementById('login-form').innerHTML = `
-        <h1>${t.createHeading}</h1>
-        <input type="text" placeholder="${t.createUsernamePlaceholder}" id="username">
-        <input type="text" placeholder="${t.createEmailPlaceholder}" id="email">
-        <input type="password" placeholder="${t.createPasswordPlaceholder}" id="password">
-        <div class="checkbox-container">
-            <input type="checkbox" id="terms">
-            <label for="terms">${t.createTerms}</label>
-        </div>
-        <div class="checkbox-container">
-            <input type="checkbox" id="privacy">
-            <label for="privacy">${t.createPrivacy}</label>
-        </div>
-        <div id="general-error" class="error-message"></div>
-        <button type="button" class="login-btn" onclick="saveAccount()">${t.createRegister}</button>
-        <a href="#" class="back-to-login" onclick="showLogin()">${t.backToLogin}</a>
-    `;
-}
+  // Função para exibir o formulário de criação de conta
+  function showCreateAccount() {
+      const t = translations[currentLanguage];
+      document.getElementById('login-form').innerHTML = `
+          <h1>${t.createHeading}</h1>
+          <input type="text" placeholder="${t.createUsernamePlaceholder}" id="username">
+          <input type="text" placeholder="${t.createEmailPlaceholder}" id="email">
+          <input type="password" placeholder="${t.createPasswordPlaceholder}" id="password">
+          <div class="checkbox-container">
+              <input type="checkbox" id="terms">
+              <label for="terms">${t.createTerms}</label>
+          </div>
+          <div class="checkbox-container">
+              <input type="checkbox" id="privacy">
+              <label for="privacy">${t.createPrivacy}</label>
+          </div>
+          <div id="general-error" class="error-message"></div>
+          <button type="button" class="login-btn" onclick="saveAccount()">${t.createRegister}</button>
+          <a href="#" class="back-to-login" onclick="showLogin()">${t.backToLogin}</a>
+      `;
+  }
 
-// Função de recuperação de senha (apenas como exemplo)
-function recoverPassword() {
-    const email = document.getElementById('email').value.trim();
-    if (!email) {
-        alert('Por favor, insira um e-mail válido.');
-        return;
-    }
-    alert('Recuperação de senha em breve!');
-}
+  // Função de recuperação de senha (apenas como exemplo)
+  function recoverPassword() {
+      const email = document.getElementById('email').value.trim();
+      if (!email) {
+          alert('Por favor, insira um e-mail válido.');
+          return;
+      }
+      alert('Recuperação de senha em breve!');
+  }
 
-// Inicializa a tela de login
-showLogin();
-
-    </script>
+  // Inicializa a tela de login
+  showLogin();
+</script>
  </body>
 </html>
