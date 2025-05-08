@@ -97,7 +97,7 @@
 <body>
 
     <div class="language-buttons">
-        <select onchange="changeLanguage(this.value)">
+        <selectonchange="changeLanguage(this.value)">
             <option value="pt">🇧🇷 Português</option>
             <option value="en">🇺🇸 English</option>
             <option value="es">🇪🇸 Español</option>
@@ -238,192 +238,182 @@
                 termsError: "Debes aceptar los Términos de Uso y la Política de Privacidad."
             }
         };
+        
+      // Função de login
+function login() {
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value.trim();
+    const errorMessage = document.getElementById('general-error');
+    const t = translations[currentLanguage];
 
-        // Função de login
-        function login() {
-            const email = document.getElementById('email').value.trim();
-            const password = document.getElementById('password').value.trim();
-            const errorMessage = document.getElementById('general-error');
-            const t = translations[currentLanguage];
+    if (!email || !password) {
+        errorMessage.innerHTML = t.generalError || 'Preencha todos os campos antes de continuar.';
+        errorMessage.style.display = 'block';
+        return;
+    }
 
-            // Verifica se os campos foram preenchidos
-            if (!email || !password) {
-                errorMessage.innerHTML = t.generalError || 'Preencha todos os campos antes de continuar.';
-                errorMessage.style.display = 'block';
-                return;
-            }
+    const userData = localStorage.getItem("user_" + email);
 
-            // Recupera os dados do usuário usando o e-mail
-            const userData = localStorage.getItem("user_" + email);
+    if (userData) {
+        const parsedData = JSON.parse(userData);
 
-            if (userData) {
-                const parsedData = JSON.parse(userData);
-
-                // Verifica se a senha corresponde
-                if (parsedData.password === password) {
-                    // Sucesso no login, redireciona
-                    localStorage.setItem("email", email); // Salva o e-mail logado
-                    window.location.href = "inicial.html";   // Redireciona para a página inicial
-                } else {
-                    errorMessage.innerHTML = t.invalidEmailOrPassword || 'E-mail ou senha inválidos.';
-                    errorMessage.style.display = 'block';
-                }
-            } else {
-                // E-mail não encontrado
-                errorMessage.innerHTML = t.emailNotRegistered || 'E-mail não registrado.';
-                errorMessage.style.display = 'block';
-            }
-        }
-
-        // Função para salvar os dados do usuário ao se cadastrar
-        function saveAccount() {
-            const username = document.getElementById('username').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const password = document.getElementById('password').value.trim();
-            const terms = document.getElementById('terms').checked;
-            const privacy = document.getElementById('privacy').checked;
-            const errorMessage = document.getElementById('general-error');
-            const t = translations[currentLanguage];
-
-            // Verifica se todos os campos foram preenchidos
-            if (!username || !email || !password || !terms || !privacy) {
-                errorMessage.innerHTML = t.generalError || 'Preencha todos os campos e aceite os termos.';
-                errorMessage.style.display = 'block';
-                return;
-            }
-
-            // Validação de e-mail (simplificada para os domínios fornecidos)
-            const validDomains = /@(gmail\.com|outlook\.com|yahoo\.com|aol\.com|icloud\.com|protonmail\.com|zoho\.com)$/i;
-            if (!validDomains.test(email)) {
-                errorMessage.innerHTML = t.invalidEmail || 'Por favor, insira um email válido (Gmail, Outlook, Yahoo Mail, Apple Mail, ProtonMail, Zoho Mail).';
-                errorMessage.style.display = 'block';
-                return;
-            }
-
-            // Validação de senha
-            if (password.length <= 5) {
-                errorMessage.innerHTML = t.invalidPassword || 'A senha deve ter mais de 5 caracteres.';
-                errorMessage.style.display = 'block';
-                return;
-            }
-
-            // Verifica se os termos e privacidade foram aceitos
-            if (!terms || !privacy) {
-                errorMessage.innerHTML = t.termsError || 'Você precisa aceitar os Termos de Uso e a Política de Privacidade.';
-                errorMessage.style.display = 'block';
-                return;
-            }
-
-            // Verifica se o e-mail já foi cadastrado
-            const existingUser = localStorage.getItem("user_" + email);
-            if (existingUser) {
-                errorMessage.innerHTML = t.emailAlreadyRegistered || 'Este e-mail já está cadastrado.';
-                errorMessage.style.display = 'block';
-                return;
-            }
-
-            // Cria um objeto de dados do usuário
-            const userData = {
-                username: username,
-                password: password
-            };
-
-            // Salva os dados do usuário no localStorage
-            localStorage.setItem("user_" + email, JSON.stringify(userData));
-
-            // Salva o e-mail do usuário para login posterior
+        if (parsedData.password === password) {
+            // Salva o ID e o e-mail do usuário logado
             localStorage.setItem("email", email);
+            localStorage.setItem("userId", parsedData.id);  // Armazenando o ID do usuário
 
-            // Redireciona para a página inicial após o cadastro
+            console.log("Usuário logado com sucesso:", email);
             window.location.href = "inicial.html";
+        } else {
+            errorMessage.innerHTML = t.invalidEmailOrPassword || 'E-mail ou senha inválidos.';
+            errorMessage.style.display = 'block';
         }
+    } else {
+        errorMessage.innerHTML = t.emailNotRegistered || 'E-mail não registrado.';
+        errorMessage.style.display = 'block';
+    }
+}
 
-        // Função para exibir o formulário de recuperação de senha
-        function showForgotPassword() {
-            const t = translations[currentLanguage];
-            const loginForm = document.getElementById('login-form');
-            if (loginForm) {
-                loginForm.innerHTML = `
-                    <h1>${t.recoverHeading}</h1>
-                    <input type="email" placeholder="${t.emailPlaceholder}" id="email">
-                    <button type="button" class="login-btn" onclick="recoverPassword()">${t.recoverButton}</button>
-                    <a href="#" class="back-to-login" onclick="showLogin()">${t.backToLogin}</a>
-                `;
-                // Garante que o seletor de idioma permaneça
-                const select = document.querySelector('select');
-                if (select) {
-                    loginForm.insertBefore(select, loginForm.firstChild);
-                }
-            }
+// Função para salvar a conta e atribuir um ID único numérico sequencial
+function saveAccount() {
+    const username = document.getElementById('username').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value.trim();
+    const terms = document.getElementById('terms').checked;
+    const privacy = document.getElementById('privacy').checked;
+    const errorMessage = document.getElementById('general-error');
+    const t = translations[currentLanguage];
+
+    if (!username || !email || !password || !terms || !privacy) {
+        errorMessage.innerHTML = t.generalError || 'Preencha todos os campos e aceite os termos.';
+        errorMessage.style.display = 'block';
+        return;
+    }
+
+    const validDomains = /@(gmail\.com|outlook\.com|yahoo\.com|aol\.com|icloud\.com|protonmail\.com|zoho\.com)$/i;
+    if (!validDomains.test(email)) {
+        errorMessage.innerHTML = t.invalidEmail || 'Por favor, insira um email válido (Gmail, Outlook, Yahoo Mail, Apple Mail, ProtonMail, Zoho Mail).';
+        errorMessage.style.display = 'block';
+        return;
+    }
+
+    if (password.length <= 5) {
+        errorMessage.innerHTML = t.invalidPassword || 'A senha deve ter mais de 5 caracteres.';
+        errorMessage.style.display = 'block';
+        return;
+    }
+
+    if (!terms || !privacy) {
+        errorMessage.innerHTML = t.termsError || 'Você precisa aceitar os Termos de Uso e a Política de Privacidade.';
+        errorMessage.style.display = 'block';
+        return;
+    }
+
+    const existingUser = localStorage.getItem("user_" + email);
+    if (existingUser) {
+        errorMessage.innerHTML = t.emailAlreadyRegistered || 'Este e-mail já está cadastrado.';
+        errorMessage.style.display = 'block';
+        return;
+    }
+
+    // Gerador de ID numérico com 7 dígitos (de 0000001 até 9999999)
+    const id = generateUniqueId(); 
+
+    const userData = {
+        id: id,
+        username: username,
+        password: password
+    };
+
+    localStorage.setItem("user_" + email, JSON.stringify(userData));
+    localStorage.setItem("email", email);
+
+    console.log("Conta criada para:", email, "com ID:", id);
+    window.location.href = "inicial.html";
+}
+
+// Função para gerar o ID numérico de 0000001 até 9999999
+function generateUniqueId() {
+    // Obtém o último ID armazenado no localStorage, ou 0 se não existir
+    let lastId = parseInt(localStorage.getItem("lastId")) || 0;
+
+    // Verifica se o ID excedeu o limite de 9999999
+    if (lastId >= 9999999) {
+        lastId = 0;  // Reseta para 0 quando atingir o limite
+    }
+
+    // Incrementa o último ID
+    lastId++;
+
+    // Formata o ID com 7 dígitos, preenchendo com zeros à esquerda
+    const formattedId = String(lastId).padStart(7, '0');
+
+    // Armazena o novo ID no localStorage
+    localStorage.setItem("lastId", lastId);
+
+    return formattedId;
+}
+
+// Função para exibir o formulário de recuperação de senha
+function showForgotPassword() {
+    const t = translations[currentLanguage];
+    const loginForm = document.getElementById('login-form');
+    if (loginForm) {
+        loginForm.innerHTML = ` 
+            <h1>${t.recoverHeading}</h1>
+            <input type="email" placeholder="${t.emailPlaceholder}" id="email">
+            <button type="button" class="login-btn" onclick="recoverPassword()">${t.recoverButton}</button>
+            <a href="#" class="back-to-login" onclick="showLogin()">${t.backToLogin}</a>
+        `;
+        const select = document.querySelector('select');
+        if (select) {
+            loginForm.insertBefore(select, loginForm.firstChild);
         }
+    }
+}
 
-        // Função para exibir o formulário de criação de conta
-        function showCreateAccount() {
-            const t = translations[currentLanguage];
-            const loginForm = document.getElementById('login-form');
-            if (loginForm) {
-                loginForm.innerHTML = `
-                    <h1>${t.createHeading}</h1>
-                    <input type="text" placeholder="${t.createUsernamePlaceholder}" id="username">
-                    <input type="text" placeholder="${t.createEmailPlaceholder}" id="email">
-                    <input type="password" placeholder="${t.createPasswordPlaceholder}" id="password">
-                    <div class="checkbox-container">
-                        <input type="checkbox" id="terms">
-                        <label for="terms">${t.createTerms}</label>
-                    </div>
-                    <div class="checkbox-container">
-                        <input type="checkbox" id="privacy">
-                        <label for="privacy">${t.createPrivacy}</label>
-                    </div>
-                    <div id="general-error" class="error-message"></div>
-                    <button type="button" class="login-btn" onclick="saveAccount()">${t.createRegister}</button>
-                    <a href="#" class="back-to-login" onclick="showLogin()">${t.backToLogin}</a>
-                `;
-                // Garante que o seletor de idioma permaneça
-                const select = document.querySelector('select');
-                if (select) {
-                    loginForm.insertBefore(select, loginForm.firstChild);
-                }
-            }
+// Função para exibir o formulário de criação de conta
+function showCreateAccount() {
+    const t = translations[currentLanguage];
+    const loginForm = document.getElementById('login-form');
+    if (loginForm) {
+        loginForm.innerHTML = `
+            <h1>${t.createHeading}</h1>
+            <input type="text" placeholder="${t.createUsernamePlaceholder}" id="username">
+            <input type="text" placeholder="${t.createEmailPlaceholder}" id="email">
+            <input type="password" placeholder="${t.createPasswordPlaceholder}" id="password">
+            <div class="checkbox-container">
+                <input type="checkbox" id="terms">
+                <label for="terms">${t.createTerms}</label>
+            </div>
+            <div class="checkbox-container">
+                <input type="checkbox" id="privacy">
+                <label for="privacy">${t.createPrivacy}</label>
+            </div>
+            <div id="general-error" class="error-message"></div>
+            <button type="button" class="login-btn" onclick="saveAccount()">${t.createRegister}</button>
+            <a href="#" class="back-to-login" onclick="showLogin()">${t.backToLogin}</a>
+        `;
+        const select = document.querySelector('select');
+        if (select) {
+            loginForm.insertBefore(select, loginForm.firstChild);
         }
+    }
+}
 
-        // Função de recuperação de senha (apenas como exemplo)
-        function recoverPassword() {
-            const email = document.getElementById('email').value.trim();
-            const t = translations[currentLanguage];
-            if (!email) {
-                alert(t.invalidEmail || 'Por favor, insira um e-mail válido.');
-                return;
-            }
-            alert(t.recoverPasswordSoon || 'Recuperação de senha em breve!');
-        }
+// Função de recuperação de senha (simulada)
+function recoverPassword() {
+    const email = document.getElementById('email').value.trim();
+    const t = translations[currentLanguage];
+    if (!email) {
+        alert(t.invalidEmail || 'Por favor, insira um e-mail válido.');
+        return;
+    }
+    alert(t.recoverPasswordSoon || 'Recuperação de senha em breve!');
+}
 
-        // Inicializa a tela de login
-        showLogin();
-    </script>
-
-    <script type="module">
-        // Import the functions you need from the SDKs you need
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-analytics.js";
-        // TODO: Add SDKs for Firebase products that you want to use
-        // https://firebase.google.com/docs/web/setup#available-libraries
-
-        // Your web app's Firebase configuration
-        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-        const firebaseConfig = {
-            apiKey: "AIzaSyA-xYnpBxH7ut_aZoBJKWwkGBY9QVB5bY0",
-            authDomain: "nexworld-1-235bf.firebaseapp.com",
-            projectId: "nexworld-1-235bf",
-            storageBucket: "nexworld-1-235bf.firebasestorage.app",
-            messagingSenderId: "829828361946",
-            appId: "1:829828361946:web:6c13a0884d4b0d2829bfe3",
-            measurementId: "G-6M6M7MNR2E"
-        };
-
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const analytics = getAnalytics(app);
-    </script>
+// Inicializa a tela de login
+showLogin();
+ </script>
  </body>
 </html>
