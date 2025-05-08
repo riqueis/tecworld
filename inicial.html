@@ -1,318 +1,194 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>TecWorld</title>
-  <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TecWorld</title>
+    <style>
+ body, html {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-image: url('./blue.avif');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    overflow-x: hidden;
 }
 
-html, body {
-  height: 100%;
-  font-family: Arial, sans-serif;
-  overflow-x: hidden;
-  position: relative;
-  z-index: 1;
-}
-    body::after {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.6); /* "Cortina escura" */
-  z-index: -1; /* precisa ser um número inteiro */
-  pointer-events: none; /* evita bloqueios de clique */
-}
-/* ::before para aplicar o fundo fixo */
-body::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-image: url('./ChatGPT Image 30 de mar. de 2025, 23_49_26.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  z-index: -2;
+.header {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 65px;
+    z-index: 1000;
+    background-color: rgba(0, 0, 0, 0);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
 }
 
-    .header {
-      width: 100%;
-      height: 65px;
-      z-index: 1000;
-      background-color: rgba(0, 0, 0, 0);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px 20px;
-    }
+/* Estilo para o perfil */
+.header .profile {
+    display: flex;
+    align-items: center;  /* Alinha o avatar e a área de texto na linha */
+}
 
-    .header .profile {
-      display: flex;
-      align-items: center;
-    }
+/* Estilo para a imagem do avatar */
+.header .profile img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
 
-    .header .profile img {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      margin-right: 10px;
-    }
+/* Estilo para a área de informações do usuário (nome + id) */
+.header .profile .user-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;  /* Alinha o nome e o id à esquerda */
+    margin-top: 5px;
+}
 
-    .header .profile .user-info {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      margin-top: 15px;
-    }
+/* Estilo para o nome de usuário */
+.header .profile .username {
+    font-size: 18px;
+    color: #e0e0e0;
+    white-space: nowrap;
+}
 
-    .header .profile .username {
-      font-size: 18px;
-      color: #e0e0e0;
-      white-space: nowrap;
-    }
+/* Estilo para o ID (baixo do nome de usuário) */
+#user-id {
+    font-size: 8px;
+    color: #808080;
+    font-weight: normal;
+    background-color: #f1f1f1;
+    padding: 3px 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-top: 1px; /* Espaço entre o nome e o ID */
+}
 
-    #user-id {
-      font-size: 8px;
-      color: #808080;
-      background-color: #f1f1f1;
-      padding: 3px 8px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-      margin-top: 1px;
-    }
+/* Estilo para o ícone da coroa */
+#crown-icon {
+    width: 40px;
+    height: 40px;
+    margin-left: 10px; /* Espaçamento entre a coroa e o nome */
+}
 
-    #crown-icon {
-      width: 40px;
-      height: 40px;
-      margin-left: 10px;
-    }
+/* Cor de fundo e efeito de transição para a coroa */
+#crown-icon path {
+    fill: black;
+    stroke: none;
+    transition: fill 0.3s ease;
+}
 
-    #crown-icon path {
-      fill: black;
-      transition: fill 0.3s ease;
-    }
+#crown-icon.signed path {
+    fill: gold; /* Cor de destaque para a coroa quando "assinada" */
+}
+.profile-container {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
 
-    #crown-icon.signed path {
-      fill: gold;
-    }
+.profile-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+}
 
-    .profile-container {
-      position: relative;
-      display: inline-block;
-      cursor: pointer;
-    }
+.profile-area:hover {
+    background-color: #f0f0f0;
+}
 
-    .profile-area {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      transition: background-color 0.2s ease;
-    }
+.profile-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
 
-    .profile-area:hover {
-      background-color: #f0f0f0;
-    }
+.username {
+    font-size: 16px;
+    font-weight: bold;
+}
 
-    .profile-image {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      object-fit: cover;
-    }
+.profile-options {
+    position: absolute;
+    top: 12%;
+    left: 0;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
 
-    .username {
-      font-size: 16px;
-      font-weight: bold;
-    }
+.profile-options.hidden {
+    display: none;
+}
 
-    .profile-options {
-      position: absolute;
-      top: 12%;
-      left: 0;
-      background: #fff;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      padding: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      z-index: 10;
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-    }
+.option-button {
+    background: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+}
 
-    .profile-options.hidden {
-      display: none;
-    }
+.option-button:hover {
+    background: #0056b3;
+}
 
-    .option-button {
-      background: #007bff;
-      color: #fff;
-      border: none;
-      padding: 10px;
-      border-radius: 4px;
-      font-size: 14px;
-      cursor: pointer;
-    }
-
-    .option-button:hover {
-      background: #0056b3;
-    }
-
-    .content {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: center;
-      padding: 20px;
-      color: #e0e0e0;
-      text-align: center;
-      margin-top: 40px;
-      width: 100%;
-      overflow-y: auto;
-    }
-
-    .welcome {
-      font-size: 32px;
-      color: #ffffff;
-      text-shadow:
-        0 0 10px #00bfff,
-        0 0 20px #00bfff,
-        0 0 30px #1e90ff,
-        0 0 35px #1e90ff;
-      margin-bottom: 10px;
-    }
-
-    .tagline {
-      font-size: 19px;
-      color: #cccccc;
-      max-width: 90%;
-      line-height: 1.4;
-      margin-bottom: 20px;
-    }
-
-    .footer {
-      background-color: rgba(0, 0, 0, 0);
-      color: #666;
-      font-size: 12px;
-      text-align: center;
-      padding: 10px;
-      width: 100%;
-      margin-top: auto;
-    }
-
-    .buttons {
-      margin-top: 10px;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-      width: 100%;
-    }
-
-    .buttons button {
-      background-color: #00aaff;
-      color: white;
-      border: none;
-      border-radius: 7px;
-      padding: 10px 20px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-
-    .buttons button:hover {
-      background-color: #007acc;
-    }
-
-    #tag-input {
-      margin: 10px 0;
-      padding: 8px;
-      width: 90%;
-      border-radius: 5px;
-      box-sizing: border-box;
-    }
-
-    .select-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 100%;
-      margin-top: 30px;
-    }
-
-    .select-container select,
-    .select-container #tag-input {
-      margin: 10px 0;
-      padding: 10px;
-      width: 80%;
-      max-width: 400px;
-      border-radius: 5px;
-      box-sizing: border-box;
-    }
-
-    .language-select {
-      width: 100%;
-      padding: 10px;
-      font-size: 16px;
-      background-color: #e0e0e0;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      cursor: pointer;
-      text-align: center;
-      box-sizing: border-box;
-      appearance: none;
-      background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"%3E%3Cpath fill="none" stroke="black" stroke-width="2" d="M5 7l5 5 5-5" /%3E%3C/svg%3E');
-      background-repeat: no-repeat;
-      background-position: right 10px center;
-    }
-
-    @media (max-width: 768px) {
-      .settings-icon {
+/* Media Query para dispositivos móveis */
+@media (max-width: 768px) {
+    .settings-icon {
         width: 50px;
         height: 50px;
         fill: #111111;
-        margin-left: auto;
-        margin-right: 15px;
+        margin-left: auto; /* Empurra o ícone para a direita */
+        margin-right: 15px; /* Espaçamento da borda direita */
         cursor: pointer;
-        z-index: 1001;
-      }
+        z-index: 1001; /* Garante que fique acima de outros elementos dentro da header */
+    }
+    .settings-modal-overlay {
+    display: none; /* Inicialmente oculto */
+    position: fixed; /* Fixa o elemento na tela */
+    top: 0;
+    left: 0;
+    width: 100vw; /* Ocupa 100% da largura da viewport */
+    height: 100vh; /* Ocupa 100% da altura da viewport */
+    background-color: #888787; /* Fundo semitransparente */
+    justify-content: center; /* Centraliza o conteúdo no eixo horizontal */
+    align-items: center; /* Centraliza o conteúdo no eixo vertical */
+    z-index: 1000; /* Garante que fique acima de outros elementos */
+}
 
-      .settings-modal-overlay {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        background-color: #888787;
-        justify-content: center;
-        align-items: center;
-        z-index: 1000;
-      }
 
-      .settings-modal-content {
-        background: #888787;
-        padding: 20px;
-        border-radius: 10px;
-        text-align: center;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-        z-index: 1001;
-      }
-
-      .unlimited-jumps-btn {
-        background: linear-gradient(90deg, #ffd700, #daa520);
+.settings-modal-content {
+    background: #888787; /* Fundo branco do modal */
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Sombra para destaque */
+    z-index: 1001; /* Modal acima do overlay */
+}
+    /* Estilo para o botão "Assinar" */
+    .unlimited-jumps-btn {
+        background: linear-gradient(90deg, #ffd700, #daa520); /* Gradiente dourado */
         color: white;
         padding: 7px 15px;
         border: none;
@@ -320,70 +196,188 @@ body::before {
         cursor: pointer;
         font-size: 16px;
         font-weight: bold;
-        box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
-        margin-left: auto;
-        margin-right: 15px;
-      }
+        box-shadow: 0 0 10px rgba(255, 215, 0, 0.5); /* Efeito de brilho */
+        margin-left: auto; /* Flex para alinhar ao lado direito */
+        margin-right: 15px; /* Espaçamento da borda direita */
     }
+}
+        .unlimited-jumps-btn:hover {
+            background: linear-gradient(90deg, #ffdf00, #ffc107); /* Gradiente mais brilhante */
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 0 0 30px rgba(218, 165, 32, 0.6); /* Efeito de brilho mais intenso */
+            transform: scale(1.1); /* Leve aumento no tamanho */
+            color: black; /* Contraste adicional */
+        }
 
-    .unlimited-jumps-btn:hover {
-      background: linear-gradient(90deg, #ffdf00, #ffc107);
-      box-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 0 0 30px rgba(218, 165, 32, 0.6);
-      transform: scale(1.1);
-      color: black;
-    }
+        /* Estilo do Modal */
+        .modal-overlay {
+    display: none; /* Oculto inicialmente */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Fundo escuro semi-transparente */
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
 
-    .modal-overlay {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.8);
-      justify-content: center;
-      align-items: center;
-      z-index: 10;
-    }
+.modal-content {
+    background-color: #1a1a1d;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    text-align: center;
+    color: white;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+}
 
-    .modal-content {
-      background-color: #1a1a1d;
-      padding: 20px;
-      border-radius: 10px;
-      width: 300px;
-      text-align: center;
-      color: white;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
-    }
+.qr-code {
+    width: 150px;
+    height: 150px;
+    background-color: #333;
+    margin: 10px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #bbb;
+    font-size: 14px;
+    border-radius: 10px;
+}
+.close-btn {
+    background-color: #888787;
+    color: white;
+    padding: 7px 15px; /* Mesmo tamanho de padding que o botão "Assinar" */
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 12px;
+    width: 50%; /* Garante que o botão "Fechar" também ocupe a mesma largura */
+}
 
-    .qr-code {
-      width: 150px;
-      height: 150px;
-      background-color: #333;
-      margin: 10px auto;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: #bbb;
-      font-size: 14px;
-      border-radius: 10px;
-    }
+.close-btn:hover {
+    background-color: #888787;
+}
 
-    .close-btn {
-      background-color: #888787;
-      color: white;
-      padding: 7px 15px;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      margin-top: 12px;
-      width: 50%;
-    }
+        .content {
+            flex: 1; /* Faz o conteúdo ocupar o espaço disponível */
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 20px;
+            color: #e0e0e0;
+            text-align: center;
+            margin-top: 40px; /* Espaço para o cabeçalho */
+            overflow-y: auto;
+            width: 100%;
+        }
 
-    .close-btn:hover {
-      background-color: #888787;
-    }
-   </style>
+        .welcome {
+            font-size: 32px;
+            color: #ffffff; /* Cor branca do texto */
+            text-shadow: 
+                0 0 10px #00bfff,  /* Brilho suave */
+                0 0 20px #00bfff,  /* Brilho mais forte */
+                0 0 30px #1e90ff,  /* Brilho intenso */
+                0 0 35px #1e90ff;  /* Brilho máximo controlado até 40px */
+        }
+
+        .tagline {
+            font-size: 18px;
+            color: #cccccc;
+            margin-top: 15px;
+            max-width: 90%; /* Garante que não ultrapasse a largura da tela */
+            line-height: 1.4;
+        }
+
+        .footer {
+            background-color: rgba(0, 0, 0, 0); /* Fundo 100% transparente */
+            color: #666;
+            font-size: 12px;
+            text-align: center;
+            padding: 10px;
+            width: 100%;
+            z-index: 1000;
+            position: relative;
+            margin-top: auto;
+        }
+
+        .buttons {
+            margin-top: 1px;
+        }
+
+        .buttons button {
+            background-color: #00aaff;
+            color: white;
+            border: none;
+            border-radius: 7px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 1px;
+        }
+
+        .buttons button:hover {
+            background-color: #007acc;
+        }
+
+        /* Ajuste para o input de tags */
+        #tag-input {
+            margin: 10px 0;
+            padding: 8px;
+            width: 93%; /* Já garante boa largura em dispositivos móveis */
+            border-radius: 5px;
+            box-sizing: border-box; /* Garantir que padding e borda não aumentem a largura */
+            margin-left: 20px; /* Remover margem direita excessiva */
+        }
+
+        .select-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            margin-top: 30px; /* Espaçamento adicional */
+        }
+
+        .select-container select, .select-container #tag-input {
+            margin: 10px 0;
+            padding: 10px;
+            width: 80%; /* Tamanho adequado */
+            max-width: 400px; /* Limita a largura */
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .language-select {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            background-color: #e0e0e0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            box-sizing: border-box; /* Garantir que padding e borda não aumentem a largura */
+        }
+
+        .language-select option {
+            display: block;
+            width: 100%;  /* Garantir que as opções ocupem a largura correta */
+        }
+
+        .language-select {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"%3E%3Cpath fill="none" stroke="black" stroke-width="2" d="M5 7l5 5 5-5" /%3E%3C/svg%3E');
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+        }
+        /* Estilos para o ícone de coroa */
+
+    </style>
 </head>
 <body>
 
@@ -393,14 +387,15 @@ body::before {
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPlwkUTsaWA_zSj0oFI7sbKYXqs-ih3b0_Bg&s" alt="Avatar">
             <div class="user-info">
                 <span class="username">Nome de Usuário</span>
-                <span id="user-id">#123456</span>
+                <span id="user-id">#1234567
+                </span> <!-- Este ID será substituído pelo valor salvo no localStorage -->
             </div>
             <svg id="crown-icon" class="icon" version="1.0" xmlns="http://www.w3.org/2000/svg" width="225.000000pt" height="225.000000pt" viewBox="0 0 225.000000 225.000000" preserveAspectRatio="xMidYMid meet">
                 <g transform="translate(0.000000,225.000000) scale(0.100000,-0.100000)" fill="none" stroke="none">
                     <path d="M1085 1618 c-11 -6 -25 -19 -32 -27 -17 -22 -16 -82 1 -107 13 -18 6 -37 -79 -212 -52 -106 -96 -192 -98 -192 -2 0 -64 68 -138 152 -125 143 -133 154 -130 190 1 31 -4 44 -28 68 -50 50 -120 38 -147 -26 -12 -30 -12 -39 1 -70 9 -23 25 -40 43 -46 29 -11 30 -15 83 -257 40 -183 55 -274 59 -356 l5 -110 500 0 500 0 6 120 c5 91 19 175 58 350 28 126 51 232 51 235 0 3 14 11 30 17 60 23 70 115 17 155 -58 46 -153 -5 -145 -78 4 -33 -4 -45 -131 -190 -74 -85 -137 -154 -140 -154 -3 1 -46 85 -95 187 -90 186 -90 186 -73 215 26 45 22 85 -12 119 -31 31 -70 37 -106 17z m150 -388 c107 -222 111 -230 130 -230 7 0 82 79 166 176 85 96 155 172 156 167 1 -4 -22 -116 -51 -248 l-52 -240 -459 0 -460 0 -52 240 c-29 132 -51 243 -50 248 1 4 71 -72 156 -168 92 -105 160 -175 169 -173 19 4 14 -5 133 242 55 114 104 204 108 200 5 -5 52 -101 106 -214z m345 -495 l0 -65 -455 0 -455 0 0 65 0 65 455 0 455 0 0 -65z"/>
                 </g>
             </svg>
-        </div>
+        </div>    
             <button class="unlimited-jumps-btn" onclick="openModal()">premium</button>
         <svg id="settings-icon" class="settings-icon" version="1.0" xmlns="http://www.w3.org/2000/svg" width="512.000000pt" height="512.000000pt" viewBox="0 0 512.000000 512.000000" preserveAspectRatio="xMidYMid meet">
           <metadata>Created by potrace 1.16, written by Peter Selinger 2001-2019</metadata>
@@ -488,8 +483,8 @@ body::before {
 
         <!-- Botões para navegar para chats -->
         <div class="buttons">
-            <button onclick="window.location.href='chatTexto.html'">Chat de Texto</button>
-            <button onclick="window.location.href='ChatVideo.html'">Chat de Vídeo</button>
+            <button onclick="window.location.href='index3.html'">Chat de Texto</button>
+            <button onclick="window.location.href='index4.html'">Chat de Vídeo</button>
         </div>
     </div>
 
@@ -498,147 +493,127 @@ body::before {
         <p>&copy; 2024 TecWorld. Todos os direitos reservados.</p>
     </div>
     <script>
-        // Função que ativa a "assinatura" e muda a cor da coroa
-        function sign() {
-            document.getElementById('crown-icon').classList.add('signed');
+     // Função para abrir o modal
+function openModal() {
+    document.getElementById('paymentModal').style.display = 'flex'; // Torna o modal visível
+}
+
+// Função para fechar o modal
+function closeModal() {
+    document.getElementById('paymentModal').style.display = 'none'; // Esconde o modal
+}
+
+// Função para alterar o nome de usuário
+function changeUsername() {
+    let newUsername = prompt("Digite seu novo nome de usuário:");
+    if (newUsername && newUsername.trim() !== "") {
+        // Atualiza o nome de usuário exibido
+        document.querySelector(".username").textContent = newUsername;
+        document.getElementById("dynamicUsername").textContent = newUsername;
+
+        // Salva o novo nome de usuário no localStorage
+        const email = localStorage.getItem("email"); // Recupera o e-mail logado
+        const userData = JSON.parse(localStorage.getItem("user_" + email)); // Recupera os dados do usuário
+        userData.username = newUsername; // Atualiza o nome de usuário
+        localStorage.setItem("user_" + email, JSON.stringify(userData)); // Atualiza no localStorage
+        localStorage.setItem("username", newUsername); // Atualiza no localStorage global
+    }
+}
+
+// Função para alterar a imagem de perfil
+function changeProfileImage() {
+    let newImageUrl = prompt("Cole o URL da nova imagem de perfil:");
+    if (newImageUrl && /\.(jpeg|jpg|png|gif|bmp)$/i.test(newImageUrl)) {
+        document.querySelector(".profile img").src = newImageUrl;
+    } else {
+        alert("URL inválida. Certifique-se de inserir um link de imagem válido.");
+    }
+}
+
+// Função de login seguro
+function login() {
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+
+    // Recupera os dados do usuário usando o e-mail
+    const userData = localStorage.getItem("user_" + email);
+
+    if (userData) {
+        const parsedData = JSON.parse(userData);
+
+        // Verifica se a senha corresponde
+        if (parsedData.password === password) {
+            // Sucesso no login, salva o e-mail, ID e nome de usuário no localStorage
+            localStorage.setItem("email", email); // Salva o e-mail logado
+            localStorage.setItem("userId", parsedData.id); // Salva o ID do usuário
+            localStorage.setItem("username", parsedData.username); // Salva o nome de usuário
+            window.location.href = "inicial.html";  // Redireciona para a página inicial
+        } else {
+            displayError('E-mail ou senha inválidos.');
         }
-    
-        // Função para abrir o modal
-        function openModal() {
-            document.getElementById('paymentModal').style.display = 'flex'; // Torna o modal visível
-        }
-    
-        // Função para fechar o modal
-        function closeModal() {
-            document.getElementById('paymentModal').style.display = 'none'; // Esconde o modal
-        }
-    
-        // Função para alterar o nome de usuário
-        function changeUsername() {
-            let newUsername = prompt("Digite seu novo nome de usuário:");
-            if (newUsername && newUsername.trim() !== "") {
-                // Atualiza o nome de usuário exibido
-                document.querySelector(".username").textContent = newUsername;
-                document.getElementById("dynamicUsername").textContent = newUsername;
-    
-                // Salva o novo nome de usuário no localStorage
-                localStorage.setItem("username", newUsername);
-            }
-        }
-    
-        // Função para alterar a imagem de perfil
-        function changeProfileImage() {
-            let newImageUrl = prompt("Cole o URL da nova imagem de perfil:");
-            if (newImageUrl) {
-                document.querySelector(".profile img").src = newImageUrl;
-            }
-        }
-    
-        // Função para buscar o nome de usuário salvo e exibi-lo
-        document.addEventListener('DOMContentLoaded', function () {
-            const savedUsername = localStorage.getItem("username");
+    } else {
+        // E-mail não encontrado
+        displayError('E-mail não registrado.');
+    }
+}
+
+// Exibe mensagens de erro de forma segura
+function displayError(message) {
+    const errorElement = document.getElementById('general-error');
+    if (errorElement) {
+        errorElement.textContent = message;
+        errorElement.style.display = 'block';
+    }
+}
+// Função para carregar o nome de usuário e ID após o login
+document.addEventListener('DOMContentLoaded', function () {
+    const email = localStorage.getItem("email");  // Recupera o e-mail logado
+    if (email) {
+        const userData = localStorage.getItem("user_" + email); // Recupera os dados do usuário com base no e-mail
+
+        if (userData) {
+            const parsedData = JSON.parse(userData);
+            const savedUsername = parsedData.username;
+            const savedUserId = parsedData.id || "ID não definido";  // Se não houver ID, mostra uma mensagem de fallback
+
             if (savedUsername) {
                 // Substitui o nome de usuário nas áreas desejadas
                 document.querySelector(".username").textContent = savedUsername;
                 document.getElementById("dynamicUsername").textContent = savedUsername;
             }
-        });
-    
-        // Código de live-reload
-        if ('WebSocket' in window) {
-            (function () {
-                function refreshCSS() {
-                    var sheets = [].slice.call(document.getElementsByTagName("link"));
-                    var head = document.getElementsByTagName("head")[0];
-                    for (var i = 0; i < sheets.length; ++i) {
-                        var elem = sheets[i];
-                        var parent = elem.parentElement || head;
-                        parent.removeChild(elem);
-                        var rel = elem.rel;
-                        if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
-                            var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
-                            elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
-                        }
-                        parent.appendChild(elem);
-                    }
-                }
-                var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
-                var address = protocol + window.location.host + window.location.pathname + '/ws';
-                var socket = new WebSocket(address);
-                socket.onmessage = function (msg) {
-                    if (msg.data == 'reload') window.location.reload();
-                    else if (msg.data == 'refreshcss') refreshCSS();
-                };
-                if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
-                    console.log('Live reload enabled.');
-                    sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
-                }
-            })();
+
+            // Exibe o ID do usuário na página com formatação
+            if (savedUserId) {
+                const formattedId = `id:${String(savedUserId).padStart(7, '0')}`;
+                document.getElementById("user-id").textContent = formattedId;
+            }
         } else {
-            console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+            console.warn("Usuário não encontrado no localStorage.");
         }
-    
-        // Função para login
-        function login() {
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-    
-            // Recupera os dados do usuário usando o e-mail
-            const userData = localStorage.getItem("user_" + email);
-    
-            if (userData) {
-                const parsedData = JSON.parse(userData);
-    
-                // Verifica se a senha corresponde
-                if (parsedData.password === password) {
-                    // Sucesso no login, redireciona
-                    window.location.href = "inicial.html";  // Redireciona para a página inicial
-                } else {
-                    document.getElementById('general-error').innerHTML = 'E-mail ou senha inválidos.';
-                    document.getElementById('general-error').style.display = 'block';
-                }
-            } else {
-                // E-mail não encontrado
-                document.getElementById('general-error').innerHTML = 'E-mail não registrado.';
-                document.getElementById('general-error').style.display = 'block';
-            }
-        }
-    
-        // Função para buscar o nome de usuário salvo e exibi-lo após login
-        document.addEventListener('DOMContentLoaded', function () {
-            const email = localStorage.getItem("email");  // Recupera o e-mail logado
-            const userData = localStorage.getItem("user_" + email); // Recupera os dados do usuário com base no e-mail
-    
-            if (userData) {
-                const parsedData = JSON.parse(userData);
-                const savedUsername = parsedData.username;
-    
-                if (savedUsername) {
-                    // Substitui o nome de usuário nas áreas desejadas
-                    document.querySelector(".username").textContent = savedUsername;
-                    document.getElementById("dynamicUsername").textContent = savedUsername;
-                }
-            }
+    } else {
+        console.warn("Nenhum usuário logado.");
+    }
+
+    // Abertura e fechamento do menu de perfil
+    const profile = document.querySelector(".profile");
+    const profileOptions = document.getElementById("profileOptions");
+
+    if (profile && profileOptions) {
+        profile.addEventListener("click", function (event) {
+            profileOptions.classList.toggle("hidden");
+            event.stopPropagation();
         });
-    
-        // Função para abrir o menu de opções de perfil
-        document.addEventListener("DOMContentLoaded", function () {
-            const profile = document.querySelector(".profile");
-            const profileOptions = document.getElementById("profileOptions");
-    
-            profile.addEventListener("click", function (event) {
-                profileOptions.classList.toggle("hidden");
-                event.stopPropagation(); // Impede que o clique feche imediatamente
-            });
-    
-            document.addEventListener("click", function () {
-                profileOptions.classList.add("hidden"); // Esconde se clicar fora
-            });
-    
-            profileOptions.addEventListener("click", function (event) {
-                event.stopPropagation(); // Evita fechar ao clicar dentro do menu
-            });
+
+        document.addEventListener("click", function () {
+            profileOptions.classList.add("hidden");
         });
+
+        profileOptions.addEventListener("click", function (event) {
+            event.stopPropagation();
+        });
+    }
+});
+
     </script>    
 </body>
 </html>
