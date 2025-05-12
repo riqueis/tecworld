@@ -17,6 +17,8 @@
     text-align: center;
     margin: 0;
     background-image: url('./mundotec.webp');
+    position: relative;
+
 }
     body::after {
     content: ''; 
@@ -27,43 +29,86 @@
     z-index: -1; /* Fica atrás do conteúdo */
 }
 
-    .language-buttons {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    z-index: 2;
-}
+.language-buttons { 
+            position: fixed; 
+            top: 10px; 
+            right: 10px; 
+            z-index: 2; 
+        }
 
-.language-buttons select {
-    padding: 8px 12px;
-    cursor: pointer;
-    background-color: #444;
-    color: #fff;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    font-size: 12px;
-    transition: background-color 0.3s, transform 0.3s;
-}
+        .language-buttons select { 
+            padding: 5px 10px; 
+            cursor: pointer; 
+            background-color: #333; 
+            color: #fff;
+            border-radius: 5px;
+        }
 
-.language-buttons select:hover {
-    background-color: #555;
-    transform: scale(1.05);
-}
 
-.language-buttons option {
-    background-color: #333;
-    color: white;
-}
+    .login-container
+     { display: flex; 
+        justify-content: center; 
+        align-items: center; 
+        height: 100%;
+         z-index: 2; }
 
-    .login-container { display: flex; justify-content: center; align-items: center; height: 100%; z-index: 2; }
-    form.invisible { background-color: transparent; padding: 30px; box-shadow: none; border-radius: 0; width: 350px; text-align: center; }
-    h1 { font-size: 32px; margin-bottom: 25px; color: #E0FFFF; }
-    input[type="text"], input[type="password"] { width: 100%; padding: 14px; margin: 10px 0; border: 1px solid #b3dae4; border-radius: 8px; background-color: #8ed2e4; color: #ffffff; font-size: 18px; }
-    input[type="text"]::placeholder, input[type="password"]::placeholder { color: #000; }
-    .login-btn { width: 100%; padding: 14px; background: linear-gradient(90deg, #a6e9df 0%, #00aaff 100%); border: none; border-radius: 8px; color: #000; font-size: 18px; cursor: pointer; margin-top: 20px; transition: 0.3s; }
-    .login-btn:hover { background: linear-gradient(90deg, #ffffff 0%, #f3f3f3 100%); transform: scale(1.05); }
-    .forgot-password, .create-account, .back-to-login { display: block; margin-top: 20px; font-size: 14px; color: #00ffd9; text-decoration: none; }
-    .forgot-password:hover, .create-account:hover, .back-to-login:hover { text-decoration: underline; color: #00aaff; }
+    form.invisible
+     { background-color: transparent;
+         padding: 30px;
+          box-shadow: none;
+           border-radius: 0;
+            width: 350px;
+             text-align: center;
+             }
+    h1
+     { font-size: 32px;
+         margin-bottom:25px;
+          color: #E0FFFF;
+         }
+    input
+    [type="text"],
+     input[type="password"]
+      { width: 100%;
+         padding: 14px;
+          margin: 10px 0;
+           border: 1px solid #b3dae4;
+            border-radius: 8px;
+             background-color: #8ed2e4;
+              color: #ffffff;
+               font-size: 18px;
+             }
+    input[type="text"]::placeholder,
+     input[type="password"]::placeholder
+      { color: #000;
+     }
+    .login-btn
+     { width: 100%;
+         padding: 14px;
+          background:
+           linear-gradient(90deg, #a6e9df 0%, #00aaff 100%); 
+           border: none; 
+           border-radius: 8px; 
+           color: #000; 
+           font-size: 18px; 
+           cursor: pointer; 
+           margin-top: 20px; 
+           transition: 0.3s; 
+        }
+    .login-btn:hover 
+    { background: linear-gradient(90deg, #ffffff 0%, #f3f3f3 100%); 
+        transform: scale(1.05); 
+    }
+    .forgot-password, .create-account, .back-to-login 
+    { display: block;
+         margin-top: 20px;
+          font-size: 14px;
+           color: #00ffd9;
+            text-decoration: none;
+         }
+    .forgot-password:hover, .create-account:hover, .back-to-login:hover 
+    { text-decoration: underline; 
+        color: #00aaff; 
+    }
     .error-message {
         color: #ff6347; /* Cor vermelha para erros */
         font-size: 16px; /* Ajuste o tamanho da fonte, se necessário */
@@ -90,85 +135,54 @@
     input[type="text"]::placeholder, input[type="password"]::placeholder, input[type="email"]::placeholder {
         color: #000;
     }
+    
 
 
     </style>
 </head>
 <body>
-
-    <div class="language-buttons">
-        <selectonchange="changeLanguage(this.value)">
-            <option value="pt">🇧🇷 Português</option>
-            <option value="en">🇺🇸 English</option>
-            <option value="es">🇪🇸 Español</option>
-        </select>
-    </div>
     <div class="login-container">
         <form id="login-form" class="invisible" onsubmit="return validateForm(event)">
             <!-- Conteúdo será gerado dinamicamente pelo JavaScript -->
         </form>
     </div>
   <script>
-      let currentLanguage = 'pt'; // Idioma padrão
+    
+    let currentLanguage = 'pt'; // Idioma padrão
 
-        // Função para alterar o idioma
-        function changeLanguage(lang) {
-            localStorage.setItem('selectedLanguage', lang); // Salva o idioma
-            currentLanguage = lang;
-            showLogin(); // Atualiza os textos na página de login
-        }
+// Função para alterar o idioma
+function changeLanguage(lang) {
+    localStorage.setItem('selectedLanguage', lang); // Salva o idioma
+    currentLanguage = lang;
+    showLogin(); // Atualiza os textos na página de login
+}
 
-        // Evento DOMContentLoaded para carregar o idioma salvo e exibir a página de login
-        document.addEventListener('DOMContentLoaded', () => {
-            const savedLanguage = localStorage.getItem('selectedLanguage') || 'pt'; // Recupera ou usa o idioma padrão
-            currentLanguage = savedLanguage;
-            // Cria e adiciona o seletor de idioma dinamicamente
-            const select = document.createElement('select');
-            select.addEventListener('change', (event) => {
-                changeLanguage(event.target.value);
-            });
-            const languages = { pt: 'Português', en: 'English', es: 'Español' };
-            for (const lang in languages) {
-                const option = document.createElement('option');
-                option.value = lang;
-                option.textContent = languages[lang];
-                option.selected = lang === savedLanguage;
-                select.appendChild(option);
-            }
-            const loginForm = document.getElementById('login-form');
-            if (loginForm) {
-                loginForm.insertBefore(select, loginForm.firstChild);
-            } else {
-                const container = document.createElement('div');
-                container.id = 'login-form';
-                container.appendChild(select);
-                document.body.appendChild(container);
-            }
-            showLogin(); // Exibe o conteúdo de login imediatamente
-        });
+// Evento DOMContentLoaded para carregar o idioma salvo e exibir a página de login
+document.addEventListener('DOMContentLoaded', () => {
+    const savedLanguage = localStorage.getItem('selectedLanguage') || 'pt'; // Recupera ou usa o idioma padrão
+    currentLanguage = savedLanguage;
 
-        // Função para exibir e traduzir a página de login
-        function showLogin() {
-            const t = translations[currentLanguage]; // Obtém as traduções para o idioma selecionado
-            const loginForm = document.getElementById('login-form');
-            if (loginForm) {
-                loginForm.innerHTML = `
-                    <h1>${t.heading}</h1>
-                    <input type="text" id="email" placeholder="${t.emailPlaceholder}">
-                    <input type="password" id="password" placeholder="${t.passwordPlaceholder}">
-                    <div id="general-error" class="error-message"></div>
-                    <button type="button" class="login-btn" onclick="login()">${t.loginButton}</button>
-                    <a href="#" class="forgot-password" onclick="showForgotPassword()">${t.forgotPassword}</a>
-                    <a href="#" class="create-account" onclick="showCreateAccount()">${t.createAccount}</a>
-                `;
-                // Garante que o seletor de idioma permaneça
-                const select = document.querySelector('select');
-                if (select) {
-                    select.value = currentLanguage;
-                    loginForm.insertBefore(select, loginForm.firstChild);
-                }
-            }
-        }
+    // Exibe a página de login imediatamente com o idioma correto
+    showLogin(); 
+});
+
+// Função para exibir e traduzir a página de login
+function showLogin() {
+    const t = translations[currentLanguage]; // Obtém as traduções para o idioma selecionado
+    const loginForm = document.getElementById('login-form');
+    if (loginForm) {
+        loginForm.innerHTML = `
+            <h1>${t.heading}</h1>
+            <input type="text" id="email" placeholder="${t.emailPlaceholder}">
+            <input type="password" id="password" placeholder="${t.passwordPlaceholder}">
+            <div id="general-error" class="error-message"></div>
+            <button type="button" class="login-btn" onclick="login()">${t.loginButton}</button>
+            <a href="#" class="forgot-password" onclick="showForgotPassword()">${t.forgotPassword}</a>
+            <a href="#" class="create-account" onclick="showCreateAccount()">${t.createAccount}</a>
+        `;
+    }
+}
+
 
         const translations = {
             pt: {
