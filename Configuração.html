@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Configurações - TecWorld</title>
   <style>
     * {
@@ -12,7 +12,8 @@
       font-family: Arial, sans-serif;
     }
 
-    body, html {
+    body,
+    html {
       height: 100%;
       background: #111;
       color: #fff;
@@ -20,7 +21,7 @@
 
     .config-page {
       width: 100%;
-      height: 100vh;
+      min-height: 100vh;
       padding: 20px;
       display: flex;
       flex-direction: column;
@@ -45,9 +46,13 @@
       margin-bottom: 10px;
       font-size: 18px;
       color: #00d8ff;
+      cursor: pointer;
     }
 
-    select, button, textarea {
+    select,
+    button,
+    textarea,
+    input {
       width: 100%;
       padding: 10px;
       margin-top: 5px;
@@ -57,16 +62,71 @@
       border-radius: 5px;
     }
 
+    textarea {
+      resize: none; /* Impede redimensionamento */
+    }
+
     button:hover {
       background-color: #00d8ff;
       color: #000;
       cursor: pointer;
     }
+
+    /* Tela cheia da aba de conta */
+    .account-fullscreen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background: linear-gradient(to bottom right, #1e1e1e, #2c2c2c);
+      z-index: 999;
+      padding: 20px;
+      display: none;
+      flex-direction: column;
+      overflow-y: auto;
+    }
+
+    .account-header {
+      display: flex;
+      align-items: center;
+      position: relative;
+      margin-bottom: 20px;
+      height: 40px;
+    }
+
+    .back-button {
+      background: #444;
+      padding: 6px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+      flex-shrink: 0;
+      width: auto;
+      font-size: 14px;
+    }
+
+    .back-button:hover {
+      background: #00d8ff;
+      color: #000;
+    }
+
+    .account-title {
+      flex: 1;
+      text-align: center;
+      font-size: 24px;
+      color: #00d8ff;
+      font-weight: bold;
+      user-select: none;
+    }
   </style>
 </head>
 <body>
-  <div class="config-page">
+  <div id="main-config" class="config-page">
     <h1>Configurações</h1>
+
+    <div class="config-section">
+      <h2 onclick="abrirConta()">Conta</h2>
+    </div>
 
     <div class="config-section">
       <h2>Idioma</h2>
@@ -74,7 +134,6 @@
         <option value="pt">Português</option>
         <option value="en">English</option>
         <option value="es">Español</option>
-        <!-- Mais idiomas aqui -->
       </select>
     </div>
 
@@ -90,7 +149,7 @@
 
     <div class="config-section">
       <h2>Suporte</h2>
-      <textarea placeholder="Descreva seu problema ou dúvida aqui..."></textarea>
+      <textarea placeholder="Descreva seu problema ou dúvida aqui..." rows="4"></textarea>
       <button>Enviar para o suporte</button>
     </div>
 
@@ -100,11 +159,35 @@
     </div>
   </div>
 
+  <!-- Tela cheia da aba Conta -->
+  <div id="conta-tela" class="account-fullscreen">
+    <div class="account-header">
+      <button class="back-button" onclick="fecharConta()">← Voltar</button>
+      <div class="account-title">Conta</div>
+    </div>
+
+    <input type="text" placeholder="Alterar nome de usuário" />
+    <input type="email" placeholder="Alterar e-mail" />
+    <input type="password" placeholder="Alterar senha" />
+    <button>Salvar alterações</button>
+    <button style="margin-top: 10px; background: #800000;">Excluir conta</button>
+  </div>
+
   <script>
     function logout() {
       alert("Você foi desconectado!");
-      // Aqui você pode redirecionar ou limpar tokens
       // window.location.href = "/login";
+    }
+
+    function abrirConta() {
+      document.getElementById("main-config").style.display = "none";
+      document.getElementById("conta-tela").style.display = "flex";
+      document.getElementById("conta-tela").style.flexDirection = "column";
+    }
+
+    function fecharConta() {
+      document.getElementById("conta-tela").style.display = "none";
+      document.getElementById("main-config").style.display = "flex";
     }
   </script>
 </body>
