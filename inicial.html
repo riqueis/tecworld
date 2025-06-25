@@ -5,16 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TecWorld</title>
     <style>
- body, html {
-    height: 100%;
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background-image: url('./blue.avif');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    overflow-x: hidden;
+body, html {
+  height: 100%;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-image: url('./blue.avif');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  position: relative;
+  z-index: 0; /* Garante que body fique atrás de ::before */
+}
+
+body::before {
+  content: "";
+  position: fixed; /* ou absolute, dependendo do layout */
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: -1;
+  pointer-events: none; /* Garante que clique passe por cima */
 }
 
 .header {
