@@ -16,19 +16,42 @@ body {
     text-align: center;
     margin: 0;
 
-    /* Efeito de degradê semelhante à imagem */
-    background-image: radial-gradient(circle at bottom right, #00aaff 0%, #0d0f12 40%, #000000 100%);
+    /* Degradê radial mais estiloso e tecnológico */
+    background-image: radial-gradient(
+        circle at bottom right, 
+        #00aaff 0%,          /* azul vibrante */
+        #004c8c 50%,         /* azul escuro */
+        #000814 80%,         /* quase preto azul */
+        #000000 100%         /* preto total */
+    );
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: cover;
+
+    /* Adiciona leve animação de brilho */
+    animation: pulseGlow 10s ease-in-out infinite alternate;
+}
+
+@keyframes pulseGlow {
+    0% {
+        filter: brightness(1) saturate(1);
+    }
+    50% {
+        filter: brightness(1.1) saturate(1.2);
+    }
+    100% {
+        filter: brightness(1) saturate(1);
+    }
 }
 
 body::after {
     content: ''; 
     position: fixed;
+    top: 0; left: 0;
     width: 100vw;
     height: 100vh;
-    background: rgba(0, 0, 0, 0.4); /* escurece um pouco a imagem/degradê */
+    background: rgba(0, 0, 0, 0.35); /* escurece sutilmente o fundo */
+    pointer-events: none;
     z-index: -1;
 }
 
