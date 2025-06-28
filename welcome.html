@@ -6,7 +6,7 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body, html { height: 100%; font-family: Arial, sans-serif; }
-   body {
+  body {
     display: flex;  
     flex-direction: column;
     justify-content: center;
@@ -16,7 +16,11 @@
     text-align: center;
     margin: 0;
     background-image: url('./teste.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover; /* ou 'contain' se quiser que ela apareça toda */
 }
+
 body::after {
     content: ''; 
     position: fixed; /* Deixa o overlay fixo */
