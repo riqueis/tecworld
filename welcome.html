@@ -6,19 +6,18 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body, html { height: 100%; font-family: Arial, sans-serif; }
-  body {
-    display: flex;  
-    flex-direction: column;
-    justify-content: center;
-    align-items: center; 
-    background-color: #0d0f12; 
-    overflow: hidden; 
-    text-align: center;
-    margin: 0;
-    background-image: url('./teste.png');
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover; /* ou 'contain' se quiser que ela apareça toda */
+  body, html {
+  height: 100%;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-image: url('./blue.avif');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  overflow-x: hidden;
+  position: relative;
+  z-index: 0; /* Garante que body fique atrás de ::before */
 }
 
 body::after {
