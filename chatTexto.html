@@ -6,16 +6,19 @@
     <title>Chat de Texto - TecEvolution</title>
     <style>
         body, html {
-            height: 100%;
-            margin: 0;
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-             background-image: url('./pexels-lexx-11657171.jpg'); /* Fundo da área de chat */
-            color: #e0e0e0; /* Texto claro fixo */
-        }
-
-        /* Estilo da área de chat */
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    background-image: url('./pexels-lexx-11657171.jpg'); /* Fundo da área de chat */
+    background-size: cover;         /* Faz a imagem cobrir toda a tela */
+    background-position: center;    /* Centraliza a imagem */
+    background-repeat: no-repeat;   /* Evita repetição */
+    background-attachment: fixed;   /* Fixa o fundo na rolagem */
+    color: #e0e0e0; /* Texto claro fixo */
+}
+  /* Estilo da área de chat */
         .chat-area {
             flex: 1;
             display: flex;
