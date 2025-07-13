@@ -5,19 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chat de Texto - TecEvolution</title>
     <style>
-        body, html {
+  body, html {
     height: 100%;
     margin: 0;
     font-family: Arial, sans-serif;
     display: flex;
     flex-direction: column;
-    background-image: url('./pexels-lexx-11657171.jpg'); /* Fundo da área de chat */
-    background-size: cover;         /* Faz a imagem cobrir toda a tela */
-    background-position: center;    /* Centraliza a imagem */
-    background-repeat: no-repeat;   /* Evita repetição */
-    background-attachment: fixed;   /* Fixa o fundo na rolagem */
-    color: #e0e0e0; /* Texto claro fixo */
+    background-image: url('./pexels-lexx-11657171.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: #e0e0e0;
+    position: relative; /* Necessário para posicionar o pseudo-elemento corretamente */
+    z-index: 0;
 }
+
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.4); /* Escurecimento com opacidade */
+    z-index: -1; /* Garante que fique atrás do conteúdo, mas acima do background */
+}
+
   /* Estilo da área de chat */
         .chat-area {
             flex: 1;
