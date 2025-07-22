@@ -2,107 +2,51 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Chat de Vídeo - TecWorld</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Video Chat 50/50</title>
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: Arial, sans-serif;
     }
 
-    body {
+    html, body {
+      height: 100%;
+      width: 100%;
       background-color: #000;
+      font-family: Arial, sans-serif;
       overflow: hidden;
     }
 
     .video-container {
-      position: relative;
-      width: 100vw;
-      height: 100vh;
       display: flex;
       flex-direction: column;
-    }
-
-    .videos {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
-
-    #remoteVideo, #userVideo {
+      height: 100%;
       width: 100%;
-      height: 50vh;
-      object-fit: cover;
+    }
+
+    video {
+      width: 100%;
+      height: 50%;
+      object-fit: cover; /* Para manter proporção natural da imagem */
       background: #111;
-    }
-
-    .chat-overlay {
-      position: absolute;
-      bottom: 100px;
-      width: 100%;
-      padding: 0 20px;
-      color: white;
-      font-size: 16px;
-      pointer-events: none;
-    }
-
-    .message {
-      margin-bottom: 5px;
-    }
-
-    .input-area {
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-      display: flex;
-      padding: 10px 20px;
-      background: rgba(0, 0, 0, 0.6);
-    }
-
-    .input-area input {
-      flex: 1;
-      padding: 10px;
-      border-radius: 20px;
-      border: none;
-      outline: none;
     }
   </style>
 </head>
 <body>
   <div class="video-container">
-    <div class="videos">
-      <video id="remoteVideo" autoplay></video>
-      <video id="userVideo" autoplay muted></video>
-    </div>
+    <!-- Parte superior: vídeo da outra pessoa -->
+    <video id="remoteVideo" autoplay playsinline></video>
 
-    <div class="chat-overlay" id="chatBox">
-      <!-- Mensagens aparecem aqui dinamicamente -->
-    </div>
-
-    <div class="input-area">
-      <input type="text" id="messageInput" placeholder="Digite uma mensagem..." />
-    </div>
+    <!-- Parte inferior: seu vídeo -->
+    <video id="userVideo" autoplay muted playsinline></video>
   </div>
 
   <script>
-    const chatBox = document.getElementById("chatBox");
-    const messageInput = document.getElementById("messageInput");
-
-    messageInput.addEventListener("keypress", function (e) {
-      if (e.key === "Enter" && messageInput.value.trim() !== "") {
-        const newMsg = document.createElement("div");
-        newMsg.className = "message";
-        newMsg.innerText = "Você: " + messageInput.value;
-        chatBox.appendChild(newMsg);
-        chatBox.scrollTop = chatBox.scrollHeight;
-        messageInput.value = "";
-      }
-    });
-
-    // Captura da câmera local
     const userVideo = document.getElementById("userVideo");
+
+    // Captura da câmera do usuário (somente vídeo)
     navigator.mediaDevices.getUserMedia({ video: true, audio: false })
       .then((stream) => {
         userVideo.srcObject = stream;
