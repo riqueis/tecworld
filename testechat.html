@@ -23,22 +23,26 @@
       height: 100vh;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-      align-items: center;
     }
 
     .videos {
+      flex: 1;
       display: flex;
       flex-direction: column;
-      gap: 10px;
-      margin-top: 20px;
     }
 
-    video {
-      width: 300px;
-      height: 200px;
+    #userVideo {
+      flex: 1;
+      width: 100%;
+      object-fit: cover;
       background: #111;
-      border-radius: 10px;
+    }
+
+    #remoteVideo {
+      flex: 1;
+      width: 100%;
+      object-fit: cover;
+      background: #111;
     }
 
     .chat-overlay {
@@ -48,6 +52,7 @@
       padding: 0 20px;
       color: white;
       font-size: 16px;
+      pointer-events: none;
     }
 
     .message {
@@ -70,46 +75,17 @@
       border: none;
       outline: none;
     }
-
-    .emojis {
-      display: flex;
-      gap: 10px;
-      position: absolute;
-      bottom: 50px;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-
-    .emojis span {
-      font-size: 22px;
-      cursor: pointer;
-    }
   </style>
 </head>
 <body>
   <div class="video-container">
     <div class="videos">
-      <video id="userVideo" autoplay muted></video>
       <video id="remoteVideo" autoplay></video>
+      <video id="userVideo" autoplay muted></video>
     </div>
 
     <div class="chat-overlay" id="chatBox">
-      <div class="message">
-        <span>🇵🇪 EU SOU LUIS</span><br/>
-        <span>Prazer eu sou Daniel</span>
-      </div>
-      <div class="message">
-        <span>🇵🇪 DORMO ATÉ AS 4 AMANHÃ</span>
-      </div>
-    </div>
-
-    <div class="emojis">
-      <span>😂</span>
-      <span>❤️</span>
-      <span>👍</span>
-      <span>😊</span>
-      <span>👌</span>
-      <span>😍</span>
+      <!-- Mensagens aparecem aqui dinamicamente -->
     </div>
 
     <div class="input-area">
