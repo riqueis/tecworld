@@ -22,7 +22,7 @@
     .video-container {
       display: flex;
       flex-direction: column;
-      height: 100vh;
+      height: 100%;
       width: 100%;
     }
 
@@ -33,14 +33,10 @@
       background: #111;
       border: 2px solid #007bff; /* Linha azul */
     }
-
-    #userVideo {
-      transform: scaleX(-1); /* Espelha horizontalmente */
-    }
   </style>
 </head>
 <body>
-  <div class="video-container">
+  <div class="video-container" id="gestureArea">
     <!-- Parte superior: vídeo da outra pessoa -->
     <video id="remoteVideo" autoplay playsinline></video>
 
@@ -59,6 +55,34 @@
       .catch((err) => {
         console.error("Erro ao acessar a câmera:", err);
       });
+
+    // DETECÇÃO DE GESTOS DE ARRASTO
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    const gestureZone = document.getElementById("gestureArea");
+
+    gestureZone.addEventListener('touchstart', function(e) {
+      touchStartX = e.changedTouches[0].screenX;
+    }, false);
+
+    gestureZone.addEventListener('touchend', function(e) {
+      touchEndX = e.changedTouches[0].screenX;
+      handleGesture();
+    }, false);
+
+    function handleGesture() {
+      const distance = touchEndX - touchStartX;
+
+      if (distance < -50) {
+        // Arrastou da direita para esquerda -> Pular o chat
+        alert("Pular o chat"); // Aqui você pode acionar a função real de pulo
+      } else if (distance > 50) {
+        // Arrastou da esquerda para direita -> Voltar para página inicial
+        window.location.href = "inicial.html";
+      }
+    }
   </script>
 </body>
 </html>
+
