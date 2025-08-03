@@ -24,6 +24,7 @@
       flex-direction: column;
       height: 100%;
       width: 100%;
+      position: relative; /* necessário para posicionar o ícone dentro */
     }
 
     video {
@@ -33,10 +34,23 @@
       background: #111;
       border: 2px solid #007bff; /* Linha azul */
     }
+
+.flag-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 64px; /* tamanho aumentado */
+  height: 64px; /* tamanho aumentado */
+  cursor: pointer;
+  filter: invert(23%) sepia(95%) saturate(7411%) hue-rotate(358deg) brightness(95%) contrast(115%);
+}
   </style>
 </head>
 <body>
   <div class="video-container" id="gestureArea">
+    <!-- Ícone de denúncia (bandeira) -->
+    <img src="bandeira.svg" alt="Denunciar" class="flag-icon" />
+
     <!-- Parte superior: vídeo da outra pessoa -->
     <video id="remoteVideo" autoplay playsinline></video>
 
@@ -85,4 +99,3 @@
   </script>
 </body>
 </html>
-
