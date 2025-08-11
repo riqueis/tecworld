@@ -24,7 +24,7 @@
       flex-direction: column;
       height: 100%;
       width: 100%;
-      position: relative; /* necessário para posicionar o ícone dentro */
+      position: relative;
     }
 
     video {
@@ -32,20 +32,37 @@
       height: 50%;
       object-fit: cover;
       background: #111;
-      border: 2px solid #007bff; /* Linha azul */
+      border: 2px solid #007bff;
     }
-#userVideo {
-      transform: scaleX(-1); /* Espelha horizontalmente */
+
+    .flag-icon {
+      position: absolute;
+      top: -1px;
+      right: -10px;
+      width: 64px;
+      height: 64px;
+      cursor: pointer;
+      filter: invert(23%) sepia(95%) saturate(7411%) hue-rotate(358deg) brightness(95%) contrast(115%);
     }
-.flag-icon {
-  position: absolute;
- top: -1px;
-  right: -10px;
-  width: 64px; /* tamanho aumentado */
-  height: 64px; /* tamanho aumentado */
-  cursor: pointer;
-  filter: invert(23%) sepia(95%) saturate(7411%) hue-rotate(358deg) brightness(95%) contrast(115%);
-}
+
+    .input-container {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 10px;
+      background-color: rgba(0, 0, 0, 0.6);
+      z-index: 5;
+    }
+
+    .message-input {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      outline: none;
+    }
   </style>
 </head>
 <body>
@@ -58,12 +75,16 @@
 
     <!-- Parte inferior: seu vídeo -->
     <video id="userVideo" autoplay muted playsinline></video>
+
+    <!-- Campo de digitação -->
+    <div class="input-container">
+      <input type="text" class="message-input" placeholder="Digite sua mensagem..." />
+    </div>
   </div>
 
   <script>
     const userVideo = document.getElementById("userVideo");
 
-    // Captura da câmera do usuário (somente vídeo)
     navigator.mediaDevices.getUserMedia({ video: true, audio: false })
       .then((stream) => {
         userVideo.srcObject = stream;
@@ -72,7 +93,6 @@
         console.error("Erro ao acessar a câmera:", err);
       });
 
-    // DETECÇÃO DE GESTOS DE ARRASTO
     let touchStartX = 0;
     let touchEndX = 0;
 
@@ -91,13 +111,12 @@
       const distance = touchEndX - touchStartX;
 
       if (distance < -50) {
-        // Arrastou da direita para esquerda -> Pular o chat
-        alert("Pular o chat"); // Aqui você pode acionar a função real de pulo
+        alert("Pular o chat");
       } else if (distance > 50) {
-        // Arrastou da esquerda para direita -> Voltar para página inicial
         window.location.href = "inicial.html";
       }
     }
   </script>
 </body>
 </html>
+
