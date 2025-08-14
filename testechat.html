@@ -95,18 +95,16 @@ video {
 #crown-icon path {
   fill: gold;
 }
-
 .input-container {
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
-  padding: 10px;
+  padding: 0; /* remove espaço interno */
   background-color: rgba(0, 0, 0, 0.6);
   z-index: 5;
 
   display: flex;
-  gap: 8px;
 }
 
 .message-input {
@@ -114,16 +112,16 @@ video {
   padding: 10px;
   font-size: 16px;
   border: none;
-  border-radius: 8px;
+  border-radius: 0; /* encosta na lateral */
   outline: none;
 }
 
 .send-btn {
   background-color: #0084ff;
   border: none;
-  border-radius: 8px;
-  width: 45px;
-  height: 45px;
+  border-radius: 0; /* encosta na lateral */
+  width: 60px; /* mais largo para facilitar toque no celular */
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -133,7 +131,7 @@ video {
 }
 
 .send-btn img {
-  width: 28px; /* menor que o botão */
+  width: 28px;
   height: 28px;
 }
 
@@ -144,7 +142,6 @@ video {
 .send-btn:active {
   transform: scale(0.9);
 }
-
 
   </style>
 </head>
