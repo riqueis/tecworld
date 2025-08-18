@@ -7,27 +7,32 @@
     <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
         body, html { height: 100%; font-family: Arial, sans-serif; }
-   body {
-    display: flex;  
-    flex-direction: column;
-    justify-content: center;
-    align-items: center; 
-    background-color: #0d0f12; 
-    overflow: hidden; 
-    text-align: center;
-    margin: 0;
-    background-image: url('./mundotec.webp');
-    position: relative;
+body {
+  display: flex;  
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; 
+  background-color: #0d0f12; 
+  overflow: hidden; 
+  text-align: center;
+  margin: 0;
 
+  /* Degradê com maior impacto */
+  background-image: radial-gradient(circle at bottom right, #00aaff 0%, #005f8f 50%, #0d0f12 75%, #000000 100%);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
-    body::after {
-    content: ''; 
-    position: fixed; /* Deixa o overlay fixo */
-    width: 100vw; /* Largura total da tela */
-    height: 100vh; /* Altura total da tela */
-    background: rgba(0, 0, 0, 0.5); /* Cor preta com 50% de opacidade para escurecer */
-    z-index: -1; /* Fica atrás do conteúdo */
+
+body::after {
+  content: ''; 
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5); /* um pouco mais escuro que antes */
+  z-index: -1;
 }
+
 
 .language-buttons { 
             position: fixed; 
