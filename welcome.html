@@ -7,34 +7,36 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
 
   <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Montserrat', sans-serif;
-      color: #e0e0e0;
-      background: linear-gradient(to bottom, #0d1b2a, #1b3b6f, #2c5ca0);
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 20px;
-    }
+  body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Montserrat', sans-serif;
+  color: #e0e0e0;
+  background: linear-gradient(to bottom, #0d1b2a, #1b3b6f, #2c5ca0);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* sobe o conteúdo */
+  text-align: center;
+  padding: 40px 20px; /* mais respiro */
+}
 
-    .container {
-      max-width: 650px;
-      animation: fadeIn 1.5s ease-in-out;
-    }
+.container {
+  max-width: 650px;
+  margin-top: 40px; /* sobe ainda mais o título */
+  animation: fadeIn 1.5s ease-in-out;
+}
 
-  .title {
-  font-size: 2.2rem;
+/* TÍTULO */
+.title {
+  font-size: 2.4rem; /* maior */
   font-weight: 800;
   color: #4cc9f0;
   text-shadow: 
     0 0 8px rgba(76, 201, 240, 0.8),
     0 0 16px rgba(76, 201, 240, 0.6),
     0 0 24px rgba(76, 201, 240, 0.4);
-  margin-bottom: 20px;
+  margin-bottom: 25px;
   animation: glow 2s ease-in-out infinite alternate;
 }
 
@@ -53,54 +55,57 @@
   }
 }
 
+/* DESCRIÇÃO */
+.description {
+  font-size: 1.25rem; /* maior para ocupar mais espaço */
+  line-height: 1.8; /* mais espaçamento */
+  margin-bottom: 40px;
+  color: #d1e3f8;
+}
 
+/* BOTÃO */
+.btn-start {
+  background: linear-gradient(135deg, #4cc9f0, #4361ee);
+  border: none;
+  padding: 16px 45px; /* maior */
+  font-size: 1.3rem; /* maior */
+  font-weight: 700;
+  border-radius: 40px;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
 
-    .description {
-      font-size: 1.1rem;
-      line-height: 1.6;
-      margin-bottom: 30px;
-      color: #d1e3f8;
-    }
+.btn-start:hover {
+  transform: scale(1.07);
+  box-shadow: 0 6px 25px rgba(0,0,0,0.5);
+  background: linear-gradient(135deg, #4895ef, #3f37c9);
+}
 
-    .btn-start {
-      background: linear-gradient(135deg, #4cc9f0, #4361ee);
-      border: none;
-      padding: 12px 35px;
-      font-size: 1.1rem;
-      font-weight: 600;
-      border-radius: 30px;
-      color: #fff;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-    }
+/* BOTÃO DE IDIOMA */
+.language-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}
 
-    .btn-start:hover {
-      transform: scale(1.05);
-      box-shadow: 0 6px 20px rgba(0,0,0,0.5);
-      background: linear-gradient(135deg, #4895ef, #3f37c9);
-    }
+select {
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: none;
+  font-size: 1rem;
+  background-color: #1b3b6f;
+  color: #fff;
+  cursor: pointer;
+}
 
-    .language-btn {
-      position: absolute;
-      top: 15px;
-      right: 15px;
-    }
+/* ANIMAÇÃO */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
-    select {
-      padding: 5px 10px;
-      border-radius: 8px;
-      border: none;
-      font-size: 0.9rem;
-      background-color: #1b3b6f;
-      color: #fff;
-      cursor: pointer;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
   </style>
 </head>
 <body>
