@@ -7,21 +7,25 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body, html { height: 100%; font-family: Arial, sans-serif; }
 body {
-  display: flex;  
-  flex-direction: column;
-  justify-content: center;
-  align-items: center; 
- background: linear-gradient(to bottom, #0d1b2a, #1b3b6f, #2c5ca0);
-  overflow: hidden; 
-  text-align: center;
   margin: 0;
-
-  /* Degradê com maior impacto */
- background: linear-gradient(to bottom, #0d1b2a, #1b3b6f, #2c5ca0);;
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  background-size: cover;
+  padding: 0;
+  font-family: 'Montserrat', sans-serif;
+  color: #e0e0e0;
+  background: linear-gradient(to bottom, #0d1b2a, #1b3b6f, #2c5ca0);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* sobe o conteúdo */
+  text-align: center;
+  padding: 40px 20px; /* mais respiro */
 }
+
+.container {
+  max-width: 650px;
+  margin-top: 40px; /* sobe ainda mais o título */
+  animation: fadeIn 1.5s ease-in-out;
+}
+
 
 body::after {
   content: ''; 
