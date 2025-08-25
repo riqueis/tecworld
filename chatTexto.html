@@ -297,7 +297,7 @@ body::after {
         </div>
     </div>    
     <!-- Botão Denunciar -->
-   <img src="bandeira.svg" alt="Denunciar" class="flag-icon" />
+   <img src="bandeira.svg" alt="Denunciar" class="flag-icon" id="flagIcon" />
 
     <!-- Área de chat -->
     <div class="chat-area" id="chatArea"></div>
@@ -398,6 +398,11 @@ body::after {
                 document.getElementById('thankYouMessage').style.display = 'none';
             }, 3000); // A mensagem desaparece após 3 segundos
         }
+        // Quando clicar na bandeira, abre a área de denúncia
+document.getElementById("flagIcon").addEventListener("click", function() {
+  reportChat();
+});
+
     </script>
 </body>
 </html>
