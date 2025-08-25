@@ -103,19 +103,15 @@ body::after {
             background-color: #d9534f;
         }
 
-        /* Estilo do botão Denunciar (diminuindo a palavra "Denunciar") */
-        .report-button {
-            position: absolute;
-            margin-top: 75px;
-            right: 20px;
-            font-size: 18px; /* Tamanho ajustado da palavra "Denunciar" */
-            color: #e40606; /* Cor inicial da letra */
-            cursor: pointer;
-        }
-
-        .report-button:hover {
-            color: #ff0000; /* Cor vermelha quando o mouse passa por cima */
-        }
+     .flag-icon {
+  position: absolute;
+  top: 53px; /* antes era -1px */
+  right: 0; /* antes era -10px */
+  width: 64px;
+  height: 64px;
+  cursor: pointer;
+  filter: invert(23%) sepia(95%) saturate(7411%) hue-rotate(358deg) brightness(95%) contrast(115%);
+}
 
         /* Estilos para a janela de denúncia */
         .report-modal {
@@ -301,7 +297,7 @@ body::after {
         </div>
     </div>    
     <!-- Botão Denunciar -->
-    <span class="report-button" onclick="reportChat()">Denunciar</span>
+   <img src="bandeira.svg" alt="Denunciar" class="flag-icon" />
 
     <!-- Área de chat -->
     <div class="chat-area" id="chatArea"></div>
