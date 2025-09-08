@@ -1,208 +1,123 @@
+<!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TecWorld</title>
-    <style>
-        * { 
-  margin: 0; 
-  padding: 0; 
-  box-sizing: border-box; 
-}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Video Chat 50/50</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-body, html { 
-  height: 100%; 
-  font-family: Arial, sans-serif; 
-}
+    html, body {
+      height: 100%;
+      width: 100%;
+      background-color: #000;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+    }
 
-body {
-  display: flex;  
-  flex-direction: column;
-  justify-content: center;
-  align-items: center; 
-  overflow: hidden; 
-  text-align: center;
-  margin: 0;
+    .video-container {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      width: 100%;
+      position: relative;
+    }
 
-  /* Gradiente da página inicial */
-  background-image: linear-gradient(to top, #0d1b2a 0%, #1b3b6f 50%, #2c5ca0 100%);
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
+    video {
+      width: 100%;
+      height: 50%;
+      object-fit: cover;
+      background: #111;
+      border: 2px solid #007bff;
+    }#userVideo {
+      transform: scaleX(-1); /* Espelha horizontalmente */
+    }
+    .flag-icon {
+      position: absolute;
+      top: -1px;
+      right: -10px;
+      width: 64px;
+      height: 64px;
+      cursor: pointer;
+      filter: invert(23%) sepia(95%) saturate(7411%) hue-rotate(358deg) brightness(95%) contrast(115%);
+    }
 
-body::after {
-  content: ''; 
-  position: fixed;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.5); /* um pouco mais escuro que antes */
-  z-index: -1;
-}
+    .input-container {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 10px;
+      background-color: rgba(0, 0, 0, 0.6);
+      z-index: 5;
+    }
 
-        .language-buttons { 
-            position: absolute; 
-            top: 10px; 
-            right: 10px; 
-            z-index: 2; 
-        }
-
-        .language-buttons select { 
-            padding: 5px 10px; 
-            cursor: pointer; 
-            background-color: #333; 
-            color: #fff;
-            border-radius: 5px;
-        }
-
-        .title { 
-    color: #ffffff; 
-    font-size: 10vw; 
-    font-weight: bold; 
-    margin-bottom: 2vh; /* Espaçamento entre título e descrição */
-    z-index: 2;
-    top:-3;
-}
-        .description { 
-            color: #e0e0e0; 
-            font-size: 4vw; 
-            line-height: 1.2; 
-            margin: 1.0%; /* Margem interna para evitar textos muito colados */
-            z-index: 2;
-        }
-
-        .start-button {
-            padding: 12px 24px;
-            background:  linear-gradient(to right, #00bfff, #00ffaa);
-            color: white;
-            font-size: 5vw;
-            font-weight: bold;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: 0.3s;
-            margin-top: 4vh;
-            z-index: 2;
-        }
-
-       .start-button:hover {
-    background: linear-gradient(to right, #00bfff, #00ffaa);
-    box-shadow: 0 0 15px rgba(0, 191, 255, 0.8), 0 0 30px rgba(0, 255, 170, 0.6);
-    transform: scale(1.05);
-}
-
-
-        /* Responsividade para telas menores */
-        @media (max-width: 768px) {
-            .title { 
-                font-size: 10vw; 
-            }
-
-            .description {
-                font-size: 5vw; 
-            }
-
-            .start-button {
-                font-size: 6vw; 
-                padding: 10px 20px;
-            }
-        }
-
-        /* Responsividade para telas muito pequenas (ex.: celulares antigos) */
-        @media (max-width: 480px) {
-            .title { 
-                font-size: 10vw; 
-            }
-
-            .description {
-                font-size: 6vw;
-            }
-
-            .start-button {
-                font-size: 7vw;
-            }
-        }
-
-        .overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.4); /* Ajuste a opacidade conforme necessário */
-            z-index: 1; /* Garante que a camada translúcida não bloqueie o texto */
-        }
-
-    </style>
+    .message-input {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      outline: none;
+    }
+  </style>
 </head>
 <body>
+  <div class="video-container" id="gestureArea">
+    <!-- Ícone de denúncia (bandeira) -->
+    <img src="bandeira.svg" alt="Denunciar" class="flag-icon" />
 
-    <!-- Título no centro -->
-    <div id="title" class="title">TecWorld</div>
+    <!-- Parte superior: vídeo da outra pessoa -->
+    <video id="remoteVideo" autoplay playsinline></video>
 
-    <!-- Descrição abaixo do título -->
-    <div id="description" class="description">
-        Conecte-se com pessoas ao redor do mundo. Explore bate-papos,<br> faça novas amizades, aprenda idiomas e descubra novas culturas.<br> Personalize suas tags e encontre pessoas com interesses em comum.<br> O mundo está a um clique de distância!
+    <!-- Parte inferior: seu vídeo -->
+    <video id="userVideo" autoplay muted playsinline></video>
+
+    <!-- Campo de digitação -->
+    <div class="input-container">
+      <input type="text" class="message-input" placeholder="Digite sua mensagem..." />
     </div>
+  </div>
 
-    <!-- Botão "Iniciar" -->
-    <button id="startButton" class="start-button" onclick="startChat()">Iniciar</button>
+  <script>
+    const userVideo = document.getElementById("userVideo");
 
-    <!-- Botão de seleção de idioma -->
-    <div class="language-buttons">
-        <select id="languageSelect" onchange="changeLanguage(this.value)">
-            <option value="pt">🇧🇷 Português</option>
-            <option value="en">🇺🇸 English</option>
-            <option value="es">🇪🇸 Español</option>
-        </select>
-    </div>
+    navigator.mediaDevices.getUserMedia({ video: true, audio: false })
+      .then((stream) => {
+        userVideo.srcObject = stream;
+      })
+      .catch((err) => {
+        console.error("Erro ao acessar a câmera:", err);
+      });
 
-    
+    let touchStartX = 0;
+    let touchEndX = 0;
 
-    <script>
-        // Traduções
-        const translations = {
-            pt: {
-                title: "TecWorld",
-                description: "Conecte-se com pessoas ao redor do mundo. Explore bate-papos,<br>faça novas amizades, aprenda idiomas e descubra novas culturas.<br>Personalize suas tags e encontre pessoas com interesses em comum.<br>O mundo está a um clique de distância!",
-                startButton: "Iniciar"
-            },
-            en: {
-                title: "TecWorld",
-                description: "Connect with people around the world. Explore chats,<br>make new friends, learn languages, and discover new cultures.<br>Personalize your tags and find people with common interests.<br>The world is just a click away!",
-                startButton: "Start"
-            },
-            es: {
-                title: "TecWorld",
-                description: "Conéctate con personas de todo el mundo. Explora chats,<br>haz nuevos amigos, aprende idiomas y descubre nuevas culturas.<br>Personaliza tus etiquetas y encuentra personas con intereses en común.<br>¡El mundo está a un clic de distancia!",
-                startButton: "Comenzar"
-            }
-        };
+    const gestureZone = document.getElementById("gestureArea");
 
-        // Função para mudar o idioma
-         function changeLanguage(language) {
-        localStorage.setItem('selectedLanguage', language); // Salva o idioma
-        updateText(language); // Atualiza os textos da página
+    gestureZone.addEventListener('touchstart', function(e) {
+      touchStartX = e.changedTouches[0].screenX;
+    }, false);
+
+    gestureZone.addEventListener('touchend', function(e) {
+      touchEndX = e.changedTouches[0].screenX;
+      handleGesture();
+    }, false);
+
+    function handleGesture() {
+      const distance = touchEndX - touchStartX;
+
+      if (distance < -50) {
+        alert("Pular o chat");
+      } else if (distance > 50) {
+        window.location.href = "inicial.html";
+      }
     }
-
-    // Função para atualizar os textos da página
-    function updateText(language) {
-        document.getElementById("title").innerHTML = translations[language].title;
-        document.getElementById("description").innerHTML = translations[language].description;
-        document.getElementById("startButton").innerHTML = translations[language].startButton;
-    }
-
-    // Ao carregar a página, define o idioma salvo
-     document.addEventListener('DOMContentLoaded', () => {
-            const savedLanguage = localStorage.getItem('selectedLanguage') || 'pt';
-            updateText(savedLanguage); // Atualiza com o idioma salvo
-            document.getElementById("languageSelect").value = savedLanguage;
-        });
-         function startChat() {
-        window.location.href = "login.html"; // Redireciona para a página desejada
-    }
-    </script>
-
+  </script>
 </body>
 </html>
 
