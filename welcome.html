@@ -1,24 +1,31 @@
-
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TecWorld</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body, html { height: 100%; font-family: Arial, sans-serif; }
+        * { 
+  margin: 0; 
+  padding: 0; 
+  box-sizing: border-box; 
+}
+
+body, html { 
+  height: 100%; 
+  font-family: Arial, sans-serif; 
+}
+
 body {
   display: flex;  
   flex-direction: column;
   justify-content: center;
   align-items: center; 
-  background-color: #0d0f12; 
   overflow: hidden; 
   text-align: center;
   margin: 0;
 
-  /* Degradê com maior impacto */
-  background-image: radial-gradient(circle at bottom right, #00aaff 0%, #005f8f 50%, #0d0f12 75%, #000000 100%);
+  /* Gradiente da página inicial */
+  background-image: linear-gradient(to top, #0d1b2a 0%, #1b3b6f 50%, #2c5ca0 100%);
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: cover;
@@ -49,14 +56,15 @@ body::after {
         }
 
         .title { 
-    color: rgb(176, 224, 230); 
-    font-size: 6vw; 
+    color: #ffffff; 
+    font-size: 10vw; 
     font-weight: bold; 
     margin-bottom: 2vh; /* Espaçamento entre título e descrição */
     z-index: 2;
+    top:-3;
 }
         .description { 
-            color: HSL(187, 52%, 80%); 
+            color: #e0e0e0; 
             font-size: 4vw; 
             line-height: 1.2; 
             margin: 1.0%; /* Margem interna para evitar textos muito colados */
@@ -65,7 +73,7 @@ body::after {
 
         .start-button {
             padding: 12px 24px;
-            background: linear-gradient(90deg, #6cc6df, #152e4d);
+            background:  linear-gradient(to right, #00bfff, #00ffaa);
             color: white;
             font-size: 5vw;
             font-weight: bold;
@@ -77,15 +85,17 @@ body::after {
             z-index: 2;
         }
 
-        .start-button:hover {
-            background: linear-gradient(90deg, #6cc6df, #152e4d);
-            transform: scale(1.05);
-        }
+       .start-button:hover {
+    background: linear-gradient(to right, #00bfff, #00ffaa);
+    box-shadow: 0 0 15px rgba(0, 191, 255, 0.8), 0 0 30px rgba(0, 255, 170, 0.6);
+    transform: scale(1.05);
+}
+
 
         /* Responsividade para telas menores */
         @media (max-width: 768px) {
             .title { 
-                font-size: 8vw; 
+                font-size: 10vw; 
             }
 
             .description {
@@ -128,7 +138,7 @@ body::after {
 <body>
 
     <!-- Título no centro -->
-    <div id="title" class="title">TecWorld - <br>Conectando o Mundo</div>
+    <div id="title" class="title">TecWorld</div>
 
     <!-- Descrição abaixo do título -->
     <div id="description" class="description">
@@ -147,23 +157,23 @@ body::after {
         </select>
     </div>
 
-    
+
 
     <script>
         // Traduções
         const translations = {
             pt: {
-                title: "TecWorld -<br> Conectando o Mundo",
+                title: "TecWorld",
                 description: "Conecte-se com pessoas ao redor do mundo. Explore bate-papos,<br>faça novas amizades, aprenda idiomas e descubra novas culturas.<br>Personalize suas tags e encontre pessoas com interesses em comum.<br>O mundo está a um clique de distância!",
                 startButton: "Iniciar"
             },
             en: {
-                title: "TecWorld - <br>Connecting the World",
+                title: "TecWorld",
                 description: "Connect with people around the world. Explore chats,<br>make new friends, learn languages, and discover new cultures.<br>Personalize your tags and find people with common interests.<br>The world is just a click away!",
                 startButton: "Start"
             },
             es: {
-                title: "TecWorld - <br>Conectando el Mundo",
+                title: "TecWorld",
                 description: "Conéctate con personas de todo el mundo. Explora chats,<br>haz nuevos amigos, aprende idiomas y descubre nuevas culturas.<br>Personaliza tus etiquetas y encuentra personas con intereses en común.<br>¡El mundo está a un clic de distancia!",
                 startButton: "Comenzar"
             }
