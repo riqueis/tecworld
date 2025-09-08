@@ -71,21 +71,25 @@ body::after {
             z-index: 2;
         }
 
-        .start-button {
-  background: #00bfff;
-  color: #fff;
+ /* BOTÃO AZUL NEON */
+.btn-start {
+  background: linear-gradient(135deg, #00bfff, #0077ff);
   border: none;
-  padding: 15px 40px;
-  font-size: 1.5rem;
-  border-radius: 50px;
+  padding: 16px 45px; /* maior */
+  font-size: 1.3rem; /* maior */
+  font-weight: 700;
+  border-radius: 40px;
+  color: #fff;
   cursor: pointer;
-  box-shadow: 0 0 20px #00bfff;
-  transition: 0.3s;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 15px rgba(0, 191, 255, 0.7), 0 0 25px rgba(0, 119, 255, 0.5);
 }
 
-.start-button:hover {
-  box-shadow: 0 0 30px #00bfff, 0 0 60px #00bfff;
-}
+.btn-start:hover {
+  transform: scale(1.07);
+  box-shadow: 0 0 25px rgba(0, 191, 255, 0.9), 0 0 40px rgba(0, 119, 255, 0.7);
+  background: linear-gradient(135deg, #00cfff, #005eff);
+      }
 
 
         /* Responsividade para telas menores */
