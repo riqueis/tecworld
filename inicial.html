@@ -350,15 +350,16 @@ body::before {
         
         }
 
-        .select-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            margin-top: 30px; /* Espaçamento adicional */
-            margin-right: 30px;
-        }
+      .select-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 30px; /* Espaçamento adicional */
+    margin-right: 30px;
+    box-sizing: border-box; /* evita barra horizontal */
+}
 
         .select-container select, .select-container #tag-input {
             margin: 10px 0;
@@ -638,6 +639,7 @@ document.addEventListener('DOMContentLoaded', function () {
     </script>    
 </body>
 </html>
+
 
 
 
