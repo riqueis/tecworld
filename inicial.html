@@ -274,20 +274,17 @@ body::before {
     background-color: #888787;
 }
 
-        .content {
-            flex: 1; /* Faz o conteúdo ocupar o espaço disponível */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            color: #e0e0e0;
-            text-align: center;
-            margin-top: 40px; /* Espaço para o cabeçalho */
-            overflow-y: auto;
-            width: 100%;
-            flex-direction: column;
-        }
+      .content { flex: 1; /* Faz o conteúdo ocupar o espaço disponível */
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start; 
+                align-items: center;
+                padding: 20px;
+                color: #e0e0e0; 
+                text-align: center;
+                margin-top: 40px; /* Espaço para o cabeçalho */ 
+                overflow-y: auto; width: 100%;
+               }
 
         .welcome {
             font-size: 32px;
@@ -297,7 +294,7 @@ body::before {
                 0 0 20px #00bfff,  /* Brilho mais forte */
                 0 0 30px #1e90ff,  /* Brilho intenso */
                 0 0 35px #1e90ff;  /* Brilho máximo controlado até 40px */
-             text-aling: center;
+           margin-right: 30px
         }
 
         .tagline {
@@ -323,6 +320,7 @@ body::before {
 
         .buttons {
             margin-top: 1px;
+            margin-right: 30px
         }
 
         .buttons button {
@@ -334,6 +332,7 @@ body::before {
             font-size: 16px;
             cursor: pointer;
             margin: 1px;
+            margin-right: 30px
         }
 
         .buttons button:hover {
@@ -348,6 +347,7 @@ body::before {
             border-radius: 5px;
             box-sizing: border-box; /* Garantir que padding e borda não aumentem a largura */
             margin-left: 20px; /* Remover margem direita excessiva */
+            margin-right: 30px
         }
 
         .select-container {
@@ -357,6 +357,7 @@ body::before {
             justify-content: center;
             width: 100%;
             margin-top: 30px; /* Espaçamento adicional */
+            margin-right: 30px
         }
 
         .select-container select, .select-container #tag-input {
@@ -366,6 +367,7 @@ body::before {
             max-width: 400px; /* Limita a largura */
             border-radius: 5px;
             box-sizing: border-box;
+            margin-right: 30px
         }
 
         .language-select {
@@ -378,11 +380,13 @@ body::before {
             cursor: pointer;
             text-align: center;
             box-sizing: border-box; /* Garantir que padding e borda não aumentem a largura */
+            margin-right: 30px
         }
 
         .language-select option {
             display: block;
             width: 100%;  /* Garantir que as opções ocupem a largura correta */
+            margin-right: 30px
         }
 
         .language-select {
@@ -392,6 +396,7 @@ body::before {
             background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"%3E%3Cpath fill="none" stroke="black" stroke-width="2" d="M5 7l5 5 5-5" /%3E%3C/svg%3E');
             background-repeat: no-repeat;
             background-position: right 10px center;
+            margin-right: 30px
         }
         /* Estilos para o ícone de coroa */
 
@@ -633,6 +638,7 @@ document.addEventListener('DOMContentLoaded', function () {
     </script>    
 </body>
 </html>
+
 
 
 
