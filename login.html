@@ -145,8 +145,18 @@ body::after {
     input[type="text"]::placeholder, input[type="password"]::placeholder, input[type="email"]::placeholder {
         color: #000;
     }
-    
-
+              .title { 
+     color: #ffffff; /* branco puro */
+  text-shadow: 
+    0 0 6px rgba(255, 255, 255, 0.9),
+    0 0 12px rgba(0, 191, 255, 0.6),
+    0 0 20px rgba(0, 191, 255, 0.5);
+    font-size: 15px; 
+    font-weight: bold; 
+    margin-bottom: 2vh; /* Espaçamento entre título e descrição */
+    z-index: 2;
+    top:-400;
+}
 
     </style>
 </head>
@@ -156,6 +166,7 @@ body::after {
             <!-- Conteúdo será gerado dinamicamente pelo JavaScript -->
         </form>
     </div>
+     <div id="title" class="title">TecWorld</div>
   <script>
     
     let currentLanguage = 'pt'; // Idioma padrão
