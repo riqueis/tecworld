@@ -9,14 +9,14 @@ body, html {
   height: 100%;
   margin: 0;
   font-family: Arial, sans-serif;
-  background-image: linear-gradient(to top, #0b1a30 0%, #1c3566 50%, #2a57a0 100%);
+  background-image: linear-gradient(to top, #0c1a2f 0%, #1a3663 50%, #2b5fa3 100%);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
   overflow-x: hidden;
   position: relative;
-  z-index: 0; /* Garante que body fique atrás de ::before */
+  z-index: 0;
 }
 
 body::before {
@@ -30,6 +30,7 @@ body::before {
   z-index: -1;
   pointer-events: none;
 }
+
 
 .header {
     top: 0;
@@ -640,6 +641,7 @@ document.addEventListener('DOMContentLoaded', function () {
     </script>    
 </body>
 </html>
+
 
 
 
