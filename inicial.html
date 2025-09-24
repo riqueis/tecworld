@@ -9,7 +9,7 @@ body, html {
   height: 100%;
   margin: 0;
   font-family: Arial, sans-serif;
-  background-image: url('./blue.avif');
+  background-image: linear-gradient(to top, #0b1a30 0%, #1c3566 50%, #2a57a0 100%);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -21,14 +21,14 @@ body, html {
 
 body::before {
   content: "";
-  position: fixed; /* ou absolute, dependendo do layout */
+  position: fixed;
   top: 0;
   left: 0;
   height: 100%;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.25); /* overlay suave */
   z-index: -1;
-  pointer-events: none; /* Garante que clique passe por cima */
+  pointer-events: none;
 }
 
 .header {
@@ -640,6 +640,7 @@ document.addEventListener('DOMContentLoaded', function () {
     </script>    
 </body>
 </html>
+
 
 
 
