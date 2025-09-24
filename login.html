@@ -51,12 +51,15 @@ body::after {
         }
 
 
-    .login-container
-     { display: flex; 
-        justify-content: center; 
-        align-items: center; 
-        height: 100%;
-         z-index: 2; }
+  .login-container {
+    display: flex; 
+    flex-direction: column; /* deixa em coluna */
+    justify-content: center; 
+    align-items: center; 
+    height: 100%;
+    z-index: 2;
+}
+
 
     form.invisible
      { background-color: transparent;
@@ -67,13 +70,10 @@ body::after {
              text-align: center;
              }
     h1
-     { font-size: 15vw;
+     { font-size: 15px;
          margin-bottom:25px;
            color: #ffffff; /* branco puro */
-  text-shadow: 
-    0 0 6px rgba(255, 255, 255, 0.9),
-    0 0 12px rgba(0, 191, 255, 0.6),
-    0 0 20px rgba(0, 191, 255, 0.5);
+ 
          }
     input
     [type="text"],
@@ -145,15 +145,31 @@ body::after {
     input[type="text"]::placeholder, input[type="password"]::placeholder, input[type="email"]::placeholder {
         color: #000;
     }
+            .title { 
+     color: #ffffff; /* branco puro */
+  text-shadow: 
+    0 0 6px rgba(255, 255, 255, 0.9),
+    0 0 12px rgba(0, 191, 255, 0.6),
+    0 0 20px rgba(0, 191, 255, 0.5);
+    font-size: 45px; 
+    font-weight: bold; 
+    z-index: 2;
+    top: -100000px;
+}
         
 
     </style>
 </head>
 <body>
-    <div class="login-container">
-        <form id="login-form" class="invisible" onsubmit="return validateForm(event)">
-            <!-- Conteúdo será gerado dinamicamente pelo JavaScript -->
-        </form>
+
+   <div class="login-container">
+ <h1 class="title">TecWorld</h1>
+
+ <form id="login-form" class="invisible" onsubmit="return validateForm(event)">
+        <!-- Conteúdo será gerado dinamicamente pelo JavaScript -->
+    </form>
+</div>
+
     </div>
   <script>
     
@@ -180,8 +196,8 @@ function showLogin() {
     const t = translations[currentLanguage]; // Obtém as traduções para o idioma selecionado
     const loginForm = document.getElementById('login-form');
     if (loginForm) {
-        loginForm.innerHTML = `
-            <h1>${t.heading}</h1>
+    loginForm.innerHTML = `
+                   <h1>${t.heading}</h1>
             <input type="text" id="email" placeholder="${t.emailPlaceholder}">
             <input type="password" id="password" placeholder="${t.passwordPlaceholder}">
             <div id="general-error" class="error-message"></div>
@@ -189,13 +205,15 @@ function showLogin() {
             <a href="#" class="forgot-password" onclick="showForgotPassword()">${t.forgotPassword}</a>
             <a href="#" class="create-account" onclick="showCreateAccount()">${t.createAccount}</a>
         `;
-    }
+
+}
+
 }
 
 
         const translations = {
             pt: {
-                heading: "TecWorld",
+                heading:"entrar",
                 emailPlaceholder: "Email ou nome de usuario",
                 passwordPlaceholder: "Senha",
                 loginButton: "Entrar",
@@ -217,7 +235,7 @@ function showLogin() {
                 termsError: "Você precisa aceitar os Termos de Uso e a Política de Privacidade."
             },
             en: {
-                heading: "TecWorld",
+                heading: "Log In",
                 emailPlaceholder: "Email or username",
                 passwordPlaceholder: "Password",
                 loginButton: "Login",
@@ -239,7 +257,7 @@ function showLogin() {
                 termsError: "You must accept the Terms of Use and Privacy Policy."
             },
             es: {
-                heading: "TecWorld",
+                heading: "Iniciar sesión",
                 emailPlaceholder: "Correo electrónico o nombre de usuario",
                 passwordPlaceholder: "Contraseña",
                 loginButton: "Iniciar sesión",
