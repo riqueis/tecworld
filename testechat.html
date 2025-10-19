@@ -1,124 +1,236 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Video Chat 50/50</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TecWorld</title>
   <style>
-    * {
+    /* ====== GERAL ====== */
+    body {
       margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+      font-family: 'Montserrat', sans-serif;
+      color: #e0e0e0;
+      background: linear-gradient(to top, #0d1b2a 0%, #1b3b6f 50%, #2c5ca0 100%);
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+      background-size: cover;
+      text-align: center;
     }
 
-    html, body {
-      height: 100%;
-      width: 100%;
-      background-color: #000;
-      font-family: Arial, sans-serif;
-      overflow: hidden;
+    /* ====== TOPO ====== */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
     }
 
-    .video-container {
+    .profile {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .avatar {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      border: 2px solid #00bfff;
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .user-info {
       display: flex;
       flex-direction: column;
-      height: 100%;
-      width: 100%;
-      position: relative;
+      align-items: flex-start;
     }
 
-    video {
-      width: 100%;
-      height: 50%;
-      object-fit: cover;
-      background: #111;
-      border: 2px solid #007bff;
-    }#userVideo {
-      transform: scaleX(-1); /* Espelha horizontalmente */
+    .username {
+      font-weight: 600;
+      color: #fff;
+      font-size: 1rem;
+      text-shadow: 0 0 8px #007bff;
     }
-    .flag-icon {
-      position: absolute;
-      top: -1px;
-      right: -10px;
-      width: 64px;
-      height: 64px;
+
+    .crown {
+      font-size: 1.1rem;
+      color: gold;
+      margin-left: 3px;
+    }
+
+    .user-id {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 6px;
+      padding: 2px 6px;
+      font-size: 0.8rem;
+      color: #cfd8dc;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(5px);
+    }
+
+    .premium-badge {
+      background: linear-gradient(45deg, #ffcc00, #f5b400);
+      padding: 5px 12px;
+      border-radius: 10px;
+      color: #000;
+      font-weight: 700;
+      box-shadow: 0 0 8px rgba(255, 204, 0, 0.7);
+      text-transform: lowercase;
+    }
+
+    .settings {
+      font-size: 1.4rem;
       cursor: pointer;
-      filter: invert(23%) sepia(95%) saturate(7411%) hue-rotate(358deg) brightness(95%) contrast(115%);
+      color: #cfd8dc;
+      transition: 0.3s;
+    }
+    .settings:hover {
+      color: #ffffff;
+      transform: rotate(20deg);
     }
 
-    .input-container {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      padding: 10px;
-      background-color: rgba(0, 0, 0, 0.6);
-      z-index: 5;
+    /* ====== CONTEÚDO ====== */
+    .main-content {
+      max-width: 500px;
+      margin: 60px auto;
+      padding: 0 20px;
     }
 
-    .message-input {
+    .welcome {
+      font-size: 2rem;
+      margin-bottom: 10px;
+      color: #fff;
+      text-shadow: 0 0 15px #00bfff;
+    }
+    .welcome span {
+      color: #00bfff;
+    }
+
+    .description {
+      font-size: 1rem;
+      color: #d0d8e0;
+      margin-bottom: 25px;
+      line-height: 1.5;
+    }
+
+    /* ====== SELETORES E INPUTS ====== */
+    .language-select,
+    .tag-input {
       width: 100%;
-      padding: 10px;
-      font-size: 16px;
-      border: none;
-      border-radius: 8px;
+      max-width: 400px;
+      padding: 12px;
+      margin: 8px auto;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
+      backdrop-filter: blur(6px);
+      font-size: 1rem;
       outline: none;
+      transition: 0.3s;
+      text-align: center;
+    }
+
+    .language-select:focus,
+    .tag-input:focus {
+      border-color: #00bfff;
+      box-shadow: 0 0 8px #00bfff;
+    }
+
+    /* ====== BOTÕES ====== */
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .chat-btn {
+      background: linear-gradient(to right, #00bfff, #0077ff);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      padding: 12px 25px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.3s;
+      box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+    }
+
+    .chat-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px rgba(0, 191, 255, 0.8);
+    }
+
+    .chat-btn.video {
+      background: linear-gradient(to right, #0080ff, #0047b3);
+    }
+
+    /* ====== RODAPÉ ====== */
+    .footer {
+      font-size: 0.85rem;
+      margin-top: 60px;
+      color: #b0bec5;
+      opacity: 0.8;
+    }
+
+    /* ====== RESPONSIVIDADE ====== */
+    @media (max-width: 600px) {
+      .welcome {
+        font-size: 1.8rem;
+      }
+
+      .chat-btn {
+        padding: 10px 18px;
+        font-size: 0.95rem;
+      }
+
+      .main-content {
+        margin-top: 40px;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="video-container" id="gestureArea">
-    <!-- Ícone de denúncia (bandeira) -->
-    <img src="bandeira.svg" alt="Denunciar" class="flag-icon" />
-
-    <!-- Parte superior: vídeo da outra pessoa -->
-    <video id="remoteVideo" autoplay playsinline></video>
-
-    <!-- Parte inferior: seu vídeo -->
-    <video id="userVideo" autoplay muted playsinline></video>
-
-    <!-- Campo de digitação -->
-    <div class="input-container">
-      <input type="text" class="message-input" placeholder="Digite sua mensagem..." />
+  <header class="header">
+    <div class="profile">
+      <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Avatar" class="avatar">
+      <div class="user-info">
+        <span class="username">Riques</span>
+        <span class="crown">👑</span>
+        <div class="user-id">id:0000001</div>
+      </div>
     </div>
-  </div>
+    <div class="premium-badge">premium</div>
+    <div class="settings">⚙️</div>
+  </header>
 
-  <script>
-    const userVideo = document.getElementById("userVideo");
+  <main class="main-content">
+    <h1 class="welcome">Bem-vindo, <span>Riques</span></h1>
+    <p class="description">
+      🌍 O mundo inteiro está online esperando para conversar com você.
+      Clique, conecte-se e descubra amizades, culturas e experiências incríveis a cada nova conversa.
+      Sua próxima conexão pode estar a apenas um clique de distância!
+    </p>
 
-    navigator.mediaDevices.getUserMedia({ video: true, audio: false })
-      .then((stream) => {
-        userVideo.srcObject = stream;
-      })
-      .catch((err) => {
-        console.error("Erro ao acessar a câmera:", err);
-      });
+    <select class="language-select">
+      <option>Chinês</option>
+      <option>Português</option>
+      <option>Inglês</option>
+      <option>Espanhol</option>
+      <option>Francês</option>
+    </select>
 
-    let touchStartX = 0;
-    let touchEndX = 0;
+    <input type="text" class="tag-input" placeholder="Escreva sua tag Ex: Anime, Jogos, Filmes">
 
-    const gestureZone = document.getElementById("gestureArea");
+    <div class="buttons">
+      <button class="chat-btn">Chat de Texto</button>
+      <button class="chat-btn video">Chat de Vídeo</button>
+    </div>
+  </main>
 
-    gestureZone.addEventListener('touchstart', function(e) {
-      touchStartX = e.changedTouches[0].screenX;
-    }, false);
-
-    gestureZone.addEventListener('touchend', function(e) {
-      touchEndX = e.changedTouches[0].screenX;
-      handleGesture();
-    }, false);
-
-    function handleGesture() {
-      const distance = touchEndX - touchStartX;
-
-      if (distance < -50) {
-        alert("Pular o chat");
-      } else if (distance > 50) {
-        window.location.href = "inicial.html";
-      }
-    }
-  </script>
+  <footer class="footer">
+    © 2024 TecWorld. Todos os direitos reservados.
+  </footer>
 </body>
 </html>
-
-
