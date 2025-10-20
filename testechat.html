@@ -1,182 +1,241 @@
-<!DOCTYPE html>
+<!DO<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TecWorld - Início</title>
+  <title>TecWorld</title>
   <style>
+    /* ====== GERAL ====== */
     * {
-      margin: 0;
-      padding: 0;
       box-sizing: border-box;
     }
 
     body {
+      margin: 0;
       font-family: 'Montserrat', sans-serif;
       color: #e0e0e0;
       background: linear-gradient(to top, #0d1b2a 0%, #1b3b6f 50%, #2c5ca0 100%);
       background-attachment: fixed;
       background-repeat: no-repeat;
       background-size: cover;
-      overflow-x: hidden;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+      text-align: center;
+      overflow-x: hidden; /* 🔧 evita rolagem lateral */
     }
 
-    .container {
-      text-align: center;
-      padding: 20px;
-      width: 90%;
-      max-width: 450px;
-      background: rgba(255, 255, 255, 0.08);
-      border-radius: 20px;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-      backdrop-filter: blur(8px);
+    /* ====== TOPO ====== */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 5%;
+      width: 100%;
+      max-width: 100vw;
     }
 
     .profile {
-      margin-bottom: 25px;
-      margin-top: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .avatar {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      border: 2px solid #00bfff;
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .user-info {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
     }
 
     .username {
-      font-size: 1.8em;
-      font-weight: bold;
-      color: #ffffff;
-      margin-top: 15px;
-      text-shadow: 0 0 8px rgba(0, 123, 255, 0.6);
+      font-weight: 600;
+      color: #fff;
+      font-size: 1rem;
+      text-shadow: 0 0 8px #007bff;
     }
 
-    .userid {
-      font-size: 1em;
-      color: #a9c3e5;
-      margin-top: 8px;
+    .user-id {
       background: rgba(255, 255, 255, 0.1);
-      padding: 6px 12px;
+      border-radius: 6px;
+      padding: 2px 6px;
+      font-size: 0.8rem;
+      color: #cfd8dc;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(5px);
+    }
+
+    .premium-badge {
+      background: linear-gradient(45deg, #ffcc00, #f5b400);
+      padding: 5px 12px;
       border-radius: 10px;
-      display: inline-block;
+      color: #000;
+      font-weight: 700;
+      box-shadow: 0 0 8px rgba(255, 204, 0, 0.7);
+      text-transform: lowercase;
     }
 
-    h2 {
-      margin-top: 25px;
-      font-size: 1.4em;
-      text-shadow: 0 0 6px rgba(255, 255, 255, 0.2);
+    .settings {
+      font-size: 1.4rem;
+      cursor: pointer;
+      color: #cfd8dc;
+      transition: 0.3s;
+    }
+    .settings:hover {
+      color: #ffffff;
+      transform: rotate(20deg);
     }
 
-    p {
-      margin: 15px 0 25px;
-      color: #d0d8e0;
-      font-size: 1em;
-    }
-
-    .select-container select,
-    .select-container input {
+    /* ====== CONTEÚDO ====== */
+    .main-content {
+      max-width: 500px;
+      margin: 60px auto;
+      padding: 0 20px;
       width: 100%;
-      padding: 10px;
-      margin: 10px 0;
+    }
+
+    .welcome {
+      font-size: 2rem;
+      margin-bottom: 10px;
+      color: #fff;
+      text-shadow: 0 0 15px #00bfff;
+    }
+    .welcome span {
+      color: #00bfff;
+    }
+
+    .description {
+      font-size: 1rem;
+      color: #d0d8e0;
+      margin-bottom: 25px;
+      line-height: 1.5;
+    }
+
+    /* ====== SELETORES E INPUTS ====== */
+    .language-select,
+    .tag-input {
+      width: 100%;
+      max-width: 400px;
+      padding: 12px;
+      margin: 8px auto;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
+      backdrop-filter: blur(6px);
+      font-size: 1rem;
+      outline: none;
+      transition: 0.3s;
+      text-align: center;
+      display: block;
+    }
+
+    .language-select:focus,
+    .tag-input:focus {
+      border-color: #00bfff;
+      box-shadow: 0 0 8px #00bfff;
+    }
+
+    /* ====== BOTÕES ====== */
+    .buttons {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-top: 20px;
+      width: 100%;
+    }
+
+    .chat-btn {
+      background: linear-gradient(to right, #00bfff, #0077ff);
+      color: white;
       border: none;
       border-radius: 12px;
-      background: rgba(255, 255, 255, 0.15);
-      color: white;
-      font-size: 1em;
-      outline: none;
-      transition: all 0.3s ease;
-    }
-
-    .select-container select:focus,
-    .select-container input:focus {
-      background: rgba(255, 255, 255, 0.25);
-      box-shadow: 0 0 10px rgba(0, 150, 255, 0.6);
-    }
-
-    .button-container {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      margin-top: 20px;
-    }
-
-    .btn {
-      padding: 12px 0;
-      border: none;
-      border-radius: 15px;
-      background: linear-gradient(to right, #007bff, #00bfff);
-      color: white;
-      font-size: 1.1em;
-      font-weight: bold;
+      padding: 12px 25px;
+      font-size: 1rem;
       cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 0 10px rgba(0, 150, 255, 0.3);
+      transition: 0.3s;
+      box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
     }
 
-    .btn:hover {
-      box-shadow: 0 0 20px rgba(0, 150, 255, 0.6);
-      transform: scale(1.02);
+    .chat-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px rgba(0, 191, 255, 0.8);
     }
 
-    .premium-btn {
-      background: linear-gradient(to right, #ffcc33, #ff9900);
-      box-shadow: 0 0 10px rgba(255, 200, 50, 0.3);
+    .chat-btn.video {
+      background: linear-gradient(to right, #0080ff, #0047b3);
     }
 
-    .premium-btn:hover {
-      box-shadow: 0 0 20px rgba(255, 200, 50, 0.6);
-      transform: scale(1.03);
+    /* ====== RODAPÉ ====== */
+    .footer {
+      font-size: 0.85rem;
+      margin-top: 60px;
+      color: #b0bec5;
+      opacity: 0.8;
+      padding: 10px;
     }
 
-    footer {
-      margin-top: 30px;
-      color: #b0c4de;
-      font-size: 0.9em;
-    }
-
-    @media (max-width: 480px) {
-      .container {
-        width: 95%;
-        padding: 15px;
+    /* ====== RESPONSIVIDADE ====== */
+    @media (max-width: 600px) {
+      .welcome {
+        font-size: 1.8rem;
       }
 
-      .username {
-        font-size: 1.5em;
+      .chat-btn {
+        padding: 10px 18px;
+        font-size: 0.95rem;
       }
 
-      .btn {
-        font-size: 1em;
+      .main-content {
+        margin-top: 40px;
       }
     }
   </style>
 </head>
 <body>
-  <div class="container">
+  <header class="header">
     <div class="profile">
-      <div class="username">Riques</div>
-      <div class="userid">ID: 0000001</div>
+      <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Avatar" class="avatar">
+      <div class="user-info">
+        <span class="username">Riques</span>
+        <div class="user-id">id:0000001</div>
+      </div>
     </div>
+    <div class="premium-badge">premium</div>
+    <div class="settings">⚙️</div>
+  </header>
 
-    <h2>Bem-vindo ao TecWorld</h2>
-    <p>Escolha o idioma e uma tag para encontrar pessoas com os mesmos interesses.</p>
+  <main class="main-content">
+    <h1 class="welcome">Bem-vindo, <span>Riques</span></h1>
+    <p class="description">
+      🌍 O mundo inteiro está online esperando para conversar com você.
+      Clique, conecte-se e descubra amizades, culturas e experiências incríveis a cada nova conversa.
+      Sua próxima conexão pode estar a apenas um clique de distância!
+    </p>
 
-    <div class="select-container">
-      <select>
-        <option>Português</option>
-        <option>Inglês</option>
-        <option>Espanhol</option>
-      </select>
-      <input type="text" placeholder="Digite uma tag (ex: Anime, Música)">
+    <select class="language-select">
+      <option>Chinês</option>
+      <option>Português</option>
+      <option>Inglês</option>
+      <option>Espanhol</option>
+      <option>Francês</option>
+    </select>
+
+    <input type="text" class="tag-input" placeholder="Escreva sua tag Ex: Anime, Jogos, Filmes">
+
+    <div class="buttons">
+      <button class="chat-btn">Chat de Texto</button>
+      <button class="chat-btn video">Chat de Vídeo</button>
     </div>
+  </main>
 
-    <div class="button-container">
-      <button class="btn">Chat de Texto</button>
-      <button class="btn">Chat de Vídeo</button>
-      <button class="btn premium-btn">Premium</button>
-    </div>
-
-    <footer>
-      © 2024 TecWorld. Todos os direitos reservados.
-    </footer>
-  </div>
+  <footer class="footer">
+    © 2024 TecWorld. Todos os direitos reservados.
+  </footer>
 </body>
 </html>
