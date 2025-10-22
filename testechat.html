@@ -198,7 +198,25 @@
       .main-content {
         margin-top: 40px;
       }
-    }
+    
+    .profile-options {
+    position: absolute;
+    top: 12%;
+    left: 0;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.profile-options.hidden {
+    display: none;
+}
   </style>
 </head>
 <body>
