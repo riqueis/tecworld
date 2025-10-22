@@ -119,30 +119,28 @@
       line-height: 1.5;
     }
 
-    /* ====== SELETORES E INPUTS ====== */
-    .language-select
-    .tag-input {
-      width: 100%;
-      max-width: 400px;
-      padding: 12px;
-      margin: 8px auto;
-      border-radius: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      background: rgba(255, 255, 255, 0.15);
-      color: #fff;
-      backdrop-filter: blur(6px);
-      font-size: 1rem;
-      outline: none;
-      transition: 0.3s;
-      text-align: center;
-      display: block;
-    }
+    .input-field {
+  padding: 12px;
+  margin: 8px auto;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  backdrop-filter: blur(6px);
+  font-size: 1rem;
+  outline: none;
+  transition: 0.3s;
+  text-align: center;
+  display: block;
+  width: 80%;
+  max-width: 300px;
+}
 
-    .language-select:focus,
-    .tag-input:focus {
-      border-color: #00bfff;
-      box-shadow: 0 0 8px #00bfff;
-    }
+.input-field:focus {
+  border-color: #00bfff;
+  box-shadow: 0 0 8px #00bfff;
+}
+
 
     /* ====== BOTÕES ====== */
     .buttons {
@@ -332,43 +330,43 @@
       Sua próxima conexão pode estar a apenas um clique de distância!
     </p>
 
-   <div class="language-select">
-            <select class="language-select" id="language-select">
-                <option value="zh">Chinês</option>
-                <option value="es">Espanhol</option>
-                <option value="en">Inglês</option>
-                <option value="hi">Hindi</option>
-                <option value="ar">Árabe</option>
-                <option value="bn">Bengali</option>
-                <option value="pt">Português</option>
-                <option value="ru">Russo</option>
-                <option value="ja">Japonês</option>
-                <option value="de">Alemão</option>
-                <option value="ko">Coreano</option>
-                <option value="fr">Francês</option>
-                <option value="tr">Turco</option>
-                <option value="it">Italiano</option>
-                <option value="vi">Vietnamita</option>
-                <option value="ta">Tâmil</option>
-                <option value="ur">Urdu</option>
-                <option value="mr">Marata</option>
-                <option value="te">Télugo</option>
-                <option value="kn">Canará</option>
-                <option value="ml">Malaiala</option>
-                <option value="pa">Punjabi</option>
-                <option value="gu">Guzerate</option>
-                <option value="pl">Polonês</option>
-                <option value="uk">Ucraniano</option>
-            </select>
-            <br>
-            <input id="tag-input" type="text" placeholder="Escreva sua tag Ex: Anime, Jogos, Filmes" />
-        </div>
+<div class="language-tag-container">
+  <select class="input-field" id="language-select">
+    <option value="zh">Chinês</option>
+    <option value="es">Espanhol</option>
+    <option value="en">Inglês</option>
+    <option value="hi">Hindi</option>
+    <option value="ar">Árabe</option>
+    <option value="bn">Bengali</option>
+    <option value="pt">Português</option>
+    <option value="ru">Russo</option>
+    <option value="ja">Japonês</option>
+    <option value="de">Alemão</option>
+    <option value="ko">Coreano</option>
+    <option value="fr">Francês</option>
+    <option value="tr">Turco</option>
+    <option value="it">Italiano</option>
+    <option value="vi">Vietnamita</option>
+    <option value="ta">Tâmil</option>
+    <option value="ur">Urdu</option>
+    <option value="mr">Marata</option>
+    <option value="te">Télugo</option>
+    <option value="kn">Canará</option>
+    <option value="ml">Malaiala</option>
+    <option value="pa">Punjabi</option>
+    <option value="gu">Guzerate</option>
+    <option value="pl">Polonês</option>
+    <option value="uk">Ucraniano</option>
+  </select>
 
-        <!-- Botões para navegar para chats -->
-        <div class="buttons">
-    <button onclick="window.location.href='chatTexto.html'">Chat de Texto</button>
-    <button onclick="window.location.href='ChatVideo.html'">Chat de Vídeo</button>
-        </div>
+  <input class="input-field" type="text" placeholder="Escreva sua tag Ex: Anime, Jogos, Filmes" />
+</div>
+
+<div class="buttons">
+  <button class="chat-btn" onclick="window.location.href='chatTexto.html'">Chat de Texto</button>
+  <button class="chat-btn video" onclick="window.location.href='ChatVideo.html'">Chat de Vídeo</button>
+</div>
+
     </div>
 
     <!-- Rodapé -->
