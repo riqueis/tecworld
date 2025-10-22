@@ -206,40 +206,213 @@
     <div class="profile">
       <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Avatar" class="avatar">
       <div class="user-info">
-        <span class="username">Riques</span>
-        <div class="user-id">id:0000001</div>
-      </div>
+          <span class="username">Nome de Usuário</span>
+                <span id="user-id">#1234567
+                </span> <!-- Este ID será substituído pelo valor salvo no localStorage -->
+     </div>
     </div>
+      <button class="unlimited-jumps-btn" onclick="openModal()">premium</button>
     <div class="premium-badge">premium</div>
     <div class="settings">⚙️</div>
   </header>
+  
+        <div class="profile-options hidden" id="profileOptions">
+            <button class="option-button" onclick="changeUsername()">Mudar Nome de Usuário</button>
+            <button class="option-button" onclick="changeProfileImage()">Mudar Imagem de Perfil</button>
+        </div>
+    </div>
+      </div>
+     
+      <body>
+
+   <div class="modal-overlay" id="paymentModal">
+            <div class="modal-content">
+                <h2>Pague R$10 para obter Pulos Ilimitados</h2>
+                <div class="qr-code">
+                    QR Code<br> (Imagem aqui)
+                </div>
+                <p>Use o código QR acima para fazer o pagamento</p>
+                
+                <!-- Botão Assinar dentro do Modal, acima do botão Fechar -->
+                <button class="unlimited-jumps-btn" onclick="sign()">Assinar</button>
+                
+                <button class="close-btn" onclick="closeModal()">Fechar</button>
+            </div>
+        </div>
 
   <main class="main-content">
-    <h1 class="welcome">Bem-vindo, <span>Riques</span></h1>
+    <h1 class="welcome">Bem-vindo,<br><span id="dynamicUsername">Nome de Usuário!</span></div>
     <p class="description">
       🌍 O mundo inteiro está online esperando para conversar com você.
       Clique, conecte-se e descubra amizades, culturas e experiências incríveis a cada nova conversa.
       Sua próxima conexão pode estar a apenas um clique de distância!
     </p>
 
-    <select class="language-select">
-      <option>Chinês</option>
-      <option>Português</option>
-      <option>Inglês</option>
-      <option>Espanhol</option>
-      <option>Francês</option>
-    </select>
+   <div class="select-container">
+            <select class="language-select" id="language-select">
+                <option value="zh">Chinês</option>
+                <option value="es">Espanhol</option>
+                <option value="en">Inglês</option>
+                <option value="hi">Hindi</option>
+                <option value="ar">Árabe</option>
+                <option value="bn">Bengali</option>
+                <option value="pt">Português</option>
+                <option value="ru">Russo</option>
+                <option value="ja">Japonês</option>
+                <option value="de">Alemão</option>
+                <option value="ko">Coreano</option>
+                <option value="fr">Francês</option>
+                <option value="tr">Turco</option>
+                <option value="it">Italiano</option>
+                <option value="vi">Vietnamita</option>
+                <option value="ta">Tâmil</option>
+                <option value="ur">Urdu</option>
+                <option value="mr">Marata</option>
+                <option value="te">Télugo</option>
+                <option value="kn">Canará</option>
+                <option value="ml">Malaiala</option>
+                <option value="pa">Punjabi</option>
+                <option value="gu">Guzerate</option>
+                <option value="pl">Polonês</option>
+                <option value="uk">Ucraniano</option>
+            </select>
+            <br>
+            <input id="tag-input" type="text" placeholder="Escreva sua tag Ex: Anime, Jogos, Filmes" />
+        </div>
 
-    <input type="text" class="tag-input" placeholder="Escreva sua tag Ex: Anime, Jogos, Filmes">
-
-    <div class="buttons">
-      <button class="chat-btn">Chat de Texto</button>
-      <button class="chat-btn video">Chat de Vídeo</button>
+        <!-- Botões para navegar para chats -->
+        <div class="buttons">
+    <button onclick="window.location.href='chatTexto.html'">Chat de Texto</button>
+    <button onclick="window.location.href='ChatVideo.html'">Chat de Vídeo</button>
+        </div>
     </div>
-  </main>
 
-  <footer class="footer">
-    © 2024 TecWorld. Todos os direitos reservados.
-  </footer>
+    <!-- Rodapé -->
+    <div class="footer">
+        <p>&copy; 2024 TecWorld. Todos os direitos reservados.</p>
+    </div>
+    <script>
+     // Função para abrir o modal
+function openModal() {
+    document.getElementById('paymentModal').style.display = 'flex'; // Torna o modal visível
+}
+
+// Função para fechar o modal
+function closeModal() {
+    document.getElementById('paymentModal').style.display = 'none'; // Esconde o modal
+}
+
+// Função para alterar o nome de usuário
+function changeUsername() {
+    let newUsername = prompt("Digite seu novo nome de usuário:");
+    if (newUsername && newUsername.trim() !== "") {
+        // Atualiza o nome de usuário exibido
+        document.querySelector(".username").textContent = newUsername;
+        document.getElementById("dynamicUsername").textContent = newUsername;
+
+        // Salva o novo nome de usuário no localStorage
+        const email = localStorage.getItem("email"); // Recupera o e-mail logado
+        const userData = JSON.parse(localStorage.getItem("user_" + email)); // Recupera os dados do usuário
+        userData.username = newUsername; // Atualiza o nome de usuário
+        localStorage.setItem("user_" + email, JSON.stringify(userData)); // Atualiza no localStorage
+        localStorage.setItem("username", newUsername); // Atualiza no localStorage global
+    }
+}
+
+// Função para alterar a imagem de perfil
+function changeProfileImage() {
+    let newImageUrl = prompt("Cole o URL da nova imagem de perfil:");
+    if (newImageUrl && /\.(jpeg|jpg|png|gif|bmp)$/i.test(newImageUrl)) {
+        document.querySelector(".profile img").src = newImageUrl;
+    } else {
+        alert("URL inválida. Certifique-se de inserir um link de imagem válido.");
+    }
+}
+
+// Função de login seguro
+function login() {
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+
+    // Recupera os dados do usuário usando o e-mail
+    const userData = localStorage.getItem("user_" + email);
+
+    if (userData) {
+        const parsedData = JSON.parse(userData);
+
+        // Verifica se a senha corresponde
+        if (parsedData.password === password) {
+            // Sucesso no login, salva o e-mail, ID e nome de usuário no localStorage
+            localStorage.setItem("email", email); // Salva o e-mail logado
+            localStorage.setItem("userId", parsedData.id); // Salva o ID do usuário
+            localStorage.setItem("username", parsedData.username); // Salva o nome de usuário
+            window.location.href = "inicial.html";  // Redireciona para a página inicial
+        } else {
+            displayError('E-mail ou senha inválidos.');
+        }
+    } else {
+        // E-mail não encontrado
+        displayError('E-mail não registrado.');
+    }
+}
+
+// Exibe mensagens de erro de forma segura
+function displayError(message) {
+    const errorElement = document.getElementById('general-error');
+    if (errorElement) {
+        errorElement.textContent = message;
+        errorElement.style.display = 'block';
+    }
+}
+// Função para carregar o nome de usuário e ID após o login
+document.addEventListener('DOMContentLoaded', function () {
+    const email = localStorage.getItem("email");  // Recupera o e-mail logado
+    if (email) {
+        const userData = localStorage.getItem("user_" + email); // Recupera os dados do usuário com base no e-mail
+
+        if (userData) {
+            const parsedData = JSON.parse(userData);
+            const savedUsername = parsedData.username;
+            const savedUserId = parsedData.id || "ID não definido";  // Se não houver ID, mostra uma mensagem de fallback
+
+            if (savedUsername) {
+                // Substitui o nome de usuário nas áreas desejadas
+                document.querySelector(".username").textContent = savedUsername;
+                document.getElementById("dynamicUsername").textContent = savedUsername;
+            }
+
+            // Exibe o ID do usuário na página com formatação
+            if (savedUserId) {
+                const formattedId = `id:${String(savedUserId).padStart(7, '0')}`;
+                document.getElementById("user-id").textContent = formattedId;
+            }
+        } else {
+            console.warn("Usuário não encontrado no localStorage.");
+        }
+    } else {
+        console.warn("Nenhum usuário logado.");
+    }
+
+    // Abertura e fechamento do menu de perfil
+    const profile = document.querySelector(".profile");
+    const profileOptions = document.getElementById("profileOptions");
+
+    if (profile && profileOptions) {
+        profile.addEventListener("click", function (event) {
+            profileOptions.classList.toggle("hidden");
+            event.stopPropagation();
+        });
+
+        document.addEventListener("click", function () {
+            profileOptions.classList.add("hidden");
+        });
+
+        profileOptions.addEventListener("click", function (event) {
+            event.stopPropagation();
+        });
+    }
+});
+
+    </script>    
 </body>
 </html>
