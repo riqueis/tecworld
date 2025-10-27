@@ -387,7 +387,7 @@
         <p>&copy; 2024 TecWorld. Todos os direitos reservados.</p>
     </div>
     <script>
-     // Função para abrir o modal
+   // Função para abrir o modal
 function openModal() {
     document.getElementById('paymentModal').style.display = 'flex'; // Torna o modal visível
 }
@@ -414,7 +414,7 @@ function changeUsername() {
     }
 }
 
-// Função para alterar a imagem de perfil
+// Função para alterar a imagem de perfil via URL
 function changeProfileImage() {
     let newImageUrl = prompt("Cole o URL da nova imagem de perfil:");
     if (newImageUrl && /\.(jpeg|jpg|png|gif|bmp)$/i.test(newImageUrl)) {
@@ -422,6 +422,34 @@ function changeProfileImage() {
     } else {
         alert("URL inválida. Certifique-se de inserir um link de imagem válido.");
     }
+}
+
+// 🔹 Função para escolher imagem do dispositivo (sem precisar de URL)
+function chooseLocalProfileImage() {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'image/*';
+
+    input.onchange = function(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.querySelector(".profile img").src = e.target.result;
+
+                // Salva a imagem no localStorage (como base64)
+                const email = localStorage.getItem("email");
+                if (email) {
+                    const userData = JSON.parse(localStorage.getItem("user_" + email));
+                    userData.profileImage = e.target.result;
+                    localStorage.setItem("user_" + email, JSON.stringify(userData));
+                }
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
+    input.click();
 }
 
 // Função de login seguro
@@ -459,7 +487,8 @@ function displayError(message) {
         errorElement.style.display = 'block';
     }
 }
-// Função para carregar o nome de usuário e ID após o login
+
+// Função para carregar o nome de usuário, ID e imagem após o login
 document.addEventListener('DOMContentLoaded', function () {
     const email = localStorage.getItem("email");  // Recupera o e-mail logado
     if (email) {
@@ -480,6 +509,11 @@ document.addEventListener('DOMContentLoaded', function () {
             if (savedUserId) {
                 const formattedId = `id:${String(savedUserId).padStart(7, '0')}`;
                 document.getElementById("user-id").textContent = formattedId;
+            }
+
+            // 🔹 Se houver imagem salva, exibe
+            if (parsedData.profileImage) {
+                document.querySelector(".profile img").src = parsedData.profileImage;
             }
         } else {
             console.warn("Usuário não encontrado no localStorage.");
@@ -507,6 +541,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
+
 
     </script>    
 </body>
