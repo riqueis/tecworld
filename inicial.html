@@ -1,145 +1,207 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TecWorld</title>
-    <style>
-body, html {
-  height: 100%;
-  margin: 0;
-  font-family: Arial, sans-serif;
-  overflow-x: hidden;
-  position: relative;
-  z-index: 0;
 
-  /* Gradiente da página */
- background-image: linear-gradient(to top, #14243a 0%, #254973 50%, #3d6fb0 100%);
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TecWorld</title>
+  <style>
+    /* ====== GERAL ====== */
+    * {
+      box-sizing: border-box;
+    }
+
+   body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  color: #e0e0e0;
+  background: linear-gradient(to top, #0d1b2a 0%, #1b3b6f 50%, #2c5ca0 100%);
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: center;
+  text-align: center;
+  overflow-x: hidden; /* evita rolagem lateral */
+  overflow-y: hidden; /* evita rolagem vertical */
+   }
+    
+
+
+    /* ====== TOPO ====== */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 5%;
+      width: 100%;
+      max-width: 100vw;
+    }
+
+    .profile {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .avatar {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      border: 2px solid #00bfff;
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .user-info {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .username {
+      font-weight: 600;
+      color: #fff;
+      font-size: 1rem;
+      text-shadow: 0 0 8px #007bff;
+      margin-top: 10px;
+    }
+
+    .user-id {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 6px;
+      padding: 2px 6px;
+      font-size: 0.8rem;
+      color: #cfd8dc;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(5px);
+      margin-right: 10px;
+      
+    }
+
+    .premium-badge {
+      background: linear-gradient(45deg, #ffcc00, #f5b400);
+      padding: 5px 12px;
+      border-radius: 10px;
+      color: #000;
+      font-weight: 700;
+      box-shadow: 0 0 8px rgba(255, 204, 0, 0.7);
+      text-transform: lowercase;
+    }
+
+    .settings {
+      font-size: 1.4rem;
+      cursor: pointer;
+      color: #cfd8dc;
+      transition: 0.3s;
+    }
+    .settings:hover {
+      color: #ffffff;
+      transform: rotate(20deg);
+    }
+
+    /* ====== CONTEÚDO ====== */
+    .main-content {
+      max-width: 500px;
+      margin: 60px auto;
+      padding: 0 20px;
+      width: 100%;
+    }
+
+    .welcome {
+      font-size: 5rem;
+      margin-bottom: 35px;
+      color: #fff;
+      text-shadow: 0 0 15px #00bfff;
+      margin-top: 70px;
+    }
+    .welcome span {
+      color: #00bfff;
+    }
+
+    .description {
+      font-size: 1.3rem;
+      color: #d0d8e0;
+      margin-bottom: 25px;
+      line-height: 1.5;
+    }
+
+    .input-field {
+  padding: 12px;
+  margin: 8px auto;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  backdrop-filter: blur(6px);
+  font-size: 1rem;
+  outline: none;
+  transition: 0.3s;
+  text-align: center;
+  display: block;
+  width: 80%;
+  max-width: 300px;
+}
+
+.input-field:focus {
+  border-color: #00bfff;
+  box-shadow: 0 0 8px #00bfff;
 }
 
 
-body::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  background-color: rgba(0, 0, 0, 0.25); /* overlay suave */
-  z-index: -1;
-  pointer-events: none;
-}
+    /* ====== BOTÕES ====== */
+    .buttons {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-top: 20px;
+      width: 100%;
+    }
 
+    .chat-btn {
+      background: linear-gradient(to right, #00bfff, #0077ff);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      padding: 12px 25px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.3s;
+      box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+    }
 
-.header {
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 65px;
-    z-index: 1000;
-    background-color: rgba(0, 0, 0, 0);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 20px;
-}
+    .chat-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px rgba(0, 191, 255, 0.8);
+    }
 
-/* Estilo para o perfil */
-.header .profile {
-    display: flex;
-    align-items: center;  /* Alinha o avatar e a área de texto na linha */
-}
+    .chat-btn.video {
+      background: linear-gradient(to right, #0080ff, #0047b3);
+    }
 
-/* Estilo para a imagem do avatar */
-.header .profile img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    margin-right: 10px;
-}
+    /* ====== RODAPÉ ====== */
+    .footer {
+      font-size: 0.85rem;
+      margin-top: 30px;
+      color: #b0bec5;
+      opacity: 0.8;
+      padding: 13px;
+    }
 
-/* Estilo para a área de informações do usuário (nome + id) */
-.header .profile .user-info {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;  /* Alinha o nome e o id à esquerda */
-    margin-top: 5px;
-}
+    /* ====== RESPONSIVIDADE ====== */
+    @media (max-width: 600px) {
+      .welcome {
+        font-size: 2.5rem;
+      }
 
-/* Estilo para o nome de usuário */
-.header .profile .username {
-    font-size: 18px;
-    color: #e0e0e0;
-    white-space: nowrap;
-}
+      .chat-btn {
+        padding: 10px 18px;
+        font-size: 0.95rem;
+      }
 
-/* Estilo para o ID (baixo do nome de usuário) */
-#user-id {
-    font-size: 8px;
-    color: #808080;
-    font-weight: normal;
-    background-color: #f1f1f1;
-    padding: 3px 8px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    margin-top: 1px; /* Espaço entre o nome e o ID */
-}
-
-/* Estilo para o ícone da coroa */
-#crown-icon {
-    width: 40px;
-    height: 40px;
-    margin-left: 0px; /* Espaçamento entre a coroa e o nome */
-    margin-bottom: 18px ;
-}
-
-/* Cor de fundo e efeito de transição para a coroa */
-#crown-icon path {
-    fill: black;
-    stroke: none;
-    transition: fill 0.3s ease;
-}
-
-#crown-icon.signed path {
-    fill: gold; /* Cor de destaque para a coroa quando "assinada" */
-}
-.profile-container {
-    position: relative;
-    display: inline-block;
-    cursor: pointer;
-}
-
-.profile-area {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    transition: background-color 0.2s ease;
-}
-
-.profile-area:hover {
-    background-color: #f0f0f0;
-}
-
-.profile-image {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    object-fit: cover;
-}
-
-.username {
-    font-size: 16px;
-    font-weight: bold;
-}
-
-.profile-options {
+      .main-content {
+        margin-top: 40px;
+      }
+    
+    .profile-options {
     position: absolute;
     top: 12%;
     left: 0;
@@ -157,75 +219,7 @@ body::before {
 .profile-options.hidden {
     display: none;
 }
-
-.option-button {
-    background: #007bff;
-    color: #fff;
-    border: none;
-    padding: 10px;
-    border-radius: 4px;
-    font-size: 14px;
-    cursor: pointer;
-}
-
-.option-button:hover {
-    background: #0056b3;
-}
-
-/* Media Query para dispositivos móveis */
-@media (max-width: 768px) {
-    .settings-icon {
-        width: 50px;
-        height: 50px;
-        fill: #111111;
-        margin-left: auto; /* Empurra o ícone para a direita */
-        margin-right: 15px; /* Espaçamento da borda direita */
-        cursor: pointer;
-        z-index: 1001; /* Garante que fique acima de outros elementos dentro da header */
-    }
-    .settings-modal-overlay {
-    display: none; /* Inicialmente oculto */
-    position: fixed; /* Fixa o elemento na tela */
-    top: 0;
-    left: 0;
-    width: 100vw; /* Ocupa 100% da largura da viewport */
-    height: 100vh; /* Ocupa 100% da altura da viewport */
-    background-color: #888787; /* Fundo semitransparente */
-    justify-content: center; /* Centraliza o conteúdo no eixo horizontal */
-    align-items: center; /* Centraliza o conteúdo no eixo vertical */
-    z-index: 1000; /* Garante que fique acima de outros elementos */
-}
-
-
-.settings-modal-content {
-    background: #888787; /* Fundo branco do modal */
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Sombra para destaque */
-    z-index: 1001; /* Modal acima do overlay */
-}
-    /* Estilo para o botão "Assinar" */
-    .unlimited-jumps-btn {
-        background: linear-gradient(90deg, #ffd700, #daa520); /* Gradiente dourado */
-        color: white;
-        padding: 7px 15px;
-        border: none;
-        border-radius: 10px;
-        cursor: pointer;
-        font-size: 16px;
-        font-weight: bold;
-        box-shadow: 0 0 10px rgba(255, 215, 0, 0.5); /* Efeito de brilho */
-        margin-left: auto; /* Flex para alinhar ao lado direito */
-        margin-right: 15px; /* Espaçamento da borda direita */
-    }
-}
-        .unlimited-jumps-btn:hover {
-            background: linear-gradient(90deg, #ffdf00, #ffc107); /* Gradiente mais brilhante */
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 0 0 30px rgba(218, 165, 32, 0.6); /* Efeito de brilho mais intenso */
-            transform: scale(1.1); /* Leve aumento no tamanho */
-            color: black; /* Contraste adicional */
-        }
+          
 
         /* Estilo do Modal */
         .modal-overlay {
@@ -291,167 +285,45 @@ body::before {
                 width: 100%;
                  overflow-x: hidden;
                }
-
-        .welcome {
-            font-size: 32px;
-            color: #ffffff; /* Cor branca do texto */
-            text-shadow: 
-                0 0 10px #00bfff,  /* Brilho suave */
-                0 0 20px #00bfff,  /* Brilho mais forte */
-                0 0 30px #1e90ff,  /* Brilho intenso */
-                0 0 35px #1e90ff;  /* Brilho máximo controlado até 40px */
-            margin-right: 30px;
-        }
-
-        .tagline {
-            font-size: 18px;
-            color: #cccccc;
-            margin-top: 15px;
-            max-width: 90%; /* Garante que não ultrapasse a largura da tela */
-            line-height: 1.4;
-            margin-right: 30px;
-        }
-
-        .footer {
-            background-color: rgba(0, 0, 0, 0); /* Fundo 100% transparente */
-            color: #666;
-            font-size: 12px;
-            text-align: center;
-            padding: 10px;
-            width: 100%;
-            z-index: 1000;
-            position: relative;
-            margin-top: auto;
-        }
-
-        .buttons {
-            margin-top: 1px;
-              margin-right: 30px;
-
-        }
-
-        .buttons button {
-            background-color: #00aaff;
-            color: white;
-            border: none;
-            border-radius: 7px;
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            margin: 1px;
-           top:3px;
-        }
-
-        .buttons button:hover {
-            background-color: #007acc;
-        }
-
-        /* Ajuste para o input de tags */
-        #tag-input {
-            margin: 10px 0;
-            padding: 8px;
-            width: 93%; /* Já garante boa largura em dispositivos móveis */
-            border-radius: 5px;
-            box-sizing: border-box; /* Garantir que padding e borda não aumentem a largura */
-            margin-left: 20px; /* Remover margem direita excessiva */
-              box-sizing: border-box;
-        }
-
-      .select-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    margin-top: 30px; /* Espaçamento adicional */
-    margin-right: 30px;
-    box-sizing: border-box;
+      .option-button {
+    background: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
 }
 
-        .select-container select, .select-container #tag-input {
-            margin: 10px 0;
-            padding: 10px;
-            width: 80%; /* Tamanho adequado */
-            max-width: 400px; /* Limita a largura */
-            border-radius: 5px;
-            box-sizing: border-box;
+.option-button:hover {
+    background: #0056b3;
+}
 
-        }
-
-        .language-select {
-            width: 100%;
-            padding: 10px;
-            font-size: 16px;
-            background-color: #e0e0e0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            cursor: pointer;
-            text-align: center;
-            box-sizing: border-box; /* Garantir que padding e borda não aumentem a largura */
-
-        }
-
-        .language-select option {
-            display: block;
-            width: 100%;  /* Garantir que as opções ocupem a largura correta */
-          
-        }
-
-        .language-select {
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-            background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"%3E%3Cpath fill="none" stroke="black" stroke-width="2" d="M5 7l5 5 5-5" /%3E%3C/svg%3E');
-            background-repeat: no-repeat;
-            background-position: right 10px center;
-    
-        }
-        /* Estilos para o ícone de coroa */
-
-    </style>
+  </style>
 </head>
 <body>
-
-    <!-- Cabeçalho -->
-    <div class="header">
-        <div class="profile">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPlwkUTsaWA_zSj0oFI7sbKYXqs-ih3b0_Bg&s" alt="Avatar">
-            <div class="user-info">
-                <span class="username">Nome de Usuário</span>
+  <header class="header">
+    <div class="profile">
+      <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Avatar" class="avatar">
+      <div class="user-info">
+          <span class="username">Nome de Usuário</span>
                 <span id="user-id">#1234567
                 </span> <!-- Este ID será substituído pelo valor salvo no localStorage -->
-            </div>
-            <svg id="crown-icon" class="icon" version="1.0" xmlns="http://www.w3.org/2000/svg" width="225.000000pt" height="225.000000pt" viewBox="0 0 225.000000 225.000000" preserveAspectRatio="xMidYMid meet">
-                <g transform="translate(0.000000,225.000000) scale(0.100000,-0.100000)" fill="none" stroke="none">
-                    <path d="M1085 1618 c-11 -6 -25 -19 -32 -27 -17 -22 -16 -82 1 -107 13 -18 6 -37 -79 -212 -52 -106 -96 -192 -98 -192 -2 0 -64 68 -138 152 -125 143 -133 154 -130 190 1 31 -4 44 -28 68 -50 50 -120 38 -147 -26 -12 -30 -12 -39 1 -70 9 -23 25 -40 43 -46 29 -11 30 -15 83 -257 40 -183 55 -274 59 -356 l5 -110 500 0 500 0 6 120 c5 91 19 175 58 350 28 126 51 232 51 235 0 3 14 11 30 17 60 23 70 115 17 155 -58 46 -153 -5 -145 -78 4 -33 -4 -45 -131 -190 -74 -85 -137 -154 -140 -154 -3 1 -46 85 -95 187 -90 186 -90 186 -73 215 26 45 22 85 -12 119 -31 31 -70 37 -106 17z m150 -388 c107 -222 111 -230 130 -230 7 0 82 79 166 176 85 96 155 172 156 167 1 -4 -22 -116 -51 -248 l-52 -240 -459 0 -460 0 -52 240 c-29 132 -51 243 -50 248 1 4 71 -72 156 -168 92 -105 160 -175 169 -173 19 4 14 -5 133 242 55 114 104 204 108 200 5 -5 52 -101 106 -214z m345 -495 l0 -65 -455 0 -455 0 0 65 0 65 455 0 455 0 0 -65z"/>
-                </g>
-            </svg>
-        </div>    
-            <button class="unlimited-jumps-btn" onclick="openModal()">premium</button>
-        <svg id="settings-icon" class="settings-icon" version="1.0" xmlns="http://www.w3.org/2000/svg" width="512.000000pt" height="512.000000pt" viewBox="0 0 512.000000 512.000000" preserveAspectRatio="xMidYMid meet">
-          <metadata>Created by potrace 1.16, written by Peter Selinger 2001-2019</metadata>
-          <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" fill="#524f4f" stroke="none">
-            <path d="M2256 3798 c-13 -18 -16 -54 -16 -180 l0 -157 -42 -19 -43 -20 -115 113 c-63 62 -122 115 -131 118 -8 2 -28 -1 -45 -8 -39 -17 -394 -376 -395 -401 -3 -41 6 -52 116 -164 l114 -115 -19 -42 -19 -43 -158 0 c-127 0 -163 -3 -181 -16 -22 -15 -22 -17 -22 -303 0 -266 1 -289 18 -304 16 -14 44 -17 178 -17 l160 0 21 -42 21 -43 -116 -117 c-98 -100 -115 -121 -115 -148 0 -28 24 -56 199 -231 167 -166 205 -199 229 -199 23 0 51 22 145 116 l117 115 42 -17 41 -16 0 -158 c0 -144 2 -160 21 -184 l20 -26 278 0 c234 0 280 2 299 16 21 15 22 21 22 182 l0 167 46 19 46 19 117 -117 c96 -96 121 -116 146 -116 25 0 59 30 227 198 169 169 198 202 198 227 0 25 -20 50 -119 149 l-119 119 21 43 21 44 161 0 c144 0 164 2 178 18 15 16 17 52 17 305 0 246 -2 288 -16 301 -13 13 -44 16 -178 16 l-162 0 -21 43 -21 42 116 117 c98 100 115 121 115 148 0 28 -24 56 -199 231 -168 167 -205 199 -230 199 -24 1 -47 -18 -144 -119 l-115 -119 -42 19 -43 20 0 163 c0 145 -2 165 -18 179 -16 15 -52 17 -305 17 -284 0 -286 0 -301 -22z m485 -240 c1 -79 4 -154 8 -168 5 -20 23 -32 81 -56 41 -17 92 -38 113 -48 22 -10 48 -14 60 -10 12 3 68 52 125 107 l102 102 127 -128 128 -127 -102 -102 c-55 -57 -104 -113 -107 -125 -5 -14 5 -46 29 -96 19 -41 35 -82 35 -90 0 -9 11 -29 24 -44 l24 -28 156 -3 156 -3 0 -180 0 -179 -144 0 c-80 0 -156 -4 -170 -10 -15 -5 -31 -22 -38 -37 -6 -16 -26 -61 -44 -102 -19 -40 -34 -85 -34 -99 0 -18 27 -53 107 -134 l107 -109 -127 -127 -127 -127 -102 102 c-57 55 -113 104 -125 107 -14 5 -46 -5 -96 -29 -41 -19 -82 -35 -90 -35 -9 0 -29 11 -44 24 l-28 24 -3 -156 -3 -156 -180 0 -179 0 0 134 c0 173 -4 194 -44 211 -181 80 -198 86 -219 80 -12 -4 -68 -53 -125 -108 l-102 -102 -127 127 -127 127 107 109 c59 60 107 117 107 126 0 9 -16 50 -35 90 -19 41 -35 81 -35 89 0 9 -11 29 -24 44 l-24 28 -156 3 -156 3 0 180 0 179 139 0 c161 0 194 8 211 53 7 18 28 67 47 110 23 52 32 85 28 100 -4 12 -53 68 -108 125 l-102 102 128 127 127 128 102 -102 c57 -55 113 -104 125 -107 14 -5 46 5 96 29 41 -19 82 35 90 35 9 0 29 11 44 24 l28 24 3 156 3 156 180 0 179 0 1 -142z"/>
-            <path d="M2441 2994 c-80 -21 -144 -60 -205 -124 -61 -64 -90 -114 -111 -197 -29 -109 -13 -234 42 -335 31 -58 123 -147 181 -177 134 -68 302 -66 434 6 58 31 147 123 177 181 66 130 66 294 0 424 -30 58 -119 150 -177 181 -101 55 -232 71 -341 41z m254 -157 c60 -30 114 -85 146 -147 20 -37 24 -60 24 -130 0 -73 -4 -92 -27 -135 -32 -60 -87 -114 -148 -146 -37 -20 -60 -24 -130 -24 -70 0 -93 4 -130 24 -61 32 -116 86 -148 146 -23 43 -27 62 -27 135 0 70 4 93 24 130 42 81 115 143 201 171 49 16 162 4 215 -24z"/>
-          </g>
-        </svg>
-      
+     </div>
+    </div>
+      <button class="premium-badge" onclick="openModal()">premium</button>
+    <div class="settings">⚙️</div>
+  </header>
+  
         <div class="profile-options hidden" id="profileOptions">
             <button class="option-button" onclick="changeUsername()">Mudar Nome de Usuário</button>
-            <button class="option-button" onclick="changeProfileImage()">Mudar Imagem de Perfil</button>
+            <button class="option-button" onclick="chooseLocalProfileImage()">Mudar foto</button>
         </div>
     </div>
-      </div>
-      
-    <div class="settings-modal-overlay">
-        <div class="settings-modal-content">
-            <h2>Configurações</h2>
-            <p>Personalize suas preferências aqui.</p>
-            <button class="close-btn" onclick="document.querySelector('.settings-modal-overlay').style.display='none';">Fechar</button>
-        </div>
-    </div>    
-    <body>
-        <div class="modal-overlay" id="paymentModal">
+     
+      <body>
+
+   <div class="modal-overlay" id="paymentModal">
             <div class="modal-content">
                 <h2>Pague R$10 para obter Pulos Ilimitados</h2>
                 <div class="qr-code">
@@ -465,55 +337,52 @@ body::before {
                 <button class="close-btn" onclick="closeModal()">Fechar</button>
             </div>
         </div>
-      
-        <!-- Ícone SVG da coroa -->
-       
 
-    <!-- Conteúdo principal -->
-    <div class="content">
-        <div class="welcome">Bem-vindo, <br><span id="dynamicUsername">Nome de Usuário!</span></div>
-                <div class="tagline">
-🌍 O mundo inteiro está online esperando para conversar com você. Clique, conecte-se e descubra amizades, culturas e experiências incríveis a cada nova conversa. Sua próxima conexão pode estar a apenas um clique de distância!”
-        </div>
+  <main class="main-content">
+    <h1 class="welcome">Bem-vindo,<br><span id="dynamicUsername">Nome de Usuário!</span></div>
+    <p class="description">
+      🌍 O mundo inteiro está online esperando para conversar com você.
+      Clique, conecte-se e descubra amizades, culturas e experiências incríveis a cada nova conversa.
+      Sua próxima conexão pode estar a apenas um clique de distância!
+    </p>
 
-        <!-- Seletor de idioma e input de tag -->
-        <div class="select-container">
-            <select class="language-select" id="language-select">
-                <option value="zh">Chinês</option>
-                <option value="es">Espanhol</option>
-                <option value="en">Inglês</option>
-                <option value="hi">Hindi</option>
-                <option value="ar">Árabe</option>
-                <option value="bn">Bengali</option>
-                <option value="pt">Português</option>
-                <option value="ru">Russo</option>
-                <option value="ja">Japonês</option>
-                <option value="de">Alemão</option>
-                <option value="ko">Coreano</option>
-                <option value="fr">Francês</option>
-                <option value="tr">Turco</option>
-                <option value="it">Italiano</option>
-                <option value="vi">Vietnamita</option>
-                <option value="ta">Tâmil</option>
-                <option value="ur">Urdu</option>
-                <option value="mr">Marata</option>
-                <option value="te">Télugo</option>
-                <option value="kn">Canará</option>
-                <option value="ml">Malaiala</option>
-                <option value="pa">Punjabi</option>
-                <option value="gu">Guzerate</option>
-                <option value="pl">Polonês</option>
-                <option value="uk">Ucraniano</option>
-            </select>
-            <br>
-            <input id="tag-input" type="text" placeholder="Escreva sua tag Ex: Anime, Jogos, Filmes" />
-        </div>
+<div class="language-tag-container">
+  <select class="input-field" id="language-select">
+    <option value="zh">Chinês</option>
+    <option value="es">Espanhol</option>
+    <option value="en">Inglês</option>
+    <option value="hi">Hindi</option>
+    <option value="ar">Árabe</option>
+    <option value="bn">Bengali</option>
+    <option value="pt">Português</option>
+    <option value="ru">Russo</option>
+    <option value="ja">Japonês</option>
+    <option value="de">Alemão</option>
+    <option value="ko">Coreano</option>
+    <option value="fr">Francês</option>
+    <option value="tr">Turco</option>
+    <option value="it">Italiano</option>
+    <option value="vi">Vietnamita</option>
+    <option value="ta">Tâmil</option>
+    <option value="ur">Urdu</option>
+    <option value="mr">Marata</option>
+    <option value="te">Télugo</option>
+    <option value="kn">Canará</option>
+    <option value="ml">Malaiala</option>
+    <option value="pa">Punjabi</option>
+    <option value="gu">Guzerate</option>
+    <option value="pl">Polonês</option>
+    <option value="uk">Ucraniano</option>
+  </select>
 
-        <!-- Botões para navegar para chats -->
-        <div class="buttons">
-    <button onclick="window.location.href='chatTexto.html'">Chat de Texto</button>
-    <button onclick="window.location.href='ChatVideo.html'">Chat de Vídeo</button>
-        </div>
+  <input class="input-field" type="text" placeholder="Escreva sua tag Ex: Anime, Jogos, Filmes" />
+</div>
+
+<div class="buttons">
+  <button class="chat-btn" onclick="window.location.href='chatTexto.html'">Chat de Texto</button>
+  <button class="chat-btn video" onclick="window.location.href='ChatVideo.html'">Chat de Vídeo</button>
+</div>
+
     </div>
 
     <!-- Rodapé -->
@@ -521,8 +390,7 @@ body::before {
         <p>&copy; 2024 TecWorld. Todos os direitos reservados.</p>
     </div>
     <script>
-     // Função para abrir o modal
-function openModal() {
+  function openModal() {
     document.getElementById('paymentModal').style.display = 'flex'; // Torna o modal visível
 }
 
@@ -548,7 +416,7 @@ function changeUsername() {
     }
 }
 
-// Função para alterar a imagem de perfil
+// Função para alterar a imagem de perfil via URL
 function changeProfileImage() {
     let newImageUrl = prompt("Cole o URL da nova imagem de perfil:");
     if (newImageUrl && /\.(jpeg|jpg|png|gif|bmp)$/i.test(newImageUrl)) {
@@ -556,6 +424,34 @@ function changeProfileImage() {
     } else {
         alert("URL inválida. Certifique-se de inserir um link de imagem válido.");
     }
+}
+
+// 🔹 Função para escolher imagem do dispositivo (sem precisar de URL)
+function chooseLocalProfileImage() {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'image/*';
+
+    input.onchange = function(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.querySelector(".profile img").src = e.target.result;
+
+                // Salva a imagem no localStorage (como base64)
+                const email = localStorage.getItem("email");
+                if (email) {
+                    const userData = JSON.parse(localStorage.getItem("user_" + email));
+                    userData.profileImage = e.target.result;
+                    localStorage.setItem("user_" + email, JSON.stringify(userData));
+                }
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
+    input.click();
 }
 
 // Função de login seguro
@@ -593,7 +489,8 @@ function displayError(message) {
         errorElement.style.display = 'block';
     }
 }
-// Função para carregar o nome de usuário e ID após o login
+
+// Função para carregar o nome de usuário, ID e imagem após o login
 document.addEventListener('DOMContentLoaded', function () {
     const email = localStorage.getItem("email");  // Recupera o e-mail logado
     if (email) {
@@ -612,8 +509,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Exibe o ID do usuário na página com formatação
             if (savedUserId) {
-                const formattedId = `id:${String(savedUserId).padStart(7, '0')}`;
+                const formattedId = id:${String(savedUserId).padStart(7, '0')};
                 document.getElementById("user-id").textContent = formattedId;
+            }
+
+            // 🔹 Se houver imagem salva, exibe
+            if (parsedData.profileImage) {
+                document.querySelector(".profile img").src = parsedData.profileImage;
             }
         } else {
             console.warn("Usuário não encontrado no localStorage.");
@@ -641,7 +543,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
-
     </script>    
 </body>
 </html>
