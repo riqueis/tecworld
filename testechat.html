@@ -390,7 +390,8 @@
         <p>&copy; 2024 TecWorld. Todos os direitos reservados.</p>
     </div>
     <script>
-  function openModal() {
+   // Função para abrir o modal
+function openModal() {
     document.getElementById('paymentModal').style.display = 'flex'; // Torna o modal visível
 }
 
@@ -509,7 +510,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Exibe o ID do usuário na página com formatação
             if (savedUserId) {
-                const formattedId = id:${String(savedUserId).padStart(7, '0')};
+                const formattedId = `id:${String(savedUserId).padStart(7, '0')}`;
                 document.getElementById("user-id").textContent = formattedId;
             }
 
@@ -543,6 +544,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
+    </script>    
     </script>    
 </body>
 </html>
