@@ -18,6 +18,16 @@
       background: #111;
       color: #fff;
     }
+     .settings {
+      font-size: 1.4rem;
+      cursor: pointer;
+      color: #cfd8dc;
+      transition: 0.3s;
+    }
+    .settings:hover {
+      color: #ffffff;
+      transform: rotate(20deg);
+    }
 
     .config-page {
       width: 100%;
@@ -121,6 +131,7 @@
   </style>
 </head>
 <body>
+    <div class="settings">⚙️</div>
   <div id="main-config" class="config-page">
     <h1>Configurações</h1>
 
@@ -174,6 +185,16 @@
   </div>
 
   <script>
+
+// Seleciona o botão pelo ID
+const settingsBtn = document.getElementById('settings-btn');
+
+// Adiciona um evento de clique ao botão
+settingsBtn.addEventListener('click', () => {
+    // Redireciona para a página de configurações
+    window.location.href = 'config-page.html';
+});
+
     function logout() {
       alert("Você foi desconectado!");
       // window.location.href = "/login";
