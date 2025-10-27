@@ -390,249 +390,164 @@
         <p>&copy; 2024 TecWorld. Todos os direitos reservados.</p>
     </div>
     <script>
-                  
-});// Função para abrir o modal
-  
+  // Função para abrir o modal
 function openModal() {
-  
     document.getElementById('paymentModal').style.display = 'flex'; // Torna o modal visível
-  
 }
-  
 
-  
 // Função para fechar o modal
-  
 function closeModal() {
-  
     document.getElementById('paymentModal').style.display = 'none'; // Esconde o modal
-  
 }
-  
 
-  
 // Função para alterar o nome de usuário
-  
 function changeUsername() {
-  
     let newUsername = prompt("Digite seu novo nome de usuário:");
-  
     if (newUsername && newUsername.trim() !== "") {
-  
         // Atualiza o nome de usuário exibido
-  
         document.querySelector(".username").textContent = newUsername;
-  
         document.getElementById("dynamicUsername").textContent = newUsername;
-  
 
-  
         // Salva o novo nome de usuário no localStorage
-  
         const email = localStorage.getItem("email"); // Recupera o e-mail logado
-  
         const userData = JSON.parse(localStorage.getItem("user_" + email)); // Recupera os dados do usuário
-  
         userData.username = newUsername; // Atualiza o nome de usuário
-  
         localStorage.setItem("user_" + email, JSON.stringify(userData)); // Atualiza no localStorage
-  
         localStorage.setItem("username", newUsername); // Atualiza no localStorage global
-  
     }
-  
 }
-  
 
-  
-// Função para alterar a imagem de perfil
-  
+// Função para alterar a imagem de perfil via URL
 function changeProfileImage() {
-  
     let newImageUrl = prompt("Cole o URL da nova imagem de perfil:");
-  
     if (newImageUrl && /\.(jpeg|jpg|png|gif|bmp)$/i.test(newImageUrl)) {
-  
         document.querySelector(".profile img").src = newImageUrl;
-  
     } else {
-  
         alert("URL inválida. Certifique-se de inserir um link de imagem válido.");
-  
     }
-  
 }
-  
 
-  
+// 🔹 Função para escolher imagem do dispositivo (sem precisar de URL)
+function chooseLocalProfileImage() {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'image/*';
+
+    input.onchange = function(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.querySelector(".profile img").src = e.target.result;
+
+                // Salva a imagem no localStorage (como base64)
+                const email = localStorage.getItem("email");
+                if (email) {
+                    const userData = JSON.parse(localStorage.getItem("user_" + email));
+                    userData.profileImage = e.target.result;
+                    localStorage.setItem("user_" + email, JSON.stringify(userData));
+                }
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
+    input.click();
+}
+
 // Função de login seguro
-  
 function login() {
-  
     const email = document.getElementById('email').value;
-  
     const password = document.getElementById('password').value;
-  
 
-  
     // Recupera os dados do usuário usando o e-mail
-  
     const userData = localStorage.getItem("user_" + email);
-  
 
-  
     if (userData) {
-  
         const parsedData = JSON.parse(userData);
-  
 
-  
         // Verifica se a senha corresponde
-  
         if (parsedData.password === password) {
-  
             // Sucesso no login, salva o e-mail, ID e nome de usuário no localStorage
-  
             localStorage.setItem("email", email); // Salva o e-mail logado
-  
             localStorage.setItem("userId", parsedData.id); // Salva o ID do usuário
-  
             localStorage.setItem("username", parsedData.username); // Salva o nome de usuário
-  
             window.location.href = "inicial.html";  // Redireciona para a página inicial
-  
         } else {
-  
             displayError('E-mail ou senha inválidos.');
-  
         }
-  
     } else {
-  
         // E-mail não encontrado
-  
         displayError('E-mail não registrado.');
-  
     }
-  
 }
-  
 
-  
 // Exibe mensagens de erro de forma segura
-  
 function displayError(message) {
-  
     const errorElement = document.getElementById('general-error');
-  
     if (errorElement) {
-  
         errorElement.textContent = message;
-  
         errorElement.style.display = 'block';
-  
     }
-  
 }
-  
-// Função para carregar o nome de usuário e ID após o login
-  
+
+// Função para carregar o nome de usuário, ID e imagem após o login
 document.addEventListener('DOMContentLoaded', function () {
-  
     const email = localStorage.getItem("email");  // Recupera o e-mail logado
-  
     if (email) {
-  
         const userData = localStorage.getItem("user_" + email); // Recupera os dados do usuário com base no e-mail
-  
 
-  
         if (userData) {
-  
             const parsedData = JSON.parse(userData);
-  
             const savedUsername = parsedData.username;
-  
             const savedUserId = parsedData.id || "ID não definido";  // Se não houver ID, mostra uma mensagem de fallback
-  
 
-  
             if (savedUsername) {
-  
                 // Substitui o nome de usuário nas áreas desejadas
-  
                 document.querySelector(".username").textContent = savedUsername;
-  
                 document.getElementById("dynamicUsername").textContent = savedUsername;
-  
             }
-  
 
-  
             // Exibe o ID do usuário na página com formatação
-  
             if (savedUserId) {
-  
                 const formattedId = `id:${String(savedUserId).padStart(7, '0')}`;
-  
                 document.getElementById("user-id").textContent = formattedId;
-  
             }
-  
+
+            // 🔹 Se houver imagem salva, exibe
+            if (parsedData.profileImage) {
+                document.querySelector(".profile img").src = parsedData.profileImage;
+            }
         } else {
-  
             console.warn("Usuário não encontrado no localStorage.");
-  
         }
-  
     } else {
-  
         console.warn("Nenhum usuário logado.");
-  
     }
-  
 
-  
     // Abertura e fechamento do menu de perfil
-  
     const profile = document.querySelector(".profile");
-  
     const profileOptions = document.getElementById("profileOptions");
-  
 
-  
     if (profile && profileOptions) {
-  
         profile.addEventListener("click", function (event) {
-  
             profileOptions.classList.toggle("hidden");
-  
             event.stopPropagation();
-  
         });
-  
 
-  
         document.addEventListener("click", function () {
-  
             profileOptions.classList.add("hidden");
-  
         });
-  
 
-  
         profileOptions.addEventListener("click", function (event) {
-  
             event.stopPropagation();
-  
         });
-  
     }
-  
 });
     </script>    
 </body>
 </html>
+
 
 
 
