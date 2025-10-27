@@ -22,7 +22,57 @@
   text-align: center;
   overflow-x: hidden; /* evita rolagem lateral */
   overflow-y: hidden; /* evita rolagem vertical */
+   }
+    /* 🔳 Deixa a imagem sempre quadrada e cortada corretamente */
+.avatar {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  border: 2px solid #00bfff;
+  background-color: rgba(255, 255, 255, 0.2);
+  object-fit: cover; /* <-- isso corta a imagem sem amassar */
+  object-position: center; /* centraliza o corte */
 }
+    .profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.profile-image-container {
+  width: 120px; /* tamanho fixo do quadrado */
+  height: 120px;
+  border-radius: 16px; /* ou 50% se quiser redondo */
+  overflow: hidden; /* recorta a imagem */
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 0 8px rgba(0, 191, 255, 0.6);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.profile-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* centraliza e corta sem amassar */
+  object-position: center;
+}
+
+.change-photo-btn {
+  background: linear-gradient(to right, #00bfff, #0077ff);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.change-photo-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 12px rgba(0, 191, 255, 0.8);
+}
+
 
     /* ====== TOPO ====== */
     .header {
@@ -390,28 +440,26 @@
     <script>
    // Função para abrir o modal
 function openModal() {
-    document.getElementById('paymentModal').style.display = 'flex'; // Torna o modal visível
+    document.getElementById('paymentModal').style.display = 'flex';
 }
 
 // Função para fechar o modal
 function closeModal() {
-    document.getElementById('paymentModal').style.display = 'none'; // Esconde o modal
+    document.getElementById('paymentModal').style.display = 'none';
 }
 
 // Função para alterar o nome de usuário
 function changeUsername() {
     let newUsername = prompt("Digite seu novo nome de usuário:");
     if (newUsername && newUsername.trim() !== "") {
-        // Atualiza o nome de usuário exibido
         document.querySelector(".username").textContent = newUsername;
         document.getElementById("dynamicUsername").textContent = newUsername;
 
-        // Salva o novo nome de usuário no localStorage
-        const email = localStorage.getItem("email"); // Recupera o e-mail logado
-        const userData = JSON.parse(localStorage.getItem("user_" + email)); // Recupera os dados do usuário
-        userData.username = newUsername; // Atualiza o nome de usuário
-        localStorage.setItem("user_" + email, JSON.stringify(userData)); // Atualiza no localStorage
-        localStorage.setItem("username", newUsername); // Atualiza no localStorage global
+        const email = localStorage.getItem("email");
+        const userData = JSON.parse(localStorage.getItem("user_" + email));
+        userData.username = newUsername;
+        localStorage.setItem("user_" + email, JSON.stringify(userData));
+        localStorage.setItem("username", newUsername);
     }
 }
 
@@ -419,13 +467,13 @@ function changeUsername() {
 function changeProfileImage() {
     let newImageUrl = prompt("Cole o URL da nova imagem de perfil:");
     if (newImageUrl && /\.(jpeg|jpg|png|gif|bmp)$/i.test(newImageUrl)) {
-        document.querySelector(".profile img").src = newImageUrl;
+        document.getElementById("profile-image").src = newImageUrl; // ✅ seletor correto
     } else {
         alert("URL inválida. Certifique-se de inserir um link de imagem válido.");
     }
 }
 
-// 🔹 Função para escolher imagem do dispositivo (sem precisar de URL)
+// 🔹 Função para escolher imagem do dispositivo
 function chooseLocalProfileImage() {
     const input = document.createElement('input');
     input.type = 'file';
@@ -436,9 +484,8 @@ function chooseLocalProfileImage() {
         if (file) {
             const reader = new FileReader();
             reader.onload = function(e) {
-                document.querySelector(".profile img").src = e.target.result;
+                document.getElementById("profile-image").src = e.target.result; // ✅ seletor correto
 
-                // Salva a imagem no localStorage (como base64)
                 const email = localStorage.getItem("email");
                 if (email) {
                     const userData = JSON.parse(localStorage.getItem("user_" + email));
@@ -453,34 +500,28 @@ function chooseLocalProfileImage() {
     input.click();
 }
 
-// Função de login seguro
+// Função de login
 function login() {
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
-
-    // Recupera os dados do usuário usando o e-mail
     const userData = localStorage.getItem("user_" + email);
 
     if (userData) {
         const parsedData = JSON.parse(userData);
-
-        // Verifica se a senha corresponde
         if (parsedData.password === password) {
-            // Sucesso no login, salva o e-mail, ID e nome de usuário no localStorage
-            localStorage.setItem("email", email); // Salva o e-mail logado
-            localStorage.setItem("userId", parsedData.id); // Salva o ID do usuário
-            localStorage.setItem("username", parsedData.username); // Salva o nome de usuário
-            window.location.href = "inicial.html";  // Redireciona para a página inicial
+            localStorage.setItem("email", email);
+            localStorage.setItem("userId", parsedData.id);
+            localStorage.setItem("username", parsedData.username);
+            window.location.href = "inicial.html";
         } else {
             displayError('E-mail ou senha inválidos.');
         }
     } else {
-        // E-mail não encontrado
         displayError('E-mail não registrado.');
     }
 }
 
-// Exibe mensagens de erro de forma segura
+// Exibe mensagens de erro
 function displayError(message) {
     const errorElement = document.getElementById('general-error');
     if (errorElement) {
@@ -489,41 +530,35 @@ function displayError(message) {
     }
 }
 
-// Função para carregar o nome de usuário, ID e imagem após o login
+// Carrega nome, ID e imagem
 document.addEventListener('DOMContentLoaded', function () {
-    const email = localStorage.getItem("email");  // Recupera o e-mail logado
+    const email = localStorage.getItem("email");
     if (email) {
-        const userData = localStorage.getItem("user_" + email); // Recupera os dados do usuário com base no e-mail
+        const userData = localStorage.getItem("user_" + email);
 
         if (userData) {
             const parsedData = JSON.parse(userData);
             const savedUsername = parsedData.username;
-            const savedUserId = parsedData.id || "ID não definido";  // Se não houver ID, mostra uma mensagem de fallback
+            const savedUserId = parsedData.id || "ID não definido";
 
             if (savedUsername) {
-                // Substitui o nome de usuário nas áreas desejadas
                 document.querySelector(".username").textContent = savedUsername;
                 document.getElementById("dynamicUsername").textContent = savedUsername;
             }
 
-            // Exibe o ID do usuário na página com formatação
             if (savedUserId) {
                 const formattedId = `id:${String(savedUserId).padStart(7, '0')}`;
                 document.getElementById("user-id").textContent = formattedId;
             }
 
-            // 🔹 Se houver imagem salva, exibe
+            // ✅ usa o ID correto da imagem
             if (parsedData.profileImage) {
-                document.querySelector(".profile img").src = parsedData.profileImage;
+                document.getElementById("profile-image").src = parsedData.profileImage;
             }
-        } else {
-            console.warn("Usuário não encontrado no localStorage.");
         }
-    } else {
-        console.warn("Nenhum usuário logado.");
     }
 
-    // Abertura e fechamento do menu de perfil
+    // Controle do menu de perfil
     const profile = document.querySelector(".profile");
     const profileOptions = document.getElementById("profileOptions");
 
@@ -542,7 +577,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
-
 
     </script>    
 </body>
