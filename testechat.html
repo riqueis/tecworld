@@ -333,7 +333,7 @@ body {
    PÁGINA DE CONFIGURAÇÃO
 ============================== */
 /* ==============================
-   CONFIGURAÇÕES (MODAL / PÁGINA DE CONFIG)
+   PÁGINA DE CONFIGURAÇÕES
 ============================== */
 .config-page {
   position: fixed;
@@ -341,14 +341,14 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(10, 20, 30, 0.98); /* cor sólida escura */
-  color: white;
-  z-index: 9999; /* garante que cobre tudo */
+  background: rgba(10, 20, 30, 0.98); /* Fundo escuro sólido */
+  color: #fff;
+  z-index: 9999;
   display: flex;
   flex-direction: column;
   align-items: center;
   overflow-y: auto;
-  padding: 40px 20px;
+  padding: 60px 20px 100px 20px;
   transition: opacity 0.3s ease;
 }
 
@@ -357,96 +357,20 @@ body {
   display: none;
 }
 
-/* Títulos da página de config */
-h3 {
-  text-align: center;
-  margin-bottom: 10px;
-  color: #00d8ff;
-}
-
-/* Seções dentro da página de config */
-.config-section {
-  background: #222;
-  border: 1px solid #333;
-  padding: 15px;
-  border-radius: 8px;
-}
-
-/* Títulos dentro das seções */
-.config-section h2 {
-  margin-bottom: 10px;
-  font-size: 18px;
-  color: #00d8ff;
-  cursor: pointer;
-}
-
-/* Inputs, selects, buttons e textarea */
-select,
-button,
-textarea,
-input {
-  width: 100%;
-  padding: 10px;
-  margin-top: 5px;
-  background: #333;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-}
-
-/* Desativa redimensionamento de textarea */
-textarea {
-  resize: none;
-}
-
-/* Efeito hover para botões */
-button:hover {
-  background-color: #00d8ff;
-  color: #000;
-  cursor: pointer;
-}
-
 /* ==============================
-   TELA CONTA (FULLSCREEN)
+   CABEÇALHO
 ============================== */
-.account-fullscreen {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  background: linear-gradient(to bottom right, #1e1e1e, #2c2c2c);
-  z-index: 999;
-  padding: 20px;
-  display: none;
-  flex-direction: column;
-  overflow-y: auto;
-}
-
-/* Cabeçalho da tela de conta */
-.account-header {
-  display: flex;
-  align-items: center;
-  position: relative;
-  margin-bottom: 20px;
-  height: 40px;
-}
-
-
-/* Botão de voltar (seta) na página de configuração */
 .back-arrow {
-  position: fixed;
-  top: 20px;
-  left: 20px; /* lado esquerdo */
-  font-size: 2rem;
+  position: absolute;
+  top: 25px;
+  left: 20px; /* canto esquerdo */
+  font-size: 1.8rem;
   color: #00d8ff;
   cursor: pointer;
-  z-index: 10000; /* maior que o da config-page */
-  display: none; /* inicialmente escondida */
+  display: none;
   user-select: none;
   transition: transform 0.2s ease, color 0.3s;
 }
-
 
 .back-arrow:hover {
   color: #ffffff;
@@ -457,17 +381,71 @@ button:hover {
   transform: scale(0.9);
 }
 
-
-/* Título central da tela de conta */
-.account-title {
-  flex: 1;
-  text-align: center;
-  font-size: 24px;
-  color: #00d8ff;
+.config-title {
+  font-size: 28px;
   font-weight: bold;
-  user-select: none;
+  color: #00d8ff;
+  margin-bottom: 30px;
+  text-align: center;
+  width: 100%;
+  margin-top: 10px;
 }
 
+/* ==============================
+   SEÇÕES
+============================== */
+.config-section {
+  width: 100%;
+  max-width: 500px;
+  background: #1a1f25;
+  border: 1px solid #2a2f36;
+  padding: 15px 18px;
+  border-radius: 12px;
+  margin-bottom: 25px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Título das seções */
+.config-section h2 {
+  margin-bottom: 10px;
+  font-size: 18px;
+  color: #00d8ff;
+}
+
+/* Parágrafos dentro das seções */
+.config-section p {
+  font-size: 15px;
+  color: #ddd;
+}
+
+/* ==============================
+   CAMPOS E BOTÕES
+============================== */
+select,
+textarea,
+button {
+  width: 100%;
+  background: #222;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  border-radius: 6px;
+  margin-top: 5px;
+  font-size: 14px;
+}
+
+textarea {
+  resize: none;
+  height: 80px;
+}
+
+button:hover {
+  background-color: #00d8ff;
+  color: #000;
+  cursor: pointer;
+}
+
+/* ======
 
 /* ==============================
    RESPONSIVIDADE
@@ -484,6 +462,19 @@ button:hover {
 
   .main-content {
     margin-top: 40px;
+  }
+    .config-section {
+    margin-bottom: 20px;
+  }
+
+  .config-title {
+    font-size: 24px;
+  }
+
+  .back-arrow {
+    font-size: 1.6rem;
+    top: 20px;
+    left: 15px;
   }
 }
 
