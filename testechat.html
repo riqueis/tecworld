@@ -6,12 +6,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TecWorld</title>
   <style>
-    /* ====== GERAL ====== */
-    * {
-      box-sizing: border-box;
-    }
+    /* ==============================
+   CONFIGURAÇÕES GERAIS
+============================== */
+* {
+  box-sizing: border-box;
+}
 
-   body {
+body {
   margin: 0;
   font-family: 'Montserrat', sans-serif;
   color: #e0e0e0;
@@ -20,110 +22,113 @@
   background-repeat: no-repeat;
   background-size: cover;
   text-align: center;
-  overflow-x: hidden; /* evita rolagem lateral */
-  overflow-y: hidden; /* evita rolagem vertical */
-   }
-    
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
 
+/* ==============================
+   CABEÇALHO
+============================== */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 5%;
+  width: 100%;
+  max-width: 100vw;
+}
 
-    /* ====== TOPO ====== */
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 5%;
-      width: 100%;
-      max-width: 100vw;
-    }
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 
-    .profile {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
+.avatar {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  border: 2px solid #00bfff;
+  background-color: rgba(255, 255, 255, 0.2);
+}
 
-    .avatar {
-      width: 45px;
-      height: 45px;
-      border-radius: 50%;
-      border: 2px solid #00bfff;
-      background-color: rgba(255, 255, 255, 0.2);
-    }
+.user-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
 
-    .user-info {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-    }
+.username {
+  font-weight: 600;
+  color: #fff;
+  font-size: 1rem;
+  text-shadow: 0 0 8px #007bff;
+  margin-top: 10px;
+}
 
-    .username {
-      font-weight: 600;
-      color: #fff;
-      font-size: 1rem;
-      text-shadow: 0 0 8px #007bff;
-      margin-top: 10px;
-    }
+.user-id {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  padding: 2px 6px;
+  font-size: 0.8rem;
+  color: #cfd8dc;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(5px);
+  margin-right: 10px;
+}
 
-    .user-id {
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 6px;
-      padding: 2px 6px;
-      font-size: 0.8rem;
-      color: #cfd8dc;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      backdrop-filter: blur(5px);
-      margin-right: 10px;
-      
-    }
+.premium-badge {
+  background: linear-gradient(45deg, #ffcc00, #f5b400);
+  padding: 5px 12px;
+  border-radius: 10px;
+  color: #000;
+  font-weight: 700;
+  box-shadow: 0 0 8px rgba(255, 204, 0, 0.7);
+  text-transform: lowercase;
+}
 
-    .premium-badge {
-      background: linear-gradient(45deg, #ffcc00, #f5b400);
-      padding: 5px 12px;
-      border-radius: 10px;
-      color: #000;
-      font-weight: 700;
-      box-shadow: 0 0 8px rgba(255, 204, 0, 0.7);
-      text-transform: lowercase;
-    }
+.settings {
+  font-size: 1.4rem;
+  cursor: pointer;
+  color: #cfd8dc;
+  transition: 0.3s;
+}
 
-    .settings {
-      font-size: 1.4rem;
-      cursor: pointer;
-      color: #cfd8dc;
-      transition: 0.3s;
-    }
-    .settings:hover {
-      color: #ffffff;
-      transform: rotate(20deg);
-    }
+.settings:hover {
+  color: #ffffff;
+  transform: rotate(20deg);
+}
 
-    /* ====== CONTEÚDO ====== */
-    .main-content {
-      max-width: 500px;
-      margin: 60px auto;
-      padding: 0 20px;
-      width: 100%;
-    }
+/* ==============================
+   CONTEÚDO PRINCIPAL
+============================== */
+.main-content {
+  max-width: 500px;
+  margin: 60px auto;
+  padding: 0 20px;
+  width: 100%;
+}
 
-    .welcome {
-      font-size: 5rem;
-      margin-bottom: 35px;
-      color: #fff;
-      text-shadow: 0 0 15px #00bfff;
-      margin-top: 70px;
-    }
-    .welcome span {
-      color: #00bfff;
-    }
+.welcome {
+  font-size: 5rem;
+  margin-bottom: 35px;
+  color: #fff;
+  text-shadow: 0 0 15px #00bfff;
+  margin-top: 70px;
+}
 
-    .description {
-      font-size: 1.3rem;
-      color: #d0d8e0;
-      margin-bottom: 25px;
-      line-height: 1.5;
-    }
+.welcome span {
+  color: #00bfff;
+}
 
-    .input-field {
+.description {
+  font-size: 1.3rem;
+  color: #d0d8e0;
+  margin-bottom: 25px;
+  line-height: 1.5;
+}
+
+.input-field {
   padding: 12px;
   margin: 8px auto;
   border-radius: 12px;
@@ -145,252 +150,509 @@
   box-shadow: 0 0 8px #00bfff;
 }
 
-
-    /* ====== BOTÕES ====== */
-    .buttons {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 15px;
-      margin-top: 20px;
-      width: 100%;
-    }
-
-    .chat-btn {
-      background: linear-gradient(to right, #00bfff, #0077ff);
-      color: white;
-      border: none;
-      border-radius: 12px;
-      padding: 12px 25px;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: 0.3s;
-      box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
-    }
-
-    .chat-btn:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 15px rgba(0, 191, 255, 0.8);
-    }
-
-    .chat-btn.video {
-      background: linear-gradient(to right, #0080ff, #0047b3);
-    }
-
-    /* ====== RODAPÉ ====== */
-    .footer {
-      font-size: 0.85rem;
-      margin-top: 30px;
-      color: #b0bec5;
-      opacity: 0.8;
-      padding: 13px;
-    }
-
-    /* ====== RESPONSIVIDADE ====== */
-    @media (max-width: 600px) {
-      .welcome {
-        font-size: 2.5rem;
-      }
-
-      .chat-btn {
-        padding: 10px 18px;
-        font-size: 0.95rem;
-      }
-
-      .main-content {
-        margin-top: 40px;
-      }
-    
-    .profile-options {
-    position: absolute;
-    top: 12%;
-    left: 0;
-    background: #fff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    z-index: 10;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
+/* ==============================
+   BOTÕES
+============================== */
+.buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 20px;
+  width: 100%;
 }
 
-.profile-options.hidden {
-    display: none;
+.chat-btn {
+  background: linear-gradient(to right, #00bfff, #0077ff);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 25px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
 }
-          
 
-        /* Estilo do Modal */
-        .modal-overlay {
-    display: none; /* Oculto inicialmente */
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.8); /* Fundo escuro semi-transparente */
-    justify-content: center;
-    align-items: center;
-    z-index: 10;
+.chat-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(0, 191, 255, 0.8);
+}
+
+.chat-btn.video {
+  background: linear-gradient(to right, #0080ff, #0047b3);
+}
+
+/* ==============================
+   RODAPÉ
+============================== */
+.footer {
+  font-size: 0.85rem;
+  margin-top: 30px;
+  color: #b0bec5;
+  opacity: 0.8;
+  padding: 13px;
+}
+
+/* ==============================
+   MODAL
+============================== */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
 }
 
 .modal-content {
-    background-color: #1a1a1d;
-    padding: 20px;
-    border-radius: 10px;
-    width: 300px;
-    text-align: center;
-    color: white;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+  background-color: #1a1a1d;
+  padding: 20px;
+  border-radius: 10px;
+  width: 300px;
+  text-align: center;
+  color: white;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
 }
 
 .qr-code {
-    width: 150px;
-    height: 150px;
-    background-color: #333;
-    margin: 10px auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #bbb;
-    font-size: 14px;
-    border-radius: 10px;
+  width: 150px;
+  height: 150px;
+  background-color: #333;
+  margin: 10px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #bbb;
+  font-size: 14px;
+  border-radius: 10px;
 }
+
 .close-btn {
-    background-color: #888787;
-    color: white;
-    padding: 7px 15px; /* Mesmo tamanho de padding que o botão "Assinar" */
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    margin-top: 12px;
-    width: 50%; /* Garante que o botão "Fechar" também ocupe a mesma largura */
+  background-color: #888787;
+  color: white;
+  padding: 7px 15px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 12px;
+  width: 50%;
 }
 
 .close-btn:hover {
-    background-color: #888787;
+  background-color: #888787;
 }
 
-      .content { flex: 1; /* Faz o conteúdo ocupar o espaço disponível */
-                display: flex;
-                flex-direction: column;
-                justify-content: flex-start; 
-                align-items: center;
-                padding: 20px;
-                color: #e0e0e0; 
-                text-align: center;
-                margin-top: 40px; /* Espaço para o cabeçalho */ 
-                overflow-y: auto;
-                width: 100%;
-                 overflow-x: hidden;
-               }
-      .option-button {
-    background: #007bff;
-    color: #fff;
-    border: none;
-    padding: 10px;
-    border-radius: 4px;
-    font-size: 14px;
-    cursor: pointer;
+/* ==============================
+   ÁREA DE CONTEÚDO
+============================== */
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 20px;
+  color: #e0e0e0;
+  text-align: center;
+  margin-top: 40px;
+  overflow-y: auto;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* ==============================
+   OPÇÕES DE PERFIL
+============================== */
+.profile-options {
+  position: absolute;
+  top: 12%;
+  left: 0;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.profile-options.hidden {
+  display: none;
+}
+
+/* ==============================
+   BOTÕES DE OPÇÃO
+============================== */
+.option-button {
+  background: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
 }
 
 .option-button:hover {
-    background: #0056b3;
+  background: #0056b3;
+}
+
+/* ==============================
+   BOTÃO DE VOLTAR (SETA)
+============================== */
+.back-arrow {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  font-size: 1.8rem;
+  color: #cfd8dc;
+  cursor: pointer;
+  transition: transform 0.2s ease, color 0.3s;
+  display: none;
+  z-index: 1001;
+  user-select: none;
+}
+
+.back-arrow:hover {
+  color: #00d8ff;
+}
+
+.back-arrow:active {
+  transform: scale(0.8);
+}
+
+/* ==============================
+   PÁGINA DE CONFIGURAÇÃO
+============================== */
+/* ==============================
+   CONFIGURAÇÕES (MODAL / PÁGINA DE CONFIG)
+============================== */
+.config-page {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(10, 20, 30, 0.98); /* cor sólida escura */
+  color: white;
+  z-index: 9999; /* garante que cobre tudo */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
+  padding: 40px 20px;
+  transition: opacity 0.3s ease;
+}
+
+/* Oculta quando não estiver ativa */
+.hidden {
+  display: none;
+}
+
+/* Títulos da página de config */
+h3 {
+  text-align: center;
+  margin-bottom: 10px;
+  color: #00d8ff;
+}
+
+/* Seções dentro da página de config */
+.config-section {
+  background: #222;
+  border: 1px solid #333;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+/* Títulos dentro das seções */
+.config-section h2 {
+  margin-bottom: 10px;
+  font-size: 18px;
+  color: #00d8ff;
+  cursor: pointer;
+}
+
+/* Inputs, selects, buttons e textarea */
+select,
+button,
+textarea,
+input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  background: #333;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+}
+
+/* Desativa redimensionamento de textarea */
+textarea {
+  resize: none;
+}
+
+/* Efeito hover para botões */
+button:hover {
+  background-color: #00d8ff;
+  color: #000;
+  cursor: pointer;
+}
+
+/* ==============================
+   TELA CONTA (FULLSCREEN)
+============================== */
+.account-fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(to bottom right, #1e1e1e, #2c2c2c);
+  z-index: 999;
+  padding: 20px;
+  display: none;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+/* Cabeçalho da tela de conta */
+.account-header {
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-bottom: 20px;
+  height: 40px;
+}
+
+
+/* Botão de voltar (seta) na página de configuração */
+.back-arrow {
+  position: fixed;
+  top: 20px;
+  left: 20px; /* lado esquerdo */
+  font-size: 2rem;
+  color: #00d8ff;
+  cursor: pointer;
+  z-index: 10000; /* maior que o da config-page */
+  display: none; /* inicialmente escondida */
+  user-select: none;
+  transition: transform 0.2s ease, color 0.3s;
+}
+
+
+.back-arrow:hover {
+  color: #ffffff;
+  transform: scale(1.1);
+}
+
+.back-arrow:active {
+  transform: scale(0.9);
+}
+
+
+/* Título central da tela de conta */
+.account-title {
+  flex: 1;
+  text-align: center;
+  font-size: 24px;
+  color: #00d8ff;
+  font-weight: bold;
+  user-select: none;
+}
+
+
+/* ==============================
+   RESPONSIVIDADE
+============================== */
+@media (max-width: 600px) {
+  .welcome {
+    font-size: 2.5rem;
+  }
+
+  .chat-btn {
+    padding: 10px 18px;
+    font-size: 0.95rem;
+  }
+
+  .main-content {
+    margin-top: 40px;
+  }
 }
 
   </style>
 </head>
 <body>
+  <!-- Cabeçalho -->
   <header class="header">
     <div class="profile">
       <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Avatar" class="avatar">
       <div class="user-info">
-          <span class="username">Nome de Usuário</span>
-                <span id="user-id">#1234567
-                </span> <!-- Este ID será substituído pelo valor salvo no localStorage -->
-     </div>
+        <span class="username">Nome de Usuário</span>
+        <span id="user-id">#1234567</span>
+      </div>
     </div>
-      <button class="premium-badge" onclick="openModal()">premium</button>
-    <div class="settings">⚙️</div>
+    <button class="premium-badge" onclick="openModal()">premium</button>
+    <div class="settings" id="settings-btn">⚙️</div>
   </header>
-  
-        <div class="profile-options hidden" id="profileOptions">
-            <button class="option-button" onclick="changeUsername()">Mudar Nome de Usuário</button>
-            <button class="option-button" onclick="chooseLocalProfileImage()">Mudar foto</button>
-        </div>
+
+  <!-- Opções do perfil -->
+  <div class="profile-options hidden" id="profileOptions">
+    <button class="option-button" onclick="changeUsername()">Mudar Nome de Usuário</button>
+    <button class="option-button" onclick="chooseLocalProfileImage()">Mudar foto</button>
+  </div>
+
+  <!-- Modal de pagamento -->
+  <div class="modal-overlay" id="paymentModal">
+    <div class="modal-content">
+      <h2>Pague R$10 para obter Pulos Ilimitados</h2>
+      <div class="qr-code">
+        QR Code<br>(Imagem aqui)
+      </div>
+      <p>Use o código QR acima para fazer o pagamento</p>
+      <button class="unlimited-jumps-btn" onclick="sign()">Assinar</button>
+      <button class="close-btn" onclick="closeModal()">Fechar</button>
     </div>
-     
-      <body>
+  </div>
 
-   <div class="modal-overlay" id="paymentModal">
-            <div class="modal-content">
-                <h2>Pague R$10 para obter Pulos Ilimitados</h2>
-                <div class="qr-code">
-                    QR Code<br> (Imagem aqui)
-                </div>
-                <p>Use o código QR acima para fazer o pagamento</p>
-                
-                <!-- Botão Assinar dentro do Modal, acima do botão Fechar -->
-                <button class="unlimited-jumps-btn" onclick="sign()">Assinar</button>
-                
-                <button class="close-btn" onclick="closeModal()">Fechar</button>
-            </div>
-        </div>
+  <!-- ← Seta para voltar -->
+  <div class="back-arrow" id="back-arrow">←</div>
 
+  <!-- Página de Configurações -->
+  <div id="main-config" class="config-page hidden">
+    <h1>Configurações</h1>
+
+    <div class="config-section">
+      <h3 onclick="abrirConta()">Conta</h3>
+    </div>
+
+    <div class="config-section">
+      <h4>Idioma</h4>
+      <select>
+        <option value="pt">Português</option>
+        <option value="en">English</option>
+        <option value="es">Español</option>
+      </select>
+    </div>
+
+    <div class="config-section">
+      <h4>Contas Bloqueadas</h4>
+      <p>Você ainda não bloqueou ninguém.</p>
+    </div>
+
+    <div class="config-section">
+      <h4>Histórico de Denúncias</h4>
+      <p>Sem denúncias registradas.</p>
+    </div>
+
+    <div class="config-section">
+      <h4>Suporte</h4>
+      <textarea placeholder="Descreva seu problema ou dúvida aqui..." rows="4"></textarea>
+      <button>Enviar para o suporte</button>
+    </div>
+
+    <div class="config-section">
+      <h4>Desconectar</h4>
+      <button onclick="logout()">Sair da conta</button>
+    </div>
+  </div>
+
+  <!-- Tela cheia da aba Conta -->
+  <div id="conta-tela" class="account-fullscreen hidden">
+    <div class="account-header">
+      <button class="back-button" onclick="fecharConta()">← Voltar</button>
+      <div class="account-title">Conta</div>
+    </div>
+
+    <input type="text" placeholder="Alterar nome de usuário" />
+    <input type="email" placeholder="Alterar e-mail" />
+    <input type="password" placeholder="Alterar senha" />
+    <button>Salvar alterações</button>
+    <button style="margin-top: 10px; background: #800000;">Excluir conta</button>
+  </div>
+
+  <!-- Conteúdo principal -->
   <main class="main-content">
-    <h1 class="welcome">Bem-vindo,<br><span id="dynamicUsername">Nome de Usuário!</span></div>
+    <h1 class="welcome">Bem-vindo,<br><span id="dynamicUsername">Nome de Usuário!</span></h1>
     <p class="description">
       🌍 O mundo inteiro está online esperando para conversar com você.
       Clique, conecte-se e descubra amizades, culturas e experiências incríveis a cada nova conversa.
       Sua próxima conexão pode estar a apenas um clique de distância!
     </p>
 
-<div class="language-tag-container">
-  <select class="input-field" id="language-select">
-    <option value="zh">Chinês</option>
-    <option value="es">Espanhol</option>
-    <option value="en">Inglês</option>
-    <option value="hi">Hindi</option>
-    <option value="ar">Árabe</option>
-    <option value="bn">Bengali</option>
-    <option value="pt">Português</option>
-    <option value="ru">Russo</option>
-    <option value="ja">Japonês</option>
-    <option value="de">Alemão</option>
-    <option value="ko">Coreano</option>
-    <option value="fr">Francês</option>
-    <option value="tr">Turco</option>
-    <option value="it">Italiano</option>
-    <option value="vi">Vietnamita</option>
-    <option value="ta">Tâmil</option>
-    <option value="ur">Urdu</option>
-    <option value="mr">Marata</option>
-    <option value="te">Télugo</option>
-    <option value="kn">Canará</option>
-    <option value="ml">Malaiala</option>
-    <option value="pa">Punjabi</option>
-    <option value="gu">Guzerate</option>
-    <option value="pl">Polonês</option>
-    <option value="uk">Ucraniano</option>
-  </select>
+    <div class="language-tag-container">
+      <select class="input-field" id="language-select">
+        <option value="zh">Chinês</option>
+        <option value="es">Espanhol</option>
+        <option value="en">Inglês</option>
+        <option value="hi">Hindi</option>
+        <option value="ar">Árabe</option>
+        <option value="bn">Bengali</option>
+        <option value="pt">Português</option>
+        <option value="ru">Russo</option>
+        <option value="ja">Japonês</option>
+        <option value="de">Alemão</option>
+        <option value="ko">Coreano</option>
+        <option value="fr">Francês</option>
+        <option value="tr">Turco</option>
+        <option value="it">Italiano</option>
+        <option value="vi">Vietnamita</option>
+        <option value="ta">Tâmil</option>
+        <option value="ur">Urdu</option>
+        <option value="mr">Marata</option>
+        <option value="te">Télugo</option>
+        <option value="kn">Canará</option>
+        <option value="ml">Malaiala</option>
+        <option value="pa">Punjabi</option>
+        <option value="gu">Guzerate</option>
+        <option value="pl">Polonês</option>
+        <option value="uk">Ucraniano</option>
+      </select>
 
-  <input class="input-field" type="text" placeholder="Escreva sua tag Ex: Anime, Jogos, Filmes" />
-</div>
-
-<div class="buttons">
-  <button class="chat-btn" onclick="window.location.href='chatTexto.html'">Chat de Texto</button>
-  <button class="chat-btn video" onclick="window.location.href='ChatVideo.html'">Chat de Vídeo</button>
-</div>
-
+      <input class="input-field" type="text" placeholder="Escreva sua tag Ex: Anime, Jogos, Filmes" />
     </div>
 
-    <!-- Rodapé -->
-    <div class="footer">
-        <p>&copy; 2024 TecWorld. Todos os direitos reservados.</p>
+    <div class="buttons">
+      <button class="chat-btn" onclick="window.location.href='chatTexto.html'">Chat de Texto</button>
+      <button class="chat-btn video" onclick="window.location.href='ChatVideo.html'">Chat de Vídeo</button>
     </div>
+  </main>
+
+  <!-- Rodapé -->
+  <footer class="footer">
+    <p>&copy; 2024 TecWorld. Todos os direitos reservados.</p>
+  </footer>
+
+  <script>
+    const settingsBtn = document.getElementById("settings-btn");
+    const mainConfig = document.getElementById("main-config");
+    const backArrow = document.getElementById("back-arrow");
+
+    settingsBtn.addEventListener("click", () => {
+      mainConfig.classList.remove("hidden");
+      backArrow.style.display = "block";
+    });
+
+    backArrow.addEventListener("click", () => {
+      backArrow.classList.add("clicked");
+      setTimeout(() => {
+        mainConfig.classList.add("hidden");
+        backArrow.style.display = "none";
+        backArrow.classList.remove("clicked");
+      }, 200);
+    });
+  </script>
+</body>
+
     <script>
-   // Função para abrir o modal
+  // Função para abrir o modal
 function openModal() {
     document.getElementById('paymentModal').style.display = 'flex'; // Torna o modal visível
 }
@@ -524,6 +786,40 @@ document.addEventListener('DOMContentLoaded', function () {
     } else {
         console.warn("Nenhum usuário logado.");
     }
+    const settingsBtn = document.getElementById('settings-btn');
+    const configPage = document.getElementById('main-config');
+    const backArrow = document.getElementById('back-arrow');
+
+    // Mostrar a página de configurações
+    settingsBtn.addEventListener('click', () => {
+      configPage.style.display = 'flex';
+      backArrow.style.display = 'block';
+    });
+
+    // Fechar a página de configurações com efeito de clique
+    backArrow.addEventListener('click', () => {
+      backArrow.style.transform = 'scale(0.8)';
+      setTimeout(() => {
+        backArrow.style.transform = 'scale(1)';
+        configPage.style.display = 'none';
+        backArrow.style.display = 'none';
+      }, 150);
+    });
+
+    function logout() {
+      alert("Você foi desconectado!");
+    }
+
+    function abrirConta() {
+      document.getElementById("main-config").style.display = "none";
+      document.getElementById("conta-tela").style.display = "flex";
+      document.getElementById("conta-tela").style.flexDirection = "column";
+    }
+
+    function fecharConta() {
+      document.getElementById("conta-tela").style.display = "none";
+      document.getElementById("main-config").style.display = "flex";
+    }
 
     // Abertura e fechamento do menu de perfil
     const profile = document.querySelector(".profile");
@@ -544,7 +840,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
-    </script>    
+ 
     </script>    
 </body>
 </html>
