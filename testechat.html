@@ -334,14 +334,15 @@ body {
    CABEÇALHO
 ============================== */
 .back-arrow {
-  position: absolute;
+  position: fixed;
   top: 25px;
   left: 20px; /* canto esquerdo */
-  font-size: 1.8rem;
+  font-size: 2rem;
   color: #00d8ff;
   cursor: pointer;
   display: none;
   user-select: none;
+  z-index: 10000; /* garante que apareça acima da config-page */
   transition: transform 0.2s ease, color 0.3s;
 }
 
