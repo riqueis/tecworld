@@ -572,6 +572,20 @@ h1 {
       <button onclick="logout()">Sair da conta</button>
     </div>
   </div>
+  <!-- Aba de Perfil (inicialmente escondida) -->
+<div id="perfil-config" class="config-page hidden">
+  <h1>Perfil</h1>
+  <div class="profile">
+    <div class="profile-image-container">
+      <img id="profile-image" src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Foto de perfil">
+    </div>
+    <h3 class="username">Seu Nome</h3>
+    <p id="user-id">id:0000000</p>
+    <button onclick="chooseLocalProfileImage()" class="change-photo-btn">Trocar foto</button>
+    <button onclick="changeUsername()" class="change-photo-btn">Trocar nome</button>
+    <button onclick="voltarConfig()" class="change-photo-btn">⬅️ Voltar</button>
+  </div>
+</div>
 
   <!-- Tela cheia da aba Conta -->
   <div id="conta-tela" class="account-fullscreen hidden">
@@ -849,16 +863,28 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
- function abrirConta() {
+function abrirConta() {
+  // Esconde a área principal de configurações
+  const mainConfig = document.getElementById("main-config");
   const perfilConfig = document.getElementById("perfil-config");
 
-  // Fecha todas as outras seções se tiver
-  const todas = document.querySelectorAll(".perfil-config");
-  todas.forEach(el => el.classList.add("hidden"));
-
-  // Mostra a de perfil
-  perfilConfig.classList.toggle("hidden");
+  if (mainConfig && perfilConfig) {
+    mainConfig.classList.add("hidden"); // esconde a tela principal
+    perfilConfig.classList.remove("hidden"); // mostra a de perfil
+  }
 }
+
+function voltarConfig() {
+  // Volta da aba de perfil para a tela principal de configurações
+  const mainConfig = document.getElementById("main-config");
+  const perfilConfig = document.getElementById("perfil-config");
+
+  if (mainConfig && perfilConfig) {
+    perfilConfig.classList.add("hidden");
+    mainConfig.classList.remove("hidden");
+  }
+}
+
 
     </script>    
 </body>
