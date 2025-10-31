@@ -1,215 +1,360 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Configurações - TecWorld</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Central de Contas — TecWorld</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, sans-serif;
+    /* Reset simples */
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
+      font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background:linear-gradient(180deg,#f5f7fb 0%,#ffffff 100%);
+      color:#1f2937;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.4;
     }
 
-    body,
-    html {
-      height: 100%;
-      background: #111;
-      color: #fff;
-    }
-     .settings {
-      font-size: 1.4rem;
-      cursor: pointer;
-      color: #cfd8dc;
-      transition: 0.3s;
-    }
-    .settings:hover {
-      color: #ffffff;
-      transform: rotate(20deg);
+    /* Layout */
+    .app{
+      max-width:1200px;
+      margin:28px auto;
+      background:#fff;
+      border-radius:16px;
+      box-shadow:0 8px 30px rgba(31,41,55,0.07);
+      overflow:hidden;
+      display:grid;
+      grid-template-columns:280px 1fr;
+      min-height:70vh;
     }
 
-    .config-page {
-      width: 100%;
-      min-height: 100vh;
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      background: linear-gradient(to bottom right, #1e1e1e, #2c2c2c);
+    /* SIDEBAR */
+    .sidebar{
+      background:linear-gradient(180deg,#0ea5a0 0%,#06b6d4 100%);
+      color:#fff;
+      padding:24px;
+    }
+    .brand{
+      display:flex;align-items:center;gap:12px;margin-bottom:20px
+    }
+    .brand .logo{
+      width:48px;height:48px;border-radius:10px;background:rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;font-weight:700
+    }
+    .brand h1{font-size:18px}
+    .profile{
+      display:flex;align-items:center;gap:12px;padding:12px;border-radius:10px;background:rgba(255,255,255,0.06);margin-bottom:20px
+    }
+    .profile img{width:56px;height:56px;border-radius:999px;object-fit:cover;border:2px solid rgba(255,255,255,0.18)}
+    .profile .meta{font-size:14px}
+    .nav{margin-top:8px;display:flex;flex-direction:column;gap:8px}
+    .nav button{
+      background:transparent;border:0;color:inherit;text-align:left;padding:10px;border-radius:8px;cursor:pointer;font-weight:600;display:flex;align-items:center;gap:10px
+    }
+    .nav button:hover{background:rgba(255,255,255,0.06)}
+    .nav .active{background:rgba(255,255,255,0.12)}
+
+    /* MAIN */
+    .main{padding:28px}
+    .header-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+    .header-row h2{font-size:20px}
+    .actions{display:flex;gap:8px}
+
+    /* Cards grid */
+    .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:18px}
+    .card{background:#fbfcfe;border:1px solid #eef2f7;padding:16px;border-radius:12px}
+    .card h3{margin-bottom:10px;font-size:15px}
+    .card p{font-size:13px;color:#475569}
+
+    /* Form styles */
+    label{display:block;font-size:13px;margin-bottom:6px;color:#334155}
+    input[type="text"],input[type="email"],select{width:100%;padding:10px;border-radius:8px;border:1px solid #e6eef6;background:#fff}
+    .row{display:flex;gap:12px}
+    .row .col{flex:1}
+
+    .btn{padding:10px 14px;border-radius:10px;border:0;cursor:pointer;font-weight:700}
+    .btn-primary{background:#0ea5a0;color:#fff}
+    .btn-ghost{background:transparent;border:1px solid #cbd5e1;color:#0f172a}
+
+    /* Table/Lists */
+    .list{display:flex;flex-direction:column;gap:10px}
+    .list-item{display:flex;justify-content:space-between;align-items:center;padding:12px;border-radius:10px;border:1px solid #eef2f7;background:#fff}
+    .muted{color:#64748b;font-size:13px}
+
+    /* Danger area */
+    .danger{border-left:4px solid #ef4444;padding-left:12px}
+
+    /* Mobile */
+    @media (max-width:880px){
+      .app{grid-template-columns:1fr;min-height:unset}
+      .grid{grid-template-columns:1fr}
+      .sidebar{display:flex;justify-content:space-between;align-items:center}
+      .nav{display:none}
     }
 
-    h1 {
-      text-align: center;
-      margin-bottom: 10px;
-      color: #00d8ff;
-    }
-
-    .config-section {
-      background: #222;
-      border: 1px solid #333;
-      padding: 15px;
-      border-radius: 8px;
-    }
-
-    .config-section h2 {
-      margin-bottom: 10px;
-      font-size: 18px;
-      color: #00d8ff;
-      cursor: pointer;
-    }
-
-    select,
-    button,
-    textarea,
-    input {
-      width: 100%;
-      padding: 10px;
-      margin-top: 5px;
-      background: #333;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-    }
-
-    textarea {
-      resize: none; /* Impede redimensionamento */
-    }
-
-    button:hover {
-      background-color: #00d8ff;
-      color: #000;
-      cursor: pointer;
-    }
-
-    /* Tela cheia da aba de conta */
-    .account-fullscreen {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100vh;
-      background: linear-gradient(to bottom right, #1e1e1e, #2c2c2c);
-      z-index: 999;
-      padding: 20px;
-      display: none;
-      flex-direction: column;
-      overflow-y: auto;
-    }
-
-    .account-header {
-      display: flex;
-      align-items: center;
-      position: relative;
-      margin-bottom: 20px;
-      height: 40px;
-    }
-
-    .back-button {
-      background: #444;
-      padding: 6px 12px;
-      border-radius: 5px;
-      cursor: pointer;
-      flex-shrink: 0;
-      width: auto;
-      font-size: 14px;
-    }
-
-    .back-button:hover {
-      background: #00d8ff;
-      color: #000;
-    }
-
-    .account-title {
-      flex: 1;
-      text-align: center;
-      font-size: 24px;
-      color: #00d8ff;
-      font-weight: bold;
-      user-select: none;
-    }
+    /* small helpers */
+    .small{font-size:13px;color:#475569}
+    .pill{display:inline-block;padding:6px 8px;border-radius:999px;border:1px solid #e6eef6;font-weight:700}
   </style>
 </head>
 <body>
-    <div class="settings">⚙️</div>
-  <div id="main-config" class="config-page">
-    <h1>Configurações</h1>
+  <div class="app" role="application" aria-label="Central de Contas TecWorld">
 
-    <div class="config-section">
-      <h2 onclick="abrirConta()">Conta</h2>
-    </div>
+    <aside class="sidebar" aria-label="Barra lateral">
+      <div class="brand">
+        <div class="logo">TW</div>
+        <div>
+          <h1>TecWorld</h1>
+          <div class="small">Central de Contas</div>
+        </div>
+      </div>
 
-    <div class="config-section">
-      <h2>Idioma</h2>
-      <select>
-        <option value="pt">Português</option>
-        <option value="en">English</option>
-        <option value="es">Español</option>
-      </select>
-    </div>
+     <div class="profile">
+  <label for="profileUpload" style="cursor:pointer;">
+    <img id="profileImage" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&q=60&auto=format&fit=crop" alt="Foto do usuário">
+  </label>
+  <input type="file" id="profileUpload" accept="image/*" style="display:none;">
+  <div class="meta">
+    <div style="font-weight:700">Henrique</div>
+    <div class="small">henrique@example.com</div>
+  </div>
+</div>
 
-    <div class="config-section">
-      <h2>Contas Bloqueadas</h2>
-      <p>Você ainda não bloqueou ninguém.</p>
-    </div>
+      <nav class="nav" role="navigation" aria-label="Navegação da conta">
+        <button class="active" data-target="overview">Visão geral</button>
+        <button data-target="profile">Perfil</button>
+        <button data-target="security">Segurança</button>
+        <button data-target="payments">Pagamentos</button>
+        <button data-target="subscriptions">Assinatura</button>
+        <button data-target="blocked">Usuários bloqueados</button>
+        <button data-target="support">Suporte</button>
+        <button data-target="delete">Excluir conta</button>
+      </nav>
 
-    <div class="config-section">
-      <h2>Histórico de Denúncias</h2>
-      <p>Sem denúncias registradas.</p>
-    </div>
+    </aside>
 
-    <div class="config-section">
-      <h2>Suporte</h2>
-      <textarea placeholder="Descreva seu problema ou dúvida aqui..." rows="4"></textarea>
-      <button>Enviar para o suporte</button>
-    </div>
+    <main class="main">
 
-    <div class="config-section">
-      <h2>Desconectar</h2>
-      <button onclick="logout()">Sair da conta</button>
-    </div>
+      <div id="overview" class="panel">
+        <div class="header-row">
+          <h2>Visão geral da conta</h2>
+          <div class="actions">
+            <button class="btn btn-ghost" onclick="openModal('editProfile')">Editar perfil</button>
+            <button class="btn btn-primary" onclick="openModal('addPayment')">Adicionar pagamento</button>
+          </div>
+        </div>
+
+        <div class="grid">
+          <section class="card">
+            <h3>Conta</h3>
+            <p class="small">ID: <strong>#0012345</strong></p>
+            <p class="small">Plano: <span class="pill">Free</span></p>
+            <p style="margin-top:10px">Último login: <span class="muted">24/10/2025 09:34</span></p>
+          </section>
+
+          <section class="card">
+            <h3>Segurança</h3>
+            <p class="small">Autenticação de dois fatores: <strong>Desativada</strong></p>
+            <p class="small">E-mail verificado: <strong>Sim</strong></p>
+            <div style="margin-top:10px">
+              <button class="btn btn-ghost" onclick="openModal('security')">Configurar</button>
+            </div>
+          </section>
+        </div>
+
+        <div class="grid">
+          <section class="card">
+            <h3>Atividade recente</h3>
+            <div class="list">
+              <div class="list-item"><div>Login de desktop</div><div class="muted">13/10/2025</div></div>
+              <div class="list-item"><div>Tentativa de alteração de senha</div><div class="muted">02/10/2025</div></div>
+              <div class="list-item"><div>Pagamento recusado</div><div class="muted">30/09/2025</div></div>
+            </div>
+          </section>
+
+          <section class="card">
+            <h3>Preferências</h3>
+            <p class="small">Idioma: Português</p>
+            <p class="small">Notificações: Ativas</p>
+            <div style="margin-top:12px"><button class="btn btn-ghost" onclick="openModal('preferences')">Alterar preferências</button></div>
+          </section>
+        </div>
+
+      </div>
+
+      <!-- OUTROS PAINEIS (ocultos por padrão) -->
+      <div id="profile" class="panel" style="display:none">
+        <h2>Perfil</h2>
+        <div style="margin-top:12px" class="card">
+          <form onsubmit="event.preventDefault();saveProfile();">
+            <label for="name">Nome</label>
+            <input id="name" type="text" value="Henrique">
+
+            <label for="username" style="margin-top:10px">Nome de usuário</label>
+            <input id="username" type="text" value="genickworld">
+
+            <label for="bio" style="margin-top:10px">Biografia</label>
+            <input id="bio" type="text" placeholder="Sobre você">
+
+            <div style="margin-top:12px;display:flex;gap:8px">
+              <button class="btn btn-primary">Salvar</button>
+              <button class="btn btn-ghost" type="button" onclick="resetProfile()">Cancelar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div id="security" class="panel" style="display:none">
+        <h2>Segurança</h2>
+        <div style="margin-top:12px" class="card">
+          <label>Senha</label>
+          <div class="row" style="align-items:center">
+            <div class="col"><input type="text" value="••••••••••" readonly></div>
+            <div style="width:160px"><button class="btn btn-ghost" onclick="openModal('changePassword')">Alterar senha</button></div>
+          </div>
+
+          <div style="margin-top:12px">
+            <label>Autenticação de dois fatores</label>
+            <p class="small">Use um app de autenticação para segurança extra.</p>
+            <div style="margin-top:8px"><button class="btn btn-primary" onclick="enable2FA()">Ativar 2FA</button></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="payments" class="panel" style="display:none">
+        <h2>Pagamentos</h2>
+        <div style="margin-top:12px" class="card">
+          <h3>Métodos de pagamento</h3>
+          <div class="list" style="margin-top:8px">
+            <div class="list-item"><div>Cartão •••• 4242</div><div><button class="btn btn-ghost">Remover</button></div></div>
+            <div class="list-item"><div>PayPal</div><div><button class="btn btn-ghost">Remover</button></div></div>
+          </div>
+          <div style="margin-top:12px"><button class="btn btn-primary" onclick="openModal('addPayment')">Adicionar método</button></div>
+        </div>
+      </div>
+
+      <div id="subscriptions" class="panel" style="display:none">
+        <h2>Assinatura</h2>
+        <div class="card">
+          <h3>Plano atual</h3>
+          <p class="small">Plano: <strong>Free</strong></p>
+          <p class="small">Benefícios: acesso básico ao TecWorld</p>
+          <div style="margin-top:12px"><button class="btn btn-primary">Assinar Premium</button></div>
+        </div>
+      </div>
+
+      <div id="blocked" class="panel" style="display:none">
+        <h2>Usuários bloqueados</h2>
+        <div class="card">
+          <div class="list">
+            <div class="list-item"><div>usuario123</div><div><button class="btn btn-ghost">Desbloquear</button></div></div>
+            <div class="list-item"><div>troll_99</div><div><button class="btn btn-ghost">Desbloquear</button></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="support" class="panel" style="display:none">
+        <h2>Suporte</h2>
+        <div class="card">
+          <label>Assunto</label>
+          <input type="text" placeholder="Resumo do problema">
+          <label style="margin-top:10px">Mensagem</label>
+          <input type="text" placeholder="Descreva o problema">
+          <div style="margin-top:10px;display:flex;gap:8px"><button class="btn btn-primary">Enviar</button></div>
+        </div>
+      </div>
+
+      <div id="delete" class="panel" style="display:none">
+        <h2>Excluir conta</h2>
+        <div class="card danger">
+          <h3>Atenção</h3>
+          <p class="small">Excluir sua conta é permanente. Todos os dados serão removidos conforme nossa política de privacidade.</p>
+          <div style="margin-top:12px;display:flex;gap:8px">
+            <button class="btn" style="background:#ef4444;color:#fff" onclick="openModal('confirmDelete')">Excluir conta</button>
+            <button class="btn btn-ghost" onclick="navigate('overview')">Voltar</button>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
   </div>
 
-  <!-- Tela cheia da aba Conta -->
-  <div id="conta-tela" class="account-fullscreen">
-    <div class="account-header">
-      <button class="back-button" onclick="fecharConta()">← Voltar</button>
-      <div class="account-title">Conta</div>
+  <!-- Modais simples -->
+  <div id="modal" style="display:none;position:fixed;inset:0;background:rgba(2,6,23,0.6);align-items:center;justify-content:center;padding:20px;z-index:1000">
+    <div style="background:#fff;border-radius:12px;max-width:560px;width:100%;padding:18px;box-shadow:0 10px 40px rgba(2,6,23,0.3)">
+      <div id="modalContent"></div>
+      <div style="margin-top:12px;display:flex;justify-content:flex-end;gap:8px"><button class="btn btn-ghost" onclick="closeModal()">Fechar</button></div>
     </div>
-
-    <input type="text" placeholder="Alterar nome de usuário" />
-    <input type="email" placeholder="Alterar e-mail" />
-    <input type="password" placeholder="Alterar senha" />
-    <button>Salvar alterações</button>
-    <button style="margin-top: 10px; background: #800000;">Excluir conta</button>
   </div>
 
   <script>
+    // Navegação entre painéis
+    const navButtons = document.querySelectorAll('.nav button');
+    navButtons.forEach(btn=>btn.addEventListener('click',()=>navigate(btn.dataset.target)));
 
-// Seleciona o botão pelo ID
-const settingsBtn = document.getElementById('settings-btn');
+    function navigate(target){
+      document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));
+      document.querySelector(".nav button[data-target='"+target+"']")?.classList.add('active');
+      document.querySelectorAll('.panel').forEach(p=>p.style.display='none');
+      document.getElementById(target).style.display='block';
+      window.scrollTo({top:0,behavior:'smooth'});
+    }
 
-// Adiciona um evento de clique ao botão
-settingsBtn.addEventListener('click', () => {
-    // Redireciona para a página de configurações
-    window.location.href = 'config-page.html';
+    // Funções de modal
+    function openModal(name){
+      const content = document.getElementById('modalContent');
+      if(name==='addPayment'){
+        content.innerHTML = `
+          <h3>Adicionar método de pagamento</h3>
+          <label>Cartão</label>
+          <input type=\"text\" placeholder=\"Número do cartão\" style=\"width:100%;padding:10px;margin-top:8px;border-radius:8px;border:1px solid #e6eef6\">`;
+      } else if(name==='editProfile'){
+        content.innerHTML = `
+          <h3>Editar perfil</h3>
+          <label>Nome</label>
+          <input type=\"text\" value=\"Henrique\" style=\"width:100%;padding:10px;margin-top:8px;border-radius:8px;border:1px solid #e6eef6\">`;
+      } else if(name==='security'){
+        content.innerHTML = `<h3>Segurança</h3><p class=\"small\">Configurações de segurança</p>`;
+      } else if(name==='changePassword'){
+        content.innerHTML = `<h3>Alterar senha</h3><label>Senha atual</label><input type=\"text\" style=\"width:100%;padding:10px;margin-top:8px;border-radius:8px;border:1px solid #e6eef6\"><label style=\"margin-top:8px\">Nova senha</label><input type=\"text\" style=\"width:100%;padding:10px;margin-top:8px;border-radius:8px;border:1px solid #e6eef6\">`;
+      } else if(name==='preferences'){
+        content.innerHTML = `<h3>Preferências</h3><label>Idioma</label><select style=\"width:100%;padding:10px;border-radius:8px\"><option>Português</option><option>Inglês</option><option>Espanhol</option></select>`;
+      } else if(name==='confirmDelete'){
+        content.innerHTML = `<h3>Confirmar exclusão</h3><p class=\"small\">Tem certeza que deseja excluir sua conta? Essa ação é irreversível.</p><div style=\"margin-top:12px;display:flex;gap:8px;justify-content:flex-end\"><button class=\"btn\" style=\"background:#ef4444;color:#fff\" onclick=\"confirmDelete()\">Excluir</button></div>`;
+      } else {
+        content.innerHTML = `<h3>Modal</h3>`;
+      }
+      document.getElementById('modal').style.display = 'flex';
+    }
+    function closeModal(){document.getElementById('modal').style.display='none'}
+
+    function confirmDelete(){
+      closeModal();
+      alert('Conta excluída (simulação)');
+      navigate('overview');
+    }
+
+    // ações fictícias
+    function saveProfile(){closeModal();alert('Perfil salvo (simulação)')}
+    function resetProfile(){alert('Alterações descartadas')}
+    function enable2FA(){alert('2FA ativado (simulação)')}
+    
+    // Alterar foto de perfil localmente
+document.getElementById('profileUpload').addEventListener('change', function(e) {
+  const file = e.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function(ev) {
+      document.getElementById('profileImage').src = ev.target.result;
+      alert('Foto de perfil alterada (simulação)');
+    };
+    reader.readAsDataURL(file);
+  }
 });
 
-    function logout() {
-      alert("Você foi desconectado!");
-      // window.location.href = "/login";
-    }
 
-    function abrirConta() {
-      document.getElementById("main-config").style.display = "none";
-      document.getElementById("conta-tela").style.display = "flex";
-      document.getElementById("conta-tela").style.flexDirection = "column";
-    }
-
-    function fecharConta() {
-      document.getElementById("conta-tela").style.display = "none";
-      document.getElementById("main-config").style.display = "flex";
-    }
   </script>
 </body>
 </html>
