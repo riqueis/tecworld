@@ -837,7 +837,17 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
- 
+ function abrirConta() {
+  const perfilConfig = document.getElementById("perfil-config");
+
+  // Fecha todas as outras seções se tiver
+  const todas = document.querySelectorAll(".perfil-config");
+  todas.forEach(el => el.classList.add("hidden"));
+
+  // Mostra a de perfil
+  perfilConfig.classList.toggle("hidden");
+}
+
     </script>    
 </body>
 </html>
