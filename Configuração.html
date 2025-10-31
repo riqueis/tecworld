@@ -1,205 +1,156 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Central de Conta - TecWorld</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: "Inter", sans-serif;
-    }
-
-    body {
-      background: #f4f4f4;
-      color: #222;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
-    }
-
-    header {
-      width: 100%;
-      text-align: center;
-      background: #00bfa5;
-      color: white;
-      padding: 15px 0;
-      font-weight: 600;
-      font-size: 18px;
-      border-radius: 0 0 20px 20px;
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-    }
-
-    .container {
-      width: 100%;
-      max-width: 420px;
-      padding: 25px 20px 80px;
-    }
-
-    .profile-section {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-
-    .profile-wrapper {
-      position: relative;
-      display: inline-block;
-      cursor: pointer;
-    }
-
-    .profile-wrapper img {
-      width: 110px;
-      height: 110px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 3px solid #00bfa5;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-      transition: 0.3s ease;
-    }
-
-    .edit-overlay {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: rgba(0, 0, 0, 0.5);
-      color: #fff;
-      font-size: 13px;
-      padding: 4px 0;
-      border-radius: 0 0 50% 50%;
-      opacity: 0;
-      transition: 0.3s ease;
-    }
-
-    .profile-wrapper:hover .edit-overlay {
-      opacity: 1;
-    }
-
-    .username {
-      font-size: 18px;
-      font-weight: 600;
-      margin-top: 10px;
-    }
-
-    .email {
-      color: #666;
-      font-size: 14px;
-    }
-
-    /* Lista de opções */
-    .settings-list {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      margin-top: 25px;
-    }
-
-    .setting-item {
-      background: white;
-      border-radius: 12px;
-      padding: 14px 16px;
-      font-size: 16px;
-      font-weight: 500;
-      color: #333;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      transition: 0.2s ease;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-    }
-
-    .setting-item:hover {
-      background: #f0f0f0;
-    }
-
-    .logout {
-      color: #e74c3c;
-      border: 1px solid #e74c3c;
-      background: #fff;
-      margin-top: 20px;
-    }
-
-    .logout:hover {
-      background: #e74c3c;
-      color: white;
-    }
-
-    footer {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      background: white;
-      display: flex;
-      justify-content: space-around;
-      padding: 10px 0;
-      border-top: 1px solid #ddd;
-      box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.08);
-    }
-
-    footer button {
-      background: none;
-      border: none;
-      color: #00bfa5;
-      font-size: 22px;
-      cursor: pointer;
-      transition: 0.2s ease;
-    }
-
-    footer button:hover {
-      opacity: 0.6;
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Central de Contas — TecWorld</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;background:#f5f7fb;color:#1f2937;line-height:1.4}
+  .app{max-width:480px;margin:0 auto;padding:16px}
+  .profile{display:flex;align-items:center;gap:12px;padding:12px;border-radius:12px;background:#e5e7eb;margin-bottom:16px}
+  .profile img{width:64px;height:64px;border-radius:50%;object-fit:cover;border:2px solid #d1d5db;cursor:pointer}
+  .profile .meta{flex:1}
+  .profile .meta div{margin-bottom:4px}
+  .nav{display:flex;flex-direction:column;gap:10px;margin-bottom:16px}
+  .nav button{padding:12px;border-radius:10px;border:none;background:#f3f4f6;font-weight:600;cursor:pointer;text-align:left}
+  .nav button.active{background:#d1d5db}
+  .panel{display:none}
+  .panel.active{display:block}
+  .card{background:#fff;border-radius:12px;padding:16px;margin-bottom:12px;box-shadow:0 2px 6px rgba(0,0,0,0.05)}
+  .btn{padding:10px 14px;border-radius:10px;border:none;cursor:pointer;font-weight:700}
+  .btn-primary{background:#0ea5a0;color:#fff;margin-top:8px;width:100%}
+  .btn-ghost{background:#f3f4f6;color:#1f2937;margin-top:8px;width:100%}
+  #modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);align-items:center;justify-content:center;padding:16px;z-index:1000}
+  #modal .modal-content{background:#fff;padding:16px;border-radius:12px;width:100%;max-width:360px;box-shadow:0 4px 12px rgba(0,0,0,0.2)}
+</style>
 </head>
 <body>
-  <header>Central de Conta</header>
-
-  <div class="container">
-    <div class="profile-section">
-      <label for="profile-upload" class="profile-wrapper">
-        <img id="profile-pic" src="https://via.placeholder.com/150" alt="Foto de Perfil">
-        <div class="edit-overlay">Alterar</div>
-      </label>
-      <input type="file" id="profile-upload" accept="image/*" hidden>
-      <p class="username">@usuario</p>
-      <p class="email">usuario@tecworld.com</p>
-    </div>
-
-    <div class="settings-list">
-      <div class="setting-item">👤 Editar Perfil <span>›</span></div>
-      <div class="setting-item">🔒 Segurança <span>›</span></div>
-      <div class="setting-item">💳 Pagamentos <span>›</span></div>
-      <div class="setting-item">⭐ Assinatura <span>›</span></div>
-      <div class="setting-item">⚙️ Suporte <span>›</span></div>
-      <div class="setting-item">🌐 Idioma <span>›</span></div>
-      <div class="setting-item logout">🚪 Sair da Conta</div>
+<div class="app">
+  <div class="profile">
+    <label for="profileUpload">
+      <img id="profileImage" src="https://i.pravatar.cc/150?img=3" alt="Avatar">
+    </label>
+    <input type="file" id="profileUpload" accept="image/*" style="display:none;">
+    <div class="meta">
+      <div style="font-weight:700">Henrique</div>
+      <div class="small">henrique@example.com</div>
     </div>
   </div>
 
-  <footer>
-    <button>🏠</button>
-    <button>💬</button>
-    <button>👤</button>
-  </footer>
+  <nav class="nav">
+    <button class="active" data-target="overview">Visão geral</button>
+    <button data-target="profile">Perfil</button>
+    <button data-target="security">Segurança</button>
+    <button data-target="payments">Pagamentos</button>
+    <button data-target="subscriptions">Assinatura</button>
+    <button data-target="support">Suporte</button>
+    <button data-target="logout">Sair</button>
+  </nav>
 
-  <script>
-    // Alterar foto de perfil
-    const uploadInput = document.getElementById("profile-upload");
-    const profilePic = document.getElementById("profile-pic");
+  <div id="overview" class="panel active">
+    <div class="card">
+      <h3>Conta</h3>
+      <p>ID: <strong>#0012345</strong></p>
+      <p>Plano: Free</p>
+      <p>Último login: 24/10/2025 09:34</p>
+    </div>
+    <div class="card">
+      <h3>Atividade recente</h3>
+      <p>Login de desktop - 13/10/2025</p>
+      <p>Tentativa de alteração de senha - 02/10/2025</p>
+    </div>
+  </div>
 
-    uploadInput.addEventListener("change", (event) => {
-      const file = event.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          profilePic.src = e.target.result;
-        };
-        reader.readAsDataURL(file);
-      }
-    });
-  </script>
+  <div id="profile" class="panel">
+    <div class="card">
+      <label>Nome</label>
+      <input type="text" id="name" value="Henrique" style="width:100%;margin-top:4px;padding:8px;border-radius:8px;border:1px solid #d1d5db">
+      <label style="margin-top:8px">Usuário</label>
+      <input type="text" id="username" value="genickworld" style="width:100%;margin-top:4px;padding:8px;border-radius:8px;border:1px solid #d1d5db">
+      <button class="btn btn-primary" onclick="saveProfile()">Salvar</button>
+    </div>
+  </div>
+
+  <div id="security" class="panel">
+    <div class="card">
+      <p>Senha: ••••••••••</p>
+      <button class="btn btn-primary" onclick="alert('Alterar senha (simulado)')">Alterar senha</button>
+    </div>
+  </div>
+
+  <div id="payments" class="panel">
+    <div class="card">
+      <h3>Métodos de pagamento</h3>
+      <p>Cartão •••• 4242</p>
+      <p>PayPal</p>
+      <button class="btn btn-primary" onclick="alert('Adicionar método (simulado)')">Adicionar pagamento</button>
+    </div>
+  </div>
+
+  <div id="subscriptions" class="panel">
+    <div class="card">
+      <h3>Plano atual: Free</h3>
+      <button class="btn btn-primary" onclick="alert('Assinar Premium (simulado)')">Assinar Premium</button>
+    </div>
+  </div>
+
+  <div id="support" class="panel">
+    <div class="card">
+      <label>Assunto</label>
+      <input type="text" style="width:100%;margin-top:4px;padding:8px;border-radius:8px;border:1px solid #d1d5db">
+      <label style="margin-top:8px">Mensagem</label>
+      <input type="text" style="width:100%;margin-top:4px;padding:8px;border-radius:8px;border:1px solid #d1d5db">
+      <button class="btn btn-primary" onclick="alert('Mensagem enviada (simulado)')">Enviar</button>
+    </div>
+  </div>
+
+  <div id="logout" class="panel">
+    <div class="card">
+      <button class="btn btn-primary" onclick="alert('Logout (simulado)')">Confirmar Logout</button>
+    </div>
+  </div>
+
+</div>
+
+<div id="modal">
+  <div class="modal-content">
+    <div id="modalContent"></div>
+    <button class="btn btn-ghost" onclick="closeModal()" style="margin-top:12px;width:100%">Fechar</button>
+  </div>
+</div>
+
+<script>
+  const navButtons = document.querySelectorAll('.nav button');
+  navButtons.forEach(btn => btn.addEventListener('click', () => navigate(btn.dataset.target)));
+
+  function navigate(target) {
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    document.getElementById(target).classList.add('active');
+    navButtons.forEach(b => b.classList.remove('active'));
+    document.querySelector(".nav button[data-target='"+target+"']").classList.add('active');
+  }
+
+  function saveProfile() {
+    alert('Perfil salvo (simulado)');
+  }
+
+  function openModal(content='') {
+    document.getElementById('modalContent').innerHTML = content;
+    document.getElementById('modal').style.display='flex';
+  }
+  function closeModal(){document.getElementById('modal').style.display='none'}
+
+  // Troca de avatar
+  document.getElementById('profileUpload').addEventListener('change', function(e){
+    const file = e.target.files[0];
+    if(file){
+      const reader = new FileReader();
+      reader.onload = function(ev){document.getElementById('profileImage').src = ev.target.result};
+      reader.readAsDataURL(file);
+      alert('Avatar atualizado (simulado)');
+    }
+  });
+</script>
 </body>
 </html>
