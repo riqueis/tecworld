@@ -13,39 +13,35 @@
     }
 
     body {
-      background: #ffffff;
-      color: #1c1c1c;
-      min-height: 100vh;
+      background: #f4f4f4;
+      color: #222;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    header {
+      width: 100%;
+      text-align: center;
+      background: #00bfa5;
+      color: white;
+      padding: 15px 0;
+      font-weight: 600;
+      font-size: 18px;
+      border-radius: 0 0 20px 20px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
     }
 
     .container {
       width: 100%;
-      max-width: 430px;
-      padding: 20px 15px 70px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      max-width: 420px;
+      padding: 25px 20px 80px;
     }
 
-    /* Cabeçalho */
-    header {
-      width: 100%;
-      text-align: center;
-      padding: 15px 0;
-      font-size: 20px;
-      font-weight: 600;
-      background: #00bfa5;
-      color: #fff;
-      border-radius: 0 0 18px 18px;
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
-    }
-
-    /* Perfil */
     .profile-section {
-      margin-top: 25px;
       text-align: center;
+      margin-bottom: 30px;
     }
 
     .profile-wrapper {
@@ -60,6 +56,7 @@
       border-radius: 50%;
       object-fit: cover;
       border: 3px solid #00bfa5;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
       transition: 0.3s ease;
     }
 
@@ -70,7 +67,7 @@
       right: 0;
       background: rgba(0, 0, 0, 0.5);
       color: #fff;
-      font-size: 12px;
+      font-size: 13px;
       padding: 4px 0;
       border-radius: 0 0 50% 50%;
       opacity: 0;
@@ -82,94 +79,85 @@
     }
 
     .username {
-      margin-top: 10px;
       font-size: 18px;
       font-weight: 600;
+      margin-top: 10px;
     }
 
     .email {
-      font-size: 14px;
       color: #666;
-      margin-bottom: 20px;
+      font-size: 14px;
     }
 
-    /* Opções */
-    .options {
-      width: 100%;
+    /* Lista de opções */
+    .settings-list {
       display: flex;
       flex-direction: column;
       gap: 12px;
+      margin-top: 25px;
     }
 
-    .option-btn {
-      background: #f8f8f8;
-      border: 1px solid #ddd;
-      border-radius: 14px;
+    .setting-item {
+      background: white;
+      border-radius: 12px;
       padding: 14px 16px;
-      text-align: left;
       font-size: 16px;
       font-weight: 500;
       color: #333;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      transition: all 0.2s ease;
+      transition: 0.2s ease;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
     }
 
-    .option-btn:hover {
+    .setting-item:hover {
       background: #f0f0f0;
     }
 
-    .option-btn span {
-      color: #00bfa5;
-      font-size: 18px;
-    }
-
-    .logout-btn {
+    .logout {
+      color: #e74c3c;
+      border: 1px solid #e74c3c;
       background: #fff;
-      border: 1px solid #ff4c4c;
-      color: #ff4c4c;
-      margin-top: 15px;
+      margin-top: 20px;
     }
 
-    .logout-btn:hover {
-      background: #ff4c4c;
-      color: #fff;
+    .logout:hover {
+      background: #e74c3c;
+      color: white;
     }
 
-    /* Rodapé */
     footer {
       position: fixed;
       bottom: 0;
       left: 0;
       width: 100%;
-      background: #fefefe;
-      border-top: 1px solid #ddd;
+      background: white;
       display: flex;
       justify-content: space-around;
       padding: 10px 0;
+      border-top: 1px solid #ddd;
       box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.08);
     }
 
     footer button {
       background: none;
       border: none;
-      font-size: 22px;
       color: #00bfa5;
+      font-size: 22px;
       cursor: pointer;
-      transition: 0.2s;
+      transition: 0.2s ease;
     }
 
     footer button:hover {
-      opacity: 0.7;
+      opacity: 0.6;
     }
   </style>
 </head>
 <body>
+  <header>Central de Conta</header>
 
   <div class="container">
-    <header>Central de Conta</header>
-
     <div class="profile-section">
       <label for="profile-upload" class="profile-wrapper">
         <img id="profile-pic" src="https://via.placeholder.com/150" alt="Foto de Perfil">
@@ -180,14 +168,14 @@
       <p class="email">usuario@tecworld.com</p>
     </div>
 
-    <div class="options">
-      <button class="option-btn">👤 Editar Perfil <span>›</span></button>
-      <button class="option-btn">🔒 Segurança <span>›</span></button>
-      <button class="option-btn">💳 Pagamentos <span>›</span></button>
-      <button class="option-btn">⭐ Assinatura <span>›</span></button>
-      <button class="option-btn">⚙️ Suporte <span>›</span></button>
-      <button class="option-btn">🌐 Idioma <span>›</span></button>
-      <button class="option-btn logout-btn">🚪 Sair da Conta</button>
+    <div class="settings-list">
+      <div class="setting-item">👤 Editar Perfil <span>›</span></div>
+      <div class="setting-item">🔒 Segurança <span>›</span></div>
+      <div class="setting-item">💳 Pagamentos <span>›</span></div>
+      <div class="setting-item">⭐ Assinatura <span>›</span></div>
+      <div class="setting-item">⚙️ Suporte <span>›</span></div>
+      <div class="setting-item">🌐 Idioma <span>›</span></div>
+      <div class="setting-item logout">🚪 Sair da Conta</div>
     </div>
   </div>
 
@@ -198,6 +186,7 @@
   </footer>
 
   <script>
+    // Alterar foto de perfil
     const uploadInput = document.getElementById("profile-upload");
     const profilePic = document.getElementById("profile-pic");
 
