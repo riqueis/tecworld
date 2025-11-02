@@ -254,7 +254,7 @@ body {
 .content {
   flex: 1;
   display: flex;
-  flex-direction: column;
+  flex-direction: flex;
   justify-content: flex-start;
   align-items: center;
   padding: 20px;
@@ -291,19 +291,38 @@ body {
 /* ==============================
    BOTÕES DE OPÇÃO
 ============================== */
-.option-button {
-  background: #007bff;
-  color: #fff;
-  border: none;
-  padding: 10px;
-  border-radius: 4px;
-  font-size: 14px;
-  cursor: pointer;
+.buttons {
+  display: flex;
+  flex-direction: row;      /* Deixa lado a lado */
+  justify-content: center;  /* Centraliza horizontalmente */
+  align-items: center;      /* Alinha na mesma linha */
+  gap: 10px;                /* Espaçamento entre os botões */
+  width: 100%;
+  margin-top: 15px;         /* Espaço acima */
 }
 
-.option-button:hover {
-  background: #0056b3;
+.chat-btn {
+  flex: 1;                  /* Faz os dois ocuparem o mesmo tamanho */
+  max-width: 160px;         /* Limita a largura para não ficarem enormes no PC */
+  padding: 12px 0;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  color: #fff;
+  background: linear-gradient(90deg, #00b4ff, #007bff);
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.3s ease;
 }
+
+.chat-btn:hover {
+  transform: scale(1.05);
+  background: linear-gradient(90deg, #0090e0, #0060d0);
+}
+
+.chat-btn.video {
+  background: linear-gradient(90deg, #007bff, #0056b3);
+}
+
 
 /* ==============================
    PÁGINA DE CONFIGURAÇÕES
@@ -471,16 +490,84 @@ h1 {
     left: 15px;
   }
 }
-    .perfil-config {
-  margin-top: 15px;
-  padding: 15px;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 12px;
-  box-shadow: 0 0 10px rgba(0, 191, 255, 0.2);
+  .perfil-config {
+    display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* ocupa a tela toda */
+  background-color: #0a0a0a;
+  color: #ffffff;
+  text-align: center;
 }
 
 .hidden {
   display: none;
+}
+.perfil-config h2 {
+  font-size: 2.5rem;
+  color: #00e0ff;
+  margin-bottom: 30px;
+}
+
+/* Foto de perfil (círculo centralizado) */
+.profile-photo {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background-color: #2a2a2a;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  margin-bottom: 20px;
+  box-shadow: 0 0 15px rgba(0, 224, 255, 0.4);
+}
+
+/* Imagem dentro do círculo */
+.profile-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Nome e ID */
+.user-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 25px;
+  gap: 8px;
+}
+
+.user-info span {
+  font-size: 1.2rem;
+  color: #dcdcdc;
+}
+
+/* Container dos botões */
+.profile-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+
+/* Botões de ação */
+.profile-buttons button {
+  background: linear-gradient(90deg, #007bff, #00b4ff);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.3s ease;
+}
+
+.profile-buttons button:hover {
+  transform: scale(1.05);
+  background: linear-gradient(90deg, #0060d0, #00aaff);
 }
 
 
@@ -583,7 +670,6 @@ h1 {
     <p id="user-id">id:0000000</p>
     <button onclick="chooseLocalProfileImage()" class="change-photo-btn">Trocar foto</button>
     <button onclick="changeUsername()" class="change-photo-btn">Trocar nome</button>
-    <button onclick="voltarConfig()" class="change-photo-btn">⬅️ Voltar</button>
   </div>
 </div>
 
@@ -654,27 +740,113 @@ h1 {
   </footer>
 
   <script>
-    const settingsBtn = document.getElementById("settings-btn");
-    const mainConfig = document.getElementById("main-config");
-    const backArrow = document.getElementById("back-arrow");
+  const settingsBtn = document.getElementById('settings-btn');
+    const configPage = document.getElementById('main-config');
+    const backArrow = document.getElementById('back-arrow');
 
-    settingsBtn.addEventListener("click", () => {
-      mainConfig.classList.remove("hidden");
-      backArrow.style.display = "block";
+    // Mostrar a página de configurações
+    settingsBtn.addEventListener('click', () => {
+      configPage.style.display = 'flex';
+      backArrow.style.display = 'block';
     });
 
-    backArrow.addEventListener("click", () => {
-      backArrow.classList.add("clicked");
-      setTimeout(() => {
-        mainConfig.classList.add("hidden");
-        backArrow.style.display = "none";
-        backArrow.classList.remove("clicked");
-      }, 200);
-    });
-  </script>
-</body>
+    backArrow.addEventListener('click', () => {
+  backArrow.style.transform = 'scale(0.8)';
 
-    <script>
+  setTimeout(() => {
+    backArrow.style.transform = 'scale(1)';
+
+    const mainConfig = document.getElementById('main-config');
+    const perfilConfig = document.getElementById('perfil-config');
+    const welcomePage = document.querySelector('.welcome');
+
+    // 1️⃣ Se a aba de perfil estiver aberta, volta para a tela de configuração principal
+    if (perfilConfig && getComputedStyle(perfilConfig).display !== 'none') {
+      perfilConfig.style.display = 'none';
+      if (mainConfig) mainConfig.style.display = 'flex';
+      return;
+    }
+
+    // 2️⃣ Se a tela de configuração principal estiver aberta, volta para a tela inicial
+    if (mainConfig && getComputedStyle(mainConfig).display !== 'none') {
+      mainConfig.style.display = 'none';
+      if (welcomePage) welcomePage.style.display = 'flex';
+      backArrow.style.display = 'none';
+      return;
+    }
+  }, 150);
+});
+
+
+
+    function logout() {
+      alert("Você foi desconectado!");
+    }
+
+    function abrirConta() {
+      document.getElementById("main-config").style.display = "none";
+      document.getElementById("conta-tela").style.display = "flex";
+      document.getElementById("conta-tela").style.flexDirection = "column";
+    }
+
+    function fecharConta() {
+      document.getElementById("conta-tela").style.display = "none";
+      document.getElementById("main-config").style.display = "flex";
+    }
+
+    // Abertura e fechamento do menu de perfil
+const profile = document.querySelector(".profile");
+const profileOptions = document.getElementById("profileOptions");
+
+if (profile && profileOptions) {
+    profile.addEventListener("click", (event) => {
+    profileOptions.classList.toggle("hidden"); // abre ou fecha o menu do perfil
+    event.stopPropagation(); // evita que o clique feche imediatamente
+
+    // Esconde a página principal de configuração
+    const configPage = document.getElementById("main-config");
+    if (configPage) {
+        configPage.style.display = "none";
+    }
+
+   
+});
+
+}
+
+;
+function abrirConta() {
+  const mainConfig = document.getElementById("main-config");
+  const perfilConfig = document.getElementById("perfil-config");
+
+  if (mainConfig && perfilConfig) {
+    mainConfig.style.display = "none";       // esconde tela principal
+    perfilConfig.style.display = "flex";     // mostra perfil
+  }
+}
+
+function voltarConfig() {
+  const mainConfig = document.getElementById("main-config");
+  const perfilConfig = document.getElementById("perfil-config");
+
+  if (mainConfig && perfilConfig) {
+    perfilConfig.style.display = "none";     // esconde perfil
+    mainConfig.style.display = "flex";       // mostra configuração principal
+  }
+}
+
+
+function voltarConfig() {
+  const mainConfig = document.getElementById("main-config");
+  const perfilConfig = document.getElementById("perfil-config");
+
+  if (mainConfig && perfilConfig) {
+    perfilConfig.style.display = 'none'; // esconde perfil
+    mainConfig.style.display = 'flex';   // mostra configuração principal
+  }
+}
+
+
   // Função para abrir o modal
 function openModal() {
     document.getElementById('paymentModal').style.display = 'flex'; // Torna o modal visível
@@ -809,9 +981,7 @@ document.addEventListener('DOMContentLoaded', function () {
     } else {
         console.warn("Nenhum usuário logado.");
     }
-    const settingsBtn = document.getElementById('settings-btn');
-    const configPage = document.getElementById('main-config');
-    const backArrow = document.getElementById('back-arrow');
+  
 
     // Mostrar a página de configurações
     settingsBtn.addEventListener('click', () => {
@@ -819,15 +989,7 @@ document.addEventListener('DOMContentLoaded', function () {
       backArrow.style.display = 'block';
     });
 
-    // Fechar a página de configurações com efeito de clique
-    backArrow.addEventListener('click', () => {
-      backArrow.style.transform = 'scale(0.8)';
-      setTimeout(() => {
-        backArrow.style.transform = 'scale(1)';
-        configPage.style.display = 'none';
-        backArrow.style.display = 'none';
-      }, 150);
-    });
+    
 
     function logout() {
       alert("Você foi desconectado!");
@@ -863,27 +1025,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
-function abrirConta() {
-  // Esconde a área principal de configurações
-  const mainConfig = document.getElementById("main-config");
-  const perfilConfig = document.getElementById("perfil-config");
-
-  if (mainConfig && perfilConfig) {
-    mainConfig.classList.add("hidden"); // esconde a tela principal
-    perfilConfig.classList.remove("hidden"); // mostra a de perfil
-  }
-}
-
-function voltarConfig() {
-  // Volta da aba de perfil para a tela principal de configurações
-  const mainConfig = document.getElementById("main-config");
-  const perfilConfig = document.getElementById("perfil-config");
-
-  if (mainConfig && perfilConfig) {
-    perfilConfig.classList.add("hidden");
-    mainConfig.classList.remove("hidden");
-  }
-}
 
 
     </script>    
