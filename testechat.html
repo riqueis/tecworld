@@ -66,16 +66,7 @@ body {
   margin-top: 10px;
 }
 
-.user-id {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 6px;
-  padding: 2px 6px;
-  font-size: 0.8rem;
-  color: #cfd8dc;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(5px);
-  margin-right: 10px;
-}
+
 
 .premium-badge {
   background: linear-gradient(45deg, #ffcc00, #f5b400);
@@ -504,71 +495,129 @@ h1 {
 .hidden {
   display: none;
 }
-.perfil-config h2 {
-  font-size: 2.5rem;
-  color: #00e0ff;
-  margin-bottom: 30px;
-}
-
-/* Foto de perfil (círculo centralizado) */
-.profile-photo {
-  width: 180px;
-  height: 180px;
-  border-radius: 50%;
-  background-color: #2a2a2a;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  margin-bottom: 20px;
-  box-shadow: 0 0 15px rgba(0, 224, 255, 0.4);
-}
-
-/* Imagem dentro do círculo */
-.profile-photo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* Nome e ID */
-.user-info {
+.profile1 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 25px;
-  gap: 8px;
+  background-color: #1c1c1c;
+  border-radius: 16px;
+  padding: 25px 20px;
+  margin: 20px auto;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.user-info span {
-  font-size: 1.2rem;
-  color: #dcdcdc;
+.profile1:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
 }
 
-/* Container dos botões */
-.profile-buttons {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 15px;
+.profile1 .profile-image-containe {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid #4caf50;
+  margin-bottom: 15px;
 }
 
-/* Botões de ação */
-.profile-buttons button {
-  background: linear-gradient(90deg, #007bff, #00b4ff);
-  border: none;
-  padding: 10px 20px;
-  border-radius: 8px;
-  color: #fff;
-  font-size: 14px;
-  cursor: pointer;
-  transition: transform 0.2s ease, background 0.3s ease;
+.profile1 .profile-image-containe img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s;
 }
 
-.profile-buttons button:hover {
+.profile1 .profile-image-containe img:hover {
   transform: scale(1.05);
-  background: linear-gradient(90deg, #0060d0, #00aaff);
 }
+
+.profile1 .username1 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 5px;
+  color: #fff;
+  text-align: center;
+}
+
+.profile1 #user-id {
+  font-size: 0.85rem;
+  color: #aaa;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.profile1 .change-photo-btn {
+  background-color: #2a2a2a;
+  color: #e0e0e0;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 15px;
+  margin-bottom: 12px;
+  width: 100%;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.profile1 .change-photo-btn:hover {
+  background-color: #3a3a3a;
+}
+
+.profile1 input,
+.profile1 textarea,
+.profile1 select {
+  width: 100%;
+  padding: 12px 14px;
+  margin-bottom: 14px;
+  border-radius: 10px;
+  border: none;
+  background-color: #2b2b2b;
+  color: #e0e0e0;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.profile1 input:focus,
+.profile1 textarea:focus,
+.profile1 select:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #4caf50;
+  background-color: #323232;
+}
+
+.profile1 input::placeholder,
+.profile1 textarea::placeholder {
+  color: #888;
+}
+
+.profile1 select {
+  appearance: none;
+  cursor: pointer;
+}
+
+.profile1 .save-btn {
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 14px;
+  width: 100%;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+}
+
+.profile1 .save-btn:hover {
+  background-color: #45a049;
+  transform: translateY(-2px);
+}
+
+
 
 
   </style>
@@ -580,7 +629,7 @@ h1 {
       <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Avatar" class="avatar">
       <div class="user-info">
         <span class="username">Nome de Usuário</span>
-        <span id="user-id">#1234567</span>
+       
       </div>
     </div>
     <button class="premium-badge" onclick="openModal()">premium</button>
@@ -589,8 +638,8 @@ h1 {
 
   <!-- Opções do perfil -->
   <div class="profile-options hidden" id="profileOptions">
-    <button class="option-button" onclick="changeUsername()">Mudar Nome de Usuário</button>
-    <button class="option-button" onclick="chooseLocalProfileImage()">Mudar foto</button>
+        <input type="text" placeholder="Username">
+   <button class="change-photo-btn">Alterar Foto</button>
   </div>
 
   <!-- Modal de pagamento -->
@@ -603,6 +652,7 @@ h1 {
       <p>Use o código QR acima para fazer o pagamento</p>
       <button class="unlimited-jumps-btn" onclick="sign()">Assinar</button>
       <button class="close-btn" onclick="closeModal()">Fechar</button>
+        <button class="save-btn">Salvar Alterações</button>
     </div>
   </div>
 
@@ -662,14 +712,15 @@ h1 {
   <!-- Aba de Perfil (inicialmente escondida) -->
 <div id="perfil-config" class="config-page hidden">
   <h1>Perfil</h1>
-  <div class="profile">
-    <div class="profile-image-container">
+  <div class="profile1">
+    <div class="profile-image-containe">
       <img id="profile-image" src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Foto de perfil">
     </div>
-    <h3 class="username">Seu Nome</h3>
-    <p id="user-id">id:0000000</p>
-    <button onclick="chooseLocalProfileImage()" class="change-photo-btn">Trocar foto</button>
-    <button onclick="changeUsername()" class="change-photo-btn">Trocar nome</button>
+    <h3 class="username1">Seu Nome</h3>
+     <span id="user-id">#1234567</span>
+      <button class="change-photo-btn">Alterar Foto</button>
+     <input type="text" placeholder="Username">
+    <button class="save-btn">Salvar Alterações</button>
   </div>
 </div>
 
@@ -1028,5 +1079,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     </script>    
+</body>
+</html>
 </body>
 </html>
