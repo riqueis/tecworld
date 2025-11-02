@@ -112,6 +112,7 @@ body {
   color: #00bfff;
 }
 
+
 .description {
   font-size: 1.3rem;
   color: #d0d8e0;
@@ -428,6 +429,7 @@ button:hover {
   color: #000;
   cursor: pointer;
 }
+
 /* título genérico (caso use h1 em outras páginas) */
 h1 {
   font-size: 100px;
@@ -679,13 +681,7 @@ h1 {
         <option value="es">Español</option>
       </select>
     </div>
-      <div class="config-section">
-      <h4>Metodos de pagamentos</h4>
-      </div>
-          <div class="config-section">
-      <h4>Assinatura</h4>
-          </div>
-
+      
     <div class="config-section">
       <h4>Contas Bloqueadas</h4>
       <p>Você ainda não bloqueou ninguém.</p>
@@ -696,17 +692,15 @@ h1 {
       <p>Sem denúncias registradas.</p>
     </div>
 
-    
-      
-     <div class="config-section">
-  <h4>Suporte</h4>
-  <textarea placeholder="Descreva seu problema ou dúvida aqui..." rows="4"></textarea>
-  <button>Enviar para o suporte</button>
-</div>
-
     <div class="config-section">
       <h4>Desconectar</h4>
       <button onclick="logout()">Sair da conta</button>
+      </div>
+       <div class="config-section">
+  <h4>Excluir conta</h4>
+
+  <button>Excluir</button>
+</div>
     </div>
   </div>
   <!-- Aba de Perfil (inicialmente escondida) -->
@@ -809,7 +803,7 @@ h1 {
 
     const mainConfig = document.getElementById('main-config');
     const perfilConfig = document.getElementById('perfil-config');
-    const welcomePage = document.querySelector('.welcome');
+    const welcomePage = document.querySelector('.header');
 
     // 1️⃣ Se a aba de perfil estiver aberta, volta para a tela de configuração principal
     if (perfilConfig && getComputedStyle(perfilConfig).display !== 'none') {
@@ -1079,7 +1073,5 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     </script>    
-</body>
-</html>
 </body>
 </html>
