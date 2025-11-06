@@ -619,6 +619,225 @@ h1 {
   transform: translateY(-2px);
 }
 
+/* ============================
+   Segurança — estilo completo
+   ============================ */
+
+/* Container principal da página de Segurança (use class="segurance-config hidden" no HTML) */
+.segurance-config {
+  position: fixed;
+  inset: 0; /* top:0; right:0; bottom:0; left:0; */
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 68px 20px 36px; /* espaço superior para header/back */
+  box-sizing: border-box;
+  background: linear-gradient(180deg, #161616 0%, #1e1e1e 100%);
+  color: #eaeaea;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  transition: opacity 220ms ease, transform 220ms ease;
+  transform: translateY(0);
+}
+
+/* esconder */
+.hidden {
+  display: none ;
+}
+
+/* Header fixo (voltar + título) */
+.segurance-config .header {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  box-sizing: border-box;
+  background: rgba(22,22,22,0.95);
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+  z-index: 10000;
+}
+
+/* Botão voltar / ícone */
+.segurance-config .back-btn {
+  width: 40px;
+  height: 40px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 10px;
+  cursor: pointer;
+  user-select: none;
+  background: transparent;
+  color: #eaeaea;
+  border: none;
+}
+.segurance-config .back-btn:active { transform: scale(0.98); }
+.segurance-config .header h1 {
+  font-size: 1.05rem;
+  margin: 0;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+
+/* Conteúdo abaixo do header */
+.segurance-config .content {
+  margin-top: 68px; /* para não ficar atrás do header */
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 40px;
+}
+
+/* Card de opção */
+.security-card {
+  background: #171717;
+  border: 1px solid rgba(255,255,255,0.03);
+  border-radius: 12px;
+  padding: 14px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  transition: transform 160ms ease, background 160ms ease;
+}
+.security-card:hover {
+  transform: translateY(-4px);
+  background: linear-gradient(180deg, #1b1b1b, #141414);
+}
+
+/* Título e descrição da opção */
+.security-card .info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.security-card .info .title {
+  font-weight: 600;
+  font-size: 0.98rem;
+  color: #f2f2f2;
+}
+.security-card .info .desc {
+  font-size: 0.85rem;
+  color: #bdbdbd;
+}
+
+/* Switch estilizado */
+.switch {
+  --switch-w: 46px;
+  --switch-h: 26px;
+  width: var(--switch-w);
+  height: var(--switch-h);
+  position: relative;
+  display: inline-block;
+}
+.switch input {
+  display: none;
+}
+.switch .track {
+  width: 100%;
+  height: 100%;
+  background: #3a3a3a;
+  border-radius: 999px;
+  position: relative;
+  transition: background 160ms ease;
+}
+.switch .thumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: calc(var(--switch-h) - 6px);
+  height: calc(var(--switch-h) - 6px);
+  background: #ffffff;
+  border-radius: 50%;
+  transition: transform 160ms ease, box-shadow 160ms ease;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.4);
+}
+.switch input:checked + .track {
+  background: #2fa16b;
+}
+.switch input:checked + .track .thumb {
+  transform: translateX(calc(var(--switch-w) - var(--switch-h)));
+}
+
+/* Campos de formulário dentro de Segurança */
+.segurance-config input[type="text"],
+.segurance-config input[type="password"],
+.segurance-config input[type="email"],
+.segurance-config textarea,
+.segurance-config select {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.04);
+  background: #131313;
+  color: #eaeaea;
+  font-size: 0.95rem;
+  box-sizing: border-box;
+}
+
+/* Label */
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Grupo de ações (botões) */
+.actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Botão primário */
+.btn {
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  background: #2fa16b;
+  color: #fff;
+  transition: transform 120ms ease, opacity 120ms ease;
+}
+.btn:active { transform: translateY(1px); }
+
+/* Botão secundário */
+.btn.secondary {
+  background: transparent;
+  color: #ddd;
+  border: 1px solid rgba(255,255,255,0.04);
+}
+
+/* Botão perigoso (ex.: deletar conta) */
+.btn.danger {
+  background: linear-gradient(180deg,#8f1f1f,#b22222);
+  color: #fff;
+}
+
+/* Texto explicativo pequeno */
+.small {
+  font-size: 0.82rem;
+  color: #bdbdbd;
+}
+
+/* Divider */
+.divider {
+  height: 1px;
+  background: rgba(255,255,255,0.03);
+  margin: 6px 0 6px 0;
+  border-radius: 2px;
+}
 
 
 
@@ -669,7 +888,7 @@ h1 {
       <h3 onclick="abrirConta()">Perfil</h3>
     </div>
     <div class="config-section">
-      <h4>Segurança</h4>
+       <h3 onclick="abrirsegurance()">Segurança</h3>
     </div>
   
 
@@ -731,6 +950,76 @@ h1 {
     <button>Salvar alterações</button>
     <button style="margin-top: 10px; background: #800000;">Excluir conta</button>
   </div>
+<!-- Página de Segurança -->
+<div class="segurance-config hidden" id="segurance-config">
+
+  <!-- Cabeçalho -->
+  <div class="header">
+    <button class="back-btn" id="back-segurance">←</button>
+    <h1>Segurança</h1>
+  </div>
+
+  <!-- Conteúdo -->
+  <div class="content">
+
+    <!-- Card 1: Verificação em duas etapas -->
+    <div class="security-card">
+      <div class="info">
+        <span class="title">Verificação em duas etapas</span>
+        <span class="desc">Adicione uma camada extra de segurança ao seu login.</span>
+      </div>
+      <label class="switch">
+        <input type="checkbox" id="twofactor">
+        <span class="track"><span class="thumb"></span></span>
+      </label>
+    </div>
+
+    <!-- Card 2: Sessões ativas -->
+    <div class="security-card">
+      <div class="info">
+        <span class="title">Gerenciar sessões</span>
+        <span class="desc">Veja onde sua conta está conectada atualmente.</span>
+      </div>
+      <button class="btn secondary">Ver sessões</button>
+    </div>
+
+    <!-- Card 3: Alterar senha -->
+    <div class="security-card">
+      <div class="info">
+        <span class="title">Alterar senha</span>
+        <span class="desc">Atualize sua senha para manter a conta segura.</span>
+      </div>
+      <button class="btn secondary" id="change-pass-btn">Alterar</button>
+    </div>
+
+    <!-- Campo de redefinição de senha -->
+    <div class="form-row hidden" id="change-pass-section">
+      <label for="new-password">Nova senha</label>
+      <input type="password" id="new-password" placeholder="Digite sua nova senha">
+      <div class="actions">
+        <button class="btn">Salvar</button>
+        <button class="btn secondary" id="cancel-change-pass">Cancelar</button>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Card 4: Excluir conta -->
+    <div class="security-card">
+      <div class="info">
+        <span class="title">Excluir conta</span>
+        <span class="desc">Remova permanentemente sua conta TecWorld.</span>
+      </div>
+      <button class="btn danger">Excluir</button>
+    </div>
+
+    <p class="small">
+      ⚠️ Ao excluir sua conta, todos os seus dados serão apagados permanentemente.
+    </p>
+
+  </div>
+</div>
+
 
   <!-- Conteúdo principal -->
   <main class="main-content">
@@ -788,6 +1077,20 @@ h1 {
   const settingsBtn = document.getElementById('settings-btn');
     const configPage = document.getElementById('main-config');
     const backArrow = document.getElementById('back-arrow');
+
+ function abrirsegurance() {
+  const mainConfig = document.getElementById("main-config");
+  const seguranceConfig = document.getElementById("segurance-config");
+
+  if (mainConfig && seguranceConfig) {
+    mainConfig.style.display = "none";        // esconde tela principal
+    seguranceConfig.style.display = "flex";   // mostra menu de segurança
+  }
+}
+
+   
+
+ 
 
     // Mostrar a página de configurações
     settingsBtn.addEventListener('click', () => {
@@ -859,7 +1162,6 @@ if (profile && profileOptions) {
 
 }
 
-;
 function abrirConta() {
   const mainConfig = document.getElementById("main-config");
   const perfilConfig = document.getElementById("perfil-config");
