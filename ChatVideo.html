@@ -435,11 +435,20 @@ color:green;
         }, 3000);
     }
     
-    // Função para ação do botão "Próximo"
-    function nextAction() {
-        alert('Você clicou no botão "Próximo"!');
-    }
-    
+  function skipChat() {
+  const chatArea = document.getElementById('chatArea');
+  const message = document.createElement('div');
+  message.classList.add('message', 'partner');
+  message.textContent = "Você foi para o próximo chat!";
+  chatArea.appendChild(message);
+  chatArea.scrollTop = chatArea.scrollHeight;
+}
+
+function voltarPaginaAnterior() {
+  // aqui você pode redirecionar ou esconder a página atual
+  window.history.back(); // volta pra página anterior
+}
+
     // Oculta o modal de denúncia quando a página for carregada
     window.onload = function() {
         document.getElementById('reportModal').style.display = 'none';
@@ -500,4 +509,5 @@ window.onload = () => {
 
 </body>
 </html>
+
 
