@@ -95,13 +95,7 @@ body::after {
             background-color: #007acc;
         }
 
-        .input-area .skip-button {
-            background-color: #00ff0d; /* Cor do botão Pular */
-        }
-
-        .input-area .skip-button:hover {
-            background-color: #d9534f;
-        }
+        
 
      .flag-icon {
   position: absolute;
@@ -306,7 +300,7 @@ body::after {
     <div class="input-area">
         <input type="text" id="messageInput" placeholder="Digite sua mensagem...">
         <button class="send-button" onclick="sendMessage()">Enviar</button>
-        <button class="skip-button" onclick="skipChat()">Próximo</button>
+
     </div>
 
     <!-- Janela Modal de Denúncia -->
@@ -358,14 +352,45 @@ body::after {
             chatArea.scrollTop = chatArea.scrollHeight;
         }
 
-        function skipChat() {
-            const chatArea = document.getElementById('chatArea');
-            const message = document.createElement('div');
-            message.classList.add('message', 'partner');
-            message.textContent = "Você foi para o próximo chat!";
-            chatArea.appendChild(message);
-            chatArea.scrollTop = chatArea.scrollHeight;
-        }
+      let touchStartX = 0;
+let touchEndX = 0;
+
+document.addEventListener('touchstart', (e) => {
+  touchStartX = e.changedTouches[0].screenX;
+});
+
+document.addEventListener('touchend', (e) => {
+  touchEndX = e.changedTouches[0].screenX;
+  handleSwipe();
+});
+
+function handleSwipe() {
+  const swipeDistance = touchStartX - touchEndX;
+
+  if (Math.abs(swipeDistance) < 50) return; // ignora toques curtos
+
+  if (swipeDistance > 0) {
+    // 👉 direita → esquerda
+    skipChat();
+  } else {
+    // 👈 esquerda → direita
+    voltarPaginaAnterior();
+  }
+}
+
+function skipChat() {
+  const chatArea = document.getElementById('chatArea');
+  const message = document.createElement('div');
+  message.classList.add('message', 'partner');
+  message.textContent = "Você foi para o próximo chat!";
+  chatArea.appendChild(message);
+  chatArea.scrollTop = chatArea.scrollHeight;
+}
+
+function voltarPaginaAnterior() {
+  // aqui você pode redirecionar ou esconder a página atual
+  window.history.back(); // volta pra página anterior
+}
 
         function reportChat() {
             document.getElementById('reportModal').style.display = 'flex';
