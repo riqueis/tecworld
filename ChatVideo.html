@@ -405,20 +405,21 @@ color:green;
             }, 1500);
         }
     }
-    /*pular para o proximo*/
-     wipe() {
+   function swipe() {
   const swipeDistance = touchStartX - touchEndX;
 
-  if (Math.abs(swipeDistance) < 50) return; // ignora toques curtos
+  // Ignora toques muito curtos (menos de 50px)
+  if (Math.abs(swipeDistance) < 50) return;
 
   if (swipeDistance > 0) {
-    // 👉 direita → esquerda
+    // 👉 deslizou da direita para a esquerda
     skipChat();
   } else {
-    // 👈 esquerda → direita
+    // 👈 deslizou da esquerda para a direita
     voltarPaginaAnterior();
   }
 }
+
     
     // Função para criar uma nova mensagem no chat
     function createMessage(userLabel, text, cssClass) {
