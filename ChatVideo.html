@@ -245,18 +245,15 @@ color:green;
     resize: vertical;
 }
 
-.report-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 18px;
-    color: #e0e0e0;
-    cursor: pointer;
-    z-index: 3;
-}
-
-.report-button:hover {
-    color: #ff0000;
+  .flag-icon {
+  position: absolute;
+  top: 57px; /* antes era -1px */
+  right: 0; /* antes era -10px */
+  width: 64px;
+  height: 64px;
+  cursor: pointer;
+  filter: invert(23%) sepia(95%) saturate(7411%) hue-rotate(358deg) brightness(95%) contrast(115%);
+  z-index: 1;
 }
 
 .thank-you-message {
@@ -348,10 +345,9 @@ color:green;
     </div>
 </div>
 
-        <!-- Botão de denúncia separado -->
-        <div class="report-container">
-            <span class="report-button" onclick="reportChat()">Denúncia</span>
-        </div>
+     <!-- Botão Denunciar -->
+<img src="bandeira.svg" alt="Denunciar" class="flag-icon" id="flagIcon" />
+        
     <!-- Área de chat -->
 <div class="chat-container">
   <!-- Container para exibição das mensagens -->
@@ -409,6 +405,20 @@ color:green;
             }, 1500);
         }
     }
+    /*pular para o proximo*/
+     wipe() {
+  const swipeDistance = touchStartX - touchEndX;
+
+  if (Math.abs(swipeDistance) < 50) return; // ignora toques curtos
+
+  if (swipeDistance > 0) {
+    // 👉 direita → esquerda
+    skipChat();
+  } else {
+    // 👈 esquerda → direita
+    voltarPaginaAnterior();
+  }
+}
     
     // Função para criar uma nova mensagem no chat
     function createMessage(userLabel, text, cssClass) {
@@ -509,5 +519,4 @@ window.onload = () => {
 
 </body>
 </html>
-
 
