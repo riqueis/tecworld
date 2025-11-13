@@ -506,14 +506,14 @@ function startVideo(userVideoElement) {
         });
 }
 
-// Quando a página carregar, inicia o vídeo dos dois usuários
+// Quando a página carregar, inicia o vídeo do usuário local no user2Video
 window.onload = () => {
-    startVideo(user1Video);
+    startVideo(user2Video);
 
-    // Se estiver apenas testando localmente, pode usar o mesmo stream:
-    // startVideo(user2Video); // Isso causaria conflito de câmera no mesmo navegador
-    user2Video.srcObject = user1Video.srcObject; // apenas para visualizar os dois vídeos
+    // Apenas para visualização, mostra o mesmo vídeo também no user1Video (opcional)
+    user1Video.srcObject = user2Video.srcObject;
 };
+
 
 
     </script>
