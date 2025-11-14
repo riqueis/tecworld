@@ -491,31 +491,28 @@ function voltarPaginaAnterior() {
         }, 5500); // 5500 milissegundos para garantir que a transição termine antes de remover
     }
 // Acessa os vídeos dos dois usuários
-const user1Video = document.getElementById('user1-video');
-const user2Video = document.getElementById('user2-video');
+const user1Video = document.getElementById("user1-video");
+const user2Video = document.getElementById("user2-video");
 
-// Função genérica para iniciar vídeo em um elemento
-function startVideo(userVideoElement) {
-    navigator.mediaDevices.getUserMedia({ video: true })
-        .then(stream => {
-            userVideoElement.srcObject = stream;
-        })
-        .catch(error => {
-            console.error('Erro ao acessar a câmera:', error);
-        });
-}
+// Inicia o vídeo local
+navigator.mediaDevices.getUserMedia({ video: true, audio: false })
+  .then(stream => {
 
-// Quando a página carregar, inicia o vídeo do usuário local no user2Video
-window.onload = () => {
-    startVideo(user2Video);
+    // Você aparece no user2Video (normal)
+    user2Video.srcObject = stream;
 
-    // Apenas para visualização, mostra o mesmo vídeo também no user1Video (opcional)
-    user1Video.srcObject = user2Video.srcObject;
-};
+    // E também aparece no user1Video (espelhado)
+    user1Video.srcObject = stream;
+
+  })
+  .catch(error => {
+    console.error("Erro ao acessar câmera:", error);
+  });
 
     </script>
 
 </body>
 </html>
+
 
 
