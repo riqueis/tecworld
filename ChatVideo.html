@@ -515,11 +515,14 @@ function startVideo(userVideoElement, callback) {
 }
 
 window.onload = () => {
-    startVideo(user2Video, (stream) => {
-        // COPIA O MESMO STREAM APÓS CARREGAR
-        user1Video.srcObject = stream;
-        
-    });
+    navigator.mediaDevices.getUserMedia({ video: true })
+        .then(stream => {
+            // User 1 - espelhado
+            user1Video.srcObject = stream;
+
+            // User 2 - não espelhado (SÓ NO CSS)
+            user2Video.srcObject = stream;
+        });
 };
 
 
@@ -528,6 +531,7 @@ window.onload = () => {
 
 </body>
 </html>
+
 
 
 
