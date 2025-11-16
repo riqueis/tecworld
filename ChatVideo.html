@@ -33,23 +33,24 @@ body, html {
     position: relative;
 }
 .video-container {
-    width: 100vw;
-    height: 100vh;
     display: flex;
     flex-direction: column;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
     padding: 0;
     margin: 0;
-    overflow: hidden;
-    background: #000;
 }
 
 .video {
-    width: 100%;
-    height: 50vh;       /* metade da tela */
-    object-fit: contain; /* NÃO corta o vídeo */
+    width: 150%;
+    height: 50%;
     background-color: black;
-    border: 1px solid #00aaff; /* borda azul */
-    box-sizing: border-box;    /* garante que a borda não estoure o tamanho */
+    object-fit: contain;
+    border: 1px solid #00aaff;
 }
 
 
@@ -512,6 +513,7 @@ navigator.mediaDevices.getUserMedia({ video: true, audio: false })
 
 </body>
 </html>
+
 
 
 
