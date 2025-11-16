@@ -46,16 +46,9 @@ body, html {
     margin: 0;
 }
 
-.video1  {
+.video {
     width: 100%;
-    height: 100%;
-    background-color: black;
-    object-fit: contain;
-    border: 1px solid #00aaff;
-}
-.video2  {
-    width: 100%;
-    height: 100%;
+    height: 50%;
     background-color: black;
     object-fit: contain;
     border: 1px solid #00aaff;
@@ -333,7 +326,7 @@ color:green;
         </div>
         
         <!-- Vídeo local (Usuário 1) -->
-        <video class="video1" id="user1-video" autoplay muted></video>
+        <video class="video" id="user1-video" autoplay muted></video>
 
         <!-- Usuário 2 (Perfil) -->
         <div class="user user-left user-bottom">
@@ -348,7 +341,7 @@ color:green;
         </div>
         
         <!-- Vídeo remoto (Usuário 2) -->
-        <video class="video2" id="user2-video" autoplay></video>
+        <video class="video" id="user2-video" autoplay></video>
     </div>
 </div>
 
@@ -527,6 +520,4 @@ window.onload = () => {
 
 </body>
 </html>
-
-
 
