@@ -57,9 +57,6 @@ body, html {
     transform: scaleX(-1) !important;
 }
 
-#user1-video {
-    transform: none !important;
-}
 
 .user {
     display: flex;
@@ -501,28 +498,18 @@ function voltarPaginaAnterior() {
 const user1Video = document.getElementById('user1-video');
 const user2Video = document.getElementById('user2-video');
 
-function startVideo(userVideoElement, callback) {
-    navigator.mediaDevices.getUserMedia({ video: true })
-        .then(stream => {
-            userVideoElement.srcObject = stream;
 
-            if (callback) callback(stream);
-        })
-        .catch(error => {
-            console.error('Erro ao acessar a câmera:', error);
-        });
-}
 
 window.onload = () => {
     navigator.mediaDevices.getUserMedia({ video: true })
         .then(stream => {
-            // User 1 - espelhado
-            user1Video.srcObject = stream;
-
-            // User 2 - não espelhado (SÓ NO CSS)
-            user2Video.srcObject = stream;
+            user2Video.srcObject = stream; // SOMENTE USER 2
+        })
+        .catch(error => {
+            console.error('Erro ao acessar a câmera:', error);
         });
 };
+
 
 
 
@@ -530,6 +517,7 @@ window.onload = () => {
 
 </body>
 </html>
+
 
 
 
