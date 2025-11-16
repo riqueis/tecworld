@@ -53,15 +53,14 @@ body, html {
     background-color: black;
     border: 1px solid #00aaff;
 }
-/* Usuário 1 continua espelhado */
-.user1-video {
-    transform: scaleX(-1); /* espelhado */
+#user1-video {
+    transform: scaleX(-1) !important;
 }
 
-/* Usuário 2 sem qualquer espelhamento */
-.user2-video {
+#user2-video {
     transform: none !important;
 }
+
 .user {
     display: flex;
     align-items: center;
@@ -531,6 +530,7 @@ window.onload = () => {
 
 </body>
 </html>
+
 
 
 
