@@ -7,19 +7,25 @@
     <style>
   body, html {
     height: 100%;
-    margin: 0;
-    font-family: Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
-    background-image: linear-gradient(to top, #1a2f48 0%, #2d5685 50%, #4a7fc2 100%);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    color: #e0e0e0;
-    position: relative; /* Necessário para posicionar o pseudo-elemento corretamente */
-    z-index: 0;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  
+  /* Fundo com imagem + gradiente */
+  background-image: 
+    linear-gradient(to top, rgba(26, 47, 72, 0.8) 0%, rgba(45, 86, 133, 0.8) 50%, rgba(74, 127, 194, 0.8) 100%),
+    url('pexels-sliceisop-2873671.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
+  color: #e0e0e0;
+  position: relative;
+  z-index: 0;
 }
+
 
 body::after {
     content: '';
@@ -99,12 +105,13 @@ body::after {
 
      .flag-icon {
   position: absolute;
-  top: 53px; /* antes era -1px */
+  top: 57px; /* antes era -1px */
   right: 0; /* antes era -10px */
   width: 64px;
   height: 64px;
   cursor: pointer;
   filter: invert(23%) sepia(95%) saturate(7411%) hue-rotate(358deg) brightness(95%) contrast(115%);
+  
 }
 
         /* Estilos para a janela de denúncia */
@@ -185,6 +192,7 @@ body::after {
         .report-close-letter:hover {
             color: #ff0000;
         }
+        
 
         .report-description {
             width: 100%;
@@ -227,36 +235,194 @@ body::after {
 }
 
 .user {
-    display: flex;
-    align-items: center; /* Mantém nome e imagem alinhados */
-    gap: 10px; /* Espaço entre a imagem e o nome */
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .profile-image {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%; /* Torna a imagem redonda */
-    object-fit: cover;
-    background-color: #E0E0E0; /* Fundo cinza claro */
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  background-color: #2a2a2a;
+  border: 2px solid #00bfff;
+  transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.profile-image:hover {
+  transform: scale(1.1);
+  border-color: #33ccff;
 }
 
 .username {
-    font-size: 16px;
-    font-weight: bold;
-    color: #333; /* Cor do texto */
-    display: flex;
-    align-items: center; /* Alinha a coroa com o nome */
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
+@media (max-width: 600px) {
+  .chat-area {
+    padding: 10px;
+    padding-top: 50px;
+  }
 
-#crown-icon {
+  .message {
+    max-width: 85%;
+    font-size: 14px;
+  }
+
+  .profile-image {
+    width: 42px;
+    height: 42px;
+  }
+
+  .username {
+    font-size: 14px;
+  }
+
+  .flag-icon {
     width: 40px;
     height: 40px;
-    margin-left: 10px;
+  }
+
+  .report-content {
+    padding: 20px;
+  }
+}
+.report-submit-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
 }
 
-#crown-icon path {
-    fill: gold; /* Cor dourada para o ícone da coroa */
+.report-submit-btn {
+  display: inline-block;
+  padding: 8px 18px;
+  background: linear-gradient(90deg, #0078ff, #00bfff);
+  color: #cccccc;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 0 10px rgba(0, 191, 255, 0.3);
 }
+
+.report-submit-btn:hover {
+  background: linear-gradient(90deg, #00bfff, #008cd1);
+  transform: translateY(-2px);
+  box-shadow: 0 0 15px rgba(0, 191, 255, 0.6);
+}
+
+.report-submit-btn:active {
+  transform: scale(0.96);
+  box-shadow: 0 0 8px rgba(0, 191, 255, 0.4);
+}
+/* === Fundo escurecido === */
+.profile1 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(5px);
+  z-index: 1000;
+}
+
+.profile1.hidden {
+  display: none;
+}
+
+.profile1 .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(10, 10, 10, 0.6);
+}
+
+/* === Caixa do perfil === */
+.profile1 .profile-box {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #1b1b1b;
+  border-radius: 18px;
+  padding: 10px 5px; /* espaço interno equilibrado */
+  width: 85%;
+  max-width: 340px;
+  min-height: 340px; /* altura ajustada para não parecer exagerada */
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7);
+  text-align: center;
+}
+
+/* === Botão de fechar === */
+.profile1 .close-btn {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  color: #ccc;
+  font-size: 22px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.profile1 .close-btn:hover {
+  color: #fff;
+}
+
+/* === Imagem === */
+.profile1 .profile-image-containe {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid #00bfff;
+  margin-bottom: 15px;
+}
+
+.profile1 .profile-image-containe img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* === Nome e ID === */
+.profile1 .username1 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: #fff;
+}
+
+.profile1 #user-id {
+  font-size: 0.9rem;
+  color: #aaa;
+  margin-bottom: 14px;
+}
+
+/* === Biografia === */
+.profile1 .bio {
+  font-size: 1rem;
+  color: #ddd;
+  line-height: 1.8;
+  margin: 0;
+  padding: 0 10px;
+}
+
+
 
     </style>
 </head>
@@ -264,15 +430,10 @@ body::after {
     <div class="chat-container">
         <!-- Usuário 1 à esquerda -->
         <div class="user">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPlwkUTsaWA_zSj0oFI7sbKYXqs-ih3b0_Bg&s" alt="Usuário 1" class="profile-image">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPlwkUTsaWA_zSj0oFI7sbKYXqs-ih3b0_Bg&s" alt="Usuário 1" class="profile-image" onclick="openperfil">
             <span class="username">
                 Usuário 1
-                <!-- Ícone da coroa -->
-                <svg id="crown-icon" class="icon" version="1.0" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 225.000000 225.000000" preserveAspectRatio="xMidYMid meet">
-                    <g transform="translate(0.000000,225.000000) scale(0.100000,-0.100000)" fill="none" stroke="none">
-                        <path d="M1085 1618 c-11 -6 -25 -19 -32 -27 -17 -22 -16 -82 1 -107 13 -18 6 -37 -79 -212 -52 -106 -96 -192 -98 -192 -2 0 -64 68 -138 152 -125 143 -133 154 -130 190 1 31 -4 44 -28 68 -50 50 -120 38 -147 -26 -12 -30 -12 -39 1 -70 9 -23 25 -40 43 -46 29 -11 30 -15 83 -257 40 -183 55 -274 59 -356 l5 -110 500 0 500 0 6 120 c5 91 19 175 58 350 28 126 51 232 51 235 0 3 14 11 30 17 60 23 70 115 17 155 -58 46 -153 -5 -145 -78 4 -33 -4 -45 -131 -190 -74 -85 -137 -154 -140 -154 -3 1 -46 85 -95 187 -90 186 -90 186 -73 215 26 45 22 85 -12 119 -31 31 -70 37 -106 17z m150 -388 c107 -222 111 -230 130 -230 7 0 82 79 166 176 85 96 155 172 156 167 1 -4 -22 -116 -51 -248 l-52 -240 -459 0 -460 0 -52 240 c-29 132 -51 243 -50 248 1 4 71 -72 156 -168 92 -105 160 -175 169 -173 19 4 14 -5 133 242 55 114 104 204 108 200 5 -5 52 -101 106 -214z m345 -495 l0 -65 -455 0 -455 0 0 65 0 65 455 0 455 0 0 -65z"/>
-                    </g>
-                </svg>
+
             </span>
         </div>
     
@@ -280,18 +441,35 @@ body::after {
         <div class="user">
             <span class="username">
                 Usuário 2
-                <!-- Ícone da coroa -->
-                <svg id="crown-icon" class="icon" version="1.0" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 225.000000 225.000000" preserveAspectRatio="xMidYMid meet">
-                    <g transform="translate(0.000000,225.000000) scale(0.100000,-0.100000)" fill="none" stroke="none">
-                        <path d="M1085 1618 c-11 -6 -25 -19 -32 -27 -17 -22 -16 -82 1 -107 13 -18 6 -37 -79 -212 -52 -106 -96 -192 -98 -192 -2 0 -64 68 -138 152 -125 143 -133 154 -130 190 1 31 -4 44 -28 68 -50 50 -120 38 -147 -26 -12 -30 -12 -39 1 -70 9 -23 25 -40 43 -46 29 -11 30 -15 83 -257 40 -183 55 -274 59 -356 l5 -110 500 0 500 0 6 120 c5 91 19 175 58 350 28 126 51 232 51 235 0 3 14 11 30 17 60 23 70 115 17 155 -58 46 -153 -5 -145 -78 4 -33 -4 -45 -131 -190 -74 -85 -137 -154 -140 -154 -3 1 -46 85 -95 187 -90 186 -90 186 -73 215 26 45 22 85 -12 119 -31 31 -70 37 -106 17z m150 -388 c107 -222 111 -230 130 -230 7 0 82 79 166 176 85 96 155 172 156 167 1 -4 -22 -116 -51 -248 l-52 -240 -459 0 -460 0 -52 240 c-29 132 -51 243 -50 248 1 4 71 -72 156 -168 92 -105 160 -175 169 -173 19 4 14 -5 133 242 55 114 104 204 108 200 5 -5 52 -101 106 -214z m345 -495 l0 -65 -455 0 -455 0 0 65 0 65 455 0 455 0 0 -65z"/>
-                    </g>
-                </svg>
             </span>
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPlwkUTsaWA_zSj0oFI7sbKYXqs-ih3b0_Bg&s" alt="Usuário 2" class="profile-image">
         </div>
     </div>    
-    <!-- Botão Denunciar -->
-   <img src="bandeira.svg" alt="Denunciar" class="flag-icon" id="flagIcon" />
+   <!-- Botão Denunciar -->
+<img src="bandeira.svg" alt="Denunciar" class="flag-icon" id="flagIcon" />
+
+<!-- Perfil Pop-up -->
+<div class="profile1 hidden" id="popupPerfil">
+  <div class="overlay" onclick="closePerfil()"></div>
+
+  <div class="profile-box">
+    <div class="close-btn" onclick="closePerfil()">✕</div>
+
+    <div class="profile-image-containe">
+      <img
+        src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
+        alt="Foto de perfil"
+      />
+    </div>
+
+    <h3 class="username1">Usuário Anônimo</h3>
+    <span id="user-id">#1234567</span>
+    <p class="bio">
+      Olá! Esta é a biografia do usuário. Aqui ele pode escrever algo breve
+      sobre si mesmo.
+    </p>
+    </div>
+ </div>
 
     <!-- Área de chat -->
     <div class="chat-area" id="chatArea"></div>
@@ -324,13 +502,17 @@ body::after {
 
             <div id="errorMessage" class="error-message" style="display: none;">Você deve marcar uma das opções antes de enviar.</div>
 
-            <button onclick="submitReport()">Enviar Denúncia</button>
+         <div class="report-submit-container">
+             <button class="report-submit-btn" onclick="submitReport()">Enviar Denúncia</button>
+          </div>
+
         </div>
     </div>
 
     <div id="thankYouMessage" class="thank-you-message">
         Obrigado por nos ajudar a manter a comunidade segura!
     </div>
+    
 
     <script>
         document.getElementById('messageInput').addEventListener('keydown', function(event) {
@@ -391,15 +573,35 @@ function voltarPaginaAnterior() {
   // aqui você pode redirecionar ou esconder a página atual
   window.history.back(); // volta pra página anterior
 }
+function openperfil() {
+  document.querySelector('.profile1').style.display = 'flex';
+}
+
+document.querySelector('.profile-image').addEventListener('click', function() {
+  openperfil();
+});
+function closePerfil() {
+  document.querySelector('.profile1').style.display = 'none';
+}
+
+
 
         function reportChat() {
             document.getElementById('reportModal').style.display = 'flex';
-            // Exibe a mensagem de agradecimento assim que o botão "Denunciar" for clicado
-            document.getElementById('thankYouMessage').style.display = 'block';
-            setTimeout(function() {
-                document.getElementById('thankYouMessage').style.display = 'none';
-            }, 3000); // A mensagem desaparece após 3 segundos
+           
         }
+        function submitReport() {
+  // Aqui você pode colocar a lógica de envio real da denúncia depois, se quiser
+  // Por enquanto, apenas mostra a mensagem de agradecimento
+  const thankYou = document.getElementById('thankYouMessage');
+
+  thankYou.style.display = 'block'; // mostra mensagem
+  setTimeout(() => {
+    thankYou.style.display = 'none'; // oculta após 3s
+    document.getElementById('reportModal').style.display = 'none'; // fecha modal
+  }, 3000);
+}
+
 
         function closeReportModal() {
             document.getElementById('reportModal').style.display = 'none';
@@ -431,4 +633,3 @@ document.getElementById("flagIcon").addEventListener("click", function() {
     </script>
 </body>
 </html>
-
