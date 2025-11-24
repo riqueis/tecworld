@@ -834,14 +834,14 @@ h1 {
        
       </div>
     </div>
-    <button class="premium-badge" onclick="openModal()">premium</button>
+    <button1 class="premium-badge" onclick="openModal()">premium</button1>
     <div class="settings" id="settings-btn">⚙️</div>
   </header>
 
   <!-- Opções do perfil -->
   <div class="profile-options hidden" id="profileOptions">
         <input type="text" placeholder="Username">
-   <button class="change-photo-btn">Alterar Foto</button>
+   <button class="change-photo-btn" onclick="chooseLocalProfileImage()"> Alterar Foto</button>
   </div>
 
   <!-- Modal de pagamento -->
@@ -854,7 +854,6 @@ h1 {
       <p>Use o código QR acima para fazer o pagamento</p>
       <button class="unlimited-jumps-btn" onclick="sign()">Assinar</button>
       <button class="close-btn" onclick="closeModal()">Fechar</button>
-        <button class="save-btn">Salvar Alterações</button>
     </div>
   </div>
 
@@ -896,12 +895,8 @@ h1 {
       <h4>Desconectar</h4>
       <button onclick="logout()">Sair da conta</button>
       </div>
-       <div class="config-section">
-  <h4>Excluir conta</h4>
-
-  <button>Excluir</button>
-</div>
-    </div>
+    
+    
   </div>
   <!-- Aba de Perfil (inicialmente escondida) -->
 <div id="perfil-config" class="config-page hidden">
@@ -915,7 +910,8 @@ h1 {
     <h3 class="username1">Seu Nome</h3>
     <span id="user-id">#1234567</span>
 
-    <button class="change-photo-btn">Alterar Foto</button>
+ <button type="button" class="change-photo-btn" onclick="chooseLocalProfileImage()">Alterar Foto</button>
+
 
     <input type="text" placeholder="Username">
     <input type="text" placeholder="Biografia">
@@ -969,7 +965,8 @@ h1 {
   <div class="account-section danger-zone">
     <label>Excluir Conta</label>
     <p class="warning-text">Excluir sua conta é permanente e não pode ser desfeito.</p>
-    <button class="delete-account-btn">Excluir Conta</button>
+    <button class="delete-account-btn" onclick="deleteAccount()">Excluir Conta</button>
+
   </div>
 </div>
 
@@ -1038,7 +1035,7 @@ h1 {
   if (mainConfig && seguranceConfig) {
     mainConfig.style.display = "none";       // Esconde o menu principal
     seguranceConfig.style.display = "flex";  // Mostra o menu de segurança
-l
+
   }
 }
 
@@ -1098,12 +1095,54 @@ function voltarConfig() {
     }
   }, 150);
 });
+  //excluir conta
 
+function deleteAccount() {
+    const confirmar = confirm("Tem certeza que deseja excluir sua conta? Essa ação é permanente.");
 
+    if (!confirmar) return;
 
-    function logout() {
-      alert("Você foi desconectado!");
+    // 1. Descobre o email da conta logada
+    const email = localStorage.getItem("email");
+
+    if (email) {
+        // 2. Monta a chave do usuário no formato correto
+        const userKey = "user_" + email;
+
+        // 3. Remove a conta armazenada
+        localStorage.removeItem(userKey);
     }
+
+    // 4. Remove dados da sessão
+    localStorage.removeItem("email");
+    localStorage.removeItem("userId");
+    localStorage.removeItem("username");
+
+    alert("Conta excluída com sucesso!");
+
+    // 5. Redireciona para login
+    window.location.href = "login.html";
+}
+
+ //desconectar conta               
+  function logout() {
+    // Remove todos os dados salvos localmente sobre o login
+    localStorage.removeItem("tecworld_user");
+    localStorage.removeItem("tecworld_token");
+    localStorage.removeItem("tecworld_id");
+
+    // Caso tenha salvo outras coisas, como preferências:
+    localStorage.removeItem("tecworld_lang");
+    localStorage.removeItem("tecworld_theme");
+    localStorage.removeItem("tecworld_tags");
+
+    // Se quiser limpar tudo de uma vez:
+    // localStorage.clear();
+
+    // Redireciona para o login
+    window.location.href = "login.html";
+  }
+
 
     function abrirConta() {
       document.getElementById("main-config").style.display = "none";
@@ -1315,9 +1354,7 @@ document.addEventListener('DOMContentLoaded', function () {
       backArrow.style.display = 'block';
     });
 
-    function logout() {
-      alert("Você foi desconectado!");
-    }
+    
 
     function abrirConta() {
       document.getElementById("main-config").style.display = "none";
