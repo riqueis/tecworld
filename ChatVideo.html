@@ -251,7 +251,7 @@ color:green;
 
   .flag-icon {
   position: absolute;
-  top: 57px; /* antes era -1px */
+  top: 0; /* antes era -1px */
   right: 0; /* antes era -10px */
   width: 64px;
   height: 64px;
@@ -510,6 +510,37 @@ window.onload = () => {
         });
 };
 
+document.addEventListener("DOMContentLoaded", () => {
+    const email = localStorage.getItem("email");
+    if (!email) return;
+
+    // Dados do usuário salvo no localStorage
+    const userData = JSON.parse(localStorage.getItem("user_" + email)) || {};
+
+    // Seleciona o usuário 2 (aquele com a classe user-left user-bottom)
+    const user2 = document.querySelector(".user.user-left.user-bottom");
+    if (!user2) return;
+
+    const user2NameEl = user2.querySelector(".username");
+    const user2ImageEl = user2.querySelector(".profile-image");
+
+    // Carregar nome
+    if (userData.username && user2NameEl) {
+        user2NameEl.childNodes[0].textContent = userData.username + " ";
+        // (Mantém a coroa SVG intacta)
+    }
+
+    // Carregar imagem
+    if (userData.profileImage && user2ImageEl) {
+        user2ImageEl.src = userData.profileImage;
+    }
+
+    // Carregar cor da borda
+    if (userData.borderColor && user2ImageEl) {
+        user2ImageEl.style.border = `3px solid ${userData.borderColor}`;
+        user2ImageEl.style.borderRadius = "50%";
+    }
+});
 
 
 
@@ -517,15 +548,3 @@ window.onload = () => {
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
