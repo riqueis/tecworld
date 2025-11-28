@@ -6,12 +6,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TecWorld</title>
   <style>
-    /* ====== GERAL ====== */
-    * {
-      box-sizing: border-box;
-    }
+    /* ==============================
+   CONFIGURAÇÕES GERAIS
+============================== */
+* {
+  box-sizing: border-box;
+}
 
-   body {
+body {
   margin: 0;
   font-family: 'Montserrat', sans-serif;
   color: #e0e0e0;
@@ -20,110 +22,118 @@
   background-repeat: no-repeat;
   background-size: cover;
   text-align: center;
-  overflow-x: hidden; /* evita rolagem lateral */
-  overflow-y: hidden; /* evita rolagem vertical */
-   }
-    
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+/* ==============================
+   CABEÇALHO
+============================== */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 5%;
+  width: 100%;
+  max-width: 100vw;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.profile-avatar {
+  width: 55px;               /* tamanho levemente maior para mais clareza */
+  height: 55px;
+  border-radius: 50%;        /* círculo perfeito */
+  border: 3px solid var(--border-color, #00bfff);
+  background-color: rgba(255, 255, 255, 0.15);
+  overflow: hidden;          /* impede imagem de vazar */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;         /* faz a imagem preencher sem deformar */
+  object-position: center;   /* centraliza */
+  border-radius: 50%;        /* garante que a imagem também fique redonda */
+}
 
 
-    /* ====== TOPO ====== */
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 5%;
-      width: 100%;
-      max-width: 100vw;
-    }
+.user-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
 
-    .profile {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
+.username {
+  font-weight: 600;
+  color: #fff;
+  font-size: 1rem;
+  text-shadow: 0 0 8px #007bff;
+  margin-top: 10px;
+}
 
-    .avatar {
-      width: 45px;
-      height: 45px;
-      border-radius: 50%;
-      border: 2px solid #00bfff;
-      background-color: rgba(255, 255, 255, 0.2);
-    }
 
-    .user-info {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-    }
 
-    .username {
-      font-weight: 600;
-      color: #fff;
-      font-size: 1rem;
-      text-shadow: 0 0 8px #007bff;
-      margin-top: 10px;
-    }
+.premium-badge {
+  background: linear-gradient(45deg, #ffcc00, #f5b400);
+  padding: 5px 12px;
+  border-radius: 10px;
+  color: #000;
+  font-weight: 700;
+  box-shadow: 0 0 8px rgba(255, 204, 0, 0.7);
+  text-transform: lowercase;
+}
 
-    .user-id {
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 6px;
-      padding: 2px 6px;
-      font-size: 0.8rem;
-      color: #cfd8dc;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      backdrop-filter: blur(5px);
-      margin-right: 10px;
-      
-    }
+.settings {
+  font-size: 1.4rem;
+  cursor: pointer;
+  color: #cfd8dc;
+  transition: 0.3s;
+}
 
-    .premium-badge {
-      background: linear-gradient(45deg, #ffcc00, #f5b400);
-      padding: 5px 12px;
-      border-radius: 10px;
-      color: #000;
-      font-weight: 700;
-      box-shadow: 0 0 8px rgba(255, 204, 0, 0.7);
-      text-transform: lowercase;
-    }
+.settings:hover {
+  color: #ffffff;
+  transform: rotate(20deg);
+}
 
-    .settings {
-      font-size: 1.4rem;
-      cursor: pointer;
-      color: #cfd8dc;
-      transition: 0.3s;
-    }
-    .settings:hover {
-      color: #ffffff;
-      transform: rotate(20deg);
-    }
+/* ==============================
+   CONTEÚDO PRINCIPAL
+============================== */
+.main-content {
+  max-width: 500px;
+  margin: 60px auto;
+  padding: 0 20px;
+  width: 100%;
+}
 
-    /* ====== CONTEÚDO ====== */
-    .main-content {
-      max-width: 500px;
-      margin: 60px auto;
-      padding: 0 20px;
-      width: 100%;
-    }
+.welcome {
+  font-size: 5rem;
+  margin-bottom: 35px;
+  color: #fff;
+  text-shadow: 0 0 15px #00bfff;
+  margin-top: 70px;
+}
 
-    .welcome {
-      font-size: 5rem;
-      margin-bottom: 35px;
-      color: #fff;
-      text-shadow: 0 0 15px #00bfff;
-      margin-top: 70px;
-    }
-    .welcome span {
-      color: #00bfff;
-    }
+.welcome span {
+  color: #00bfff;
+}
 
-    .description {
-      font-size: 1.3rem;
-      color: #d0d8e0;
-      margin-bottom: 25px;
-      line-height: 1.5;
-    }
 
-    .input-field {
+.description {
+  font-size: 1.3rem;
+  color: #d0d8e0;
+  margin-bottom: 25px;
+  line-height: 1.5;
+}
+
+.input-field {
   padding: 12px;
   margin: 8px auto;
   border-radius: 12px;
@@ -145,277 +155,1046 @@
   box-shadow: 0 0 8px #00bfff;
 }
 
-
-    /* ====== BOTÕES ====== */
-    .buttons {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 15px;
-      margin-top: 20px;
-      width: 100%;
-    }
-
-    .chat-btn {
-      background: linear-gradient(to right, #00bfff, #0077ff);
-      color: white;
-      border: none;
-      border-radius: 12px;
-      padding: 12px 25px;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: 0.3s;
-      box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
-    }
-
-    .chat-btn:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 15px rgba(0, 191, 255, 0.8);
-    }
-
-    .chat-btn.video {
-      background: linear-gradient(to right, #0080ff, #0047b3);
-    }
-
-    /* ====== RODAPÉ ====== */
-    .footer {
-      font-size: 0.85rem;
-      margin-top: 30px;
-      color: #b0bec5;
-      opacity: 0.8;
-      padding: 13px;
-    }
-
-    /* ====== RESPONSIVIDADE ====== */
-    @media (max-width: 600px) {
-      .welcome {
-        font-size: 2.5rem;
-      }
-
-      .chat-btn {
-        padding: 10px 18px;
-        font-size: 0.95rem;
-      }
-
-      .main-content {
-        margin-top: 40px;
-      }
-    
-    .profile-options {
-    position: absolute;
-    top: 12%;
-    left: 0;
-    background: #fff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    z-index: 10;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
+/* ==============================
+   BOTÕES
+============================== */
+.buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 20px;
+  width: 100%;
 }
 
-.profile-options.hidden {
-    display: none;
+.chat-btn {
+  background: linear-gradient(to right, #00bfff, #0077ff);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 25px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
 }
-          
 
-        /* Estilo do Modal */
-        .modal-overlay {
-    display: none; /* Oculto inicialmente */
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.8); /* Fundo escuro semi-transparente */
-    justify-content: center;
-    align-items: center;
-    z-index: 10;
+.chat-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(0, 191, 255, 0.8);
+}
+
+.chat-btn.video {
+  background: linear-gradient(to right, #0080ff, #0047b3);
+}
+
+/* ==============================
+   RODAPÉ
+============================== */
+.footer {
+  font-size: 0.85rem;
+  margin-top: 30px;
+  color: #b0bec5;
+  opacity: 0.8;
+  padding: 13px;
+}
+
+/* ==============================
+   MODAL
+============================== */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
 }
 
 .modal-content {
-    background-color: #1a1a1d;
-    padding: 20px;
-    border-radius: 10px;
-    width: 300px;
-    text-align: center;
-    color: white;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+  background-color: #1a1a1d;
+  padding: 20px;
+  border-radius: 10px;
+  width: 300px;
+  text-align: center;
+  color: white;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
 }
 
 .qr-code {
-    width: 150px;
-    height: 150px;
-    background-color: #333;
-    margin: 10px auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #bbb;
-    font-size: 14px;
-    border-radius: 10px;
+  width: 150px;
+  height: 150px;
+  background-color: #333;
+  margin: 10px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #bbb;
+  font-size: 14px;
+  border-radius: 10px;
 }
+
 .close-btn {
-    background-color: #888787;
-    color: white;
-    padding: 7px 15px; /* Mesmo tamanho de padding que o botão "Assinar" */
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    margin-top: 12px;
-    width: 50%; /* Garante que o botão "Fechar" também ocupe a mesma largura */
+  background-color: #888787;
+  color: white;
+  padding: 7px 15px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 12px;
+  width: 50%;
 }
 
 .close-btn:hover {
-    background-color: #888787;
+  background-color: #888787;
 }
 
-      .content { flex: 1; /* Faz o conteúdo ocupar o espaço disponível */
-                display: flex;
-                flex-direction: column;
-                justify-content: flex-start; 
-                align-items: center;
-                padding: 20px;
-                color: #e0e0e0; 
-                text-align: center;
-                margin-top: 40px; /* Espaço para o cabeçalho */ 
-                overflow-y: auto;
-                width: 100%;
-                 overflow-x: hidden;
-               }
-      .option-button {
-    background: #007bff;
-    color: #fff;
-    border: none;
-    padding: 10px;
-    border-radius: 4px;
-    font-size: 14px;
-    cursor: pointer;
+/* ==============================
+   ÁREA DE CONTEÚDO
+============================== */
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 20px;
+  color: #e0e0e0;
+  text-align: center;
+  margin-top: 40px;
+  overflow-y: auto;
+  width: 100%;
+  overflow-x: hidden;
 }
 
-.option-button:hover {
-    background: #0056b3;
+/* ==============================
+   OPÇÕES DE PERFIL
+============================== */
+
+/* ==============================
+   BOTÕES DE OPÇÃO
+============================== */
+.buttons {
+  display: flex;
+  flex-direction: row;      /* Deixa lado a lado */
+  justify-content: center;  /* Centraliza horizontalmente */
+  align-items: center;      /* Alinha na mesma linha */
+  gap: 10px;                /* Espaçamento entre os botões */
+  width: 100%;
+  margin-top: 0px;         /* Espaço acima */
 }
 
+.chat-btn {
+  flex: 1;                  /* Faz os dois ocuparem o mesmo tamanho */
+  max-width: 160px;         /* Limita a largura para não ficarem enormes no PC */
+  padding: 12px 0;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  color: #fff;
+  background: linear-gradient(90deg, #00b4ff, #007bff);
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.3s ease;
+}
+
+.chat-btn:hover {
+  transform: scale(1.05);
+  background: linear-gradient(90deg, #0090e0, #0060d0);
+}
+
+.chat-btn.video {
+  background: linear-gradient(90deg, #007bff, #0056b3);
+}
+
+
+/* ==============================
+   PÁGINA DE CONFIGURAÇÕES
+============================== */
+.config-page {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+ background-color: #1e1e1e;
+  color: #fff;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
+  padding: 60px 20px 100px 20px;
+  transition: opacity 0.3s ease;
+}
+
+/* Oculta quando não estiver ativa */
+.hidden {
+  display: none;
+}
+
+/* ==============================
+   CABEÇALHO
+============================== */
+.back-arrow {
+  position: fixed;
+  top: 25px;
+  left: 20px; /* canto esquerdo */
+  font-size: 2rem;
+  color: #00d8ff;
+  cursor: pointer;
+  display: none;
+  user-select: none;
+  z-index: 10000; /* garante que apareça acima da config-page */
+  transition: transform 0.2s ease, color 0.3s;
+}
+
+.back-arrow:hover {
+  color: #ffffff;
+  transform: scale(1.1);
+}
+
+.back-arrow:active {
+  transform: scale(0.9);
+}
+
+.config-title {
+  font-size: 50px;
+  font-weight: bold;
+  color: #00d8ff;
+  margin-bottom: 30px;
+  text-align: center;
+  width: 100%;
+  margin-top: 10px;
+}
+
+/* ==============================
+   SEÇÕES
+============================== */
+.config-section {
+  width: 100%;
+  max-width: 500px;
+  background: #1a1f25;
+  border: 1px solid #2a2f36;
+  padding: 15px 18px;
+  border-radius: 12px;
+  margin-bottom: 25px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Título das seções */
+.config-section h2 {
+  margin-bottom: 10px;
+  font-size: 18px;
+  color: #00d8ff;
+}
+
+/* Parágrafos dentro das seções */
+.config-section p {
+  font-size: 15px;
+  color: #ddd;
+}
+
+/* ==============================
+   CAMPOS E BOTÕES
+============================== */
+select,
+textarea,
+button {
+  width: 100%;
+  background: #222;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  border-radius: 6px;
+  margin-top: 5px;
+  font-size: 14px;
+}
+
+textarea {
+  resize: none;
+  height: 80px;
+}
+
+button:hover {
+  background-color: #00d8ff;
+  color: #000;
+  cursor: pointer;
+}
+
+/* título genérico (caso use h1 em outras páginas) */
+h1 {
+  font-size: 100px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 18px 0;
+  text-align: center;
+  line-height: 1.1;
+}
+
+/* título específico da página de configurações */
+ .config-title,
+.config-page h1,
+.segurance-config h1 {
+  font-size: 58px;            /* tamanho expressivo */
+  font-weight: 800;
+  color: #00d8ff;             /* azul-ciano do tema TecWorld */
+  margin: 10px 0 30px 0;
+  text-align: center;
+  letter-spacing: 0.2px;
+}
+
+/* ======
+
+/* ==============================
+   RESPONSIVIDADE
+============================== */
+
+  /* === Área de Perfil === */
+.perfil-config {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(180deg, #0a0a0a 0%, #121212 100%);
+  color: #ffffff;
+  font-family: "Inter", system-ui, sans-serif;
+  padding: 60px 20px 100px 20px;
+  text-align: center;
+}
+
+.hidden {
+  display: none;
+}
+
+/* === Card principal === */
+.profile1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #1b1b1b;
+  border-radius: 18px;
+  padding: 30px 25px;
+  margin-top: 20px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.profile1:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7);
+}
+
+/* === Imagem de perfil === */
+.profile1 .profile-image-containe {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid #00bfff;
+  margin-bottom: 15px;
+  transition: border-color 0.3s ease;
+}
+
+
+
+.profile1 .profile-image-containe img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.profile1 .profile-image-containe img:hover {
+  transform: scale(1.08);
+}
+
+/* === Nome e ID === */
+.profile1 .username1 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: #fff;
+}
+
+.profile1 #user-id {
+  font-size: 0.9rem;
+  color: #aaa;
+  margin-bottom: 18px;
+}
+
+/* === Botão de alterar foto === */
+.profile1 .change-photo-btn {
+  background-color: #2a2a2a;
+  color: #e0e0e0;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 15px;
+  margin-bottom: 15px;
+  width: 100%;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.profile1 .change-photo-btn:hover {
+  background-color: #3a3a3a;
+  transform: translateY(-2px);
+}
+
+/* === Campos de entrada === */
+.profile1 input,
+.profile1 textarea {
+  width: 100%;
+  padding: 12px 14px;
+  margin-bottom: 14px;
+  border-radius: 10px;
+  border: none;
+  background-color: #2b2b2b;
+  color: #e0e0e0;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.profile1 input:focus,
+.profile1 textarea:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #4caf50;
+  background-color: #323232;
+}
+
+.profile1 input::placeholder,
+.profile1 textarea::placeholder {
+  color: #888;
+}
+
+/* === Biografia === */
+.profile1 textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+/* === Botão de salvar === */
+.profile1 .save-btn {
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 14px;
+  width: 100%;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+}
+
+.profile1 .save-btn:hover {
+  background-color: #43a047;
+  transform: translateY(-3px);
+}
+
+
+/* ============================
+   Segurança — estilo completo position: fixed;
+  
+   ============================ */
+   
+
+.segurance-config {
+  position: fixed;           /* cobre toda a tela */
+  top: 0;
+  left: 0;
+  overflow-y: auto;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #0a0a0a;
+  color: #ffffff;
+  text-align: center;
+  font-family: "Inter", system-ui, sans-serif;
+  z-index: 9999;             /* acima de tudo */
+   padding: 60px 20px 100px 20px;
+}
+
+/* Esconder elementos */
+.hidden {
+  display: none;
+}
+.segurance-config .content {
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;              /* antes era 10px → agora mais próximo */
+  padding: 0 12px 16px;  /* reduziu o padding lateral e inferior */
+  box-sizing: border-box;
+}
+
+.account-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background-color: #1a1a1a;
+  width: 100%;
+  max-width: 380px;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+/* Label de cada campo */
+.account-section label {
+  font-weight: 500;
+  margin-bottom: 8px;
+  color: #fff;
+}
+
+/* Campos de input */
+.account-section input {
+  width: 100%;
+  height: 42px;
+  border: 1px solid #333;
+  border-radius: 6px;
+  background-color: #2b2b2b;
+  color: #fff;
+  padding: 10px;
+  font-size: 15px;
+  outline: none;
+  margin-bottom: 12px;
+  transition: border-color 0.2s;
+}
+
+.account-section input:focus {
+  border-color: #00bfff;
+}
+
+/* Botões */
+.account-section button {
+  background-color: #00bfff;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: 0.2s;
+  align-self: flex-end;
+}
+
+.account-section button:hover {
+  background-color: #0099cc;
+}
+
+/* Sessões ativas */
+.session-info {
+  color: #bbb;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+/* Área de exclusão (zona de perigo) */
+.danger-zone {
+  border: 1px solid #ff4444;
+  background-color: #1c0000;
+}
+
+.danger-zone label {
+  color: #ff5555;
+}
+
+.warning-text {
+  font-size: 13px;
+  color: #ff8888;
+  margin-bottom: 10px;
+}
+
+.delete-account-btn {
+  background-color: #ff3333;
+}
+
+.delete-account-btn:hover {
+  background-color: #cc0000;
+}
+.change-pass-btn {
+  background-color: #00bcd4;
+  color: #fff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s;
+  width: 100%;
+}
+
+.change-pass-btn:hover {
+  background-color: #0097a7;
+}
+.change-color-btn {
+  background-color: #2a2a2a;
+  color: #e0e0e0;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 16px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.change-color-btn:hover {
+  background-color: #3a3a3a;
+  transform: translateY(-2px);
+}
+
+
+@media (max-width: 600px) {
+  .welcome {
+    font-size: 2.5rem;
+  }
+
+  .chat-btn {
+    padding: 10px 18px;
+    font-size: 0.95rem;
+  }
+
+  .main-content {
+    margin-top: 40px;
+  }
+    .config-section {
+    margin-bottom: 20px;
+  }
+
+  .config-title {
+    font-size: 200px;
+  }
+
+  .back-arrow {
+    font-size: 1.6rem;
+    top: 20px;
+    left: 15px;
+  }
+  .config-page h1{
+      margin-top: 10px;
+    font-size: 24px;
+  }
+  .perfil-config{
+     margin-top: 10px;
+    font-size: 24px;
+  }
+
+   .segurance-config {
+    justify-content: flex-start; /* começa do topo */
+    padding: 20px 15px 80px 15px; /* menos espaço no topo e nas laterais */
+    overflow-y: auto; /* permite rolagem se o conteúdo for maior */
+  }
+
+  .segurance-config h1 {
+    margin-top: 10px;
+    font-size: 24px;
+  }
+
+  .segurance-config .content {
+    max-width: 600px;
+  }
+
+  .account-section {
+    max-width: 420px;
+  }
+
+  .account-section button {
+    width: auto;
+    align-self: flex-end;
+  }
+
+}
   </style>
 </head>
 <body>
+  <!-- Cabeçalho -->
   <header class="header">
     <div class="profile">
-      <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Avatar" class="avatar">
+     <!-- AVATAR PRINCIPAL DO USUÁRIO -->
+<img id="main-avatar" src="https://cdn-icons-png.flaticon.com/512/149/149071.png" 
+     alt="Avatar do usuário" class="profile-avatar">
+
       <div class="user-info">
-          <span class="username">Nome de Usuário</span>
-                <span id="user-id">#1234567
-                </span> <!-- Este ID será substituído pelo valor salvo no localStorage -->
-     </div>
+        <span class="username">Nome de Usuário</span>
+       
+      </div>
     </div>
-      <button class="premium-badge" onclick="openModal()">premium</button>
-    <div class="settings">⚙️</div>
+    <button1 class="premium-badge" onclick="openModal()">premium</button1>
+    <div class="settings" id="settings-btn">⚙️</div>
   </header>
-  
-        <div class="profile-options hidden" id="profileOptions">
-            <button class="option-button" onclick="changeUsername()">Mudar Nome de Usuário</button>
-            <button class="option-button" onclick="chooseLocalProfileImage()">Mudar foto</button>
-        </div>
+
+
+  <!-- Modal de pagamento -->
+  <div class="modal-overlay" id="paymentModal">
+    <div class="modal-content">
+      <h2>Pague R$10 para obter Pulos Ilimitados</h2>
+      <div class="qr-code">
+        QR Code<br>(Imagem aqui)
+      </div>
+      <p>Use o código QR acima para fazer o pagamento</p>
+      <button class="unlimited-jumps-btn" onclick="sign()">Assinar</button>
+      <button class="close-btn" onclick="closeModal()">Fechar</button>
+        <button class="save-btn">Salvar Alterações</button>
     </div>
-     
-      <body>
+  </div>
 
-   <div class="modal-overlay" id="paymentModal">
-            <div class="modal-content">
-                <h2>Pague R$10 para obter Pulos Ilimitados</h2>
-                <div class="qr-code">
-                    QR Code<br> (Imagem aqui)
-                </div>
-                <p>Use o código QR acima para fazer o pagamento</p>
-                
-                <!-- Botão Assinar dentro do Modal, acima do botão Fechar -->
-                <button class="unlimited-jumps-btn" onclick="sign()">Assinar</button>
-                
-                <button class="close-btn" onclick="closeModal()">Fechar</button>
-            </div>
-        </div>
+  <!-- ← Seta para voltar -->
+  <div class="back-arrow" id="back-arrow">←</div>
 
+  <!-- Página de Configurações -->
+  <div id="main-config" class="config-page hidden">
+    <h1>Configurações</h1>
+
+    <div class="config-section">
+      <h3 onclick="abrirConta()">Perfil</h3>
+    </div>
+    <div class="config-section">
+       <h3 onclick="abrirSegurance()">conta e Segurança</h3>
+    </div>
+  
+
+    <div class="config-section">
+      <h4>Idioma</h4>
+      <select>
+        <option value="pt">Português</option>
+        <option value="en">English</option>
+        <option value="es">Español</option>
+      </select>
+    </div>
+      
+    <div class="config-section">
+      <h4>Contas Bloqueadas</h4>
+      <p>Você ainda não bloqueou ninguém.</p>
+    </div>
+
+    <div class="config-section">
+      <h4>Histórico de Denúncias</h4>
+      <p>Sem denúncias registradas.</p>
+    </div>
+
+    <div class="config-section">
+      <h4>Desconectar</h4>
+      <button onclick="logout()">Sair da conta</button>
+      </div>
+       <div class="config-section">
+  <h4>Excluir conta</h4>
+
+  <button>Excluir</button>
+</div>
+    </div>
+  </div>
+  <!-- Aba de Perfil (inicialmente escondida) -->
+<div id="perfil-config" class="config-page hidden">
+  <h1>Perfil</h1>
+
+  <div class="profile1">
+    <div class="profile-image-containe">
+<img id="profile-image" class="avatar1" src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Foto de perfil">
+    </div>
+
+    <h3 class="username1">Seu Nome</h3>
+    <span id="user-id">#1234567</span>
+
+ <button type="button" class="change-photo-btn" onclick="chooseLocalProfileImage()">Alterar Foto</button>
+
+    <input type="text" id="novoNome" placeholder="Digite seu novo nome">
+    <input type="text" placeholder="Biografia">
+
+    <button id="change-border-btn">Cor da moldura</button>
+
+    <button class="save-btn" id="salvarBtn">Salvar Alterações</button>
+  </div>
+</div>
+  <!-- Tela cheia da aba Conta -->
+  <div id="conta-tela" class="account-fullscreen hidden">
+    <div class="account-header">
+ 
+      <div class="account-title">Conta</div>
+    </div>
+
+    <input type="text" placeholder="Alterar nome de usuário" />
+    <input type="email" placeholder="Alterar e-mail" />
+    <input type="password" placeholder="Alterar senha" />
+    <button>Salvar alterações</button>
+    <button style="margin-top: 10px; background: #800000;">Desconectar</button>
+  </div>
+<!-- Página de Segurança -->
+<div class="segurance-config hidden" id="segurance-config">
+  <h1>Segurança</h1>
+
+ <div class="account-section">
+  <label for="email">E-mail registrado</label>
+  <input 
+    type="email" 
+    id="email" 
+    value="usuario@tecworld.com" 
+    readonly
+  >
+ 
+</div>
+
+<div class="account-section">
+  <label for="new-password">Alterar Senha</label>
+  <input type="password" id="new-password" placeholder="Nova senha">
+  <input type="password" id="confirm-password" placeholder="Confirmar  senha">
+  <button class="change-pass-btn">Salvar nova senha</button>
+</div>
+
+  <div class="account-section">
+    <label for="active-sessions">Sessões Ativas</label>
+    <p class="session-info">1 sessão ativa neste dispositivo</p>
+    <button class="close-sessions-btn">Encerrar outras sessões</button>
+  </div>
+
+  <div class="account-section danger-zone">
+    <label>Excluir Conta</label>
+    <p class="warning-text">Excluir sua conta é permanente e não pode ser desfeito.</p>
+        <button class="delete-account-btn" onclick="deleteAccount()">Excluir Conta</button>
+  </div>
+</div>
+
+  <!-- Conteúdo principal -->
   <main class="main-content">
-    <h1 class="welcome">Bem-vindo,<br><span id="dynamicUsername">Nome de Usuário!</span></div>
+    <h1 class="welcome">Bem-vindo,<br><span id="dynamicUsername">Nome de Usuário!</span></h1>
     <p class="description">
       🌍 O mundo inteiro está online esperando para conversar com você.
       Clique, conecte-se e descubra amizades, culturas e experiências incríveis a cada nova conversa.
       Sua próxima conexão pode estar a apenas um clique de distância!
     </p>
 
-<div class="language-tag-container">
-  <select class="input-field" id="language-select">
-    <option value="zh">Chinês</option>
-    <option value="es">Espanhol</option>
-    <option value="en">Inglês</option>
-    <option value="hi">Hindi</option>
-    <option value="ar">Árabe</option>
-    <option value="bn">Bengali</option>
-    <option value="pt">Português</option>
-    <option value="ru">Russo</option>
-    <option value="ja">Japonês</option>
-    <option value="de">Alemão</option>
-    <option value="ko">Coreano</option>
-    <option value="fr">Francês</option>
-    <option value="tr">Turco</option>
-    <option value="it">Italiano</option>
-    <option value="vi">Vietnamita</option>
-    <option value="ta">Tâmil</option>
-    <option value="ur">Urdu</option>
-    <option value="mr">Marata</option>
-    <option value="te">Télugo</option>
-    <option value="kn">Canará</option>
-    <option value="ml">Malaiala</option>
-    <option value="pa">Punjabi</option>
-    <option value="gu">Guzerate</option>
-    <option value="pl">Polonês</option>
-    <option value="uk">Ucraniano</option>
-  </select>
+    <div class="language-tag-container">
+      <select class="input-field" id="language-select">
+        <option value="zh">Chinês</option>
+        <option value="es">Espanhol</option>
+        <option value="en">Inglês</option>
+        <option value="hi">Hindi</option>
+        <option value="ar">Árabe</option>
+        <option value="bn">Bengali</option>
+        <option value="pt">Português</option>
+        <option value="ru">Russo</option>
+        <option value="ja">Japonês</option>
+        <option value="de">Alemão</option>
+        <option value="ko">Coreano</option>
+        <option value="fr">Francês</option>
+        <option value="tr">Turco</option>
+        <option value="it">Italiano</option>
+        <option value="vi">Vietnamita</option>
+        <option value="ta">Tâmil</option>
+        <option value="ur">Urdu</option>
+        <option value="mr">Marata</option>
+        <option value="te">Télugo</option>
+        <option value="kn">Canará</option>
+        <option value="ml">Malaiala</option>
+        <option value="pa">Punjabi</option>
+        <option value="gu">Guzerate</option>
+        <option value="pl">Polonês</option>
+        <option value="uk">Ucraniano</option>
+      </select>
 
-  <input class="input-field" type="text" placeholder="Escreva sua tag Ex: Anime, Jogos, Filmes" />
-</div>
-
-<div class="buttons">
-  <button class="chat-btn" onclick="window.location.href='chatTexto.html'">Chat de Texto</button>
-  <button class="chat-btn video" onclick="window.location.href='ChatVideo.html'">Chat de Vídeo</button>
-</div>
-
+      <input class="input-field" type="text" placeholder="Escreva sua tag Ex: Anime, Jogos, Filmes" />
     </div>
 
-    <!-- Rodapé -->
-    <div class="footer">
-        <p>&copy; 2024 TecWorld. Todos os direitos reservados.</p>
+    <div class="buttons">
+      <button class="chat-btn" onclick="window.location.href='chatTexto.html'">Chat de Texto</button>
+      <button class="chat-btn video" onclick="window.location.href='ChatVideo.html'">Chat de Vídeo</button>
     </div>
-    <script>
-  // Função para abrir o modal
-function openModal() {
-    document.getElementById('paymentModal').style.display = 'flex'; // Torna o modal visível
+  </main>
+
+  <!-- Rodapé -->
+  <footer class="footer">
+    <p>&copy; 2024 TecWorld. Todos os direitos reservados.</p>
+  </footer>
+
+  <script>
+    const settingsBtn = document.getElementById('settings-btn');
+    const configPage = document.getElementById('main-config');
+    const backArrow = document.getElementById('back-arrow');
+    const nomeExibido = document.querySelector(".username1");
+    const inputNome = document.getElementById("novoNome");
+    const salvarNomeBtn = document.getElementById("salvarNomeBtn");
+
+ function abrirSegurance() {
+  const mainConfig = document.getElementById("main-config");
+  const seguranceConfig = document.getElementById("segurance-config");
+
+  if (mainConfig && seguranceConfig) {
+    mainConfig.style.display = "none";       // Esconde o menu principal
+    seguranceConfig.style.display = "flex";  // Mostra o menu de segurança
+
+  }
 }
 
-// Função para fechar o modal
-function closeModal() {
-    document.getElementById('paymentModal').style.display = 'none'; // Esconde o modal
+function voltarConfig() {
+  const mainConfig = document.getElementById("main-config");
+  const seguranceConfig = document.getElementById("segurance-config");
+
+
+  if (mainConfig && seguranceConfig) {
+    seguranceConfig.style.display = "none";  // Esconde segurança
+    mainConfig.style.display = "flex";       // Volta para o menu principal
+  
+  }
 }
+/*alterar senha*/
+const btnAlterarSenha = document.querySelector(".change-pass-btn");
 
-// Função para alterar o nome de usuário
-function changeUsername() {
-    let newUsername = prompt("Digite seu novo nome de usuário:");
-    if (newUsername && newUsername.trim() !== "") {
-        // Atualiza o nome de usuário exibido
-        document.querySelector(".username").textContent = newUsername;
-        document.getElementById("dynamicUsername").textContent = newUsername;
+btnAlterarSenha.addEventListener("click", () => {
 
-        // Salva o novo nome de usuário no localStorage
-        const email = localStorage.getItem("email"); // Recupera o e-mail logado
-        const userData = JSON.parse(localStorage.getItem("user_" + email)); // Recupera os dados do usuário
-        userData.username = newUsername; // Atualiza o nome de usuário
-        localStorage.setItem("user_" + email, JSON.stringify(userData)); // Atualiza no localStorage
-        localStorage.setItem("username", newUsername); // Atualiza no localStorage global
+    const email = localStorage.getItem("email"); // usuário logado
+    if (!email) {
+        alert("Nenhum usuário logado!");
+        return;
     }
+
+    const novaSenha = document.getElementById("new-password").value.trim();
+    const confirmSenha = document.getElementById("confirm-password").value.trim();
+
+    if (novaSenha === "" || confirmSenha === "") {
+        alert("Preencha todos os campos!");
+        return;
+    }
+
+    if (novaSenha !== confirmSenha) {
+        alert("As senhas não coincidem!");
+        return;
+    }
+
+    // Pega dados do usuário
+    const userData = JSON.parse(localStorage.getItem("user_" + email));
+
+    if (!userData) {
+        alert("Erro: usuário não encontrado!");
+        return;
+    }
+
+    // Atualiza a senha
+    userData.password = novaSenha;
+
+    // Salva novamente
+    localStorage.setItem("user_" + email, JSON.stringify(userData));
+
+    alert("Senha alterada com sucesso!");
+
+    // Limpa os inputs
+    document.getElementById("new-password").value = "";
+    document.getElementById("confirm-password").value = "";
+});
+
+
+
+// Mostrar a página de configurações
+    settingsBtn.addEventListener('click', () => {
+      configPage.style.display = 'flex';
+      backArrow.style.display = 'block';
+    });
+
+    backArrow.addEventListener('click', () => {
+  backArrow.style.transform = 'scale(0.8)';
+
+  setTimeout(() => {
+    backArrow.style.transform = 'scale(1)';
+
+    const mainConfig = document.getElementById('main-config');
+    const perfilConfig = document.getElementById('perfil-config');
+    const seguranceConfig = document.getElementById('segurance-config')
+    const welcomePage = document.querySelector('.header');
+  
+
+    // 1️⃣ Se a aba de perfil estiver aberta, volta para a tela de configuração principal
+    if (perfilConfig && getComputedStyle(perfilConfig).display !== 'none') {
+      perfilConfig.style.display = 'none';
+      if (mainConfig) mainConfig.style.display = 'flex';
+      return;
+    }
+
+    // 2️⃣ Se a tela de configuração principal estiver aberta, volta para a tela inicial
+    if (mainConfig && getComputedStyle(mainConfig).display !== 'none') {
+      mainConfig.style.display = 'none';
+      if (welcomePage) welcomePage.style.display = 'flex';
+      backArrow.style.display = 'none';
+      return;
+    }
+    if (seguranceConfig && getComputedStyle(seguranceConfig).display !== 'none') {
+      seguranceConfig.style.display = 'none';
+      if (mainConfig) mainConfig.style.display = 'flex';
+      return;
+    }
+  }, 150);
+});
+
+
+
+    function logout() {
+    // Remove apenas a sessão atual
+    localStorage.removeItem("email");
+    localStorage.removeItem("username");
+
+    // Redireciona para a página de login
+    window.location.href = "login.html";
 }
+
+
+    function abrirConta() {
+      document.getElementById("main-config").style.display = "none";
+      document.getElementById("conta-tela").style.display = "flex";
+      document.getElementById("conta-tela").style.flexDirection = "column";
+    }
+
+    function fecharConta() {
+      document.getElementById("conta-tela").style.display = "none";
+      document.getElementById("main-config").style.display = "flex";
+    }
+
+    // Abertura e fechamento do menu de perfil
+const profile = document.querySelector(".profile");
+const profileOptions = document.getElementById("profileOptions");
+
+if (profile && profileOptions) {
+    profile.addEventListener("click", (event) => {
+    profileOptions.classList.toggle("hidden"); // abre ou fecha o menu do perfil
+    event.stopPropagation(); // evita que o clique feche imediatamente
+
+    // Esconde a página principal de configuração
+    const configPage = document.getElementById("main-config");
+    if (configPage) {
+        configPage.style.display = "none";
+    }
+
+   
+ });
+
+}
+const changeColorBtn = document.getElementById("change-border-btn");
+const profileImageContainer = document.querySelector(".profile-image-containe");
+const profileAvatar = document.querySelector(".profile-avatar");
+
+let novaCorMoldura = null; // guarda cor escolhida para salvar depois
+
+const colors = ["#4caf50", "#2196f3", "#ff9800", "#e91e63", "#9c27b0", "#00bcd4", "#f44336"];
+let currentIndex = 0;
+
+// ----------- BOTÃO DE TROCAR COR (prévia) ----------------
+changeColorBtn.addEventListener("click", () => {
+    currentIndex = (currentIndex + 1) % colors.length;
+
+    const cor = colors[currentIndex];
+
+    profileImageContainer.style.borderColor = cor; // mostra prévia
+    novaCorMoldura = cor; // guarda para salvar depois
+});
 
 // Função para alterar a imagem de perfil via URL
 function changeProfileImage() {
@@ -428,6 +1207,8 @@ function changeProfileImage() {
 }
 
 // 🔹 Função para escolher imagem do dispositivo (sem precisar de URL)
+let novaImagemPerfil = null; // armazena temporariamente até salvar
+
 function chooseLocalProfileImage() {
     const input = document.createElement('input');
     input.type = 'file';
@@ -435,25 +1216,143 @@ function chooseLocalProfileImage() {
 
     input.onchange = function(event) {
         const file = event.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                document.querySelector(".profile img").src = e.target.result;
+        if (!file) return;
 
-                // Salva a imagem no localStorage (como base64)
-                const email = localStorage.getItem("email");
-                if (email) {
-                    const userData = JSON.parse(localStorage.getItem("user_" + email));
-                    userData.profileImage = e.target.result;
-                    localStorage.setItem("user_" + email, JSON.stringify(userData));
-                }
-            };
-            reader.readAsDataURL(file);
-        }
+        const reader = new FileReader();
+        reader.onload = function(e) {
+
+            // apenas muda visual
+            document.getElementById("profile-image").src = e.target.result;
+
+            // guarda para salvar depois
+            novaImagemPerfil = e.target.result;
+        };
+
+        reader.readAsDataURL(file);
     };
 
     input.click();
 }
+
+
+// ----------- BOTÃO DE SALVAR ALTERAÇÕES ----------------
+salvarBtn.addEventListener("click", function () {
+
+    const novoNome = inputNome.value.trim();
+    const nomeAtual = document.querySelector(".username").textContent.trim();
+
+    const nomeMudou = novoNome !== "" && novoNome !== nomeAtual;
+   const corMudou = typeof novaCorMoldura === "string" && novaCorMoldura.trim() !== "";
+
+       const imagemAtual = document.getElementById("profile-image").src;
+    const imagemPrincipalAtual = document.querySelector(".profile-avatar").src;
+    const imagemMudou = imagemAtual !== imagemPrincipalAtual;
+
+
+    // Se nada foi mudado → não salva
+    if (!nomeMudou && !corMudou && !imagemMudou) {
+        alert("Nenhuma alteração foi feita!");
+        return;
+    }
+
+    // ----- SE O NOME FOR ALTERADO -----
+    if (nomeMudou) {
+        document.querySelectorAll(".username, .username1, #dynamicUsername")
+            .forEach(el => el.textContent = novoNome);
+
+        const email = localStorage.getItem("email");
+        if (email) {
+            const userData = JSON.parse(localStorage.getItem("user_" + email)) || {};
+            userData.username = novoNome;
+            localStorage.setItem("user_" + email, JSON.stringify(userData));
+            localStorage.setItem("username", novoNome);
+        }
+    }
+
+    // ----- SE A COR DA MOLDURA FOR ALTERADA -----
+    
+    if (corMudou) {
+    document.documentElement.style.setProperty("--border-color", novaCorMoldura);
+
+    const email = localStorage.getItem("email");
+    if (email) {
+        let userData = JSON.parse(localStorage.getItem("user_" + email)) || {};
+        userData.borderColor = novaCorMoldura;
+        localStorage.setItem("user_" + email, JSON.stringify(userData));
+    }
+}
+
+ // ----------- NOVA FUNÇÃO: SALVAR IMAGEM NO AVATAR PRINCIPAL -----------
+   // ----------- SALVAR IMAGEM EM TODOS OS AVATARES -----------
+// ----- SE A IMAGEM DE PERFIL FOR ALTERADA -----
+if (novaImagemPerfil) {
+
+    // aplica em todos os lugares
+    document.querySelectorAll("img.profile-avatar, #profile-image, img.avatar1")
+        .forEach(img => img.src = novaImagemPerfil);
+
+    // salva no localStorage
+    const email = localStorage.getItem("email");
+    if (email) {
+        let userData = JSON.parse(localStorage.getItem("user_" + email)) || {};
+        userData.profileImage = novaImagemPerfil;
+        localStorage.setItem("user_" + email, JSON.stringify(userData));
+    }
+
+    // limpa para evitar salvar de novo
+    novaImagemPerfil = null;
+}
+
+
+    
+
+    alert("Alterações salvas com sucesso!");
+
+    // limpa input e reseta
+    inputNome.value = "";
+    novaCorMoldura = null;
+});
+
+
+
+function abrirConta() {
+  const mainConfig = document.getElementById("main-config");
+  const perfilConfig = document.getElementById("perfil-config");
+
+  if (mainConfig && perfilConfig) {
+    mainConfig.style.display = "none";       // esconde tela principal
+    perfilConfig.style.display = "flex";     // mostra perfil
+  }
+}
+
+function voltarConfig() {
+  const mainConfig = document.getElementById("main-config");
+  const perfilConfig = document.getElementById("perfil-config");
+
+  if (mainConfig && perfilConfig) {
+    perfilConfig.style.display = "none";     // esconde perfil
+    mainConfig.style.display = "flex";       // mostra configuração principal
+  }
+}
+
+
+
+
+
+  // Função para abrir o modal
+function openModal() {
+    document.getElementById('paymentModal').style.display = 'flex'; // Torna o modal visível
+}
+
+// Função para fechar o modal
+function closeModal() {
+    document.getElementById('paymentModal').style.display = 'none'; // Esconde o modal
+}
+
+
+
+
+
 
 // Função de login seguro
 function login() {
@@ -463,19 +1362,28 @@ function login() {
     // Recupera os dados do usuário usando o e-mail
     const userData = localStorage.getItem("user_" + email);
 
-    if (userData) {
-        const parsedData = JSON.parse(userData);
+  if (userData) {
+    const parsedData = JSON.parse(userData);
 
-        // Verifica se a senha corresponde
-        if (parsedData.password === password) {
-            // Sucesso no login, salva o e-mail, ID e nome de usuário no localStorage
-            localStorage.setItem("email", email); // Salva o e-mail logado
-            localStorage.setItem("userId", parsedData.id); // Salva o ID do usuário
-            localStorage.setItem("username", parsedData.username); // Salva o nome de usuário
-            window.location.href = "inicial.html";  // Redireciona para a página inicial
-        } else {
-            displayError('E-mail ou senha inválidos.');
+    // Verifica se a senha corresponde
+    if (parsedData.password === password) {
+
+        // Sucesso no login, salva o e-mail, ID e nome de usuário no localStorage
+        localStorage.setItem("email", email);
+        localStorage.setItem("userId", parsedData.id);
+        localStorage.setItem("username", parsedData.username);
+
+        // 🔹 Aqui você DEVE salvar a imagem também
+        if (parsedData.profileImage) {
+            localStorage.setItem("profileImage", parsedData.profileImage);
         }
+
+        window.location.href = "inicial.html";
+    } else {
+        displayError('E-mail ou senha inválidos.');
+    }
+
+
     } else {
         // E-mail não encontrado
         displayError('E-mail não registrado.');
@@ -492,87 +1400,128 @@ function displayError(message) {
 }
 
 // Função para carregar o nome de usuário, ID e imagem após o login
+// Função para carregar o nome de usuário, ID e imagem após o login
 document.addEventListener('DOMContentLoaded', function () {
-    const email = localStorage.getItem("email");  // Recupera o e-mail logado
-    if (email) {
-        const userData = localStorage.getItem("user_" + email); // Recupera os dados do usuário com base no e-mail
-
-        if (userData) {
-            const parsedData = JSON.parse(userData);
-            const savedUsername = parsedData.username;
-            const savedUserId = parsedData.id || "ID não definido";  // Se não houver ID, mostra uma mensagem de fallback
-
-            if (savedUsername) {
-                // Substitui o nome de usuário nas áreas desejadas
-                document.querySelector(".username").textContent = savedUsername;
-                document.getElementById("dynamicUsername").textContent = savedUsername;
-            }
-
-            // Exibe o ID do usuário na página com formatação
-            if (savedUserId) {
-                const formattedId = `id:${String(savedUserId).padStart(7, '0')}`;
-                document.getElementById("user-id").textContent = formattedId;
-            }
-
-            // 🔹 Se houver imagem salva, exibe
-            if (parsedData.profileImage) {
-                document.querySelector(".profile img").src = parsedData.profileImage;
-            }
-        } else {
-            console.warn("Usuário não encontrado no localStorage.");
-        }
-    } else {
+    const email = localStorage.getItem("email");  
+    if (!email) {
         console.warn("Nenhum usuário logado.");
+        return;
     }
 
-    // Abertura e fechamento do menu de perfil
-    const profile = document.querySelector(".profile");
-    const profileOptions = document.getElementById("profileOptions");
+    const userData = localStorage.getItem("user_" + email);
+    if (!userData) {
+        console.warn("Usuário não encontrado no localStorage.");
+        return;
+    }
 
-    if (profile && profileOptions) {
-        profile.addEventListener("click", function (event) {
-            profileOptions.classList.toggle("hidden");
-            event.stopPropagation();
-        });
+    const parsedData = JSON.parse(userData);
 
-        document.addEventListener("click", function () {
-            profileOptions.classList.add("hidden");
-        });
+    // ----- Carregar cor da moldura -----
+    if (parsedData.borderColor) {
+        document.documentElement.style.setProperty("--border-color", parsedData.borderColor);
 
-        profileOptions.addEventListener("click", function (event) {
-            event.stopPropagation();
+        const mainAvatar = document.getElementById("profile-avatar");
+        if (mainAvatar) mainAvatar.style.borderColor = parsedData.borderColor;
+
+        const profileContainer = document.querySelector(".profile-image-container");
+        if (profileContainer) profileContainer.style.borderColor = parsedData.borderColor;
+    }
+
+    // ----- Carregar nome de usuário -----
+    if (parsedData.username) {
+        const usernameElements = document.querySelectorAll(".username, #dynamicUsername");
+        usernameElements.forEach(el => el.textContent = parsedData.username);
+    }
+
+    // ----- Carregar ID do usuário -----
+    if (parsedData.id) {
+        const userIdElement = document.getElementById("user-id");
+        if (userIdElement) userIdElement.textContent = `id:${String(parsedData.id).padStart(7, '0')}`;
+    }
+
+    // ----- Carregar imagem de perfil -----
+    const imgSrc = parsedData.profileImage || "https://cdn-icons-png.flaticon.com/512/149/149071.png";
+
+    const mainAvatar = document.getElementById("main-avatar");
+    if (mainAvatar) mainAvatar.src = imgSrc;
+
+    const profileImg = document.getElementById("profile-image");
+    if (profileImg) profileImg.src = imgSrc;
+
+    document.querySelectorAll("img.profile-avatar, img.avatar1").forEach(img => img.src = imgSrc);
+
+    // ----- Botão de configurações -----
+    const settingsBtn = document.getElementById('settings-btn');
+    const configPage = document.getElementById('configPage'); // ajuste para o id correto
+    const backArrow = document.getElementById('backArrow'); // ajuste para o id correto
+
+    if (settingsBtn && configPage && backArrow) {
+        settingsBtn.addEventListener('click', () => {
+            configPage.style.display = 'flex';
+            backArrow.style.display = 'block';
         });
     }
+
+   function abrirConta() {
+    document.getElementById("main-config").style.display = "none"; 
+    document.getElementById("conta-tela").style.display = "flex"; 
+    document.getElementById("conta-tela").style.flexDirection = "column";
+     } 
+     function fecharConta() { 
+     document.getElementById("conta-tela").style.display = "none"; 
+     document.getElementById("main-config").style.display = "flex"; }
 });
+
+ //excluir conta
+
+function deleteAccount() {
+    const confirmar = confirm("Tem certeza que deseja excluir sua conta? Essa ação é permanente.");
+
+    if (!confirmar) return;
+
+    // 1. Descobre o email da conta logada
+    const email = localStorage.getItem("email");
+
+    if (email) {
+        // 2. Monta a chave do usuário no formato correto
+        const userKey = "user_" + email;
+
+        // 3. Remove a conta armazenada
+        localStorage.removeItem(userKey);
+    }
+
+    // 4. Remove dados da sessão
+    localStorage.removeItem("email");
+    localStorage.removeItem("userId");
+    localStorage.removeItem("username");
+
+    alert("Conta excluída com sucesso!");
+
+    // 5. Redireciona para login
+    window.location.href = "login.html";
+}
+
+ //desconectar conta               
+  function logout() {
+    // Remove todos os dados salvos localmente sobre o login
+    localStorage.removeItem("tecworld_user");
+    localStorage.removeItem("tecworld_token");
+    localStorage.removeItem("tecworld_id");
+
+    // Caso tenha salvo outras coisas, como preferências:
+    localStorage.removeItem("tecworld_lang");
+    localStorage.removeItem("tecworld_theme");
+    localStorage.removeItem("tecworld_tags");
+
+    // Se quiser limpar tudo de uma vez:
+    // localStorage.clear();
+
+    // Redireciona para o login
+    window.location.href = "login.html";
+  }
+
+
+
     </script>    
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
