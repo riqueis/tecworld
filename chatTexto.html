@@ -106,9 +106,9 @@ body::after {
      .flag-icon {
   position: absolute;
   top: 57px; /* antes era -1px */
-  right: 0; /* antes era -10px */
-  width: 64px;
-  height: 64px;
+  right: 3px; /* antes era -10px */
+  width: 68px;
+  height: 68px;
   cursor: pointer;
   filter: invert(23%) sepia(95%) saturate(7411%) hue-rotate(358deg) brightness(95%) contrast(115%);
   
@@ -284,8 +284,8 @@ body::after {
   }
 
   .flag-icon {
-    width: 40px;
-    height: 40px;
+    width: 48px;
+    height: 48px;
   }
 
   .report-content {
@@ -629,6 +629,41 @@ function closePerfil() {
 document.getElementById("flagIcon").addEventListener("click", function() {
   reportChat();
 });
+document.addEventListener("DOMContentLoaded", () => {
+    // Recupera o e-mail do usuário logado
+    const email = localStorage.getItem("email");
+    if (!email) return;
+
+    // Recupera os dados do usuário
+    const userData = JSON.parse(localStorage.getItem("user_" + email)) || {};
+
+    // Seleciona todos os usuários
+    const users = document.querySelectorAll(".chat-container .user");
+
+    // Pega o segundo usuário (Usuário 2)
+    const user2El = users[1];
+    if (!user2El) return;
+
+    const user2NameEl = user2El.querySelector(".username");
+    const user2ImageEl = user2El.querySelector(".profile-image");
+
+    // Atualiza o nome do Usuário 2
+    if (userData.username && user2NameEl) {
+        user2NameEl.textContent = userData.username;
+    }
+
+    // Atualiza a imagem do Usuário 2
+    if (userData.profileImage && user2ImageEl) {
+        user2ImageEl.src = userData.profileImage;
+    }
+
+    // Opcional: aplica borda se tiver
+    if (userData.borderColor) {
+        user2ImageEl.style.border = `3px solid ${userData.borderColor}`;
+        user2ImageEl.style.borderRadius = "50%";
+    }
+});
+
 
     </script>
 </body>
