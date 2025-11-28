@@ -360,10 +360,13 @@ function saveAccount() {
     const id = generateUniqueId(); 
 
     const userData = {
-        id: id,
-        username: username,
-        password: password
-    };
+    id: id,
+    username: username,
+    password: password,
+    borderColor: "#00bfff"   // COR CERTA
+    
+};
+
 
     localStorage.setItem("user_" + email, JSON.stringify(userData));
     localStorage.setItem("email", email);
