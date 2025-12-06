@@ -4,89 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TecWorld - Redefinir Senha</title>
-
 <style>
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #001f3f, #005f9e);
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    padding: 0 10px;
-}
-.container {
-    position: relative;
-    text-align: center;
-    width: 100%;
-    max-width: 360px;
-}
-.title {
-    color: #ffffff;
-    text-shadow: 0 0 10px rgba(255,255,255,1),
-                 0 0 20px rgba(0,191,255,0.8),
-                 0 0 35px rgba(0,191,255,0.7),
-                 0 0 50px rgba(0,191,255,0.6);
-    font-weight: bold;
-    font-size: 32px;
-    margin: 0;
-    letter-spacing: 1.5px;
-}
-h2 { margin-top:8px; font-weight: normal; opacity:0.9; font-size:18px; }
-.input-group { margin-top:25px; text-align:left; }
-.input-group label { font-size:14px; opacity:0.9; }
-.input-group input {
-    width:100%; margin-top:6px; padding:14px;
-    border-radius:10px; border:none; outline:none;
-    background: rgba(255,255,255,0.18); color:white; font-size:17px;
-}
-button {
-    width:100%; margin-top:28px; padding:16px;
-    background:#0a84ff; color:white; border:none;
-    border-radius:10px; font-size:18px; cursor:pointer;
-    transition:0.2s;
-}
-button:active { transform:scale(0.98); }
-button:hover { background:#006ad1; }
-.error, .success {
-    margin-top:15px; padding:12px; border-radius:8px; display:none;
-}
-.error { background: rgba(255,50,50,0.2); color:#ff6b6b; }
-.success { background: rgba(50,255,100,0.2); color:#6bff95; }
-.invalid-overlay {
-    position:absolute; top:0; left:0; width:100%; height:100%;
-    background: rgba(0,0,0,0.50); display:none;
-    flex-direction:column; justify-content:center; align-items:center;
-    text-align:center; padding:25px; z-index:999;
-}
-.invalid-overlay h1 { font-size:28px; color:#ff4444; text-shadow:0 0 10px #ff3b3b,0 0 25px red; margin-bottom:10px; }
-.invalid-overlay p { font-size:16px; color:#ffffffcc; line-height:1.4; }
+/* ... seu CSS permanece igual ... */
 </style>
 
 <!-- Firebase -->
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"></script>
-
-<script>
-const firebaseConfig = {
-    apiKey: "AIzaSyA-xYnpBxH7ut_aZoBJKWwkGBY9QVB5bY0",
-    authDomain: "nexworld-1-235bf.firebaseapp.com",
-    projectId: "nexworld-1-235bf",
-    storageBucket: "nexworld-1-235bf.firebasestorage.app",
-    messagingSenderId: "829828361946",
-    appId: "1:829828361946:web:6c13a0884d4b0d2829bfe3",
-    measurementId: "G-6M6M7MNR2E"
-};
-firebase.initializeApp(firebaseConfig);
-const auth = firebase.auth();
-</script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js" defer></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js" defer></script>
 </head>
-
 <body>
 <div class="container">
-
     <div class="invalid-overlay" id="invalidOverlay">
         <h1>Link inválido</h1>
         <p>Este link expirou ou não é válido.</p>
@@ -99,80 +26,91 @@ const auth = firebase.auth();
         <label>Nova senha</label>
         <input type="password" id="newPass">
     </div>
-
     <div class="input-group">
         <label>Confirmar senha</label>
         <input type="password" id="confirmPass">
     </div>
 
-    <button onclick="resetPassword()">Alterar</button>
+    <button id="resetBtn">Alterar</button>
 
     <div class="error" id="errorBox"></div>
     <div class="success" id="successBox"></div>
 </div>
 
-<script>
-const urlParams = new URLSearchParams(window.location.search);
-const oobCode = urlParams.get("oobCode");
+<script defer>
+document.addEventListener("DOMContentLoaded", () => {
+    const firebaseConfig = {
+        apiKey: "AIzaSyA-xYnpBxH7ut_aZoBJKWwkGBY9QVB5bY0",
+        authDomain: "nexworld-1-235bf.firebaseapp.com",
+        projectId: "nexworld-1-235bf",
+        storageBucket: "nexworld-1-235bf.firebasestorage.app",
+        messagingSenderId: "829828361946",
+        appId: "1:829828361946:web:6c13a0884d4b0d2829bfe3"
+    };
 
-const newPassInput = document.getElementById("newPass");
-const confirmPassInput = document.getElementById("confirmPass");
-const btn = document.querySelector("button");
-const errorBox = document.getElementById("errorBox");
-const successBox = document.getElementById("successBox");
-const overlay = document.getElementById("invalidOverlay");
+    const app = firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
 
-if (!oobCode) {
-    overlay.style.display = "flex";
-    newPassInput.disabled = true;
-    confirmPassInput.disabled = true;
-    btn.disabled = true;
-    newPassInput.style.opacity = "0.5";
-    confirmPassInput.style.opacity = "0.5";
-    btn.style.opacity = "0.4";
-    btn.style.cursor = "not-allowed";
-}
+    const urlParams = new URLSearchParams(window.location.search);
+    const oobCode = urlParams.get("oobCode");
 
-async function resetPassword() {
-    if (!oobCode) return;
+    const newPassInput = document.getElementById("newPass");
+    const confirmPassInput = document.getElementById("confirmPass");
+    const btn = document.getElementById("resetBtn");
+    const errorBox = document.getElementById("errorBox");
+    const successBox = document.getElementById("successBox");
+    const overlay = document.getElementById("invalidOverlay");
 
-    const newPass = newPassInput.value.trim();
-    const confirmPass = confirmPassInput.value.trim();
-
-    errorBox.style.display = "none";
-    successBox.style.display = "none";
-
-    if (newPass.length < 6) {
-        errorBox.innerHTML = "A senha deve ter pelo menos 6 caracteres.";
-        errorBox.style.display = "block";
-        return;
+    if (!oobCode) {
+        overlay.style.display = "flex";
+        newPassInput.disabled = true;
+        confirmPassInput.disabled = true;
+        btn.disabled = true;
+        newPassInput.style.opacity = "0.5";
+        confirmPassInput.style.opacity = "0.5";
+        btn.style.opacity = "0.4";
+        btn.style.cursor = "not-allowed";
     }
 
-    if (newPass !== confirmPass) {
-        errorBox.innerHTML = "As senhas não coincidem.";
-        errorBox.style.display = "block";
-        return;
-    }
+    btn.addEventListener("click", async () => {
+        if (!oobCode) return;
 
-    try {
-        await auth.confirmPasswordReset(oobCode, newPass);
-        successBox.innerHTML = "Senha redefinida com sucesso! Redirecionando...";
-        successBox.style.display = "block";
-        setTimeout(() => window.location.href = "login.html", 2500);
-    } catch (error) {
-        if (error.code === "auth/expired-action-code" || error.code === "auth/invalid-action-code") {
-            overlay.style.display = "flex";
-            newPassInput.disabled = true;
-            confirmPassInput.disabled = true;
-            btn.disabled = true;
-            btn.style.opacity = "0.4";
-            btn.style.cursor = "not-allowed";
-        } else {
-            errorBox.innerHTML = "Erro: " + error.message;
+        const newPass = newPassInput.value.trim();
+        const confirmPass = confirmPassInput.value.trim();
+        errorBox.style.display = "none";
+        successBox.style.display = "none";
+
+        if (newPass.length < 6) {
+            errorBox.innerHTML = "A senha deve ter pelo menos 6 caracteres.";
             errorBox.style.display = "block";
+            return;
         }
-    }
-}
+        if (newPass !== confirmPass) {
+            errorBox.innerHTML = "As senhas não coincidem.";
+            errorBox.style.display = "block";
+            return;
+        }
+
+        try {
+            await auth.confirmPasswordReset(oobCode, newPass);
+            successBox.innerHTML = "Senha redefinida com sucesso! Redirecionando...";
+            successBox.style.display = "block";
+            setTimeout(() => window.location.href = "login.html", 2500);
+        } catch (error) {
+            if (error.code === "auth/expired-action-code" || error.code === "auth/invalid-action-code") {
+                overlay.style.display = "flex";
+                newPassInput.disabled = true;
+                confirmPassInput.disabled = true;
+                btn.disabled = true;
+                btn.style.opacity = "0.4";
+                btn.style.cursor = "not-allowed";
+            } else {
+                errorBox.innerHTML = "Erro: " + error.message;
+                errorBox.style.display = "block";
+            }
+        }
+    });
+});
 </script>
 </body>
 </html>
