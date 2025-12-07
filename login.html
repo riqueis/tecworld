@@ -254,16 +254,18 @@ const translations = {
         invalidEmail: "Por favor, insira um email válido (Gmail, Outlook, Yahoo Mail, Apple Mail, ProtonMail, Zoho Mail).",
         invalidPassword: "A senha deve ter mais de 5 caracteres.",
         termsError: "Você precisa aceitar os Termos de Uso e a Política de Privacidade.",
-        firebaseErrors: {
-            "auth/invalid-email": "Email inválido.",
-            "auth/user-disabled": "Usuário desativado.",
-            "auth/user-not-found": "Usuário não encontrado.",
-            "auth/wrong-password": "Senha incorreta.",
-            "auth/email-already-in-use": "Este email já está em uso.",
-            "auth/weak-password": "A senha é muito fraca.",
-            "auth/too-many-requests": "Muitas tentativas. Tente novamente mais tarde.",
-            "auth/network-request-failed": "Erro de rede. Verifique sua conexão."
-        }
+       firebaseErrors: {
+    "auth/invalid-email": "Email inválido.",
+    "auth/user-disabled": "Usuário desativado.",
+    "auth/user-not-found": "Usuário não encontrado.",
+    "auth/wrong-password": "Senha incorreta.",
+    "auth/invalid-login-credentials": "email ou senha incorretos.",
+    "auth/email-already-in-use": "Este email já está em uso.",
+    "auth/weak-password": "A senha é muito fraca.",
+    "auth/too-many-requests": "Muitas tentativas. Tente novamente mais tarde.",
+    "auth/network-request-failed": "Erro de rede. Verifique sua conexão."
+}
+
     },
     en: {
         heading: "Log In",
@@ -286,16 +288,18 @@ const translations = {
         invalidEmail: "Please enter a valid email (Gmail, Outlook, Yahoo Mail, Apple Mail, ProtonMail, Zoho Mail).",
         invalidPassword: "Password must be more than 5 characters.",
         termsError: "You must accept the Terms of Use and Privacy Policy.",
-        firebaseErrors: {
-            "auth/invalid-email": "Invalid email.",
-            "auth/user-disabled": "User disabled.",
-            "auth/user-not-found": "User not found.",
-            "auth/wrong-password": "Incorrect password.",
-            "auth/email-already-in-use": "Email already in use.",
-            "auth/weak-password": "Password is too weak.",
-            "auth/too-many-requests": "Too many requests. Try again later.",
-            "auth/network-request-failed": "Network error. Check your connection."
-        }
+       firebaseErrors: {
+    "auth/invalid-email": "Invalid email.",
+    "auth/user-disabled": "User disabled.",
+    "auth/user-not-found": "User not found.",
+    "auth/wrong-password": "Incorrect password.",
+    "auth/invalid-login-credentials": "wrong email or password.",
+    "auth/email-already-in-use": "Email already in use.",
+    "auth/weak-password": "Password is too weak.",
+    "auth/too-many-requests": "Too many requests. Try again later.",
+    "auth/network-request-failed": "Network error. Check your connection."
+}
+
     },
     es: {
         heading: "Iniciar sesión",
@@ -318,16 +322,18 @@ const translations = {
         invalidEmail: "Por favor, ingresa un correo electrónico válido (Gmail, Outlook, Yahoo Mail, Apple Mail, ProtonMail, Zoho Mail).",
         invalidPassword: "La contraseña debe tener más de 5 caracteres.",
         termsError: "Debes aceptar los Términos de Uso y la Política de Privacidad.",
-        firebaseErrors: {
-            "auth/invalid-email": "Correo electrónico inválido.",
-            "auth/user-disabled": "Usuario deshabilitado.",
-            "auth/user-not-found": "Usuario no encontrado.",
-            "auth/wrong-password": "Contraseña incorrecta.",
-            "auth/email-already-in-use": "Este correo ya está en uso.",
-            "auth/weak-password": "La contraseña es demasiado débil.",
-            "auth/too-many-requests": "Demasiados intentos. Intente más tarde.",
-            "auth/network-request-failed": "Error de red. Verifique su conexión."
-        }
+       firebaseErrors: {
+    "auth/invalid-email": "Correo electrónico inválido.",
+    "auth/user-disabled": "Usuario deshabilitado.",
+    "auth/user-not-found": "Usuario no encontrado.",
+    "auth/wrong-password": "Contraseña incorrecta.",
+    "auth/invalid-login-credentials": "correo o contraseña incorrectos.",
+    "auth/email-already-in-use": "Este correo ya está en uso.",
+    "auth/weak-password": "La contraseña es demasiado débil.",
+    "auth/too-many-requests": "Demasiados intentos. Intente más tarde.",
+    "auth/network-request-failed": "Error de red. Verifique su conexión."
+}
+
     }
 };
 
@@ -508,31 +514,24 @@ async function login() {
     }
 
     try {
-        const res = await fetch("http://localhost:3000/login", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ identifier: email, password })
-        });
+        // 🔹 LOGIN COM FIREBASE AUTH
+        const userCredential = await firebase.auth().signInWithEmailAndPassword(email, password);
 
-        const data = await res.json();
-
-        if (!res.ok) {
-            errorMessage.innerHTML = data.error || t.firebaseErrors["auth/wrong-password"];
-            errorMessage.style.display = "block";
-            return;
-        }
-
-        // 🔥 LOGIN OK
-        localStorage.setItem("uid", data.uid);
+        // 🔹 Salva no localStorage
+        localStorage.setItem("uid", userCredential.user.uid);
         localStorage.setItem("email", email);
 
+        // 🔹 Redireciona para a página inicial
         window.location.href = "inicial.html";
 
-    } catch (err) {
-        errorMessage.innerHTML = "Erro ao conectar ao servidor.";
+    } catch (error) {
+        // 🔹 Tratamento de erros do Firebase
+        const code = error.code;
+        errorMessage.innerHTML = t.firebaseErrors[code] || error.message;
         errorMessage.style.display = "block";
     }
 }
+
 
 
 
