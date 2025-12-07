@@ -16,14 +16,12 @@ body {
     color: white;
     padding: 0 10px;
 }
-
 .container {
     position: relative;
     text-align: center;
     width: 100%;
     max-width: 360px;
 }
-
 .title {
     color: #ffffff;
     text-shadow: 0 0 10px rgba(255,255,255,1),
@@ -65,6 +63,11 @@ button:hover { background:#006ad1; }
 .invalid-overlay h1 { font-size:28px; color:#ff4444; text-shadow:0 0 10px #ff3b3b,0 0 25px red; margin-bottom:10px; }
 .invalid-overlay p { font-size:16px; color:#ffffffcc; line-height:1.4; }
 </style>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"></script>
+
 </head>
 <body>
 
@@ -92,84 +95,79 @@ button:hover { background:#006ad1; }
     <div class="success" id="successBox"></div>
 </div>
 
-<!-- Firebase e código JS modular -->
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getAuth, confirmPasswordReset } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+<script>
+  // Configuração real do seu Firebase
+  const firebaseConfig = {
+    apiKey: "AIzaSyA-xYnpBxH7ut_aZoBJKWwkGBY9QVB5bY0",
+    authDomain: "nexworld-1-235bf.firebaseapp.com",
+    projectId: "nexworld-1-235bf",
+    storageBucket: "nexworld-1-235bf.appspot.com",
+    messagingSenderId: "829828361946",
+    appId: "1:829828361946:web:6c13a0884d4b0d2829bfe3",
+    measurementId: "G-6M6M7MNR2E"
+  };
 
-const firebaseConfig = {
-  apiKey: "SUA_API_KEY",
-  authDomain: "SEU_AUTH_DOMAIN",
-  projectId: "SEU_PROJECT_ID",
-  storageBucket: "SEU_BUCKET",
-  messagingSenderId: "SEU_SENDER_ID",
-  appId: "SEU_APP_ID"
-};
+  // Inicializa Firebase
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+  const urlParams = new URLSearchParams(window.location.search);
+  const oobCode = urlParams.get("oobCode");
 
-document.addEventListener("DOMContentLoaded", () => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const oobCode = urlParams.get("oobCode");
+  const newPassInput = document.getElementById("newPass");
+  const confirmPassInput = document.getElementById("confirmPass");
+  const btn = document.getElementById("resetBtn");
+  const errorBox = document.getElementById("errorBox");
+  const successBox = document.getElementById("successBox");
+  const overlay = document.getElementById("invalidOverlay");
 
-    const newPassInput = document.getElementById("newPass");
-    const confirmPassInput = document.getElementById("confirmPass");
-    const btn = document.getElementById("resetBtn");
-    const errorBox = document.getElementById("errorBox");
-    const successBox = document.getElementById("successBox");
-    const overlay = document.getElementById("invalidOverlay");
+  if (!oobCode) {
+      overlay.style.display = "flex";
+      newPassInput.disabled = true;
+      confirmPassInput.disabled = true;
+      btn.disabled = true;
+      newPassInput.style.opacity = "0.5";
+      confirmPassInput.style.opacity = "0.5";
+      btn.style.opacity = "0.4";
+      btn.style.cursor = "not-allowed";
+  }
 
-    if (!oobCode) {
-        overlay.style.display = "flex";
-        newPassInput.disabled = true;
-        confirmPassInput.disabled = true;
-        btn.disabled = true;
-        newPassInput.style.opacity = "0.5";
-        confirmPassInput.style.opacity = "0.5";
-        btn.style.opacity = "0.4";
-        btn.style.cursor = "not-allowed";
-        return;
-    }
+  btn.addEventListener("click", async () => {
+      const newPass = newPassInput.value.trim();
+      const confirmPass = confirmPassInput.value.trim();
+      errorBox.style.display = "none";
+      successBox.style.display = "none";
 
-    btn.addEventListener("click", async () => {
-        const newPass = newPassInput.value.trim();
-        const confirmPass = confirmPassInput.value.trim();
-        errorBox.style.display = "none";
-        successBox.style.display = "none";
+      if (newPass.length < 6) {
+          errorBox.innerHTML = "A senha deve ter pelo menos 6 caracteres.";
+          errorBox.style.display = "block";
+          return;
+      }
+      if (newPass !== confirmPass) {
+          errorBox.innerHTML = "As senhas não coincidem.";
+          errorBox.style.display = "block";
+          return;
+      }
 
-        if (newPass.length < 6) {
-            errorBox.innerHTML = "A senha deve ter pelo menos 6 caracteres.";
-            errorBox.style.display = "block";
-            return;
-        }
-
-        if (newPass !== confirmPass) {
-            errorBox.innerHTML = "As senhas não coincidem.";
-            errorBox.style.display = "block";
-            return;
-        }
-
-        try {
-            await confirmPasswordReset(auth, oobCode, newPass);
-            successBox.innerHTML = "Senha redefinida com sucesso! Redirecionando...";
-            successBox.style.display = "block";
-            setTimeout(() => window.location.href = "login.html", 2500);
-        } catch (error) {
-            if (error.code === "auth/expired-action-code" || error.code === "auth/invalid-action-code") {
-                overlay.style.display = "flex";
-                newPassInput.disabled = true;
-                confirmPassInput.disabled = true;
-                btn.disabled = true;
-                btn.style.opacity = "0.4";
-                btn.style.cursor = "not-allowed";
-            } else {
-                errorBox.innerHTML = "Erro: " + error.message;
-                errorBox.style.display = "block";
-            }
-        }
-    });
-});
+      try {
+          await auth.confirmPasswordReset(oobCode, newPass);
+          successBox.innerHTML = "Senha redefinida com sucesso! Redirecionando...";
+          successBox.style.display = "block";
+          setTimeout(() => window.location.href = "login.html", 2500);
+      } catch (error) {
+          if (error.code === "auth/expired-action-code" || error.code === "auth/invalid-action-code") {
+              overlay.style.display = "flex";
+              newPassInput.disabled = true;
+              confirmPassInput.disabled = true;
+              btn.disabled = true;
+              btn.style.opacity = "0.4";
+              btn.style.cursor = "not-allowed";
+          } else {
+              errorBox.innerHTML = "Erro: " + error.message;
+              errorBox.style.display = "block";
+          }
+      }
+  });
 </script>
 
 </body>
