@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TecWorld - Redefinir Senha</title>
 <style>
+/* Mantém seu CSS */
 body {
     margin: 0;
     font-family: Arial, sans-serif;
@@ -16,58 +17,22 @@ body {
     color: white;
     padding: 0 10px;
 }
-.container {
-    position: relative;
-    text-align: center;
-    width: 100%;
-    max-width: 360px;
-}
-.title {
-    color: #ffffff;
-    text-shadow: 0 0 10px rgba(255,255,255,1),
-                 0 0 20px rgba(0,191,255,0.8),
-                 0 0 35px rgba(0,191,255,0.7),
-                 0 0 50px rgba(0,191,255,0.6);
-    font-weight: bold;
-    font-size: 32px;
-    margin: 0;
-    letter-spacing: 1.5px;
-}
+.container { position: relative; text-align: center; width: 100%; max-width: 360px; }
+.title { color: #ffffff; text-shadow: 0 0 10px rgba(255,255,255,1),0 0 20px rgba(0,191,255,0.8),0 0 35px rgba(0,191,255,0.7),0 0 50px rgba(0,191,255,0.6); font-weight: bold; font-size: 32px; margin: 0; letter-spacing: 1.5px; }
 h2 { margin-top:8px; font-weight: normal; opacity:0.9; font-size:18px; }
 .input-group { margin-top:25px; text-align:left; }
 .input-group label { font-size:14px; opacity:0.9; }
-.input-group input {
-    width:100%; margin-top:6px; padding:14px;
-    border-radius:10px; border:none; outline:none;
-    background: rgba(255,255,255,0.18); color:white; font-size:17px;
-}
-button {
-    width:100%; margin-top:28px; padding:16px;
-    background:#0a84ff; color:white; border:none;
-    border-radius:10px; font-size:18px; cursor:pointer;
-    transition:0.2s;
-}
+.input-group input { width:100%; margin-top:6px; padding:14px; border-radius:10px; border:none; outline:none; background: rgba(255,255,255,0.18); color:white; font-size:17px; }
+button { width:100%; margin-top:28px; padding:16px; background:#0a84ff; color:white; border:none; border-radius:10px; font-size:18px; cursor:pointer; transition:0.2s; }
 button:active { transform:scale(0.98); }
 button:hover { background:#006ad1; }
-.error, .success {
-    margin-top:15px; padding:12px; border-radius:8px; display:none;
-}
+.error, .success { margin-top:15px; padding:12px; border-radius:8px; display:none; }
 .error { background: rgba(255,50,50,0.2); color:#ff6b6b; }
 .success { background: rgba(50,255,100,0.2); color:#6bff95; }
-.invalid-overlay {
-    position:absolute; top:0; left:0; width:100%; height:100%;
-    background: rgba(0,0,0,0.50); display:none;
-    flex-direction:column; justify-content:center; align-items:center;
-    text-align:center; padding:25px; z-index:999;
-}
+.invalid-overlay { position:absolute; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.50); display:none; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:25px; z-index:999; }
 .invalid-overlay h1 { font-size:28px; color:#ff4444; text-shadow:0 0 10px #ff3b3b,0 0 25px red; margin-bottom:10px; }
 .invalid-overlay p { font-size:16px; color:#ffffffcc; line-height:1.4; }
 </style>
-
-<!-- Firebase clássico -->
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"></script>
-
 </head>
 <body>
 
@@ -95,8 +60,11 @@ button:hover { background:#006ad1; }
     <div class="success" id="successBox"></div>
 </div>
 
-<script>
-  // Configuração real do Firebase
+<!-- Firebase modular -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import { getAuth, confirmPasswordReset } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
   const firebaseConfig = {
     apiKey: "AIzaSyA-xYnpBxH7ut_aZoBJKWwkGBY9QVB5bY0",
     authDomain: "nexworld-1-235bf.firebaseapp.com",
@@ -107,9 +75,8 @@ button:hover { background:#006ad1; }
     measurementId: "G-6M6M7MNR2E"
   };
 
-  // Inicializa Firebase
-  firebase.initializeApp(firebaseConfig);
-  const auth = firebase.auth();
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
 
   const urlParams = new URLSearchParams(window.location.search);
   const oobCode = urlParams.get("oobCode");
@@ -139,19 +106,19 @@ button:hover { background:#006ad1; }
       successBox.style.display = "none";
 
       if (newPass.length < 6) {
-          errorBox.innerHTML = "A senha deve ter pelo menos 6 caracteres.";
+          errorBox.innerText = "A senha deve ter pelo menos 6 caracteres.";
           errorBox.style.display = "block";
           return;
       }
       if (newPass !== confirmPass) {
-          errorBox.innerHTML = "As senhas não coincidem.";
+          errorBox.innerText = "As senhas não coincidem.";
           errorBox.style.display = "block";
           return;
       }
 
       try {
-          await auth.confirmPasswordReset(oobCode, newPass);
-          successBox.innerHTML = "Senha redefinida com sucesso! Redirecionando...";
+          await confirmPasswordReset(auth, oobCode, newPass);
+          successBox.innerText = "Senha redefinida com sucesso! Redirecionando...";
           successBox.style.display = "block";
           setTimeout(() => window.location.href = "login.html", 2500);
       } catch (error) {
@@ -163,7 +130,7 @@ button:hover { background:#006ad1; }
               btn.style.opacity = "0.4";
               btn.style.cursor = "not-allowed";
           } else {
-              errorBox.innerHTML = "Erro: " + error.message;
+              errorBox.innerText = "Erro: " + error.message;
               errorBox.style.display = "block";
           }
       }
