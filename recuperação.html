@@ -138,108 +138,81 @@ button:hover {
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"></script>
 
-<script>
-const firebaseConfig = {
-    apiKey: "SUA_API_KEY",
-    authDomain: "SEU_AUTH_DOMAIN",
-    projectId: "SEU_PROJECT_ID",
-};
-firebase.initializeApp(firebaseConfig);
-const auth = firebase.auth();
+<script type="module">
+  // Importa funções específicas do Firebase
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import { getAuth, confirmPasswordReset } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+  const firebaseConfig = {
+      apiKey: "SUA_API_KEY",
+      authDomain: "SEU_AUTH_DOMAIN",
+      projectId: "SEU_PROJECT_ID",
+      storageBucket: "SEU_BUCKET",
+      messagingSenderId: "SEU_SENDER_ID",
+      appId: "SEU_APP_ID"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const oobCode = urlParams.get("oobCode");
+
+  const newPassInput = document.getElementById("newPass");
+  const confirmPassInput = document.getElementById("confirmPass");
+  const btn = document.getElementById("resetBtn");
+  const errorBox = document.getElementById("errorBox");
+  const successBox = document.getElementById("successBox");
+  const overlay = document.getElementById("invalidOverlay");
+
+  if (!oobCode) {
+      overlay.style.display = "flex";
+      newPassInput.disabled = true;
+      confirmPassInput.disabled = true;
+      btn.disabled = true;
+      newPassInput.style.opacity = "0.5";
+      confirmPassInput.style.opacity = "0.5";
+      btn.style.opacity = "0.4";
+      btn.style.cursor = "not-allowed";
+  }
+
+  btn.addEventListener("click", async () => {
+      const newPass = newPassInput.value.trim();
+      const confirmPass = confirmPassInput.value.trim();
+      errorBox.style.display = "none";
+      successBox.style.display = "none";
+
+      if (newPass.length < 6) {
+          errorBox.innerHTML = "A senha deve ter pelo menos 6 caracteres.";
+          errorBox.style.display = "block";
+          return;
+      }
+
+      if (newPass !== confirmPass) {
+          errorBox.innerHTML = "As senhas não coincidem.";
+          errorBox.style.display = "block";
+          return;
+      }
+
+      try {
+          await confirmPasswordReset(auth, oobCode, newPass);
+          successBox.innerHTML = "Senha redefinida com sucesso! Redirecionando...";
+          successBox.style.display = "block";
+          setTimeout(() => window.location.href = "login.html", 2500);
+      } catch (error) {
+          if (error.code === "auth/expired-action-code" || error.code === "auth/invalid-action-code") {
+              overlay.style.display = "flex";
+              newPassInput.disabled = true;
+              confirmPassInput.disabled = true;
+              btn.disabled = true;
+              btn.style.opacity = "0.4";
+              btn.style.cursor = "not-allowed";
+          } else {
+              errorBox.innerHTML = "Erro: " + error.message;
+              errorBox.style.display = "block";
+          }
+      }
+  });
 </script>
-</head>
-
-<body>
-<div class="container">
-
-    <div class="invalid-overlay" id="invalidOverlay">
-        <h1>Link inválido</h1>
-        <p>Este link expirou ou não é válido.</p>
-    </div>
-
-    <h1 class="title">TecWorld</h1>
-    <h2>Redefinir senha</h2>
-
-    <div class="input-group">
-        <label>Nova senha</label>
-        <input type="password" id="newPass">
-    </div>
-
-    <div class="input-group">
-        <label>Confirmar senha</label>
-        <input type="password" id="confirmPass">
-    </div>
-
-    <button onclick="resetPassword()">Alterar</button>
-
-    <div class="error" id="errorBox"></div>
-    <div class="success" id="successBox"></div>
-</div>
-
-<script>
-const urlParams = new URLSearchParams(window.location.search);
-const oobCode = urlParams.get("oobCode");
-
-const newPassInput = document.getElementById("newPass");
-const confirmPassInput = document.getElementById("confirmPass");
-const btn = document.querySelector("button");
-const errorBox = document.getElementById("errorBox");
-const successBox = document.getElementById("successBox");
-const overlay = document.getElementById("invalidOverlay");
-
-// Bloqueia se não houver código
-if (!oobCode) {
-    overlay.style.display = "flex";
-    newPassInput.disabled = true;
-    confirmPassInput.disabled = true;
-    newPassInput.style.opacity = "0.5";
-    confirmPassInput.style.opacity = "0.5";
-    btn.disabled = true;
-    btn.style.opacity = "0.4";
-    btn.style.cursor = "not-allowed";
-}
-
-async function resetPassword() {
-    if (!oobCode) return;
-
-    const newPass = newPassInput.value.trim();
-    const confirmPass = confirmPassInput.value.trim();
-
-    errorBox.style.display = "none";
-    successBox.style.display = "none";
-
-    if (newPass.length < 6) {
-        errorBox.innerHTML = "A senha deve ter pelo menos 6 caracteres.";
-        errorBox.style.display = "block";
-        return;
-    }
-
-    if (newPass !== confirmPass) {
-        errorBox.innerHTML = "As senhas não coincidem.";
-        errorBox.style.display = "block";
-        return;
-    }
-
-    try {
-        await auth.confirmPasswordReset(oobCode, newPass);
-        successBox.innerHTML = "Senha redefinida com sucesso! Redirecionando...";
-        successBox.style.display = "block";
-        setTimeout(() => window.location.href = "login.html", 2500);
-    } catch (error) {
-        if (error.code === "auth/expired-action-code" || error.code === "auth/invalid-action-code") {
-            overlay.style.display = "flex";
-            newPassInput.disabled = true;
-            confirmPassInput.disabled = true;
-            btn.disabled = true;
-            btn.style.opacity = "0.4";
-            btn.style.cursor = "not-allowed";
-        } else {
-            errorBox.innerHTML = "Erro: " + error.message;
-            errorBox.style.display = "block";
-        }
-    }
-}
-</script>
-
 </body>
 </html>
